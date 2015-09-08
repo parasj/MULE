@@ -8,3 +8,7 @@ Paras Jain
 Daniel Kim  
 Rishav Bose  
 Samuel Isang  
+
+
+## Running the program
+`gradle run`
