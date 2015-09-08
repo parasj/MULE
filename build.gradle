@@ -1,6 +1,4 @@
-apply from: "http://dl.bintray.com/content/shemnon/javafx-gradle/0.3.0/javafx.plugin"
-apply plugin: 'java'
-apply plugin: 'idea'
+apply from: "http://dl.bintray.com/content/shemnon/javafx-gradle/8.1.1/javafx.plugin"
 
 repositories {
     mavenCentral()
@@ -12,5 +10,10 @@ dependencies {
 }
 
 javafx {
-	mainClass = ''
+	mainClass = 'com.byteme.HelloWorld'
+
+	appID 'MULE'
+	appName 'MULE Game'
+
+	jvmArgs = ['-XX:+AggressiveOpts', '-XX:CompileThreshold=1']
 }
