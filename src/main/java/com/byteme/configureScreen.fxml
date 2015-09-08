@@ -1,0 +1,132 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.geometry.*?>
+<?import javafx.scene.text.*?>
+<?import javafx.scene.control.*?>
+<?import java.lang.*?>
+<?import javafx.scene.layout.*?>
+
+<VBox id="vboxWhole" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="800.0" prefWidth="1280.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1">
+   <children>
+      <HBox id="hboxTitle" prefHeight="100.0" prefWidth="200.0">
+         <children>
+            <TextField id="txtTitle" alignment="CENTER" editable="false" prefHeight="121.0" prefWidth="1280.0" text="MULE">
+               <font>
+                  <Font name="AR DESTINE" size="54.0" />
+               </font>
+            </TextField>
+         </children>
+      </HBox>
+      <HBox id="hboxOptions" prefHeight="700.0" prefWidth="200.0">
+         <children>
+            <VBox id="vboxLeft" prefHeight="700.0" prefWidth="427.0">
+               <children>
+                  <TextField id="txtLevel" alignment="CENTER" prefHeight="70.0" text="Level">
+                     <font>
+                        <Font name="AR DESTINE" size="36.0" />
+                     </font>
+                  </TextField>
+                  <RadioButton id="btnBeginner" contentDisplay="BOTTOM" mnemonicParsing="false" prefHeight="50.0" prefWidth="147.0" text="Beginner">
+                     <VBox.margin>
+                        <Insets left="10.0" top="70.0" />
+                     </VBox.margin>
+                     <font>
+                        <Font name="AR DESTINE" size="24.0" />
+                     </font>
+                  </RadioButton>
+                  <RadioButton id="btnStandard" contentDisplay="CENTER" mnemonicParsing="false" prefHeight="48.0" prefWidth="149.0" text="Standard" textFill="#1b1919">
+                     <font>
+                        <Font name="AR DESTINE" size="24.0" />
+                     </font>
+                     <VBox.margin>
+                        <Insets left="10.0" top="70.0" />
+                     </VBox.margin>
+                  </RadioButton>
+                  <RadioButton id="btnTournament" contentDisplay="RIGHT" mnemonicParsing="false" prefHeight="48.0" prefWidth="175.0" text="Tournament">
+                     <font>
+                        <Font name="AR DESTINE" size="24.0" />
+                     </font>
+                     <VBox.margin>
+                        <Insets left="10.0" top="70.0" />
+                     </VBox.margin>
+                  </RadioButton>
+               </children>
+            </VBox>
+            <VBox id="vboxMiddle" prefHeight="700.0" prefWidth="426.0">
+               <children>
+                  <TextField id="txtPlayers" alignment="CENTER" prefHeight="70.0" prefWidth="426.0" text="Number of Players">
+                     <font>
+                        <Font name="AR DESTINE" size="36.0" />
+                     </font>
+                  </TextField>
+                  <RadioButton id="btn2" mnemonicParsing="false" prefHeight="50.0" prefWidth="70.0" text="2">
+                     <VBox.margin>
+                        <Insets left="10.0" top="70.0" />
+                     </VBox.margin>
+                     <font>
+                        <Font name="AR DESTINE" size="24.0" />
+                     </font>
+                  </RadioButton>
+                  <RadioButton id="btn3" mnemonicParsing="false" prefHeight="50.0" prefWidth="68.0" text="3">
+                     <font>
+                        <Font name="AR DESTINE" size="24.0" />
+                     </font>
+                     <VBox.margin>
+                        <Insets left="10.0" top="70.0" />
+                     </VBox.margin>
+                  </RadioButton>
+                  <RadioButton id="btn4" mnemonicParsing="false" prefHeight="50.0" prefWidth="67.0" text="4">
+                     <font>
+                        <Font name="AR DESTINE" size="24.0" />
+                     </font>
+                     <VBox.margin>
+                        <Insets left="10.0" top="70.0" />
+                     </VBox.margin>
+                  </RadioButton>
+                  <Button id="btnOk" mnemonicParsing="false" text="OK">
+                     <font>
+                        <Font name="AR DESTINE" size="28.0" />
+                     </font>
+                     <VBox.margin>
+                        <Insets left="176.0" top="100.0" />
+                     </VBox.margin>
+                  </Button>
+               </children>
+            </VBox>
+            <VBox id="vboxRight" prefHeight="700.0" prefWidth="427.0">
+               <children>
+                  <TextField id="txtMap" alignment="CENTER" prefHeight="70.0" text="Map">
+                     <font>
+                        <Font name="AR DESTINE" size="36.0" />
+                     </font>
+                  </TextField>
+                  <RadioButton id="txtMap1" mnemonicParsing="false" prefHeight="50.0" text="Map 1">
+                     <font>
+                        <Font name="AR DESTINE" size="24.0" />
+                     </font>
+                     <VBox.margin>
+                        <Insets left="10.0" top="70.0" />
+                     </VBox.margin>
+                  </RadioButton>
+                  <RadioButton id="txtMap2" mnemonicParsing="false" prefHeight="50.0" text="Map 2">
+                     <font>
+                        <Font name="AR DESTINE" size="24.0" />
+                     </font>
+                     <VBox.margin>
+                        <Insets left="10.0" top="70.0" />
+                     </VBox.margin>
+                  </RadioButton>
+                  <RadioButton id="txtMap3" mnemonicParsing="false" prefHeight="50.0" text="Map 3">
+                     <font>
+                        <Font name="AR DESTINE" size="24.0" />
+                     </font>
+                     <VBox.margin>
+                        <Insets left="10.0" top="70.0" />
+                     </VBox.margin>
+                  </RadioButton>
+               </children>
+            </VBox>
+         </children>
+      </HBox>
+   </children>
+</VBox>
