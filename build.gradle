@@ -11,7 +11,7 @@ dependencies {
 }
 
 javafx {
-	mainClass = 'com.byteme.HelloWorld'
+	mainClass = 'com.byteme.Main'
 
 	appID 'MULE'
 	appName 'MULE Game'
