@@ -1,3 +1,4 @@
+apply plugin: 'idea'
 apply from: "http://dl.bintray.com/content/shemnon/javafx-gradle/8.1.1/javafx.plugin"
 
 repositories {
@@ -10,7 +11,7 @@ dependencies {
 }
 
 javafx {
-	mainClass = 'com.byteme.HelloWorld'
+	mainClass = 'com.byteme.Main'
 
 	appID 'MULE'
 	appName 'MULE Game'
