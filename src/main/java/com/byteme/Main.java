@@ -10,7 +10,7 @@ import javafx.stage.Stage;
 
 // based on https://github.com/bmuschko/gradle-javafx-hello-world/blob/master/src/main/java/helloworld/HelloWorld.java
 
-public class HelloWorld extends Application {
+public class Main extends Application {
     public static void main(String[] args) {
         launch(args);
     }
