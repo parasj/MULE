@@ -21,23 +21,11 @@ public class GameConfigParams {
         return difficulty;
     }
 
-    public void setDifficulty(Difficulty difficulty) {
-        this.difficulty = difficulty;
-    }
-
     public MapType getMaptype() {
         return maptype;
     }
 
-    public void setMaptype(MapType maptype) {
-        this.maptype = maptype;
-    }
-
     public int getNumPlayers() {
         return numplayers;
-    }
-
-    public void setNumPlayers(int numplayers) {
-        this.numplayers = numplayers;
     }
 }
