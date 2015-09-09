@@ -27,17 +27,4 @@ public class PlayerConfigParams {
     public Color getColor() {
         return color;
     }
-
-    public void setName(String name) {
-
-        this.name = name;
-    }
-
-    public void setRace(Race race) {
-        this.race = race;
-    }
-
-    public void setColor(Color color) {
-        this.color = color;
-    }
 }
