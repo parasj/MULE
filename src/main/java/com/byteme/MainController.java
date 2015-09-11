@@ -27,4 +27,14 @@ public class MainController {
             stage.showAndWait();
 
     }
+
+    public void openTemp() throws Exception {
+        Parent root = FXMLLoader.load(getClass().getResource("fxml/placeholder.fxml"));
+        Stage stage = new Stage();
+        stage.initModality(Modality.APPLICATION_MODAL);
+        stage.setOpacity(1);
+        stage.setTitle("My New Stage Title");
+        stage.setScene(new Scene(root, 450, 450));
+        stage.showAndWait();
+    }
 }
