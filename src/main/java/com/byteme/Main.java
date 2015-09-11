@@ -3,6 +3,8 @@ package com.byteme;
 import javafx.application.Application;
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
+import javafx.fxml.FXMLLoader;
+import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.layout.StackPane;
@@ -17,9 +19,9 @@ public class Main extends Application {
     
     @Override
     public void start(Stage primaryStage) throws Exception {
-        Parent root = FXMLLoader.load(getClass().getResource("fxml\CreatePlayer.fxml"));
+        Parent root = FXMLLoader.load(getClass().getResource("fxml/ConfigureScreen.fxml"));
         Scene player = new Scene(root);
-        primaryStage.setTitle("Select Player");
+        primaryStage.setTitle("Game Configuration");
         primaryStage.setScene(player);
         primaryStage.show();
     }
