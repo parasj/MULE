@@ -42,7 +42,7 @@ public class MainController {
     }
 
     public void openPlayerConfig() throws IOException {
-        setNewScene("fxml/CreatePlayer.fxml");
+        setNewScene("fxml/PlayerConfig.fxml");
     }
 
     public void openTemp() throws IOException {
