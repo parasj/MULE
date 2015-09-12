@@ -26,6 +26,7 @@ public class Main extends Application {
         Scene gameStart = new Scene(root);
         stage.setTitle("M.U.L.E. - ByteMe");
         stage.setScene(gameStart);
+        stage.setResizable(false);
         stage.show();
     }
 

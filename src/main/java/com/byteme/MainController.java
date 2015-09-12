@@ -43,8 +43,9 @@ public class MainController {
         System.out.println("Name: " + name + "\nRace: " + race + "\nColor: " + color);
 
         //TODO: Save player configuration information
+        //TODO: Make other players have options too
 
-        openTemp();
+        setNewScene("fxml/Map.fxml");
     }
 
     public void openTemp() throws IOException {

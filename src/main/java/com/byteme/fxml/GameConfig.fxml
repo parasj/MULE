@@ -32,14 +32,14 @@
       <ChoiceBox fx:id="mapType" layoutX="364.0" layoutY="158.0" prefWidth="150.0" value="Map 1">
          <items>
             <FXCollections fx:factory="observableArrayList">
-               <String fx:value="Map 1" />
+               <String fx:value="Standard Map" />
                <String fx:value="Map 2" />
                <String fx:value="Map 3" />
                <String fx:value="Random Map" />
             </FXCollections>
          </items>
       </ChoiceBox>
-      <Slider fx:id="numPlayers" blockIncrement="1.0" layoutX="43.0" layoutY="318.0" majorTickUnit="1.0" max="4.0" min="1.0" minorTickCount="0" prefHeight="17.0" prefWidth="255.0" showTickLabels="true" showTickMarks="true" snapToTicks="true" value="4.0" />
+      <Slider fx:id="numPlayers" blockIncrement="1.0" layoutX="43.0" layoutY="318.0" majorTickUnit="1.0" max="4.0" min="2.0" minorTickCount="0" prefHeight="17.0" prefWidth="255.0" showTickMarks="true" snapToTicks="true" value="4.0" />
       <Label layoutX="188.0" layoutY="37.0" text="Game Configurations" textFill="RED">
          <font>
             <Font size="24.0" />
@@ -53,5 +53,6 @@
          </toggleGroup></RadioButton>
       <RadioButton fx:id="difficultyNormal" layoutX="43.0" layoutY="191.0" mnemonicParsing="false" text="Normal" textFill="#fc0000" toggleGroup="$DifficultyGroup" />
       <RadioButton fx:id="difficultyHard" layoutX="43.0" layoutY="219.0" mnemonicParsing="false" text="Tournament" textFill="#fc0000" toggleGroup="$DifficultyGroup" />
+      <Label layoutX="43.0" layoutY="345.0" prefHeight="21.0" prefWidth="255.0" text="  2                           3                          4" textFill="RED" />
    </children>
 </Pane>
