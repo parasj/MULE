@@ -5,7 +5,6 @@
 <?import java.lang.*?>
 <?import javafx.scene.layout.*?>
 
-
 <Pane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0" style="-fx-background-color: #000099;" xmlns="http://javafx.com/javafx/8.0.40" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.byteme.MainController">
    <children>
       <Label layoutX="192.0" layoutY="38.0" prefWidth="224.0" text="Player Configuration" textFill="RED">
@@ -16,10 +15,10 @@
       <Label layoutX="39.0" layoutY="130.0" text="Name" textFill="RED" />
       <Label layoutX="39.0" layoutY="190.0" text="Race" textFill="RED" />
       <Label layoutX="39.0" layoutY="245.0" text="Color" textFill="RED" />
-      <TextField layoutX="121.0" layoutY="125.0" prefHeight="11.0" prefWidth="249.0" />
-      <ColorPicker layoutX="122.0" layoutY="240.0" />
-      <ChoiceBox layoutX="117.0" layoutY="185.0" prefWidth="150.0" />
-      <Button layoutX="247.0" layoutY="314.0" mnemonicParsing="false" onAction="#openTemp" prefHeight="31.0" prefWidth="106.0" text="OK" />
+      <TextField fx:id="playerName" layoutX="117.0" layoutY="125.0" prefHeight="11.0" prefWidth="249.0" />
+      <ColorPicker fx:id="playerColor" layoutX="117.0" layoutY="240.0" />
+      <ChoiceBox fx:id="playerRace" layoutX="117.0" layoutY="185.0" prefWidth="150.0" />
+      <Button layoutX="247.0" layoutY="314.0" mnemonicParsing="false" onAction="#savePlayerConfig" prefHeight="31.0" prefWidth="106.0" text="OK" />
       <Separator layoutX="166.0" layoutY="72.0" prefHeight="3.0" prefWidth="275.0" />
       <Separator layoutX="163.0" layoutY="37.0" prefHeight="3.0" prefWidth="275.0" />
    </children>

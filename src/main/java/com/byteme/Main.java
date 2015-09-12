@@ -19,7 +19,7 @@ public class Main extends Application {
     @Override
     public void start(Stage stage) throws IOException {
         // Launches the welcome screen
-        FXMLLoader loader = new FXMLLoader(getClass().getResource("fxml/GameStart.fxml"));
+        FXMLLoader loader = new FXMLLoader(getClass().getResource("fxml/StartGame.fxml"));
         Parent root = loader.load();
         MainController controller = loader.getController();
         controller.setStage(stage);
