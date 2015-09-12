@@ -6,127 +6,39 @@
 <?import java.lang.*?>
 <?import javafx.scene.layout.*?>
 
-<VBox id="vboxWhole" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="800.0" prefWidth="1280.0" xmlns="http://javafx.com/javafx/8.0.40" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.byteme.MainController">
+<Pane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0" style="-fx-background-color: #000099;" xmlns="http://javafx.com/javafx/8.0.40" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.byteme.MainController">
    <children>
-      <HBox id="hboxTitle" prefHeight="100.0" prefWidth="200.0">
-         <children>
-            <TextField id="txtTitle" alignment="CENTER" editable="false" prefHeight="121.0" prefWidth="1280.0" text="MULE">
-               <font>
-                  <Font name="AR DESTINE" size="54.0" />
-               </font>
-            </TextField>
-         </children>
-      </HBox>
-      <HBox id="hboxOptions" prefHeight="700.0" prefWidth="200.0">
-         <children>
-            <VBox id="vboxLeft" prefHeight="700.0" prefWidth="427.0">
-               <children>
-                  <TextField id="txtLevel" alignment="CENTER" prefHeight="70.0" text="Level">
-                     <font>
-                        <Font name="AR DESTINE" size="36.0" />
-                     </font>
-                  </TextField>
-                  <RadioButton id="btnBeginner" contentDisplay="BOTTOM" mnemonicParsing="false" prefHeight="50.0" prefWidth="147.0" text="Beginner">
-                     <VBox.margin>
-                        <Insets left="10.0" top="70.0" />
-                     </VBox.margin>
-                     <font>
-                        <Font name="AR DESTINE" size="24.0" />
-                     </font>
-                  </RadioButton>
-                  <RadioButton id="btnStandard" contentDisplay="CENTER" mnemonicParsing="false" prefHeight="48.0" prefWidth="149.0" text="Standard" textFill="#1b1919">
-                     <font>
-                        <Font name="AR DESTINE" size="24.0" />
-                     </font>
-                     <VBox.margin>
-                        <Insets left="10.0" top="70.0" />
-                     </VBox.margin>
-                  </RadioButton>
-                  <RadioButton id="btnTournament" contentDisplay="RIGHT" mnemonicParsing="false" prefHeight="48.0" prefWidth="175.0" text="Tournament">
-                     <font>
-                        <Font name="AR DESTINE" size="24.0" />
-                     </font>
-                     <VBox.margin>
-                        <Insets left="10.0" top="70.0" />
-                     </VBox.margin>
-                  </RadioButton>
-               </children>
-            </VBox>
-            <VBox id="vboxMiddle" prefHeight="700.0" prefWidth="426.0">
-               <children>
-                  <TextField id="txtPlayers" alignment="CENTER" prefHeight="70.0" prefWidth="426.0" text="Number of Players">
-                     <font>
-                        <Font name="AR DESTINE" size="36.0" />
-                     </font>
-                  </TextField>
-                  <RadioButton id="btn2" mnemonicParsing="false" prefHeight="50.0" prefWidth="70.0" text="2">
-                     <VBox.margin>
-                        <Insets left="10.0" top="70.0" />
-                     </VBox.margin>
-                     <font>
-                        <Font name="AR DESTINE" size="24.0" />
-                     </font>
-                  </RadioButton>
-                  <RadioButton id="btn3" mnemonicParsing="false" prefHeight="50.0" prefWidth="68.0" text="3">
-                     <font>
-                        <Font name="AR DESTINE" size="24.0" />
-                     </font>
-                     <VBox.margin>
-                        <Insets left="10.0" top="70.0" />
-                     </VBox.margin>
-                  </RadioButton>
-                  <RadioButton id="btn4" mnemonicParsing="false" prefHeight="50.0" prefWidth="67.0" text="4">
-                     <font>
-                        <Font name="AR DESTINE" size="24.0" />
-                     </font>
-                     <VBox.margin>
-                        <Insets left="10.0" top="70.0" />
-                     </VBox.margin>
-                  </RadioButton>
-                  <Button id="btnOk" mnemonicParsing="false" onAction="#openPlayerConfig" text="OK">
-                     <font>
-                        <Font name="AR DESTINE" size="28.0" />
-                     </font>
-                     <VBox.margin>
-                        <Insets left="176.0" top="100.0" />
-                     </VBox.margin>
-                  </Button>
-               </children>
-            </VBox>
-            <VBox id="vboxRight" prefHeight="700.0" prefWidth="427.0">
-               <children>
-                  <TextField id="txtMap" alignment="CENTER" prefHeight="70.0" text="Map">
-                     <font>
-                        <Font name="AR DESTINE" size="36.0" />
-                     </font>
-                  </TextField>
-                  <RadioButton id="txtMap1" mnemonicParsing="false" prefHeight="50.0" text="Map 1">
-                     <font>
-                        <Font name="AR DESTINE" size="24.0" />
-                     </font>
-                     <VBox.margin>
-                        <Insets left="10.0" top="70.0" />
-                     </VBox.margin>
-                  </RadioButton>
-                  <RadioButton id="txtMap2" mnemonicParsing="false" prefHeight="50.0" text="Map 2">
-                     <font>
-                        <Font name="AR DESTINE" size="24.0" />
-                     </font>
-                     <VBox.margin>
-                        <Insets left="10.0" top="70.0" />
-                     </VBox.margin>
-                  </RadioButton>
-                  <RadioButton id="txtMap3" mnemonicParsing="false" prefHeight="50.0" text="Map 3">
-                     <font>
-                        <Font name="AR DESTINE" size="24.0" />
-                     </font>
-                     <VBox.margin>
-                        <Insets left="10.0" top="70.0" />
-                     </VBox.margin>
-                  </RadioButton>
-               </children>
-            </VBox>
-         </children>
-      </HBox>
+      <Label layoutX="43.0" layoutY="115.0" text="Difficulty" textFill="RED">
+         <font>
+            <Font size="24.0" />
+         </font>
+      </Label>
+      <Label layoutX="43.0" layoutY="263.0" text="Number of Players" textFill="RED">
+         <font>
+            <Font size="24.0" />
+         </font>
+      </Label>
+      <Button id="btnOk" alignment="BASELINE_CENTER" defaultButton="true" layoutX="384.0" layoutY="251.0" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" mnemonicParsing="false" onAction="#openPlayerConfig" prefHeight="39.0" prefWidth="110.0" text="OK" textAlignment="CENTER">
+         <font>
+            <Font size="18.0" />
+         </font>
+      </Button>
+      <Label layoutX="364.0" layoutY="112.0" text="Map" textFill="RED">
+         <font>
+            <Font size="24.0" />
+         </font>
+      </Label>
+      <ChoiceBox layoutX="364.0" layoutY="158.0" prefWidth="150.0" />
+      <Slider blockIncrement="1.0" layoutX="43.0" layoutY="318.0" majorTickUnit="1.0" max="4.0" min="1.0" minorTickCount="0" prefHeight="17.0" prefWidth="255.0" showTickLabels="true" showTickMarks="true" snapToTicks="true" value="1.0" />
+      <Label layoutX="188.0" layoutY="37.0" text="Game Configurations" textFill="RED">
+         <font>
+            <Font size="24.0" />
+         </font>
+      </Label>
+      <Separator layoutX="122.0" layoutY="36.0" prefHeight="2.0" prefWidth="373.0" />
+      <Separator layoutX="122.0" layoutY="71.0" prefHeight="2.0" prefWidth="373.0" />
+      <RadioButton layoutX="43.0" layoutY="160.0" mnemonicParsing="false" text="Beginner" textFill="#fc0000" />
+      <RadioButton layoutX="43.0" layoutY="191.0" mnemonicParsing="false" text="Normal" textFill="#fc0000" />
+      <RadioButton layoutX="43.0" layoutY="219.0" mnemonicParsing="false" text="Tournament" textFill="#fc0000" />
    </children>
-</VBox>
+</Pane>
