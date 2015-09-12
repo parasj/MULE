@@ -11,30 +11,50 @@ import javafx.scene.control.Button;
 import javafx.scene.layout.StackPane;
 import javafx.stage.Modality;
 import javafx.stage.Stage;
+import javafx.application.Application;
+import javafx.fxml.FXMLLoader;
+import javafx.fxml.JavaFXBuilderFactory;
+import javafx.scene.Parent;
+import javafx.scene.Scene;
+import javafx.stage.Stage;
+
+import java.io.IOException;
 
 /**
  * Created by Siddarth on 9/10/2015.
  */
 public class MainController {
 
-    public void openPlayerConfig() throws Exception {
-        Parent root = FXMLLoader.load(getClass().getResource("fxml/ConfigureScreen.fxml"));
-            Stage stage = new Stage();
-            stage.initModality(Modality.APPLICATION_MODAL);
-            stage.setOpacity(1);
-            stage.setTitle("My New Stage Title");
-            stage.setScene(new Scene(root, 450, 450));
-            stage.showAndWait();
+    private Stage stage;
 
+    public void setStage(Stage stage) {
+        this.stage = stage;
     }
 
-    public void openTemp() throws Exception {
-        Parent root = FXMLLoader.load(getClass().getResource("fxml/placeholder.fxml"));
-        Stage stage = new Stage();
-        stage.initModality(Modality.APPLICATION_MODAL);
-        stage.setOpacity(1);
-        stage.setTitle("My New Stage Title");
-        stage.setScene(new Scene(root, 450, 450));
-        stage.showAndWait();
+    public void startGame() throws IOException {
+        // After clicking on welcome screen,
+        // ask whether to load or create new game data
+        setNewScene("fxml/LoadNewGame.fxml");
+    }
+
+    public void loadConfigureScreen() throws IOException {
+        setNewScene("fxml/ConfigureScreen.fxml");
+    }
+
+    public void openPlayerConfig() throws IOException {
+        setNewScene("fxml/CreatePlayer.fxml");
+    }
+
+    public void openTemp() throws IOException {
+        setNewScene("fxml/placeholder.fxml");
+    }
+
+    public void setNewScene(String fxmlFile) throws IOException{
+        FXMLLoader loader = new FXMLLoader(getClass().getResource(fxmlFile));
+        Parent root = loader.load();
+        MainController controller = loader.getController();
+        controller.setStage(stage);
+        Scene scene = new Scene(root);
+        stage.setScene(scene);
     }
 }

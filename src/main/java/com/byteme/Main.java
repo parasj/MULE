@@ -1,28 +1,33 @@
 package com.byteme;
 
 import javafx.application.Application;
-import javafx.event.ActionEvent;
-import javafx.event.EventHandler;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
-import javafx.scene.control.Button;
-import javafx.scene.layout.StackPane;
 import javafx.stage.Stage;
+
+import java.io.IOException;
 
 // based on https://github.com/bmuschko/gradle-javafx-hello-world/blob/master/src/main/java/helloworld/HelloWorld.java
 
 public class Main extends Application {
+
     public static void main(String[] args) {
         launch(args);
     }
-    
+
     @Override
-    public void start(Stage primaryStage) throws Exception {
-        Parent root = FXMLLoader.load(getClass().getResource("fxml/ConfigureScreen.fxml"));
-        Scene player = new Scene(root);
-        primaryStage.setTitle("Game Configuration");
-        primaryStage.setScene(player);
-        primaryStage.show();
+    public void start(Stage stage) throws IOException {
+        // Launches the welcome screen
+        FXMLLoader loader = new FXMLLoader(getClass().getResource("fxml/GameStart.fxml"));
+        Parent root = loader.load();
+        MainController controller = loader.getController();
+        controller.setStage(stage);
+        Scene gameStart = new Scene(root);
+        stage.setTitle("M.U.L.E. - ByteMe");
+        stage.setScene(gameStart);
+        stage.show();
     }
+
+
 }
