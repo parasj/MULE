@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import java.lang.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+<?import javafx.scene.text.*?>
+
+<Pane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" onMouseClicked="#startGame" prefHeight="400.0" prefWidth="600.0" style="-fx-background-color: #000099;" xmlns="http://javafx.com/javafx/8.0.40" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.byteme.MainController">
+   <children>
+      <Label layoutX="198.0" layoutY="315.0" prefHeight="27.0" prefWidth="204.0" text="Click anywhere to START!" textFill="RED">
+         <font>
+            <Font size="18.0" />
+         </font>
+      </Label>
+      <Label layoutX="190.0" layoutY="46.0" text="M.U.L.E." textFill="#ee0202">
+         <font>
+            <Font size="64.0" />
+         </font>
+      </Label>
+      <Label layoutX="248.0" layoutY="365.0" text="©Team ByteME" textFill="RED" />
+   </children>
+</Pane>
