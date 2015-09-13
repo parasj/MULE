@@ -27,4 +27,8 @@ public class PlayerConfigParams {
     public Color getColor() {
         return color;
     }
+
+    public String toString() {
+        return color + " " + race + " named " + name;
+    }
 }

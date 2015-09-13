@@ -33,6 +33,7 @@ public class ConfigurationController {
         this.difficulty = selectedDifficultyButton().getId();
         this.numPlayers = (int) numPlayersSlider.getValue();
         this.map = (String) mapType.getValue();
+
         System.out.println("Difficulty: " + difficulty + "\nNumber Players: " + numPlayers + "\nMap: " + map);
         //TODO: Save difficulty, map, and numPlayer information
 
@@ -78,13 +79,13 @@ public class ConfigurationController {
 
     public void savePlayerConfig() throws IOException {
 
+        //TODO: Make more efficient by just resetting fields and changing the label instead of creating new controller and opening new scene
         String name = playerName.getText();
         String race = (String) playerRace.getValue();
         Color color = playerColor.getValue();
-        System.out.println("Name: " + name + "\nRace: " + race + "\nColor: " + color);
 
+        System.out.println("Name: " + name + "\nRace: " + race + "\nColor: " + color);
         //TODO: Save player configuration information
-        //TODO: Make other players have options too
 
         if (currentPlayer <= numPlayers) {
             configurePlayerInformation();
@@ -93,8 +94,9 @@ public class ConfigurationController {
             // Go to Map screen
             FXMLLoader loader = new FXMLLoader(getClass().getResource("fxml/Map.fxml"));
             Parent root = loader.load();
-            MainController controller = loader.getController();
+            MapController controller = loader.getController();
             controller.setStage(stage);
+            controller.setNumPlayers(numPlayers);
             Scene scene = new Scene(root);
             stage.setScene(scene);
         }

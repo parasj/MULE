@@ -28,4 +28,8 @@ public class GameConfigParams {
     public int getNumPlayers() {
         return numplayers;
     }
+
+    public String toString() {
+        return "Difficulty: " + difficulty + "\nMap Type: " + maptype + "\nNumber of Players: " + numplayers;
+    }
 }

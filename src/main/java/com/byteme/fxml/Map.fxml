@@ -1,12 +1,13 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
+<?import javafx.scene.text.*?>
 <?import javafx.scene.effect.*?>
 <?import javafx.scene.control.*?>
 <?import javafx.scene.image.*?>
 <?import java.lang.*?>
 <?import javafx.scene.layout.*?>
 
-<Pane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="700.0" prefWidth="935.0" style="-fx-background-color: #000099;" xmlns="http://javafx.com/javafx/8.0.40" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.byteme.MainController">
+<Pane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="700.0" prefWidth="935.0" style="-fx-background-color: #000099;" xmlns="http://javafx.com/javafx/8.0.40" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.byteme.MapController">
    <children>
       <GridPane gridLinesVisible="true" layoutX="18.0" layoutY="21.0" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="500.0" prefWidth="900.0" style="-fx-border-color: Black;">
         <columnConstraints>
@@ -28,182 +29,182 @@
           <RowConstraints minHeight="10.0" prefHeight="100.0" vgrow="SOMETIMES" />
         </rowConstraints>
          <children>
-            <ImageView fx:id="sq1" fitHeight="100.0" fitWidth="100.0" pickOnBounds="true" preserveRatio="true" styleClass="css/MapTiles.css">
+            <ImageView fx:id="sq1" fitHeight="100.0" fitWidth="100.0" onMouseClicked="#tileChosen" pickOnBounds="true" preserveRatio="true" styleClass="css/MapTiles.css">
                <image>
                   <Image url="@../images/Plain.png" />
                </image>
             </ImageView>
-            <ImageView fitHeight="100.0" fitWidth="100.0" pickOnBounds="true" preserveRatio="true" styleClass="css/MapTiles.css" GridPane.columnIndex="1">
+            <ImageView fitHeight="100.0" fitWidth="100.0" onMouseClicked="#tileChosen" pickOnBounds="true" preserveRatio="true" styleClass="css/MapTiles.css" GridPane.columnIndex="1">
                <image>
                   <Image url="@../images/Plain.png" />
                </image>
             </ImageView>
-            <ImageView fitHeight="100.0" fitWidth="100.0" pickOnBounds="true" preserveRatio="true" styleClass="css/MapTiles.css" GridPane.columnIndex="2">
+            <ImageView fitHeight="100.0" fitWidth="100.0" onMouseClicked="#tileChosen" pickOnBounds="true" preserveRatio="true" styleClass="css/MapTiles.css" GridPane.columnIndex="2">
                <image>
                   <Image url="@../images/Mountain.png" />
                </image>
             </ImageView>
-            <ImageView fitHeight="100.0" fitWidth="100.0" pickOnBounds="true" preserveRatio="true" styleClass="css/MapTiles.css" GridPane.columnIndex="3">
+            <ImageView fitHeight="100.0" fitWidth="100.0" onMouseClicked="#tileChosen" pickOnBounds="true" preserveRatio="true" styleClass="css/MapTiles.css" GridPane.columnIndex="3">
                <image>
                   <Image url="@../images/Plain.png" />
                </image>
             </ImageView>
-            <ImageView fitHeight="100.0" fitWidth="100.0" pickOnBounds="true" preserveRatio="true" styleClass="css/MapTiles.css" GridPane.columnIndex="4">
+            <ImageView fitHeight="100.0" fitWidth="100.0" onMouseClicked="#tileChosen" pickOnBounds="true" preserveRatio="true" styleClass="css/MapTiles.css" GridPane.columnIndex="4">
                <image>
                   <Image url="@../images/River.png" />
                </image>
             </ImageView>
-            <ImageView fitHeight="100.0" fitWidth="100.0" pickOnBounds="true" preserveRatio="true" styleClass="css/MapTiles.css" GridPane.columnIndex="5">
+            <ImageView fitHeight="100.0" fitWidth="100.0" onMouseClicked="#tileChosen" pickOnBounds="true" preserveRatio="true" styleClass="css/MapTiles.css" GridPane.columnIndex="5">
                <image>
                   <Image url="@../images/Plain.png" />
                </image>
             </ImageView>
-            <ImageView fitHeight="100.0" fitWidth="100.0" pickOnBounds="true" preserveRatio="true" styleClass="css/MapTiles.css" GridPane.columnIndex="6">
+            <ImageView fitHeight="100.0" fitWidth="100.0" onMouseClicked="#tileChosen" pickOnBounds="true" preserveRatio="true" styleClass="css/MapTiles.css" GridPane.columnIndex="6">
                <image>
                   <Image url="@../images/Mountain.png" />
                </image>
             </ImageView>
-            <ImageView fitHeight="100.0" fitWidth="100.0" pickOnBounds="true" preserveRatio="true" styleClass="css/MapTiles.css" GridPane.columnIndex="7">
+            <ImageView fitHeight="100.0" fitWidth="100.0" onMouseClicked="#tileChosen" pickOnBounds="true" preserveRatio="true" styleClass="css/MapTiles.css" GridPane.columnIndex="7">
                <image>
                   <Image url="@../images/Plain.png" />
                </image>
             </ImageView>
-            <ImageView fitHeight="100.0" fitWidth="100.0" pickOnBounds="true" preserveRatio="true" styleClass="css/MapTiles.css" GridPane.columnIndex="8">
+            <ImageView fitHeight="100.0" fitWidth="100.0" onMouseClicked="#tileChosen" pickOnBounds="true" preserveRatio="true" styleClass="css/MapTiles.css" GridPane.columnIndex="8">
                <image>
                   <Image url="@../images/Plain.png" />
                </image>
             </ImageView>
-            <ImageView fitHeight="100.0" fitWidth="100.0" pickOnBounds="true" preserveRatio="true" styleClass="css/MapTiles.css" GridPane.rowIndex="1">
+            <ImageView fitHeight="100.0" fitWidth="100.0" onMouseClicked="#tileChosen" pickOnBounds="true" preserveRatio="true" styleClass="css/MapTiles.css" GridPane.rowIndex="1">
                <image>
                   <Image url="@../images/Plain.png" />
                </image>
             </ImageView>
-            <ImageView fitHeight="100.0" fitWidth="100.0" pickOnBounds="true" preserveRatio="true" styleClass="css/MapTiles.css" GridPane.columnIndex="2" GridPane.rowIndex="1">
+            <ImageView fitHeight="100.0" fitWidth="100.0" onMouseClicked="#tileChosen" pickOnBounds="true" preserveRatio="true" styleClass="css/MapTiles.css" GridPane.columnIndex="2" GridPane.rowIndex="1">
                <image>
                   <Image url="@../images/Plain.png" />
                </image>
             </ImageView>
-            <ImageView fitHeight="100.0" fitWidth="100.0" pickOnBounds="true" preserveRatio="true" styleClass="css/MapTiles.css" GridPane.columnIndex="3" GridPane.rowIndex="1">
+            <ImageView fitHeight="100.0" fitWidth="100.0" onMouseClicked="#tileChosen" pickOnBounds="true" preserveRatio="true" styleClass="css/MapTiles.css" GridPane.columnIndex="3" GridPane.rowIndex="1">
                <image>
                   <Image url="@../images/Plain.png" />
                </image>
             </ImageView>
-            <ImageView fitHeight="100.0" fitWidth="100.0" pickOnBounds="true" preserveRatio="true" styleClass="css/MapTiles.css" GridPane.columnIndex="7" GridPane.rowIndex="4">
+            <ImageView fitHeight="100.0" fitWidth="100.0" onMouseClicked="#tileChosen" pickOnBounds="true" preserveRatio="true" styleClass="css/MapTiles.css" GridPane.columnIndex="7" GridPane.rowIndex="4">
                <image>
                   <Image url="@../images/Plain.png" />
                </image>
             </ImageView>
-            <ImageView fitHeight="100.0" fitWidth="100.0" pickOnBounds="true" preserveRatio="true" styleClass="css/MapTiles.css" GridPane.columnIndex="8" GridPane.rowIndex="2">
+            <ImageView fitHeight="100.0" fitWidth="100.0" onMouseClicked="#tileChosen" pickOnBounds="true" preserveRatio="true" styleClass="css/MapTiles.css" GridPane.columnIndex="8" GridPane.rowIndex="2">
                <image>
                   <Image url="@../images/Mountain.png" />
                </image>
             </ImageView>
-            <ImageView fitHeight="100.0" fitWidth="100.0" pickOnBounds="true" preserveRatio="true" styleClass="css/MapTiles.css" GridPane.columnIndex="4" GridPane.rowIndex="1">
+            <ImageView fitHeight="100.0" fitWidth="100.0" onMouseClicked="#tileChosen" pickOnBounds="true" preserveRatio="true" styleClass="css/MapTiles.css" GridPane.columnIndex="4" GridPane.rowIndex="1">
                <image>
                   <Image url="@../images/River.png" />
                </image>
             </ImageView>
-            <ImageView fitHeight="100.0" fitWidth="100.0" pickOnBounds="true" preserveRatio="true" styleClass="css/MapTiles.css" GridPane.columnIndex="5" GridPane.rowIndex="4">
+            <ImageView fitHeight="100.0" fitWidth="100.0" onMouseClicked="#tileChosen" pickOnBounds="true" preserveRatio="true" styleClass="css/MapTiles.css" GridPane.columnIndex="5" GridPane.rowIndex="4">
                <image>
                   <Image url="@../images/Plain.png" />
                </image>
             </ImageView>
-            <ImageView fitHeight="100.0" fitWidth="100.0" pickOnBounds="true" preserveRatio="true" styleClass="css/MapTiles.css" GridPane.rowIndex="2">
+            <ImageView fitHeight="100.0" fitWidth="100.0" onMouseClicked="#tileChosen" pickOnBounds="true" preserveRatio="true" styleClass="css/MapTiles.css" GridPane.rowIndex="2">
                <image>
                   <Image url="@../images/Mountain.png" />
                </image>
             </ImageView>
-            <ImageView fitHeight="100.0" fitWidth="100.0" pickOnBounds="true" preserveRatio="true" styleClass="css/MapTiles.css" GridPane.columnIndex="3" GridPane.rowIndex="2">
+            <ImageView fitHeight="100.0" fitWidth="100.0" onMouseClicked="#tileChosen" pickOnBounds="true" preserveRatio="true" styleClass="css/MapTiles.css" GridPane.columnIndex="3" GridPane.rowIndex="2">
                <image>
                   <Image url="@../images/Plain.png" />
                </image>
             </ImageView>
-            <ImageView fitHeight="100.0" fitWidth="100.0" pickOnBounds="true" preserveRatio="true" styleClass="css/MapTiles.css" GridPane.columnIndex="2" GridPane.rowIndex="2">
+            <ImageView fitHeight="100.0" fitWidth="100.0" onMouseClicked="#tileChosen" pickOnBounds="true" preserveRatio="true" styleClass="css/MapTiles.css" GridPane.columnIndex="2" GridPane.rowIndex="2">
                <image>
                   <Image url="@../images/Plain.png" />
                </image>
             </ImageView>
-            <ImageView fitHeight="100.0" fitWidth="100.0" pickOnBounds="true" preserveRatio="true" styleClass="css/MapTiles.css" GridPane.columnIndex="1" GridPane.rowIndex="2">
+            <ImageView fitHeight="100.0" fitWidth="100.0" onMouseClicked="#tileChosen" pickOnBounds="true" preserveRatio="true" styleClass="css/MapTiles.css" GridPane.columnIndex="1" GridPane.rowIndex="2">
                <image>
                   <Image url="@../images/Plain.png" />
                </image>
             </ImageView>
-            <ImageView fitHeight="100.0" fitWidth="100.0" pickOnBounds="true" preserveRatio="true" styleClass="css/MapTiles.css" GridPane.rowIndex="3">
+            <ImageView fitHeight="100.0" fitWidth="100.0" onMouseClicked="#tileChosen" pickOnBounds="true" preserveRatio="true" styleClass="css/MapTiles.css" GridPane.rowIndex="3">
                <image>
                   <Image url="@../images/Plain.png" />
                </image>
             </ImageView>
-            <ImageView fitHeight="100.0" fitWidth="100.0" pickOnBounds="true" preserveRatio="true" styleClass="css/MapTiles.css" GridPane.columnIndex="3" GridPane.rowIndex="3">
+            <ImageView fitHeight="100.0" fitWidth="100.0" onMouseClicked="#tileChosen" pickOnBounds="true" preserveRatio="true" styleClass="css/MapTiles.css" GridPane.columnIndex="3" GridPane.rowIndex="3">
                <image>
                   <Image url="@../images/Plain.png" />
                </image>
             </ImageView>
-            <ImageView fitHeight="100.0" fitWidth="100.0" pickOnBounds="true" preserveRatio="true" styleClass="css/MapTiles.css" GridPane.columnIndex="2" GridPane.rowIndex="3">
+            <ImageView fitHeight="100.0" fitWidth="100.0" onMouseClicked="#tileChosen" pickOnBounds="true" preserveRatio="true" styleClass="css/MapTiles.css" GridPane.columnIndex="2" GridPane.rowIndex="3">
                <image>
                   <Image url="@../images/Plain.png" />
                </image>
             </ImageView>
-            <ImageView fitHeight="100.0" fitWidth="100.0" pickOnBounds="true" preserveRatio="true" styleClass="css/MapTiles.css" GridPane.columnIndex="1" GridPane.rowIndex="1">
+            <ImageView fitHeight="100.0" fitWidth="100.0" onMouseClicked="#tileChosen" pickOnBounds="true" preserveRatio="true" styleClass="css/MapTiles.css" GridPane.columnIndex="1" GridPane.rowIndex="1">
                <image>
                   <Image url="@../images/Mountain.png" />
                </image>
             </ImageView>
-            <ImageView fitHeight="100.0" fitWidth="100.0" pickOnBounds="true" preserveRatio="true" styleClass="css/MapTiles.css" GridPane.columnIndex="1" GridPane.rowIndex="4">
+            <ImageView fitHeight="100.0" fitWidth="100.0" onMouseClicked="#tileChosen" pickOnBounds="true" preserveRatio="true" styleClass="css/MapTiles.css" GridPane.columnIndex="1" GridPane.rowIndex="4">
                <image>
                   <Image url="@../images/Plain.png" />
                </image>
             </ImageView>
-            <ImageView fitHeight="100.0" fitWidth="100.0" pickOnBounds="true" preserveRatio="true" styleClass="css/MapTiles.css" GridPane.rowIndex="4">
+            <ImageView fitHeight="100.0" fitWidth="100.0" onMouseClicked="#tileChosen" pickOnBounds="true" preserveRatio="true" styleClass="css/MapTiles.css" GridPane.rowIndex="4">
                <image>
                   <Image url="@../images/Plain.png" />
                </image>
             </ImageView>
-            <ImageView fitHeight="100.0" fitWidth="100.0" pickOnBounds="true" preserveRatio="true" styleClass="css/MapTiles.css" GridPane.columnIndex="5" GridPane.rowIndex="3">
+            <ImageView fitHeight="100.0" fitWidth="100.0" onMouseClicked="#tileChosen" pickOnBounds="true" preserveRatio="true" styleClass="css/MapTiles.css" GridPane.columnIndex="5" GridPane.rowIndex="3">
                <image>
                   <Image url="@../images/Plain.png" />
                </image>
             </ImageView>
-            <ImageView fitHeight="100.0" fitWidth="100.0" pickOnBounds="true" preserveRatio="true" styleClass="css/MapTiles.css" GridPane.columnIndex="8" GridPane.rowIndex="3">
+            <ImageView fitHeight="100.0" fitWidth="100.0" onMouseClicked="#tileChosen" pickOnBounds="true" preserveRatio="true" styleClass="css/MapTiles.css" GridPane.columnIndex="8" GridPane.rowIndex="3">
                <image>
                   <Image url="@../images/Plain.png" />
                </image>
             </ImageView>
-            <ImageView fitHeight="100.0" fitWidth="100.0" pickOnBounds="true" preserveRatio="true" styleClass="css/MapTiles.css" GridPane.columnIndex="6" GridPane.rowIndex="3">
+            <ImageView fitHeight="100.0" fitWidth="100.0" onMouseClicked="#tileChosen" pickOnBounds="true" preserveRatio="true" styleClass="css/MapTiles.css" GridPane.columnIndex="6" GridPane.rowIndex="3">
                <image>
                   <Image url="@../images/Mountain.png" />
                </image>
             </ImageView>
-            <ImageView fitHeight="100.0" fitWidth="100.0" pickOnBounds="true" preserveRatio="true" styleClass="css/MapTiles.css" GridPane.columnIndex="6" GridPane.rowIndex="2">
+            <ImageView fitHeight="100.0" fitWidth="100.0" onMouseClicked="#tileChosen" pickOnBounds="true" preserveRatio="true" styleClass="css/MapTiles.css" GridPane.columnIndex="6" GridPane.rowIndex="2">
                <image>
                   <Image url="@../images/Plain.png" />
                </image>
             </ImageView>
-            <ImageView fitHeight="100.0" fitWidth="100.0" pickOnBounds="true" preserveRatio="true" styleClass="css/MapTiles.css" GridPane.columnIndex="4" GridPane.rowIndex="3">
+            <ImageView fitHeight="100.0" fitWidth="100.0" onMouseClicked="#tileChosen" pickOnBounds="true" preserveRatio="true" styleClass="css/MapTiles.css" GridPane.columnIndex="4" GridPane.rowIndex="3">
                <image>
                   <Image url="@../images/River.png" />
                </image>
             </ImageView>
-            <ImageView fitHeight="100.0" fitWidth="100.0" pickOnBounds="true" preserveRatio="true" styleClass="css/MapTiles.css" GridPane.columnIndex="5" GridPane.rowIndex="2">
+            <ImageView fitHeight="100.0" fitWidth="100.0" onMouseClicked="#tileChosen" pickOnBounds="true" preserveRatio="true" styleClass="css/MapTiles.css" GridPane.columnIndex="5" GridPane.rowIndex="2">
                <image>
                   <Image url="@../images/Plain.png" />
                </image>
             </ImageView>
-            <ImageView fitHeight="100.0" fitWidth="100.0" pickOnBounds="true" preserveRatio="true" styleClass="css/MapTiles.css" GridPane.columnIndex="7" GridPane.rowIndex="1">
+            <ImageView fitHeight="100.0" fitWidth="100.0" onMouseClicked="#tileChosen" pickOnBounds="true" preserveRatio="true" styleClass="css/MapTiles.css" GridPane.columnIndex="7" GridPane.rowIndex="1">
                <image>
                   <Image url="@../images/Plain.png" />
                </image>
             </ImageView>
-            <ImageView fitHeight="100.0" fitWidth="100.0" pickOnBounds="true" preserveRatio="true" styleClass="css/MapTiles.css" GridPane.columnIndex="6" GridPane.rowIndex="1">
+            <ImageView fitHeight="100.0" fitWidth="100.0" onMouseClicked="#tileChosen" pickOnBounds="true" preserveRatio="true" styleClass="css/MapTiles.css" GridPane.columnIndex="6" GridPane.rowIndex="1">
                <image>
                   <Image url="@../images/Plain.png" />
                </image>
             </ImageView>
-            <ImageView fitHeight="100.0" fitWidth="100.0" pickOnBounds="true" preserveRatio="true" styleClass="css/MapTiles.css" GridPane.columnIndex="5" GridPane.rowIndex="1">
+            <ImageView fitHeight="100.0" fitWidth="100.0" onMouseClicked="#tileChosen" pickOnBounds="true" preserveRatio="true" styleClass="css/MapTiles.css" GridPane.columnIndex="5" GridPane.rowIndex="1">
                <image>
                   <Image url="@../images/Plain.png" />
                </image>
             </ImageView>
-            <ImageView fitHeight="100.0" fitWidth="100.0" pickOnBounds="true" preserveRatio="true" styleClass="css/MapTiles.css" GridPane.columnIndex="7" GridPane.rowIndex="2">
+            <ImageView fitHeight="100.0" fitWidth="100.0" onMouseClicked="#tileChosen" pickOnBounds="true" preserveRatio="true" styleClass="css/MapTiles.css" GridPane.columnIndex="7" GridPane.rowIndex="2">
                <image>
                   <Image url="@../images/Plain.png" />
                </image>
@@ -213,47 +214,57 @@
                   <Image url="@../images/Town.png" />
                </image>
             </ImageView>
-            <ImageView fitHeight="100.0" fitWidth="100.0" pickOnBounds="true" preserveRatio="true" styleClass="css/MapTiles.css" GridPane.columnIndex="7" GridPane.rowIndex="3">
+            <ImageView fitHeight="100.0" fitWidth="100.0" onMouseClicked="#tileChosen" pickOnBounds="true" preserveRatio="true" styleClass="css/MapTiles.css" GridPane.columnIndex="7" GridPane.rowIndex="3">
                <image>
                   <Image url="@../images/Plain.png" />
                </image>
             </ImageView>
-            <ImageView fitHeight="100.0" fitWidth="100.0" pickOnBounds="true" preserveRatio="true" styleClass="css/MapTiles.css" GridPane.columnIndex="8" GridPane.rowIndex="1">
+            <ImageView fitHeight="100.0" fitWidth="100.0" onMouseClicked="#tileChosen" pickOnBounds="true" preserveRatio="true" styleClass="css/MapTiles.css" GridPane.columnIndex="8" GridPane.rowIndex="1">
                <image>
                   <Image url="@../images/Mountain.png" />
                </image>
             </ImageView>
-            <ImageView fitHeight="100.0" fitWidth="100.0" pickOnBounds="true" preserveRatio="true" styleClass="css/MapTiles.css" GridPane.columnIndex="1" GridPane.rowIndex="3">
+            <ImageView fitHeight="100.0" fitWidth="100.0" onMouseClicked="#tileChosen" pickOnBounds="true" preserveRatio="true" styleClass="css/MapTiles.css" GridPane.columnIndex="1" GridPane.rowIndex="3">
                <image>
                   <Image url="@../images/Mountain.png" />
                </image>
             </ImageView>
-            <ImageView fitHeight="100.0" fitWidth="100.0" pickOnBounds="true" preserveRatio="true" styleClass="css/MapTiles.css" GridPane.columnIndex="3" GridPane.rowIndex="4">
+            <ImageView fitHeight="100.0" fitWidth="100.0" onMouseClicked="#tileChosen" pickOnBounds="true" preserveRatio="true" styleClass="css/MapTiles.css" GridPane.columnIndex="3" GridPane.rowIndex="4">
                <image>
                   <Image url="@../images/Plain.png" />
                </image>
             </ImageView>
-            <ImageView fitHeight="100.0" fitWidth="100.0" pickOnBounds="true" preserveRatio="true" styleClass="css/MapTiles.css" GridPane.columnIndex="2" GridPane.rowIndex="4">
+            <ImageView fitHeight="100.0" fitWidth="100.0" onMouseClicked="#tileChosen" pickOnBounds="true" preserveRatio="true" styleClass="css/MapTiles.css" GridPane.columnIndex="2" GridPane.rowIndex="4">
                <image>
                   <Image url="@../images/Mountain.png" />
                </image>
             </ImageView>
-            <ImageView fitHeight="100.0" fitWidth="100.0" pickOnBounds="true" preserveRatio="true" styleClass="css/MapTiles.css" GridPane.columnIndex="4" GridPane.rowIndex="4">
+            <ImageView fitHeight="100.0" fitWidth="100.0" onMouseClicked="#tileChosen" pickOnBounds="true" preserveRatio="true" styleClass="css/MapTiles.css" GridPane.columnIndex="4" GridPane.rowIndex="4">
                <image>
                   <Image url="@../images/River.png" />
                </image>
             </ImageView>
-            <ImageView fitHeight="100.0" fitWidth="100.0" pickOnBounds="true" preserveRatio="true" styleClass="css/MapTiles.css" GridPane.columnIndex="6" GridPane.rowIndex="4">
+            <ImageView fitHeight="100.0" fitWidth="100.0" onMouseClicked="#tileChosen" pickOnBounds="true" preserveRatio="true" styleClass="css/MapTiles.css" GridPane.columnIndex="6" GridPane.rowIndex="4">
                <image>
                   <Image url="@../images/Plain.png" />
                </image>
             </ImageView>
-            <ImageView fitHeight="100.0" fitWidth="100.0" pickOnBounds="true" preserveRatio="true" styleClass="css/MapTiles.css" GridPane.columnIndex="8" GridPane.rowIndex="4">
+            <ImageView fitHeight="100.0" fitWidth="100.0" onMouseClicked="#tileChosen" pickOnBounds="true" preserveRatio="true" styleClass="css/MapTiles.css" GridPane.columnIndex="8" GridPane.rowIndex="4">
                <image>
                   <Image url="@../images/Mountain.png" />
                </image>
             </ImageView>
          </children>
       </GridPane>
+      <Button layoutX="683.0" layoutY="615.0" mnemonicParsing="false" prefHeight="45.0" prefWidth="220.0" text="Pass">
+         <font>
+            <Font size="24.0" />
+         </font>
+      </Button>
+      <Label fx:id="playerLabel" layoutX="39.0" layoutY="542.0" prefHeight="51.0" prefWidth="137.0" text="Player 1" textFill="RED">
+         <font>
+            <Font size="36.0" />
+         </font>
+      </Label>
    </children>
 </Pane>

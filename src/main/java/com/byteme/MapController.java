@@ -13,35 +13,33 @@ import javafx.event.ActionEvent;
 import java.io.IOException;
 
 /**
- * Created by Siddarth on 9/10/2015.
+ * Created by Siddarth on 9/13/2015.
  */
-public class MainController {
+public class MapController {
 
     private Stage stage;
+    private int numPlayers;
+    private static int currentPlayer = 1;
+    @FXML
+    private Label playerLabel;
 
-    public void startGame() throws IOException {
-        // Opens save/load game data screen
-        setNewScene("fxml/LoadGame.fxml");
+    public void tileChosen() {
+        currentPlayer = (currentPlayer + 1 == numPlayers) ? numPlayers : (currentPlayer + 1) % numPlayers;
+        playerLabel.setText("Player " + currentPlayer);
     }
 
-    public void loadConfigureScreen() throws IOException {
-        // Opens Game Configuration settings
-        FXMLLoader loader = new FXMLLoader(getClass().getResource("fxml/GameConfig.fxml"));
-        Parent root = loader.load();
-        ConfigurationController controller = loader.getController();
-        controller.setStage(stage);
-        Scene scene = new Scene(root);
-        stage.setScene(scene);
+    public void goToTown() throws IOException {
+        setNewScene("fxml/Town.fxml");
     }
 
     public void openTemp() throws IOException {
         setNewScene("fxml/placeholder.fxml");
     }
 
-    public void goToTown() throws IOException {
-        setNewScene("fxml/Town.fxml");
-    }
-    private ImageView sq1;
+    /*
+        These methods abstract features needed by the Controller class.
+        Please do not modify them.
+     */
 
     /**
      * Changes the scene of the current stage to the one specified
@@ -64,4 +62,6 @@ public class MainController {
     public void setStage(Stage stage) {
         this.stage = stage;
     }
+
+    public void setNumPlayers(int num) { this.numPlayers = num; }
 }

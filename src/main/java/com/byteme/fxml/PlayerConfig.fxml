@@ -29,7 +29,7 @@
             </FXCollections>
          </items>
       </ChoiceBox>
-      <Button layoutX="247.0" layoutY="314.0" mnemonicParsing="false" onAction="#savePlayerConfig" prefHeight="31.0" prefWidth="106.0" text="OK" />
+      <Button defaultButton="true" layoutX="247.0" layoutY="314.0" mnemonicParsing="false" onAction="#savePlayerConfig" prefHeight="31.0" prefWidth="106.0" text="OK" />
       <Separator layoutX="166.0" layoutY="72.0" prefHeight="3.0" prefWidth="275.0" />
       <Separator layoutX="163.0" layoutY="37.0" prefHeight="3.0" prefWidth="275.0" />
       <Label fx:id="playerNumber" layoutX="27.0" layoutY="38.0" prefHeight="35.0" prefWidth="87.0" text="Player 1" textFill="RED">
