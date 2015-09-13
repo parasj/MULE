@@ -7,6 +7,7 @@ import javafx.scene.Scene;
 import javafx.scene.control.*;
 import javafx.stage.Stage;
 import javafx.scene.paint.Color;
+import javafx.scene.image.ImageView;
 import javafx.event.ActionEvent;
 
 import java.io.IOException;
@@ -16,6 +17,8 @@ import java.io.IOException;
  */
 public class MainController {
 
+    private Stage stage;
+
     public void startGame() throws IOException {
         // Opens save/load game data screen
         setNewScene("fxml/LoadGame.fxml");
@@ -23,51 +26,12 @@ public class MainController {
 
     public void loadConfigureScreen() throws IOException {
         // Opens Game Configuration settings
-        setNewScene("fxml/GameConfig.fxml");
-    }
-
-    public void saveGameConfig() throws IOException {
-        this.difficulty = selectedDifficultyButton().getId();
-        this.numPlayers = (int) numPlayersSlider.getValue();
-        this.map = (String) mapType.getValue();
-        System.out.println("Difficulty: " + difficulty + "\nNumber Players: " + numPlayers + "\nMap: " + map);
-        //TODO: Save difficulty, map, and numPlayer information
-
-        configurePlayerInformation();
-    }
-
-    public void configurePlayerInformation() throws IOException {
-        FXMLLoader loader = new FXMLLoader(getClass().getResource("fxml/PlayerConfig.fxml"));
+        FXMLLoader loader = new FXMLLoader(getClass().getResource("fxml/GameConfig.fxml"));
         Parent root = loader.load();
-        MainController controller = loader.getController();
+        ConfigurationController controller = loader.getController();
         controller.setStage(stage);
-        controller.updatePlayerLabel();
         Scene scene = new Scene(root);
         stage.setScene(scene);
-        currentPlayer++;
-    }
-
-    public void updatePlayerLabel() {
-        playerNumber.setText("Player " + currentPlayer);
-    }
-
-    public void savePlayerConfig() throws IOException {
-
-        String name = playerName.getText();
-        String race = (String) playerRace.getValue();
-        Color color = playerColor.getValue();
-        System.out.println("Name: " + name + "\nRace: " + race + "\nColor: " + color);
-
-        //TODO: Save player configuration information
-        //TODO: Make other players have options too
-
-        if (currentPlayer <= numPlayers) {
-            configurePlayerInformation();
-        } else {
-            currentPlayer = 1;
-            setNewScene("fxml/Map.fxml");
-        }
-
     }
 
     public void openTemp() throws IOException {
@@ -77,6 +41,7 @@ public class MainController {
     public void goToTown() throws IOException {
         setNewScene("fxml/Town.fxml");
     }
+    private ImageView sq1;
 
     /**
      * Changes the scene of the current stage to the one specified
@@ -99,42 +64,4 @@ public class MainController {
     public void setStage(Stage stage) {
         this.stage = stage;
     }
-
-    private Stage stage;
-    private static int currentPlayer = 1;
-    private static int numPlayers;
-    private static String difficulty;
-    private static String map;
-
-    // Form & Game Elements
-
-    // GameConfig
-    @FXML
-    private RadioButton difficultyEasy, difficultyNormal, difficultyHard;
-    @FXML
-    private Slider numPlayersSlider;
-    @FXML
-    private ChoiceBox mapType;
-
-    private RadioButton selectedDifficultyButton() {
-        if (difficultyEasy.isSelected()) {
-            return difficultyEasy;
-        } else if (difficultyNormal.isSelected()) {
-            return difficultyNormal;
-        } else if (difficultyHard.isSelected()) {
-            return difficultyHard;
-        } else {
-            return null;
-        }
-    }
-
-    // Player Config
-    @FXML
-    private TextField playerName;
-    @FXML
-    private ChoiceBox playerRace;
-    @FXML
-    private ColorPicker playerColor;
-    @FXML
-    private Label playerNumber;
 }
