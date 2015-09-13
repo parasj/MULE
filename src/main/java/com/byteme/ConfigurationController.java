@@ -63,7 +63,7 @@ public class ConfigurationController {
     private Label playerNumber;
 
     public void configurePlayerInformation() throws IOException {
-        FXMLLoader loader = new FXMLLoader(getClass().getResource("fxml/PlayerConfig.fxml"));
+        FXMLLoader loader = new FXMLLoader(getClass().getResource("/fxml/PlayerConfig.fxml"));
         Parent root = loader.load();
         ConfigurationController controller = loader.getController();
         controller.setStage(stage);
@@ -92,7 +92,7 @@ public class ConfigurationController {
         } else {
             currentPlayer = 1;
             // Go to Map screen
-            FXMLLoader loader = new FXMLLoader(getClass().getResource("fxml/Map.fxml"));
+            FXMLLoader loader = new FXMLLoader(getClass().getResource("/fxml/Map.fxml"));
             Parent root = loader.load();
             MapController controller = loader.getController();
             controller.setStage(stage);

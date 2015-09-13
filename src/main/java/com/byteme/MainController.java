@@ -21,12 +21,12 @@ public class MainController {
 
     public void startGame() throws IOException {
         // Opens save/load game data screen
-        setNewScene("fxml/LoadGame.fxml");
+        setNewScene("/fxml/LoadGame.fxml");
     }
 
     public void loadConfigureScreen() throws IOException {
         // Opens Game Configuration settings
-        FXMLLoader loader = new FXMLLoader(getClass().getResource("fxml/GameConfig.fxml"));
+        FXMLLoader loader = new FXMLLoader(getClass().getResource("/fxml/GameConfig.fxml"));
         Parent root = loader.load();
         ConfigurationController controller = loader.getController();
         controller.setStage(stage);
@@ -35,11 +35,11 @@ public class MainController {
     }
 
     public void openTemp() throws IOException {
-        setNewScene("fxml/placeholder.fxml");
+        setNewScene("/fxml/placeholder.fxml");
     }
 
     public void goToTown() throws IOException {
-        setNewScene("fxml/Town.fxml");
+        setNewScene("/fxml/Town.fxml");
     }
     private ImageView sq1;
 
