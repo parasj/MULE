@@ -17,8 +17,9 @@ public class Main extends Application {
     @Override
     public void start(Stage stage) throws IOException {
         // Launches the welcome screen
-        FXMLLoader loader = new FXMLLoader(getClass().getResource("fxml/StartGame.fxml"));
-        Parent root = loader.load();
+        
+        FXMLLoader loader = new FXMLLoader(getClass().getResource("/fxml/StartGame.fxml"));
+        Parent root = (Parent) loader.load();
         MainController controller = loader.getController();
         controller.setStage(stage);
         Scene gameStart = new Scene(root);
@@ -27,6 +28,4 @@ public class Main extends Application {
         stage.setResizable(false);
         stage.show();
     }
-
-
 }

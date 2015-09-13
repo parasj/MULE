@@ -1,5 +1,5 @@
 apply plugin: 'idea'
-apply from: "http://dl.bintray.com/content/shemnon/javafx-gradle/8.1.1/javafx.plugin"
+apply from: 'javafx.plugin'
 
 repositories {
     mavenCentral()
@@ -12,9 +12,14 @@ dependencies {
 
 javafx {
 	mainClass = 'com.byteme.Main'
-
 	appID 'MULE'
 	appName 'MULE Game'
+}
 
-	jvmArgs = ['-XX:+AggressiveOpts', '-XX:CompileThreshold=1']
+jar {
+  manifest {
+    attributes 'Implementation-Title': 'MULE Game - ByteMe',
+           	   'Implementation-Version': '1.0',
+           	   'Main-Class': 'com.byteme.Main'
+  }
 }
