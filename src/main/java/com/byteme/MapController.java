@@ -29,11 +29,11 @@ public class MapController {
     }
 
     public void goToTown() throws IOException {
-        setNewScene("fxml/Town.fxml");
+        setNewScene("/fxml/Town.fxml");
     }
 
     public void openTemp() throws IOException {
-        setNewScene("fxml/placeholder.fxml");
+        setNewScene("/fxml/placeholder.fxml");
     }
 
     /*
