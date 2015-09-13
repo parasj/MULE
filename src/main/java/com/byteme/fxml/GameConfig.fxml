@@ -29,7 +29,7 @@
             <Font size="24.0" />
          </font>
       </Label>
-      <ChoiceBox fx:id="mapType" layoutX="364.0" layoutY="158.0" prefWidth="150.0" value="Map 1">
+      <ChoiceBox fx:id="mapType" layoutX="364.0" layoutY="158.0" prefWidth="150.0" value="Standard Map">
          <items>
             <FXCollections fx:factory="observableArrayList">
                <String fx:value="Standard Map" />
@@ -39,7 +39,7 @@
             </FXCollections>
          </items>
       </ChoiceBox>
-      <Slider fx:id="numPlayers" blockIncrement="1.0" layoutX="43.0" layoutY="318.0" majorTickUnit="1.0" max="4.0" min="2.0" minorTickCount="0" prefHeight="17.0" prefWidth="255.0" showTickMarks="true" snapToTicks="true" value="4.0" />
+      <Slider fx:id="numPlayersSlider" blockIncrement="1.0" layoutX="43.0" layoutY="318.0" majorTickUnit="1.0" max="4.0" min="2.0" minorTickCount="0" prefHeight="17.0" prefWidth="255.0" showTickMarks="true" snapToTicks="true" value="2.0" />
       <Label layoutX="188.0" layoutY="37.0" text="Game Configurations" textFill="RED">
          <font>
             <Font size="24.0" />

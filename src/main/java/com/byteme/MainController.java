@@ -27,16 +27,32 @@ public class MainController {
     }
 
     public void saveGameConfig() throws IOException {
-        String difficulty = selectedDifficultyButton().getId();
-        int players = (int) numPlayers.getValue();
-        String map = (String) mapType.getValue();
-        System.out.println("Difficulty: " + difficulty + "\nNumber Players: " + players + "\nMap: " + map);
-        //TODO: Save difficulty information
+        this.difficulty = selectedDifficultyButton().getId();
+        this.numPlayers = (int) numPlayersSlider.getValue();
+        this.map = (String) mapType.getValue();
+        System.out.println("Difficulty: " + difficulty + "\nNumber Players: " + numPlayers + "\nMap: " + map);
+        //TODO: Save difficulty, map, and numPlayer information
 
-        setNewScene("fxml/PlayerConfig.fxml");
+        configurePlayerInformation();
+    }
+
+    public void configurePlayerInformation() throws IOException {
+        FXMLLoader loader = new FXMLLoader(getClass().getResource("fxml/PlayerConfig.fxml"));
+        Parent root = loader.load();
+        MainController controller = loader.getController();
+        controller.setStage(stage);
+        controller.updatePlayerLabel();
+        Scene scene = new Scene(root);
+        stage.setScene(scene);
+        currentPlayer++;
+    }
+
+    public void updatePlayerLabel() {
+        playerNumber.setText("Player " + currentPlayer);
     }
 
     public void savePlayerConfig() throws IOException {
+
         String name = playerName.getText();
         String race = (String) playerRace.getValue();
         Color color = playerColor.getValue();
@@ -45,11 +61,21 @@ public class MainController {
         //TODO: Save player configuration information
         //TODO: Make other players have options too
 
-        setNewScene("fxml/Map.fxml");
+        if (currentPlayer <= numPlayers) {
+            configurePlayerInformation();
+        } else {
+            currentPlayer = 1;
+            setNewScene("fxml/Map.fxml");
+        }
+
     }
 
     public void openTemp() throws IOException {
         setNewScene("fxml/placeholder.fxml");
+    }
+
+    public void goToTown() throws IOException {
+        setNewScene("fxml/Town.fxml");
     }
 
     /**
@@ -75,6 +101,10 @@ public class MainController {
     }
 
     private Stage stage;
+    private static int currentPlayer = 1;
+    private static int numPlayers;
+    private static String difficulty;
+    private static String map;
 
     // Form & Game Elements
 
@@ -82,7 +112,7 @@ public class MainController {
     @FXML
     private RadioButton difficultyEasy, difficultyNormal, difficultyHard;
     @FXML
-    private Slider numPlayers;
+    private Slider numPlayersSlider;
     @FXML
     private ChoiceBox mapType;
 
@@ -105,4 +135,6 @@ public class MainController {
     private ChoiceBox playerRace;
     @FXML
     private ColorPicker playerColor;
+    @FXML
+    private Label playerNumber;
 }
