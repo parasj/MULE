@@ -1,5 +1,9 @@
 package com.byteme;
 
+import com.byteme.Config.ConfigRepository;
+import com.byteme.Config.Difficulty;
+import com.byteme.Config.GameConfigParams;
+import com.byteme.Map.MapType;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
@@ -9,17 +13,20 @@ import javafx.scene.paint.Color;
 import javafx.stage.Stage;
 
 import java.io.IOException;
+import java.util.logging.Logger;
 
 /**
  * Created by Siddarth on 9/13/2015.
  */
 public class ConfigurationController {
+    private ConfigRepository configRepository = ConfigRepository.getInstance();
+    private final static Logger log = Logger.getLogger(ConfigRepository.class.getName());
 
     private Stage stage;
     private static int currentPlayer = 1;
     private static int numPlayers;
-    private static String difficulty;
-    private static String map;
+    private static Difficulty difficulty;
+    private static MapType map;
 
     // GAME CONFIGURATION SCREEN VARIABLES & METHODS
     @FXML
@@ -36,14 +43,21 @@ public class ConfigurationController {
      * @throws IOException if PlayerConfig.fxml is not found
      */
     public void saveGameConfig() throws IOException {
-        this.difficulty = selectedDifficultyButton().getId();
+        this.difficulty = selectedDifficultyButton();
         this.numPlayers = (int) numPlayersSlider.getValue();
-        this.map = (String) mapType.getValue();
+        this.map = selectedMapType();
 
-        System.out.println("Difficulty: " + difficulty + "\nNumber Players: " + numPlayers + "\nMap: " + map);
-        //TODO: Save difficulty, map, and numPlayer information
+        log.info("Difficulty " + difficulty + ", Number Players " + numPlayers + ", Map " + map);
+        // TODO: Save difficulty, map, and numPlayer information
+        configRepository.setGameConfig(new GameConfigParams(difficulty, map, numPlayers));
 
         configurePlayerInformation();
+    }
+
+    private MapType selectedMapType() {
+        switch ((String) mapType.getValue()) {
+            default: return MapType.STANDARD;
+        }
     }
 
     /**
@@ -51,13 +65,13 @@ public class ConfigurationController {
      * is selected for game difficulty.
      * @return The selected difficulty level RadioButton
      */
-    private RadioButton selectedDifficultyButton() {
+    private Difficulty selectedDifficultyButton() {
         if (difficultyEasy.isSelected()) {
-            return difficultyEasy;
+            return Difficulty.BEGINNER;
         } else if (difficultyNormal.isSelected()) {
-            return difficultyNormal;
+            return Difficulty.STANDARD;
         } else if (difficultyHard.isSelected()) {
-            return difficultyHard;
+            return Difficulty.TOURNAMENT;
         } else {
             return null;
         }

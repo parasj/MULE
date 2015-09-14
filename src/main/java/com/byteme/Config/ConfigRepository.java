@@ -7,15 +7,26 @@ import java.util.*;
  */
 
 public class ConfigRepository {
+
+    // Singleton
+    private static ConfigRepository instance = null;
+
+    public static ConfigRepository getInstance() {
+        if(instance == null) {
+            instance = new ConfigRepository();
+        }
+        return instance;
+    }
+
     private ConfigStore configStore;
     private GameConfigParams gameConfigParams;
     private List<PlayerConfigParams> playerConfigList;
 
-    public ConfigRepository() {
+    private ConfigRepository() {
         this(new InMemoryConfigStore());
     }
 
-    public ConfigRepository(ConfigStore store) {
+    private ConfigRepository(ConfigStore store) {
         configStore = store;
         playerConfigList = new ArrayList<>();
     }
