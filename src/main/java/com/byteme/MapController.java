@@ -50,6 +50,7 @@ public class MapController implements Initializable {
         for (int i = 0; i < standardMap.length; i++) {
             for (int j = 0; j < standardMap[i].length; j++) {
                 ImageView tile = new ImageView(standardMap[i][j]);
+                tile.setOnMouseClicked((MouseEvent e) -> tileChosen(e));
                 map.add(tile, j, i);
             }
         }
