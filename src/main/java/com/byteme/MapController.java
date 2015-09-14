@@ -34,12 +34,12 @@ public class MapController implements Initializable {
     @Override
     public void initialize(java.net.URL location, java.util.ResourceBundle resources) {
 
-        String P = "com/byteme/images/Plain.png";
-        String M1 = "com/byteme/images/Mountain.png";
-        String M2 = "com/byteme/images/Mountain.png";
-        String M3 = "com/byteme/images/Mountain.png";
-        String R = "com/byteme/images/River.png";
-        String Town = "com/byteme/images/Town.png";
+        String P = "/images/Plain.png";
+        String M1 = "/images/Mountain.png";
+        String M2 = "/images/Mountain.png";
+        String M3 = "/images/Mountain.png";
+        String R = "/images/River.png";
+        String Town = "/images/Town.png";
 
         String[][] standardMap = {{P,P,M1,P,R,P,M3,P,P},
                                     {P,M1,P,P,R,P,P,P,M3},
@@ -77,14 +77,14 @@ public class MapController implements Initializable {
 
     public void goToTown() {
         try {
-            setNewScene("fxml/Town.fxml");
+            setNewScene("/fxml/Town.fxml");
         } catch (Exception e) {
             System.out.println(e);
         }
     }
 
     public void openTemp() throws IOException {
-        setNewScene("fxml/placeholder.fxml");
+        setNewScene("/fxml/placeholder.fxml");
     }
 
     /*
