@@ -1,14 +1,9 @@
 package com.byteme;
 
-import javafx.fxml.FXML;
 import javafx.scene.Parent;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Scene;
-import javafx.scene.control.*;
 import javafx.stage.Stage;
-import javafx.scene.paint.Color;
-import javafx.scene.image.ImageView;
-import javafx.event.ActionEvent;
 
 import java.io.IOException;
 
@@ -19,11 +14,22 @@ public class MainController {
 
     private Stage stage;
 
+    /**
+     * Runs when Player clicks on the screen in the Start screen.
+     * Opens the screen asking player whether they want to.
+     * open an old game file or create a new one.
+     * @throws IOException if LoadGame.fxml is not found
+     */
     public void startGame() throws IOException {
-        // Opens save/load game data screen
         setNewScene("/fxml/LoadGame.fxml");
     }
 
+    /**
+     * Runs when Player selects "Create New Game".
+     * Opens the screen containing Game Configuration settings.
+     * Gives control to the ConfigurationController class.
+     * @throws IOException if GameConfig.fxml is not found
+     */
     public void loadConfigureScreen() throws IOException {
         // Opens Game Configuration settings
         FXMLLoader loader = new FXMLLoader(getClass().getResource("/fxml/GameConfig.fxml"));
@@ -34,14 +40,23 @@ public class MainController {
         stage.setScene(scene);
     }
 
+    /**
+     * Run this whenever we want to show a temporary screen for
+     * things that still need to be created
+     * @throws IOException if placeholder.fxml is not found
+     */
     public void openTemp() throws IOException {
         setNewScene("/fxml/placeholder.fxml");
     }
 
+    /**
+     * Runs when player clicks on Town.
+     * Takes player to town.
+     * @throws IOException
+     */
     public void goToTown() throws IOException {
         setNewScene("/fxml/Town.fxml");
     }
-    private ImageView sq1;
 
     /**
      * Changes the scene of the current stage to the one specified

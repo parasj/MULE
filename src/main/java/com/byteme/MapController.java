@@ -1,6 +1,5 @@
 package com.byteme;
 
-import javafx.event.EventHandler;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.Parent;
@@ -9,11 +8,8 @@ import javafx.scene.Scene;
 import javafx.scene.control.*;
 import javafx.scene.input.MouseEvent;
 import javafx.stage.Stage;
-import javafx.scene.paint.Color;
 import javafx.scene.image.ImageView;
-import javafx.event.ActionEvent;
 import javafx.scene.layout.GridPane;
-import javafx.scene.Node;
 
 import java.io.IOException;
 
@@ -27,10 +23,16 @@ public class MapController implements Initializable {
     private static int currentPlayer = 1;
     @FXML
     private Label playerLabel;
-
     @FXML
     private GridPane map;
 
+    /**
+     * Runs right before the map screen is shown.
+     * We create the map according to the map configuration
+     * and give the tiles certain properties.
+     * @param location
+     * @param resources
+     */
     @Override
     public void initialize(java.net.URL location, java.util.ResourceBundle resources) {
 
@@ -50,47 +52,54 @@ public class MapController implements Initializable {
         for (int i = 0; i < standardMap.length; i++) {
             for (int j = 0; j < standardMap[i].length; j++) {
                 ImageView tile = new ImageView(standardMap[i][j]);
-                tile.setOnMouseClicked((MouseEvent e) -> tileChosen(e));
-                map.add(tile, j, i);
+                tile.setOnMouseClicked((MouseEvent e) -> tileChosen(e)); // Run tileChosen() when we click on a tile
+                map.add(tile, j, i); // Place the image on the grid
             }
         }
 
+        // Make the town tile run "goToTown()" instead of "tileChosen(e)"
         map.getChildren().get(23).setOnMouseClicked((MouseEvent e) -> goToTown());
 
     }
 
+    /**
+     * Runs when a certain tile is clicked.
+     * Saves tile chosen to player.
+     * @param event MouseEvent containing information on what was clicked.
+     */
     public void tileChosen(MouseEvent event) {
 
         // Get the square being clicked
         ImageView tile = (ImageView) event.getSource();
 
-        // Oddly enough, these give me null for the 0th row and 0th column tiles
-        System.out.println("Which grid row? " + map.getRowIndex(tile));
-        System.out.println("Which grid column? " + map.getColumnIndex(tile));
+        //TODO: Save which tile was clicked by which player (currentPlayer is a static variable of this class)
+        System.out.println("Player " + currentPlayer + ": " + map.getRowIndex(tile) + ", " + map.getColumnIndex(tile));
 
-        System.out.println(tile.getImage());
-
-        // Change the player label
+        // Update the player label to the next player
         currentPlayer = (currentPlayer + 1 == numPlayers) ? numPlayers : (currentPlayer + 1) % numPlayers;
         playerLabel.setText("Player " + currentPlayer);
     }
 
+    /**
+     * Runs when player clicks the Town.
+     * Changes scene to Town
+     */
     public void goToTown() {
         try {
             setNewScene("/fxml/Town.fxml");
-        } catch (Exception e) {
+        } catch (IOException e) {
             System.out.println(e);
         }
     }
 
+    /**
+     * Run this whenever we want to show a temporary screen for
+     * things that still need to be created
+     * @throws IOException if placeholder.fxml is not found
+     */
     public void openTemp() throws IOException {
         setNewScene("/fxml/placeholder.fxml");
     }
-
-    /*
-        These methods abstract features needed by the Controller class.
-        Please do not modify them.
-     */
 
     /**
      * Changes the scene of the current stage to the one specified
@@ -114,5 +123,10 @@ public class MapController implements Initializable {
         this.stage = stage;
     }
 
+    /**
+     * Sets numPlayers (total in this game) in this MapController
+     * Needed when controller is created so that methods can use it.
+     * @param num Total Number of Players in this game
+     */
     public void setNumPlayers(int num) { this.numPlayers = num; }
 }
