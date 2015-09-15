@@ -1,22 +1,27 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
+<?import javafx.scene.image.*?>
 <?import java.lang.*?>
 <?import javafx.scene.control.*?>
 <?import javafx.scene.layout.*?>
 <?import javafx.scene.text.*?>
 
-<Pane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" onMouseClicked="#startGame" prefHeight="400.0" prefWidth="600.0" style="-fx-background-color: #000099;" xmlns="http://javafx.com/javafx/8.0.40" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.byteme.MainController">
+<Pane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" onMouseClicked="#startGame" prefHeight="400.0" prefWidth="600.0" style="-fx-background-color: #2C3E50;" xmlns="http://javafx.com/javafx/8.0.40" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.byteme.MainController">
    <children>
-      <Label layoutX="198.0" layoutY="315.0" prefHeight="27.0" prefWidth="204.0" text="Click anywhere to START!" textFill="RED">
+      <ImageView fitHeight="78.0" fitWidth="491.0" layoutX="55.0" layoutY="33.0" pickOnBounds="true" preserveRatio="true">
+         <image>
+            <Image url="@../images/logo.png" />
+         </image>
+      </ImageView>
+      <ImageView fitHeight="20.0" fitWidth="338.0" layoutX="131.0" layoutY="328.0" pickOnBounds="true" preserveRatio="true">
+         <image>
+            <Image url="@../images/clickanywhere.png" />
+         </image>
+      </ImageView>
+      <Text fill="WHITE" fontSmoothingType="LCD" layoutX="491.0" layoutY="383.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Copyright ByteMe">
          <font>
-            <Font size="18.0" />
+            <Font name="System Font Regular" size="10.0" />
          </font>
-      </Label>
-      <Label layoutX="190.0" layoutY="46.0" text="M.U.L.E." textFill="#ee0202">
-         <font>
-            <Font size="64.0" />
-         </font>
-      </Label>
-      <Label layoutX="248.0" layoutY="365.0" text="©Team ByteME" textFill="RED" />
+      </Text>
    </children>
 </Pane>
