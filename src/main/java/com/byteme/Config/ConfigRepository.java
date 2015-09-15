@@ -1,12 +1,14 @@
 package com.byteme.Config;
 
 import java.util.*;
+import java.util.logging.Logger;
 
 /**
  * Created by parasjain on 9/9/15.
  */
 
 public class ConfigRepository {
+    private final static Logger log = Logger.getLogger(ConfigRepository.class.getName());
 
     // Singleton
     private static ConfigRepository instance = null;
@@ -20,7 +22,7 @@ public class ConfigRepository {
 
     private ConfigStore configStore;
     private GameConfigParams gameConfigParams;
-    private List<PlayerConfigParams> playerConfigList;
+    private Map<Integer, PlayerConfigParams> playerConfigList;
 
     private ConfigRepository() {
         this(new InMemoryConfigStore());
@@ -28,10 +30,11 @@ public class ConfigRepository {
 
     private ConfigRepository(ConfigStore store) {
         configStore = store;
-        playerConfigList = new ArrayList<>();
+        playerConfigList = new HashMap<>(3);
     }
 
     public void setGameConfig(GameConfigParams config) {
+        log.info("Saving game config, " + config);
         gameConfigParams = config;
         configStore.save(this);
     }
@@ -41,7 +44,8 @@ public class ConfigRepository {
     }
 
     public void setPlayerConfig(PlayerConfigParams player, int id) {
-        playerConfigList.set(id, player);
+        log.info("Saving player " + id + " config, " + player);
+        playerConfigList.put(id, player);
         configStore.save(this);
     }
 

@@ -30,6 +30,6 @@ public class GameConfigParams {
     }
 
     public String toString() {
-        return "Difficulty: " + difficulty + "\nMap Type: " + maptype + "\nNumber of Players: " + numplayers;
+        return "Difficulty: " + difficulty + "\tMap Type: " + maptype + "\tNumber of Players: " + numplayers;
     }
 }

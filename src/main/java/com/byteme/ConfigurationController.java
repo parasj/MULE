@@ -1,8 +1,6 @@
 package com.byteme;
 
-import com.byteme.Config.ConfigRepository;
-import com.byteme.Config.Difficulty;
-import com.byteme.Config.GameConfigParams;
+import com.byteme.Config.*;
 import com.byteme.Map.MapType;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
@@ -13,6 +11,7 @@ import javafx.scene.paint.Color;
 import javafx.stage.Stage;
 
 import java.io.IOException;
+import java.util.Locale;
 import java.util.logging.Logger;
 
 /**
@@ -20,7 +19,7 @@ import java.util.logging.Logger;
  */
 public class ConfigurationController {
     private ConfigRepository configRepository = ConfigRepository.getInstance();
-    private final static Logger log = Logger.getLogger(ConfigRepository.class.getName());
+    private final static Logger log = Logger.getLogger(ConfigurationController.class.getName());
 
     private Stage stage;
     private static int currentPlayer = 1;
@@ -43,12 +42,11 @@ public class ConfigurationController {
      * @throws IOException if PlayerConfig.fxml is not found
      */
     public void saveGameConfig() throws IOException {
-        this.difficulty = selectedDifficultyButton();
-        this.numPlayers = (int) numPlayersSlider.getValue();
-        this.map = selectedMapType();
+        difficulty = selectedDifficultyButton();
+        numPlayers = (int) numPlayersSlider.getValue();
+        map = selectedMapType();
 
-        log.info("Difficulty " + difficulty + ", Number Players " + numPlayers + ", Map " + map);
-        // TODO: Save difficulty, map, and numPlayer information
+        log.info("Difficulty " + difficulty + ", Number Players " + numPlayers + ", Map " + map + "\t" + mapType.getValue());
         configRepository.setGameConfig(new GameConfigParams(difficulty, map, numPlayers));
 
         configurePlayerInformation();
@@ -127,8 +125,8 @@ public class ConfigurationController {
         String race = (String) playerRace.getValue();
         Color color = playerColor.getValue();
 
-        System.out.println("Name: " + name + "\nRace: " + race + "\nColor: " + color);
-        //TODO: Save player configuration information
+        log.info("Name: " + name + "\nRace: " + race + "\nColor: " + color);
+        configRepository.setPlayerConfig(playerConfigParser(name, race, color), currentPlayer - 1);
 
         if (currentPlayer <= numPlayers) {
             configurePlayerInformation();
@@ -145,6 +143,11 @@ public class ConfigurationController {
             stage.setScene(scene);
         }
 
+    }
+
+    private PlayerConfigParams playerConfigParser(String name, String race, Color color) {
+        Race parsedRace = Race.valueOf(race.toUpperCase(Locale.ENGLISH));
+        return new PlayerConfigParams(name, parsedRace, color);
     }
 
     /**

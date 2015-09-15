@@ -1,5 +1,7 @@
 package com.byteme.Config;
 
+import java.util.logging.Logger;
+
 /**
  * Created by parasjain on 9/9/15.
  */
@@ -7,8 +9,10 @@ package com.byteme.Config;
 // TODO: implement saving functionality
 
 public class InMemoryConfigStore implements ConfigStore {
-    public void save(ConfigRepository repo) {
+    private final static Logger log = Logger.getLogger(InMemoryConfigStore.class.getName());
 
+    public void save(ConfigRepository repo) {
+        log.info("Saving game configuration");
     }
 
     public void restore() {
