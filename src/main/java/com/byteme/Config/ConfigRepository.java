@@ -13,7 +13,6 @@ public class ConfigRepository {
 
     // Singleton
     private static ConfigRepository instance = null;
-
     public static ConfigRepository getInstance() {
         if(instance == null) {
             instance = new ConfigRepository();
