@@ -1,5 +1,6 @@
 package com.byteme.Controllers;
 
+import com.byteme.Config.ConfigRepository;
 import com.byteme.Controllers.MainController;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
@@ -18,6 +19,7 @@ import java.io.IOException;
  * Created by Siddarth on 9/13/2015.
  */
 public class MapController implements Initializable {
+    private ConfigRepository configRepository = ConfigRepository.getInstance();
 
     private Stage stage;
     private int numPlayers;
@@ -78,7 +80,7 @@ public class MapController implements Initializable {
 
         // Update the player label to the next player
         currentPlayer = (currentPlayer + 1 == numPlayers) ? numPlayers : (currentPlayer + 1) % numPlayers;
-        playerLabel.setText("Player " + currentPlayer);
+        playerLabel.setText(String.format("Player %d: %s", currentPlayer, configRepository.getPlayerConfig(currentPlayer - 1).getName()));
     }
 
     /**
