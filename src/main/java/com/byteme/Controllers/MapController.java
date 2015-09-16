@@ -38,7 +38,6 @@ public class MapController implements Initializable {
      */
     @Override
     public void initialize(java.net.URL location, java.util.ResourceBundle resources) {
-
         String P = "/images/Plain.png";
         String M1 = "/images/Mountain.png";
         String M2 = "/images/Mountain.png";
@@ -63,6 +62,7 @@ public class MapController implements Initializable {
         // Make the town tile run "goToTown()" instead of "tileChosen(e)"
         map.getChildren().get(23).setOnMouseClicked((MouseEvent e) -> goToTown());
 
+        playerLabel.setText(String.format("Player %d: %s", currentPlayer, configRepository.getPlayerConfig(currentPlayer - 1).getName()));
     }
 
     /**
@@ -71,7 +71,6 @@ public class MapController implements Initializable {
      * @param event MouseEvent containing information on what was clicked.
      */
     public void tileChosen(MouseEvent event) {
-
         // Get the square being clicked
         ImageView tile = (ImageView) event.getSource();
 
