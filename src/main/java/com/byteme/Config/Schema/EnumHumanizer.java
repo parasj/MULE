@@ -1,4 +1,4 @@
-package com.byteme;
+package com.byteme.Config.Schema;
 
 import com.byteme.Config.*;
 

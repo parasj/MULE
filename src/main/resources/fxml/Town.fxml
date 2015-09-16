@@ -8,7 +8,7 @@
 <?import javafx.scene.image.*?>
 <?import javafx.scene.layout.*?>
 
-<Pane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" onMouseClicked="#goToTown" prefHeight="700.0" prefWidth="935.0" style="-fx-background-color: #000099;" xmlns="http://javafx.com/javafx/8.0.40" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.byteme.MainController">
+<Pane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" onMouseClicked="#goToTown" prefHeight="700.0" prefWidth="935.0" style="-fx-background-color: #000099;" xmlns="http://javafx.com/javafx/8.0.40" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.byteme.Controllers.MainController">
    <children>
       <AnchorPane layoutX="104.0" layoutY="47.0" prefHeight="480.0" prefWidth="728.0" style="-fx-background-color: #EFDD6F;">
          <children>

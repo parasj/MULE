@@ -1,12 +1,11 @@
-package com.byteme.Config;
-
-import com.byteme.EnumHumanizer;
+package com.byteme.Config.Schema;
 
 /**
  * Created by parasjain on 9/9/15.
  */
-public enum Race {
-    FLAPPER, HUMAN, BONZOID, UGAITE, BUZZITE;
+public enum MapType {
+    STANDARD, RANDOM;
+
 
     @Override
     public String toString() {

@@ -1,6 +1,4 @@
-package com.byteme.Config;
-
-import com.byteme.Map.MapType;
+package com.byteme.Config.Schema;
 
 /**
  * Created by parasjain on 9/9/15.

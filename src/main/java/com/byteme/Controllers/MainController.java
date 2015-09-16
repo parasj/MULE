@@ -1,4 +1,4 @@
-package com.byteme;
+package com.byteme.Controllers;
 
 import javafx.scene.Parent;
 import javafx.fxml.FXMLLoader;
