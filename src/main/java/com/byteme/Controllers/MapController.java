@@ -1,7 +1,6 @@
 package com.byteme.Controllers;
 
-import com.byteme.Config.ConfigRepository;
-import com.byteme.Controllers.MainController;
+import com.byteme.Models.ConfigRepository;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.Parent;
@@ -13,7 +12,6 @@ import javafx.stage.Stage;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.GridPane;
 import javafx.scene.paint.Color;
-import javafx.scene.effect.ColorAdjust;
 import javafx.scene.effect.DropShadow;
 
 import java.io.IOException;
