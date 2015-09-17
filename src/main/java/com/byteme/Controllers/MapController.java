@@ -93,10 +93,6 @@ public class MapController implements Initializable {
             System.out.println("You can't click this!");
         }
 
-        // Update the player label to the next player
-        currentPlayer = (currentPlayer + 1 == numPlayers) ? numPlayers : (currentPlayer + 1) % numPlayers;
-        playerLabel.setText(String.format("Player %d - %s", currentPlayer, configRepository.getPlayerConfig(currentPlayer - 1).getName()));
-
     }
 
     /**
