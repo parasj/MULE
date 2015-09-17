@@ -26,8 +26,8 @@ public class MapController implements Initializable {
 
     private Stage stage;
     private int numPlayers;
-    private int currentPlayer = 1;
-    private int freeLand = 0;
+    private static int currentPlayer = 1;
+    private int freeTurn = 0;
     @FXML
     private Label playerLabel;
     @FXML
@@ -76,10 +76,9 @@ public class MapController implements Initializable {
      * @param event MouseEvent containing information on what was clicked.
      */
     public void tileChosen(MouseEvent event) {
-
-        // Get the square being clicked
-        if (freeLand < numPlayers * 2) {
-            freeLand++;
+        if (freeTurn < numPlayers*2) {
+            freeTurn++;
+            // Get the square being clicked
             ImageView tile = (ImageView) event.getSource();
 
             //TODO: Save which tile was clicked by which player (currentPlayer is a static variable of this class)
@@ -91,9 +90,8 @@ public class MapController implements Initializable {
             currentPlayer = (currentPlayer + 1 == numPlayers) ? numPlayers : (currentPlayer + 1) % numPlayers;
             playerLabel.setText(String.format("Player %d: %s", currentPlayer, configRepository.getPlayerConfig(currentPlayer - 1).getName()));
         } else {
-            System.out.println("You can't click this!");
+            System.out.println("No more Free turns.");
         }
-
     }
 
     /**
