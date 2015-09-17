@@ -68,6 +68,7 @@ public class MapController implements Initializable {
         // Make the town tile run "goToTown()" instead of "tileChosen(e)"
         map.getChildren().get(23).setOnMouseClicked((MouseEvent e) -> goToTown());
 
+        playerLabel.setText(String.format("Player %d - %s", currentPlayer, configRepository.getPlayerConfig(currentPlayer - 1).getName()));
     }
 
     /**

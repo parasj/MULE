@@ -1,4 +1,4 @@
-package com.byteme.Config;
+package com.byteme.Models;
 
 /**
  * Created by parasjain on 9/9/15.

@@ -1,6 +1,6 @@
-package com.byteme.Config;
+package com.byteme.Models;
 
-import com.byteme.Config.Schema.*;
+import com.byteme.Schema.*;
 import java.util.*;
 import java.util.logging.Logger;
 

@@ -1,4 +1,4 @@
-package com.byteme.Config.Schema;
+package com.byteme.Schema;
 
 import javafx.scene.paint.Color;
 
