@@ -1,7 +1,7 @@
 package com.byteme.Controllers;
 
-import com.byteme.Config.*;
-import com.byteme.Config.Schema.*;
+import com.byteme.Models.*;
+import com.byteme.Schema.*;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
@@ -99,7 +99,6 @@ public class ConfigurationController {
         controller.updatePlayerLabel();
         Scene scene = new Scene(root);
         stage.setScene(scene);
-        currentPlayer++;
     }
 
     /**
@@ -128,6 +127,7 @@ public class ConfigurationController {
         log.info("Name: " + name + "\nRace: " + race + "\nColor: " + color);
         configRepository.setPlayerConfig(playerConfigParser(name, race, color), currentPlayer - 1);
 
+        currentPlayer++;
         if (currentPlayer <= numPlayers) {
             configurePlayerInformation();
         } else {

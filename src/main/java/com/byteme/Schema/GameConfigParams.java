@@ -1,4 +1,4 @@
-package com.byteme.Config.Schema;
+package com.byteme.Schema;
 
 /**
  * Created by parasjain on 9/9/15.

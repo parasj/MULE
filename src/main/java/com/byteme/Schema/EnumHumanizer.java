@@ -1,6 +1,4 @@
-package com.byteme.Config.Schema;
-
-import com.byteme.Config.*;
+package com.byteme.Schema;
 
 /**
  * Created by parasjain on 9/9/15.
