@@ -1,4 +1,4 @@
-package com.byteme.Config;
+package com.byteme.Models;
 
 import java.util.logging.Logger;
 
