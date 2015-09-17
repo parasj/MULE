@@ -26,8 +26,7 @@ public class MapController implements Initializable {
 
     private Stage stage;
     private int numPlayers;
-    private int currentPlayer = 1;
-    private int freeLand = 0;
+    private static int currentPlayer = 1;
     @FXML
     private Label playerLabel;
     @FXML
@@ -78,21 +77,16 @@ public class MapController implements Initializable {
     public void tileChosen(MouseEvent event) {
 
         // Get the square being clicked
-        if (freeLand < numPlayers * 2) {
-            freeLand++;
-            ImageView tile = (ImageView) event.getSource();
+        ImageView tile = (ImageView) event.getSource();
 
-            //TODO: Save which tile was clicked by which player (currentPlayer is a static variable of this class)
-            System.out.println("Player " + currentPlayer + ": " + map.getRowIndex(tile) + ", " + map.getColumnIndex(tile));
+        //TODO: Save which tile was clicked by which player (currentPlayer is a static variable of this class)
+        System.out.println("Player " + currentPlayer + ": " + map.getRowIndex(tile) + ", " + map.getColumnIndex(tile));
 
-            setColorTile(configRepository.getPlayerConfig(currentPlayer).getColor(), tile);
+        setColorTile(configRepository.getPlayerConfig(currentPlayer).getColor(), tile);
 
-            // Update the player label to the next player
-            currentPlayer = (currentPlayer + 1 == numPlayers) ? numPlayers : (currentPlayer + 1) % numPlayers;
-            playerLabel.setText(String.format("Player %d: %s", currentPlayer, configRepository.getPlayerConfig(currentPlayer - 1).getName()));
-        } else {
-            System.out.println("You can't click this!");
-        }
+        // Update the player label to the next player
+        currentPlayer = (currentPlayer + 1 == numPlayers) ? numPlayers : (currentPlayer + 1) % numPlayers;
+        playerLabel.setText(String.format("Player %d: %s", currentPlayer, configRepository.getPlayerConfig(currentPlayer - 1).getName()));
 
     }
 
