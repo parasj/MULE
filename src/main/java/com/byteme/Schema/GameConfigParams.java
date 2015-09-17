@@ -1,7 +1,5 @@
 package com.byteme.Schema;
 
-import com.byteme.Map.MapType;
-
 /**
  * Created by parasjain on 9/9/15.
  */
