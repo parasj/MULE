@@ -12,6 +12,9 @@ import javafx.scene.input.MouseEvent;
 import javafx.stage.Stage;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.GridPane;
+import javafx.scene.paint.Color;
+import javafx.scene.effect.ColorAdjust;
+import javafx.scene.effect.DropShadow;
 
 import java.io.IOException;
 
@@ -45,6 +48,7 @@ public class MapController implements Initializable {
         String M3 = "/images/Mountain.png";
         String R = "/images/River.png";
         String Town = "/images/Town.png";
+        String White = "/images/white.png";
 
         String[][] standardMap = {{P,P,M1,P,R,P,M3,P,P},
                                     {P,M1,P,P,R,P,P,P,M3},
@@ -78,9 +82,12 @@ public class MapController implements Initializable {
         //TODO: Save which tile was clicked by which player (currentPlayer is a static variable of this class)
         System.out.println("Player " + currentPlayer + ": " + map.getRowIndex(tile) + ", " + map.getColumnIndex(tile));
 
+        setColorTile(configRepository.getPlayerConfig(currentPlayer).getColor(), tile);
+
         // Update the player label to the next player
         currentPlayer = (currentPlayer + 1 == numPlayers) ? numPlayers : (currentPlayer + 1) % numPlayers;
         playerLabel.setText(String.format("Player %d: %s", currentPlayer, configRepository.getPlayerConfig(currentPlayer - 1).getName()));
+
     }
 
     /**
@@ -132,4 +139,10 @@ public class MapController implements Initializable {
      * @param num Total Number of Players in this game
      */
     public void setNumPlayers(int num) { this.numPlayers = num; }
+
+    public void setColorTile(Color color, ImageView imageView) {
+        //ColorAdjust adjust = new ColorAdjust(color.getHue(),color.getSaturation(),color.getBrightness(), 0.5);
+        DropShadow ds = new DropShadow( 70, 0, 0, color );
+        imageView.setEffect(ds);
+    }
 }
