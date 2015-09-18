@@ -1,4 +1,7 @@
-package com.byteme.Schema;
+package com.byteme.Models;
+
+import com.byteme.Schema.MapTile;
+import com.byteme.Schema.MapType;
 
 /**
  * Created by parasjain on 9/16/15.
