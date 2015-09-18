@@ -81,7 +81,7 @@ public class ConfigurationController {
     @FXML
     private ChoiceBox playerRace;
     @FXML
-    private ColorPicker playerColor;
+    private ChoiceBox playerColor;
     @FXML
     private Label playerNumber;
 
@@ -122,7 +122,21 @@ public class ConfigurationController {
         //TODO: Make more efficient by just resetting fields and changing the label instead of creating new controller and opening new scene
         String name = playerName.getText();
         String race = (String) playerRace.getValue();
-        Color color = playerColor.getValue();
+        Color color;
+        String playerChoice = (String) playerColor.getValue();
+        if (playerChoice.equals("Red")) {
+            color = Color.RED;
+        } else if (playerChoice.equals("Blue")) {
+            color = Color.BLUE;
+        } else if (playerChoice.equals("Green")) {
+            color = Color.GREEN;
+        } else if (playerChoice.equals("Yellow")) {
+            color = Color.YELLOW;
+        } else if (playerChoice.equals("Purple")) {
+            color = Color.PURPLE;
+        } else {
+            color = Color.BLACK;
+        }
 
         log.info("Name: " + name + "\nRace: " + race + "\nColor: " + color);
         configRepository.setPlayerConfig(playerConfigParser(name, race, color), currentPlayer - 1);

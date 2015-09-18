@@ -17,7 +17,6 @@
       <Label layoutX="39.0" layoutY="190.0" text="Race" textFill="RED" />
       <Label layoutX="39.0" layoutY="245.0" text="Color" textFill="RED" />
       <TextField fx:id="playerName" layoutX="117.0" layoutY="125.0" prefHeight="11.0" prefWidth="249.0" />
-      <ColorPicker fx:id="playerColor" layoutX="117.0" layoutY="240.0" />
       <ChoiceBox fx:id="playerRace" layoutX="117.0" layoutY="185.0" prefWidth="150.0" value="Flapper">
          <items>
             <FXCollections fx:factory="observableArrayList">
@@ -37,5 +36,16 @@
             <Font size="24.0" />
          </font>
       </Label>
+      <ChoiceBox fx:id="playerColor" layoutX="117.0" layoutY="240.0" prefWidth="150.0" value="Red">
+         <items>
+            <FXCollections fx:factory="observableArrayList">
+               <String fx:value="Red" />
+               <String fx:value="Green" />
+               <String fx:value="Yellow" />
+               <String fx:value="Blue" />
+               <String fx:value="Purple" />
+            </FXCollections>
+         </items>
+      </ChoiceBox>
    </children>
 </Pane>
