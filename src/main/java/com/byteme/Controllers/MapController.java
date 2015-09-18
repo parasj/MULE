@@ -48,7 +48,7 @@ public class MapController implements Initializable {
         for (int i = 0; i < board.getHeight(); i++) {
             for (int j = 0; j < board.getWidth(); j++) {
                 ImageView tile = new ImageView(board.getTile(i, j).imagePath());
-                tile.setOnMouseClicked(this::tileChosen); // Run tileChosen() when we click on a tile
+                tile.setOnMouseClicked(this::tileChosen);
                 map.add(tile, j, i); // Place the image on the grid
             }
         }
