@@ -1,6 +1,7 @@
 package com.byteme.Controllers;
 
 import com.byteme.Models.ConfigRepository;
+import com.byteme.Models.MapBoard;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.Parent;
@@ -22,6 +23,8 @@ import java.io.IOException;
 public class MapController implements Initializable {
     private ConfigRepository configRepository = ConfigRepository.getInstance();
 
+    private MapBoard board;
+
     private Stage stage;
     private int numPlayers;
     private static int currentPlayer = 1;
@@ -40,25 +43,12 @@ public class MapController implements Initializable {
      */
     @Override
     public void initialize(java.net.URL location, java.util.ResourceBundle resources) {
+        board = new MapBoard();
 
-        String P = "/images/Plain.png";
-        String M1 = "/images/Mountain.png";
-        String M2 = "/images/Mountain.png";
-        String M3 = "/images/Mountain.png";
-        String R = "/images/River.png";
-        String Town = "/images/Town.png";
-        String White = "/images/white.png";
-
-        String[][] standardMap = {{P,P,M1,P,R,P,M3,P,P},
-                                    {P,M1,P,P,R,P,P,P,M3},
-                                    {M3,P,P,P,Town,P,P,P,M1},
-                                    {P,M2,P,P,R,P,M2,P,P},
-                                    {P,P,M2,P,R,P,P,P,M2}};
-
-        for (int i = 0; i < standardMap.length; i++) {
-            for (int j = 0; j < standardMap[i].length; j++) {
-                ImageView tile = new ImageView(standardMap[i][j]);
-                tile.setOnMouseClicked((MouseEvent e) -> tileChosen(e)); // Run tileChosen() when we click on a tile
+        for (int i = 0; i < board.getHeight(); i++) {
+            for (int j = 0; j < board.getWidth(); j++) {
+                ImageView tile = new ImageView(board.getTile(i, j).imagePath());
+                tile.setOnMouseClicked(this::tileChosen); // Run tileChosen() when we click on a tile
                 map.add(tile, j, i); // Place the image on the grid
             }
         }
