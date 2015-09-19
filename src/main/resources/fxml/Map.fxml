@@ -29,7 +29,7 @@
           <RowConstraints minHeight="10.0" prefHeight="100.0" vgrow="SOMETIMES" />
         </rowConstraints>
       </GridPane>
-      <Button layoutX="683.0" layoutY="615.0" mnemonicParsing="false" prefHeight="45.0" prefWidth="220.0" text="Pass">
+      <Button fx:id="pass" layoutX="683.0" layoutY="615.0" mnemonicParsing="false" prefHeight="45.0" prefWidth="220.0" text="Pass">
          <font>
             <Font size="24.0" />
          </font>

@@ -30,6 +30,8 @@ public class MapController implements Initializable {
     private Label playerLabel;
     @FXML
     private GridPane map;
+    @FXML
+    private Button pass;
 
     /**
      * Runs right before the map screen is shown.
@@ -67,6 +69,8 @@ public class MapController implements Initializable {
         map.getChildren().get(23).setOnMouseClicked((MouseEvent e) -> goToTown());
 
         playerLabel.setText(String.format("Player %d - %s", currentPlayer, configRepository.getPlayerConfig(currentPlayer - 1).getName()));
+        
+
     }
 
     /**
@@ -75,7 +79,7 @@ public class MapController implements Initializable {
      * @param event MouseEvent containing information on what was clicked.
      */
     public void tileChosen(MouseEvent event) {
-
+        boolean buy = false;
         // Get the square being clicked
         if (freeLand < numPlayers * 2) {
             freeLand++;
@@ -89,10 +93,17 @@ public class MapController implements Initializable {
             // Update the player label to the next player
             currentPlayer = (currentPlayer + 1 == numPlayers) ? numPlayers : (currentPlayer + 1) % numPlayers;
             playerLabel.setText(String.format("Player %d: %s", currentPlayer, configRepository.getPlayerConfig(currentPlayer - 1).getName()));
+        } else if (buy) { //change boolean
+            if (configRepository.getPlayerConfig(currentPlayer).getMoney() >= 300) {
+                configRepository.getPlayerConfig(currentPlayer).payMoney(300);
+                int current = configRepository.getPlayerConfig(currentPlayer).getMoney();
+                System.out.println("You now have " + current + "money.");
+            } else {
+                System.out.println("You cannot buy!");
+            }
         } else {
             System.out.println("You can't click this!");
         }
-
     }
 
     /**
@@ -101,7 +112,12 @@ public class MapController implements Initializable {
      */
     public void goToTown() {
         try {
-            setNewScene("/fxml/Town.fxml");
+            FXMLLoader loader = new FXMLLoader(getClass().getResource("/fxml/Town.fxml"));
+            Parent root = loader.load();
+            TownController controller = loader.getController();
+            controller.setStage(stage);
+            Scene scene = new Scene(root);
+            stage.setScene(scene);
         } catch (IOException e) {
             System.out.println(e);
         }

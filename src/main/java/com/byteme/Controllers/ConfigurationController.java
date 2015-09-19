@@ -123,9 +123,10 @@ public class ConfigurationController {
         String name = playerName.getText();
         String race = (String) playerRace.getValue();
         Color color = playerColor.getValue();
+        int money = 100; //change this
 
         log.info("Name: " + name + "\nRace: " + race + "\nColor: " + color);
-        configRepository.setPlayerConfig(playerConfigParser(name, race, color), currentPlayer - 1);
+        configRepository.setPlayerConfig(playerConfigParser(name, race, color, money), currentPlayer - 1);
 
         currentPlayer++;
         if (currentPlayer <= numPlayers) {
@@ -145,9 +146,9 @@ public class ConfigurationController {
 
     }
 
-    private PlayerConfigParams playerConfigParser(String name, String race, Color color) {
+    private PlayerConfigParams playerConfigParser(String name, String race, Color color, int money) {
         Race parsedRace = Race.valueOf(race.toUpperCase(Locale.ENGLISH));
-        return new PlayerConfigParams(name, parsedRace, color);
+        return new PlayerConfigParams(name, parsedRace, color, money);
     }
 
     /**
