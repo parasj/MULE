@@ -2,6 +2,7 @@ package com.byteme.Controllers;
 
 import com.byteme.Models.*;
 import com.byteme.Schema.*;
+import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
@@ -9,6 +10,8 @@ import javafx.scene.Scene;
 import javafx.scene.control.*;
 import javafx.scene.paint.Color;
 import javafx.stage.Stage;
+import javafx.collections.FXCollections;
+
 
 import java.io.IOException;
 import java.util.Locale;
@@ -83,6 +86,8 @@ public class ConfigurationController {
     @FXML
     private ChoiceBox playerColor;
     @FXML
+    private ObservableList playerColorOptions;
+    @FXML
     private Label playerNumber;
 
     /**
@@ -137,7 +142,7 @@ public class ConfigurationController {
         } else {
             color = Color.BLACK;
         }
-
+        playerColorOptions.remove(playerChoice);
         log.info("Name: " + name + "\nRace: " + race + "\nColor: " + color);
         configRepository.setPlayerConfig(playerConfigParser(name, race, color), currentPlayer - 1);
 

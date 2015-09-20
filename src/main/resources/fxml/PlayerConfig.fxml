@@ -38,7 +38,7 @@
       </Label>
       <ChoiceBox fx:id="playerColor" layoutX="117.0" layoutY="240.0" prefWidth="150.0" value="Red">
          <items>
-            <FXCollections fx:factory="observableArrayList">
+            <FXCollections fx:factory="observableArrayList" fx:id="playerColorOptions">
                <String fx:value="Red" />
                <String fx:value="Green" />
                <String fx:value="Yellow" />
