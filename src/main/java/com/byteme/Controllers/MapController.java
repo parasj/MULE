@@ -26,6 +26,8 @@ public class MapController implements Initializable {
     private int numPlayers;
     private int currentPlayer = 1;
     private int freeLand = 0;
+    private int passNumber;
+    public static boolean buy = false;
     @FXML
     private Label playerLabel;
     @FXML
@@ -69,8 +71,14 @@ public class MapController implements Initializable {
         map.getChildren().get(23).setOnMouseClicked((MouseEvent e) -> goToTown());
 
         playerLabel.setText(String.format("Player %d - %s", currentPlayer, configRepository.getPlayerConfig(currentPlayer - 1).getName()));
-        
 
+        pass.setOnMouseClicked((MouseEvent e) -> {
+            try {
+                updatePlayer();
+            } catch (IOException e1) {
+                System.out.println(e1);
+            }
+        });
     }
 
     /**
@@ -79,7 +87,6 @@ public class MapController implements Initializable {
      * @param event MouseEvent containing information on what was clicked.
      */
     public void tileChosen(MouseEvent event) {
-        boolean buy = false;
         // Get the square being clicked
         if (freeLand < numPlayers * 2) {
             freeLand++;
@@ -93,16 +100,19 @@ public class MapController implements Initializable {
             // Update the player label to the next player
             currentPlayer = (currentPlayer + 1 == numPlayers) ? numPlayers : (currentPlayer + 1) % numPlayers;
             playerLabel.setText(String.format("Player %d: %s", currentPlayer, configRepository.getPlayerConfig(currentPlayer - 1).getName()));
+            passNumber = 0;
         } else if (buy) { //change boolean
             if (configRepository.getPlayerConfig(currentPlayer).getMoney() >= 300) {
                 configRepository.getPlayerConfig(currentPlayer).payMoney(300);
                 int current = configRepository.getPlayerConfig(currentPlayer).getMoney();
-                System.out.println("You now have " + current + "money.");
+                System.out.println("You now have " + current + " money.");
             } else {
-                System.out.println("You cannot buy!");
+                System.out.println("You cannot buy! You only have " + configRepository.getPlayerConfig(currentPlayer).getMoney() + " dollars!");
             }
+            passNumber = 0;
         } else {
             System.out.println("You can't click this!");
+            passNumber = 0;
         }
     }
 
@@ -112,6 +122,7 @@ public class MapController implements Initializable {
      */
     public void goToTown() {
         try {
+            freeLand = numPlayers * 2;
             FXMLLoader loader = new FXMLLoader(getClass().getResource("/fxml/Town.fxml"));
             Parent root = loader.load();
             TownController controller = loader.getController();
@@ -121,6 +132,16 @@ public class MapController implements Initializable {
         } catch (IOException e) {
             System.out.println(e);
         }
+    }
+
+    public void updatePlayer() throws IOException {
+        passNumber++;
+        if (passNumber == numPlayers) {
+            System.out.println("Selection phase is over!");
+            setNewScene("/fxml/placeholder.fxml");
+        }
+        currentPlayer = (currentPlayer + 1 == numPlayers) ? numPlayers : (currentPlayer + 1) % numPlayers;
+        playerLabel.setText(String.format("Player %d: %s", currentPlayer, configRepository.getPlayerConfig(currentPlayer - 1).getName()));
     }
 
     /**

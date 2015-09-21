@@ -29,6 +29,7 @@ public class TownController implements Initializable {
      */
     public void goToMap() {
         try {
+            MapController.buy = true;
             setNewScene("/fxml/Map.fxml");
         } catch (IOException e) {
             System.out.println(e);
