@@ -123,6 +123,7 @@ public class ConfigurationController {
         String name = playerName.getText();
         String race = (String) playerRace.getValue();
         Color color = playerColor.getValue();
+        int money = 400; //change depending on race
 
         log.info("Name: " + name + "\nRace: " + race + "\nColor: " + color);
         configRepository.setPlayerConfig(playerConfigParser(name, race, color, money), currentPlayer - 1);
