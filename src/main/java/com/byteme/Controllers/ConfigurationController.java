@@ -127,6 +127,7 @@ public class ConfigurationController {
         //TODO: Make more efficient by just resetting fields and changing the label instead of creating new controller and opening new scene
         String name = playerName.getText();
         String race = (String) playerRace.getValue();
+<<<<<<< HEAD
         Color color;
         String playerChoice = (String) playerColor.getValue();
         if (playerChoice.equals("Red")) {
@@ -143,8 +144,13 @@ public class ConfigurationController {
             color = Color.BLACK;
         }
         playerColorOptions.remove(playerChoice);
+=======
+        Color color = playerColor.getValue();
+        int money = 400; //change depending on race
+
+>>>>>>> dkim630m4
         log.info("Name: " + name + "\nRace: " + race + "\nColor: " + color);
-        configRepository.setPlayerConfig(playerConfigParser(name, race, color), currentPlayer - 1);
+        configRepository.setPlayerConfig(playerConfigParser(name, race, color, money), currentPlayer - 1);
 
         currentPlayer++;
         if (currentPlayer <= numPlayers) {
@@ -164,9 +170,9 @@ public class ConfigurationController {
 
     }
 
-    private PlayerConfigParams playerConfigParser(String name, String race, Color color) {
+    private PlayerConfigParams playerConfigParser(String name, String race, Color color, int money) {
         Race parsedRace = Race.valueOf(race.toUpperCase(Locale.ENGLISH));
-        return new PlayerConfigParams(name, parsedRace, color);
+        return new PlayerConfigParams(name, parsedRace, color, money);
     }
 
     /**
