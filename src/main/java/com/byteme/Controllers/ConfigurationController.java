@@ -9,10 +9,6 @@ import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.*;
 import javafx.scene.paint.Color;
-import javafx.stage.Stage;
-import javafx.collections.FXCollections;
-
-
 import java.io.IOException;
 import java.util.Locale;
 import java.util.logging.Logger;
@@ -20,11 +16,11 @@ import java.util.logging.Logger;
 /**
  * Created by Siddarth on 9/13/2015.
  */
-public class ConfigurationController {
+public class ConfigurationController extends Controller{
+
     private ConfigRepository configRepository = ConfigRepository.getInstance();
     private final static Logger log = Logger.getLogger(ConfigurationController.class.getName());
 
-    private Stage stage;
     private static int currentPlayer = 1;
     private static int numPlayers;
     private static Difficulty difficulty;
@@ -96,8 +92,17 @@ public class ConfigurationController {
      * Increments currentPlayer
      * @throws IOException if PlayerConfig.fxml is not found
      */
-    public void configurePlayerInformation() throws IOException {
-        FXMLLoader loader = new FXMLLoader(getClass().getResource("/fxml/PlayerConfig.fxml"));
+    private void configurePlayerInformation() throws IOException {
+        setNewPlayerConfigScene("/fxml/PlayerConfig.fxml");
+    }
+
+    /**
+     * Custom setNewScene - needed to change the player label
+     * @param fxmlFile The FXML containing the PlayerConfig screen
+     * @throws IOException if PlayerConfig.fxml is not found
+     */
+    private void setNewPlayerConfigScene(String fxmlFile) throws IOException {
+        FXMLLoader loader = new FXMLLoader(getClass().getResource(fxmlFile));
         Parent root = loader.load();
         ConfigurationController controller = loader.getController();
         controller.setStage(stage);
@@ -110,7 +115,7 @@ public class ConfigurationController {
      * Changes the current player label to
      * reflect the current player.
      */
-    public void updatePlayerLabel() {
+    private void updatePlayerLabel() {
         playerNumber.setText("Player " + currentPlayer);
     }
 
@@ -167,13 +172,5 @@ public class ConfigurationController {
     private PlayerConfigParams playerConfigParser(String name, String race, Color color) {
         Race parsedRace = Race.valueOf(race.toUpperCase(Locale.ENGLISH));
         return new PlayerConfigParams(name, parsedRace, color);
-    }
-
-    /**
-     * Sets this controller instance's stage
-     * @param stage The stage to be set to the controller
-     */
-    public void setStage(Stage stage) {
-        this.stage = stage;
     }
 }

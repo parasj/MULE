@@ -20,12 +20,11 @@ import java.io.IOException;
 /**
  * Created by Siddarth on 9/13/2015.
  */
-public class MapController implements Initializable {
+public class MapController extends Controller implements Initializable {
     private ConfigRepository configRepository = ConfigRepository.getInstance();
 
     private MapBoard board;
 
-    private Stage stage;
     private int numPlayers;
     private static int currentPlayer = 1;
     private int freeTurn = 0;
@@ -53,8 +52,11 @@ public class MapController implements Initializable {
             }
         }
 
-        // Make the town tile run "goToTown()" instead of "tileChosen(e)"
-        map.getChildren().get(23).setOnMouseClicked((MouseEvent e) -> goToTown());
+        // Force center tile to be Town.png
+        // Make the town tile run "goToTown()"
+        ImageView townImage = new ImageView("/images/Town.png");
+        townImage.setOnMouseClicked((MouseEvent e) -> goToTown());
+        map.add(townImage, 4, 2);
 
         playerLabel.setText(String.format("Player %d - %s", currentPlayer, configRepository.getPlayerConfig(currentPlayer - 1).getName()));
     }
@@ -93,37 +95,6 @@ public class MapController implements Initializable {
         } catch (IOException e) {
             System.out.println(e);
         }
-    }
-
-    /**
-     * Run this whenever we want to show a temporary screen for
-     * things that still need to be created
-     * @throws IOException if placeholder.fxml is not found
-     */
-    public void openTemp() throws IOException {
-        setNewScene("/fxml/placeholder.fxml");
-    }
-
-    /**
-     * Changes the scene of the current stage to the one specified
-     * @param fxmlFile A string containing the location of the new fxml file
-     * @throws IOException fxml file load failed
-     */
-    public void setNewScene(String fxmlFile) throws IOException{
-        FXMLLoader loader = new FXMLLoader(getClass().getResource(fxmlFile));
-        Parent root = loader.load();
-        MainController controller = loader.getController();
-        controller.setStage(stage);
-        Scene scene = new Scene(root);
-        stage.setScene(scene);
-    }
-
-    /**
-     * Sets this controller instance's stage
-     * @param stage The stage to be set to the controller
-     */
-    public void setStage(Stage stage) {
-        this.stage = stage;
     }
 
     /**
