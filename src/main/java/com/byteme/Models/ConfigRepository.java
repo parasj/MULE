@@ -30,6 +30,7 @@ public class ConfigRepository {
 
     private ConfigRepository(ConfigStore store) {
         configStore = store;
+        //Why 3????
         playerConfigList = new HashMap<>(3);
     }
 
@@ -51,5 +52,8 @@ public class ConfigRepository {
 
     public PlayerConfigParams getPlayerConfig(int id) {
         return playerConfigList.get(id);
+    }
+    public int getTotalPlayers() {
+        return playerConfigList.size();
     }
 }

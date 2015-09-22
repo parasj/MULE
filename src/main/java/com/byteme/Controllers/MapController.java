@@ -12,8 +12,7 @@ import javafx.scene.input.MouseEvent;
 import javafx.stage.Stage;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.GridPane;
-import javafx.scene.paint.Color;
-import javafx.scene.effect.DropShadow;
+import javafx.scene.image.Image;
 
 import java.io.IOException;
 import java.util.Timer;
@@ -26,7 +25,7 @@ public class MapController extends Controller implements Initializable {
     private ConfigRepository configRepository = ConfigRepository.getInstance();
 
     private static int numPlayers;
-    private int freeTurn = 0;
+    private static int freeTurn = 0;
     private static int currentPlayer = 1;
     private int freeLand = 0;
     private int passNumber;
@@ -91,7 +90,7 @@ public class MapController extends Controller implements Initializable {
             //TODO: Save which tile was clicked by which player (currentPlayer is a static variable of this class)
             System.out.println("Player " + currentPlayer + ": " + map.getRowIndex(tile) + ", " + map.getColumnIndex(tile));
 
-            setColorTile(configRepository.getPlayerConfig(currentPlayer).getColor(), tile);
+            setColorTile(configRepository.getPlayerConfig(currentPlayer % numPlayers).getColor(), map.getRowIndex(tile), map.getColumnIndex(tile));
 
             // Update the player label to the next player
             currentPlayer = (currentPlayer + 1 == numPlayers) ? numPlayers : (currentPlayer + 1) % numPlayers;
@@ -153,9 +152,27 @@ public class MapController extends Controller implements Initializable {
      */
     public void setNumPlayers(int num) { this.numPlayers = num; }
 
-    public void setColorTile(Color color, ImageView imageView) {
-        //ColorAdjust adjust = new ColorAdjust(color.getHue(),color.getSaturation(),color.getBrightness(), 0.5);
-        DropShadow ds = new DropShadow( 70, 0, 0, color );
-        imageView.setEffect(ds);
+    public void setColorTile(String color, int row, int column) {
+        ImageView tile;
+        switch (color) {
+            case "red":
+                tile = new ImageView(new Image("/images/red.png"));
+                break;
+            case "blue":
+                tile = new ImageView(new Image("/images/blue.png"));
+                break;
+            case "green":
+                tile = new ImageView(new Image("/images/green.png"));
+                break;
+            case "yellow":
+                tile = new ImageView(new Image("/images/yellow.png"));
+                break;
+            case "purple":
+                tile = new ImageView(new Image("/images/purple.png"));
+                break;
+            default:
+                throw new IllegalArgumentException("No color configured!");
+        }
+        map.add(tile, column, row);
     }
 }

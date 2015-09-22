@@ -8,10 +8,10 @@ import javafx.scene.paint.Color;
 public class PlayerConfigParams {
     private String name;
     private Race race;
-    private Color color;
+    private String color;
     private int money;
 
-    public PlayerConfigParams(String name, Race race, Color color, int money) {
+    public PlayerConfigParams(String name, Race race, String color, int money) {
         this.name = name;
         this.race = race;
         this.color = color;
@@ -26,7 +26,7 @@ public class PlayerConfigParams {
         return race;
     }
 
-    public Color getColor() {
+    public String getColor() {
         return color;
     }
 
