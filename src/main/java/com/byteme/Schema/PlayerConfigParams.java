@@ -9,11 +9,13 @@ public class PlayerConfigParams {
     private String name;
     private Race race;
     private Color color;
+    private int money;
 
-    public PlayerConfigParams(String name, Race race, Color color) {
+    public PlayerConfigParams(String name, Race race, Color color, int money) {
         this.name = name;
         this.race = race;
         this.color = color;
+        this.money = money;
     }
 
     public String getName() {
@@ -26,6 +28,12 @@ public class PlayerConfigParams {
 
     public Color getColor() {
         return color;
+    }
+
+    public int getMoney() {return money;}
+
+    public void payMoney(int cost) {
+        money = money - cost;
     }
 
     public String toString() {

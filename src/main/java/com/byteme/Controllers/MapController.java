@@ -26,12 +26,21 @@ public class MapController extends Controller implements Initializable {
     private MapBoard board;
 
     private int numPlayers;
+<<<<<<< HEAD
     private static int currentPlayer = 1;
     private int freeTurn = 0;
+=======
+    private int currentPlayer = 1;
+    private int freeLand = 0;
+    private int passNumber;
+    public static boolean buy = false;
+>>>>>>> dkim630m4
     @FXML
     private Label playerLabel;
     @FXML
     private GridPane map;
+    @FXML
+    private Button pass;
 
     /**
      * Runs right before the map screen is shown.
@@ -59,6 +68,14 @@ public class MapController extends Controller implements Initializable {
         map.add(townImage, 4, 2);
 
         playerLabel.setText(String.format("Player %d - %s", currentPlayer, configRepository.getPlayerConfig(currentPlayer - 1).getName()));
+
+        pass.setOnMouseClicked((MouseEvent e) -> {
+            try {
+                updatePlayer();
+            } catch (IOException e1) {
+                System.out.println(e1);
+            }
+        });
     }
 
     /**
@@ -67,9 +84,15 @@ public class MapController extends Controller implements Initializable {
      * @param event MouseEvent containing information on what was clicked.
      */
     public void tileChosen(MouseEvent event) {
+<<<<<<< HEAD
         if (freeTurn < numPlayers*2) {
             freeTurn++;
             // Get the square being clicked
+=======
+        // Get the square being clicked
+        if (freeLand < numPlayers * 2) {
+            freeLand++;
+>>>>>>> dkim630m4
             ImageView tile = (ImageView) event.getSource();
 
             //TODO: Save which tile was clicked by which player (currentPlayer is a static variable of this class)
@@ -80,8 +103,23 @@ public class MapController extends Controller implements Initializable {
             // Update the player label to the next player
             currentPlayer = (currentPlayer + 1 == numPlayers) ? numPlayers : (currentPlayer + 1) % numPlayers;
             playerLabel.setText(String.format("Player %d: %s", currentPlayer, configRepository.getPlayerConfig(currentPlayer - 1).getName()));
+            passNumber = 0;
+        } else if (buy) { //change boolean
+            if (configRepository.getPlayerConfig(currentPlayer).getMoney() >= 300) {
+                configRepository.getPlayerConfig(currentPlayer).payMoney(300);
+                int current = configRepository.getPlayerConfig(currentPlayer).getMoney();
+                System.out.println("You now have " + current + " money.");
+            } else {
+                System.out.println("You cannot buy! You only have " + configRepository.getPlayerConfig(currentPlayer).getMoney() + " dollars!");
+            }
+            passNumber = 0;
         } else {
+<<<<<<< HEAD
             System.out.println("No more Free turns.");
+=======
+            System.out.println("You can't click this!");
+            passNumber = 0;
+>>>>>>> dkim630m4
         }
     }
 
@@ -91,10 +129,26 @@ public class MapController extends Controller implements Initializable {
      */
     public void goToTown() {
         try {
-            setNewScene("/fxml/Town.fxml");
+            freeLand = numPlayers * 2;
+            FXMLLoader loader = new FXMLLoader(getClass().getResource("/fxml/Town.fxml"));
+            Parent root = loader.load();
+            TownController controller = loader.getController();
+            controller.setStage(stage);
+            Scene scene = new Scene(root);
+            stage.setScene(scene);
         } catch (IOException e) {
             System.out.println(e);
         }
+    }
+
+    public void updatePlayer() throws IOException {
+        passNumber++;
+        if (passNumber == numPlayers) {
+            System.out.println("Selection phase is over!");
+            setNewScene("/fxml/placeholder.fxml");
+        }
+        currentPlayer = (currentPlayer + 1 == numPlayers) ? numPlayers : (currentPlayer + 1) % numPlayers;
+        playerLabel.setText(String.format("Player %d: %s", currentPlayer, configRepository.getPlayerConfig(currentPlayer - 1).getName()));
     }
 
     /**
