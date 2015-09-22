@@ -26,15 +26,12 @@ public class MapController extends Controller implements Initializable {
     private MapBoard board;
 
     private int numPlayers;
-<<<<<<< HEAD
-    private static int currentPlayer = 1;
     private int freeTurn = 0;
-=======
-    private int currentPlayer = 1;
+    private static int currentPlayer = 1;
     private int freeLand = 0;
     private int passNumber;
     public static boolean buy = false;
->>>>>>> dkim630m4
+
     @FXML
     private Label playerLabel;
     @FXML
@@ -84,15 +81,9 @@ public class MapController extends Controller implements Initializable {
      * @param event MouseEvent containing information on what was clicked.
      */
     public void tileChosen(MouseEvent event) {
-<<<<<<< HEAD
-        if (freeTurn < numPlayers*2) {
-            freeTurn++;
-            // Get the square being clicked
-=======
         // Get the square being clicked
         if (freeLand < numPlayers * 2) {
             freeLand++;
->>>>>>> dkim630m4
             ImageView tile = (ImageView) event.getSource();
 
             //TODO: Save which tile was clicked by which player (currentPlayer is a static variable of this class)
@@ -114,12 +105,9 @@ public class MapController extends Controller implements Initializable {
             }
             passNumber = 0;
         } else {
-<<<<<<< HEAD
             System.out.println("No more Free turns.");
-=======
             System.out.println("You can't click this!");
             passNumber = 0;
->>>>>>> dkim630m4
         }
     }
 
