@@ -15,7 +15,7 @@ import java.io.IOException;
 /**
  * Created by Daniel on 9/18/2015.
  */
-public class TownController implements Initializable {
+public class TownController extends Controller implements Initializable {
     private Stage stage;
     @FXML
     private Rectangle landoffice;
@@ -34,26 +34,5 @@ public class TownController implements Initializable {
         } catch (IOException e) {
             System.out.println(e);
         }
-    }
-    /**
-     * Changes the scene of the current stage to the one specified
-     * @param fxmlFile A string containing the location of the new fxml file
-     * @throws IOException fxml file load failed
-     */
-    public void setNewScene(String fxmlFile) throws IOException{
-        FXMLLoader loader = new FXMLLoader(getClass().getResource(fxmlFile));
-        Parent root = loader.load();
-        MapController controller = loader.getController();
-        controller.setStage(stage);
-        Scene scene = new Scene(root);
-        stage.setScene(scene);
-    }
-
-    /**
-     * Sets this controller instance's stage
-     * @param stage The stage to be set to the controller
-     */
-    public void setStage(Stage stage) {
-        this.stage = stage;
     }
 }
