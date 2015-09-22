@@ -158,6 +158,7 @@ public class ConfigurationController extends Controller{
             configurePlayerInformation();
         } else {
             currentPlayer = 1;
+            // TODO: Create save dialog box for the player to save configuration options
             // Go to Map screen.
             // Note that the map gets a MapController and not a ConfigurationController or a MainController
             FXMLLoader loader = new FXMLLoader(getClass().getResource("/fxml/Map.fxml"));

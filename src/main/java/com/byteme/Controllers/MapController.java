@@ -16,6 +16,8 @@ import javafx.scene.paint.Color;
 import javafx.scene.effect.DropShadow;
 
 import java.io.IOException;
+import java.util.Timer;
+
 
 /**
  * Created by Siddarth on 9/13/2015.
@@ -23,13 +25,12 @@ import java.io.IOException;
 public class MapController extends Controller implements Initializable {
     private ConfigRepository configRepository = ConfigRepository.getInstance();
 
-    private MapBoard board;
-
-    private int numPlayers;
+    private static int numPlayers;
     private int freeTurn = 0;
     private static int currentPlayer = 1;
     private int freeLand = 0;
     private int passNumber;
+    private Timer timer;
     public static boolean buy = false;
 
     @FXML
@@ -42,17 +43,18 @@ public class MapController extends Controller implements Initializable {
     /**
      * Runs right before the map screen is shown.
      * We create the map according to the map configuration
-     * and give the tiles certain properties.
+     * and give the tiles certain onClick properties.
      * @param location
      * @param resources
      */
     @Override
     public void initialize(java.net.URL location, java.util.ResourceBundle resources) {
-        board = new MapBoard();
 
-        for (int i = 0; i < board.getHeight(); i++) {
-            for (int j = 0; j < board.getWidth(); j++) {
-                ImageView tile = new ImageView(board.getTile(i, j).imagePath());
+        // Create the map
+        MapBoard possibleMaps = new MapBoard();
+        for (int i = 0; i < possibleMaps.getHeight(); i++) {
+            for (int j = 0; j < possibleMaps.getWidth(); j++) {
+                ImageView tile = new ImageView(possibleMaps.getTile(i, j).imagePath());
                 tile.setOnMouseClicked(this::tileChosen);
                 map.add(tile, j, i); // Place the image on the grid
             }
@@ -64,26 +66,26 @@ public class MapController extends Controller implements Initializable {
         townImage.setOnMouseClicked((MouseEvent e) -> goToTown());
         map.add(townImage, 4, 2);
 
+        // Setup the Pass button
+        pass.setOnMouseClicked((MouseEvent e) -> updatePlayer());
+
+        // Update the player level to Player 1's name
         playerLabel.setText(String.format("Player %d - %s", currentPlayer, configRepository.getPlayerConfig(currentPlayer - 1).getName()));
 
-        pass.setOnMouseClicked((MouseEvent e) -> {
-            try {
-                updatePlayer();
-            } catch (IOException e1) {
-                System.out.println(e1);
-            }
-        });
+        // Create the player turn timer
+        timer = new Timer();
     }
 
     /**
-     * Runs when a certain tile is clicked.
+     * Runs when a tile is clicked.
      * Saves tile chosen to player.
      * @param event MouseEvent containing information on what was clicked.
      */
     public void tileChosen(MouseEvent event) {
-        // Get the square being clicked
         if (freeLand < numPlayers * 2) {
             freeLand++;
+
+            // Get the square being clicked
             ImageView tile = (ImageView) event.getSource();
 
             //TODO: Save which tile was clicked by which player (currentPlayer is a static variable of this class)
@@ -129,14 +131,19 @@ public class MapController extends Controller implements Initializable {
         }
     }
 
-    public void updatePlayer() throws IOException {
-        passNumber++;
-        if (passNumber == numPlayers) {
-            System.out.println("Selection phase is over!");
-            setNewScene("/fxml/placeholder.fxml");
+    public void updatePlayer() {
+        try {
+            passNumber++;
+            if (passNumber == numPlayers) {
+                System.out.println("Selection phase is over!");
+                setNewScene("/fxml/placeholder.fxml");
+            }
+            currentPlayer = (currentPlayer + 1 == numPlayers) ? numPlayers : (currentPlayer + 1) % numPlayers;
+            playerLabel.setText(String.format("Player %d: %s", currentPlayer, configRepository.getPlayerConfig(currentPlayer - 1).getName()));
+        } catch (IOException e) {
+            System.out.println(e);
         }
-        currentPlayer = (currentPlayer + 1 == numPlayers) ? numPlayers : (currentPlayer + 1) % numPlayers;
-        playerLabel.setText(String.format("Player %d: %s", currentPlayer, configRepository.getPlayerConfig(currentPlayer - 1).getName()));
+
     }
 
     /**
