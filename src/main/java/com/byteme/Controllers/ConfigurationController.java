@@ -181,6 +181,6 @@ public class ConfigurationController extends Controller{
 
     private PlayerConfigParams playerConfigParser(String name, String race, String color, int money) {
         Race parsedRace = Race.valueOf(race.toUpperCase(Locale.ENGLISH));
-        return new PlayerConfigParams(name, parsedRace, color, money);
+        return new PlayerConfigParams(name, parsedRace, color, money, null);
     }
 }

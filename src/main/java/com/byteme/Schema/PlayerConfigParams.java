@@ -1,6 +1,6 @@
 package com.byteme.Schema;
 
-import javafx.scene.paint.Color;
+import java.util.ArrayList;
 
 /**
  * Created by parasjain on 9/9/15.
@@ -10,12 +10,14 @@ public class PlayerConfigParams {
     private Race race;
     private String color;
     private int money;
+    private ArrayList<Property> properties;
 
-    public PlayerConfigParams(String name, Race race, String color, int money) {
+    public PlayerConfigParams(String name, Race race, String color, int money, ArrayList<Property> properties) {
         this.name = name;
         this.race = race;
         this.color = color;
         this.money = money;
+        this.properties = properties;
     }
 
     public String getName() {
@@ -34,6 +36,22 @@ public class PlayerConfigParams {
 
     public void payMoney(int cost) {
         money = money - cost;
+    }
+
+    public ArrayList<Property> getProperties() {
+        return properties;
+    }
+
+    public void setProperties(ArrayList<Property> properties) {
+        this.properties = properties;
+    }
+
+    public void addProperty(Property property) {
+        this.properties.add(property);
+    }
+
+    public boolean removeProperty(Property property) {
+        return this.properties.remove(property);
     }
 
     public String toString() {

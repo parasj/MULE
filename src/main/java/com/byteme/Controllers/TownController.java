@@ -28,10 +28,15 @@ public class TownController extends Controller implements Initializable {
      */
     public void goToMap() {
         try {
-            MapController.buy = true;
-            setNewScene("/fxml/Map.fxml");
+            FXMLLoader loader = new FXMLLoader(getClass().getResource("/fxml/Map.fxml"));
+            Parent root = (Parent) loader.load();
+            MapController controller = loader.getController();
+            controller.setStage(stage);
+            Scene scene = new Scene(root);
+            stage.setScene(scene);
         } catch (IOException e) {
             System.out.println(e);
         }
     }
+
 }
