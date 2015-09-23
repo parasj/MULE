@@ -6,7 +6,7 @@
 <?import javafx.scene.layout.*?>
 <?import javafx.collections.*?>
 
-<Pane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0" style="-fx-background-color: #000099;" xmlns="http://javafx.com/javafx/8.0.40" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.byteme.Controllers.ConfigurationController">
+<Pane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0" style="-fx-background-color: #000099;" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.byteme.Controllers.ConfigurationController">
    <children>
       <Label layoutX="192.0" layoutY="38.0" prefWidth="224.0" text="Player Configuration" textFill="RED">
          <font>
@@ -28,7 +28,7 @@
             </FXCollections>
          </items>
       </ChoiceBox>
-      <Button defaultButton="true" layoutX="247.0" layoutY="314.0" mnemonicParsing="false" onAction="#savePlayerConfig" prefHeight="31.0" prefWidth="106.0" text="OK" />
+      <Button fx:id="submitPlayer" defaultButton="true" layoutX="247.0" layoutY="314.0" mnemonicParsing="false" onAction="#savePlayerConfig" prefHeight="31.0" prefWidth="106.0" text="OK" />
       <Separator layoutX="166.0" layoutY="72.0" prefHeight="3.0" prefWidth="275.0" />
       <Separator layoutX="163.0" layoutY="37.0" prefHeight="3.0" prefWidth="275.0" />
       <Label fx:id="playerNumber" layoutX="27.0" layoutY="38.0" prefHeight="35.0" prefWidth="87.0" text="Player 1" textFill="RED">
@@ -38,7 +38,7 @@
       </Label>
       <ChoiceBox fx:id="playerColor" layoutX="117.0" layoutY="240.0" prefWidth="150.0" value="Red">
          <items>
-            <FXCollections fx:factory="observableArrayList" fx:id="playerColorOptions">
+            <FXCollections fx:id="playerColorOptions" fx:factory="observableArrayList">
                <String fx:value="Red" />
                <String fx:value="Green" />
                <String fx:value="Yellow" />

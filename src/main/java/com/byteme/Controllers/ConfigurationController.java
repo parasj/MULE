@@ -2,6 +2,7 @@ package com.byteme.Controllers;
 
 import com.byteme.Models.*;
 import com.byteme.Schema.*;
+import com.sun.javaws.exceptions.InvalidArgumentException;
 import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
@@ -10,6 +11,7 @@ import javafx.scene.Scene;
 import javafx.scene.control.*;
 import javafx.scene.paint.Color;
 import java.io.IOException;
+import java.io.InvalidClassException;
 import java.util.Locale;
 import java.util.logging.Logger;
 
@@ -82,9 +84,9 @@ public class ConfigurationController extends Controller{
     @FXML
     private ChoiceBox playerColor;
     @FXML
-    private ObservableList playerColorOptions;
-    @FXML
     private Label playerNumber;
+    @FXML
+    private Button submitPlayer;
 
     /**
      * Runs when a new player's settings need to be configured.
@@ -132,22 +134,27 @@ public class ConfigurationController extends Controller{
         //TODO: Make more efficient by just resetting fields and changing the label instead of creating new controller and opening new scene
         String name = playerName.getText();
         String race = (String) playerRace.getValue();
-        Color color;
+        String color;
         String playerChoice = (String) playerColor.getValue();
-        if (playerChoice.equals("Red")) {
-            color = Color.RED;
-        } else if (playerChoice.equals("Blue")) {
-            color = Color.BLUE;
-        } else if (playerChoice.equals("Green")) {
-            color = Color.GREEN;
-        } else if (playerChoice.equals("Yellow")) {
-            color = Color.YELLOW;
-        } else if (playerChoice.equals("Purple")) {
-            color = Color.PURPLE;
-        } else {
-            color = Color.BLACK;
+        for (int i = 0; i < configRepository.getTotalPlayers(); i++) {
+            if (configRepository.getPlayerConfig(i).getColor().equals(playerChoice)) {
+                submitPlayer.setDisable(true);
+            }
         }
-        playerColorOptions.remove(playerChoice);
+        if (playerChoice.equals("Red")) {
+            color = "red";
+        } else if (playerChoice.equals("Blue")) {
+            color = "blue";
+        } else if (playerChoice.equals("Green")) {
+            color = "green";
+        } else if (playerChoice.equals("Yellow")) {
+            color = "yellow";
+        } else if (playerChoice.equals("Purple")) {
+            color = "purple";
+        } else {
+            color = null;
+        }
+
         int money = 400; //change depending on race
 
         log.info("Name: " + name + "\nRace: " + race + "\nColor: " + color);
@@ -172,7 +179,7 @@ public class ConfigurationController extends Controller{
 
     }
 
-    private PlayerConfigParams playerConfigParser(String name, String race, Color color, int money) {
+    private PlayerConfigParams playerConfigParser(String name, String race, String color, int money) {
         Race parsedRace = Race.valueOf(race.toUpperCase(Locale.ENGLISH));
         return new PlayerConfigParams(name, parsedRace, color, money);
     }
