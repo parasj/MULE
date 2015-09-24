@@ -99,35 +99,39 @@ public class ConfigurationController {
         String race;
         String color;
         int money;
-        if (currentPlayer < numPlayers) {
+        if (!playerName.getText().equals("")) {
+            if (currentPlayer < numPlayers) {
 
-            // Parse player's information
-            name = playerName.getText();
-            race = (String) playerRace.getValue();
-            color = (String) playerColor.getValue();
-            money = 400; //TODO: change depending on race
+                // Parse player's information
+                name = playerName.getText();
+                race = (String) playerRace.getValue();
+                color = (String) playerColor.getValue();
+                money = 400; //TODO: change depending on race
 
-            // Remove color already chosen by another player
-            ObservableList<String> remainingChoices = playerColor.getItems();
-            remainingChoices.remove(color);
-            playerColor.setItems(remainingChoices);
+                // Remove color already chosen by another player
+                ObservableList<String> remainingChoices = playerColor.getItems();
+                remainingChoices.remove(color);
+                playerColor.setItems(remainingChoices);
 
-            log.info("Name: " + name + "\nRace: " + race + "\nColor: " + color);
-            configRepository.setPlayerConfig(playerConfigParser(name, race, color, money), currentPlayer - 1);
+                log.info("Name: " + name + "\nRace: " + race + "\nColor: " + color);
+                configRepository.setPlayerConfig(playerConfigParser(name, race, color, money), currentPlayer - 1);
 
-            // Update the player label
-            currentPlayer++;
-            playerNumber.setText("Player " + currentPlayer);
-            // Reset GUI to display default values
-            playerName.clear();
-            playerRace.getSelectionModel().selectFirst();
-            playerColor.getSelectionModel().selectFirst();
+                // Update the player label
+                currentPlayer++;
+                playerNumber.setText("Player " + currentPlayer);
+                // Reset GUI to display default values
+                playerName.clear();
+                playerRace.getSelectionModel().selectFirst();
+                playerColor.getSelectionModel().selectFirst();
+            } else {
+                // TODO: Create save dialog box for the player to save configuration options
+                // Go to Map screen.
+                MasterController.getInstance().setNumPlayers(numPlayers);
+                MasterController.getInstance().createMap();
+                MasterController.getInstance().map();
+            }
         } else {
-            // TODO: Create save dialog box for the player to save configuration options
-            // Go to Map screen.
-            MasterController.getInstance().setNumPlayers(numPlayers);
-            MasterController.getInstance().createMap();
-            MasterController.getInstance().map();
+            System.out.println("Set a name for your player!");
         }
     }
 
