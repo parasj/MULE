@@ -71,7 +71,7 @@ public class MasterController {
             playerConfig = new Scene(root);
 
             ConfigurationController controller = loader.<ConfigurationController>getController();
-            controller.setNumPlayers(numPlayers);
+            controller.setNumPlayers(numPlayers);//Here
             theStage.setScene(playerConfig);
         } catch(Exception e) {
             System.out.println(e);
