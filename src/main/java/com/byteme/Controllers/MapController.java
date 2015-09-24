@@ -24,7 +24,7 @@ import java.util.Timer;
 /**
  * Created by Siddarth on 9/13/2015.
  */
-public class MapController extends Controller implements Initializable {
+public class MapController implements Initializable {
     private ConfigRepository configRepository = ConfigRepository.getInstance();
 
     private static int numPlayers;
@@ -44,7 +44,7 @@ public class MapController extends Controller implements Initializable {
     private Button pass;
 
     /**
-     * Runs right before the map screen is shown.
+     * Runs right before the map screen is shown for the first time.
      * We create the map according to the map configuration
      * and give the tiles certain onClick properties.
      * @param location
@@ -132,30 +132,17 @@ public class MapController extends Controller implements Initializable {
      * Changes scene to Town
      */
     public void goToTown() {
-        try {
-            FXMLLoader loader = new FXMLLoader(getClass().getResource("/fxml/Town.fxml"));
-            Parent root = loader.load();
-            TownController controller = loader.getController();
-            controller.setStage(stage);
-            Scene scene = new Scene(root);
-            stage.setScene(scene);
-        } catch (IOException e) {
-            System.out.println(e);
-        }
+        MasterController.getInstance().town();
     }
 
     public void updatePlayer() {
-        try {
-            passNumber++;
-            if (passNumber == numPlayers) {
-                System.out.println("Selection phase is over!");
-                setNewScene("/fxml/Map.fxml");
-            }
-            currentPlayer = (currentPlayer + 1 == numPlayers) ? numPlayers : (currentPlayer + 1) % numPlayers;
-            playerLabel.setText(String.format("Player %d: %s", currentPlayer, configRepository.getPlayerConfig(currentPlayer - 1).getName()));
-        } catch (IOException e) {
-            System.out.println(e);
+        passNumber++;
+        if (passNumber == numPlayers) {
+            System.out.println("Selection phase is over!");
+            MasterController.getInstance().map();
         }
+        currentPlayer = (currentPlayer + 1 == numPlayers) ? numPlayers : (currentPlayer + 1) % numPlayers;
+        playerLabel.setText(String.format("Player %d: %s", currentPlayer, configRepository.getPlayerConfig(currentPlayer - 1).getName()));
 
     }
 

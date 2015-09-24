@@ -40,10 +40,12 @@
          <items>
             <FXCollections fx:id="playerColorOptions" fx:factory="observableArrayList">
                <String fx:value="Red" />
-               <String fx:value="Green" />
+               <String fx:value="Orange" />
                <String fx:value="Yellow" />
+               <String fx:value="Green" />
                <String fx:value="Blue" />
                <String fx:value="Purple" />
+               <String fx:value="Brown" />
             </FXCollections>
          </items>
       </ChoiceBox>

@@ -6,7 +6,7 @@
 <?import javafx.scene.layout.*?>
 <?import javafx.scene.text.*?>
 
-<Pane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" onMouseClicked="#startGame" prefHeight="400.0" prefWidth="600.0" style="-fx-background-color: #2C3E50;" xmlns="http://javafx.com/javafx/8.0.40" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.byteme.Controllers.MainController">
+<Pane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" onMouseClicked="#startGame" prefHeight="400.0" prefWidth="600.0" style="-fx-background-color: #2C3E50;" xmlns="http://javafx.com/javafx/8.0.40" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.byteme.Controllers.StartScreenController">
    <children>
       <ImageView fitHeight="78.0" fitWidth="491.0" layoutX="55.0" layoutY="23.0" pickOnBounds="true" preserveRatio="true">
          <image>

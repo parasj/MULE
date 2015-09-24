@@ -7,10 +7,10 @@
 <?import java.lang.*?>
 <?import javafx.scene.layout.*?>
 
-<Pane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0" style="-fx-background-color: #2C3E50;" xmlns="http://javafx.com/javafx/8.0.40" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.byteme.Controllers.MainController">
+<Pane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0" style="-fx-background-color: #2C3E50;" xmlns="http://javafx.com/javafx/8.0.40" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.byteme.Controllers.ConfigurationController">
    <children>
-      <Button layoutX="64.0" layoutY="253.0" mnemonicParsing="false" onAction="#openTemp" prefHeight="40.0" prefWidth="115.0" text="Load Game" />
-      <Button defaultButton="true" layoutX="421.0" layoutY="253.0" mnemonicParsing="false" onAction="#loadConfigureScreen" prefHeight="40.0" prefWidth="115.0" text="New Game" />
+      <Button layoutX="64.0" layoutY="253.0" mnemonicParsing="false" onAction="#loadGameConfiguration" prefHeight="40.0" prefWidth="115.0" text="Load Game" />
+      <Button defaultButton="true" layoutX="421.0" layoutY="253.0" mnemonicParsing="false" onAction="#newGameConfigureScreen" prefHeight="40.0" prefWidth="115.0" text="New Game" />
       <Label layoutX="64.0" layoutY="100.0" prefHeight="100.0" prefWidth="472.0" text="Load old configuration settings or start new game?" textAlignment="CENTER" textFill="WHITE" wrapText="true">
          <font>
             <Font name="System Bold" size="30.0" />
