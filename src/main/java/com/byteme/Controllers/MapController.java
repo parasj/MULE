@@ -25,16 +25,19 @@ import java.util.Timer;
  * Created by Siddarth on 9/13/2015.
  */
 public class MapController implements Initializable {
-    private ConfigRepository configRepository = ConfigRepository.getInstance();
+    private static ConfigRepository configRepository = ConfigRepository.getInstance();
 
-    private static int numPlayers;
-    private static int freeTurn = 0;
-    private static int currentPlayer = 1;
+    private int numPlayers;
+    private int currentPlayer;
+
+    private int freeTurn = 0;
     private int freeLand = 0;
     private int passNumber;
     private boolean[][] mapSpots;
+    public boolean buy = false;
+    private int currentPhase;
+    // 0 = Land Grant
     private Timer timer;
-    public static boolean buy = false;
 
     @FXML
     private Label playerLabel;
@@ -81,11 +84,15 @@ public class MapController implements Initializable {
         // Setup the Pass button
         pass.setOnMouseClicked((MouseEvent e) -> updatePlayer());
 
-        // Update the player level to Player 1's name
-        playerLabel.setText(String.format("Player %d - %s", currentPlayer, configRepository.getPlayerConfig(currentPlayer - 1).getName()));
-
         // Create the player turn timer
         timer = new Timer();
+
+        // Initialize game state for when the map is loaded for the first time
+        numPlayers = configRepository.getTotalPlayers();
+        System.out.println(numPlayers);
+        playerLabel.setText(String.format("Player %d - %s", currentPlayer, configRepository.getPlayerConfig(currentPlayer - 1).getName()));
+        currentPhase = 0; // Land Grant
+        currentPlayer = 1;
     }
 
     /**
@@ -94,6 +101,21 @@ public class MapController implements Initializable {
      * @param event MouseEvent containing information on what was clicked.
      */
     public void tileChosen(MouseEvent event) {
+
+        if (currentPhase == 0) {
+            // Get the square being clicked
+            ImageView tile = (ImageView) event.getSource();
+
+            //TODO: Save which tile was clicked by which player (currentPlayer is a static variable of this class)
+            System.out.println("Player " + currentPlayer + ": " + map.getRowIndex(tile) + ", " + map.getColumnIndex(tile));
+
+            // Update the player label to the next player
+            currentPlayer = (currentPlayer + 1 == numPlayers) ? numPlayers : (currentPlayer + 1) % numPlayers;
+            playerLabel.setText(String.format("Player %d: %s", currentPlayer, configRepository.getPlayerConfig(currentPlayer - 1).getName()));
+        }
+
+
+
         if (buy) {
             if (freeLand < numPlayers * 2) {
 
@@ -146,13 +168,6 @@ public class MapController implements Initializable {
 
     }
 
-    /**
-     * Sets numPlayers (total in this game) in this MapController
-     * Needed when controller is created so that methods can use it.
-     * @param num Total Number of Players in this game
-     */
-    public void setNumPlayers(int num) { this.numPlayers = num; }
-
     private boolean setColorTile(String color, int row, int column) {
         ImageView tile = getImageView(color);
         if (!mapSpots[row][column]) {
@@ -167,19 +182,19 @@ public class MapController implements Initializable {
     private ImageView getImageView(String color) {
         ImageView tile;
         switch (color) {
-            case "red":
+            case "Red":
                 tile = new ImageView(new Image("/images/red.png"));
                 break;
-            case "blue":
+            case "Blue":
                 tile = new ImageView(new Image("/images/blue.png"));
                 break;
-            case "green":
+            case "Green":
                 tile = new ImageView(new Image("/images/green.png"));
                 break;
-            case "yellow":
+            case "Yellow":
                 tile = new ImageView(new Image("/images/yellow.png"));
                 break;
-            case "purple":
+            case "Purple":
                 tile = new ImageView(new Image("/images/purple.png"));
                 break;
             default:
