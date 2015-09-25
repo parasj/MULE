@@ -9,8 +9,10 @@ import javafx.fxml.Initializable;
 import javafx.scene.control.*;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.image.ImageView;
+import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.GridPane;
 import javafx.scene.image.Image;
+import javafx.scene.shape.Rectangle;
 
 import java.util.ArrayList;
 import java.util.Timer;
@@ -37,9 +39,12 @@ public class MapController implements Initializable {
     @FXML
     private Label playerLabel;
     @FXML
+    private Label phase;
+    @FXML
     private GridPane map;
     @FXML
     private Button pass;
+
 
     /**
      * Runs right before the map screen is shown for the first time.
@@ -54,13 +59,17 @@ public class MapController implements Initializable {
         // Create the map
         MapBoard possibleMaps = new MapBoard();
         mapSpots = new boolean[possibleMaps.getHeight()][possibleMaps.getWidth()];
+
         for (int i = 0; i < possibleMaps.getHeight(); i++) {
             for (int j = 0; j < possibleMaps.getWidth(); j++) {
                 ImageView tile = new ImageView(possibleMaps.getTile(i, j).imagePath());
-                tile.setOnMouseClicked(this::tileChosen);
-                map.add(tile, j, i); // Place the image on the grid
+                BorderPane tileContainer = new BorderPane();
+                tileContainer.setCenter(tile);
+                tileContainer.setOnMouseClicked(this::tileChosen);
+                map.add(tileContainer, j, i); // Place the image on the grid
             }
         }
+
         for (int a = 0; a < numPlayers; a++) {
             PlayerConfigParams x = configRepository.getPlayerConfig(currentPlayer);
             ArrayList<Property> y = configRepository.getPlayerConfig(currentPlayer).getProperties();
@@ -85,9 +94,8 @@ public class MapController implements Initializable {
         // Initialize game state for when the map is loaded for the first time
         numPlayers = configRepository.getTotalPlayers();
         currentPlayer = 1;
-        System.out.println("NUMBER OF TOTAL PLAYERS: " + numPlayers);
-        System.out.println("CURRENT PLAYER : " + currentPlayer);
-        playerLabel.setText(String.format("Player %d - %s", currentPlayer, configRepository.getPlayerConfig(currentPlayer).getName()));
+        playerLabel.setText(String.format("Player %d\n%s", currentPlayer, configRepository.getPlayerConfig(currentPlayer).getName()));
+        phase.setText("Land Grant");
         currentPhase = 0; // Land Grant
     }
 
@@ -100,8 +108,11 @@ public class MapController implements Initializable {
 
         if (currentPhase == 0) {
             // Get the square being clicked
-            ImageView tile = (ImageView) event.getSource();
+            BorderPane tile = (BorderPane) event.getSource();
 
+            String color = configRepository.getPlayerConfig(currentPlayer).getColor();
+
+            tile.setStyle("-fx-border-color: " + color.toLowerCase() + ";" + "-fx-border-width: 2px;");
             //TODO: Save which tile was clicked by which player (currentPlayer is a static variable of this class)
             System.out.println("Player " + currentPlayer + ": " + map.getRowIndex(tile) + ", " + map.getColumnIndex(tile));
 

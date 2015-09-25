@@ -14,9 +14,9 @@ public enum MapTile {
     MapTile() {
         imagePath = new HashMap<>();
         imagePath.put("P", "/images/Plain.png");
-        imagePath.put("M1", "/images/Mountain.png");
-        imagePath.put("M2", "/images/Mountain.png");
-        imagePath.put("M3", "/images/Mountain.png");
+        imagePath.put("M1", "/images/Mountain1.png");
+        imagePath.put("M2", "/images/Mountain2.png");
+        imagePath.put("M3", "/images/Mountain3.png");
         imagePath.put("R", "/images/River.png");
         imagePath.put("Town", "/images/Town.png");
     }

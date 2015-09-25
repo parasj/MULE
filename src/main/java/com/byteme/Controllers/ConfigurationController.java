@@ -79,7 +79,7 @@ public class ConfigurationController {
 
     // PLAYER CONFIGURATION SCREEN VARIABLES & METHODS
     @FXML
-    private TextField playerName;
+    private TextField playerName;;
     @FXML
     private ChoiceBox playerRace;
     @FXML
