@@ -6,17 +6,12 @@ import com.byteme.Schema.PlayerConfigParams;
 import com.byteme.Schema.Property;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
-import javafx.scene.Parent;
-import javafx.fxml.FXMLLoader;
-import javafx.scene.Scene;
 import javafx.scene.control.*;
 import javafx.scene.input.MouseEvent;
-import javafx.stage.Stage;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.GridPane;
 import javafx.scene.image.Image;
 
-import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Timer;
 
@@ -89,10 +84,11 @@ public class MapController implements Initializable {
 
         // Initialize game state for when the map is loaded for the first time
         numPlayers = configRepository.getTotalPlayers();
-        System.out.println(numPlayers);
-        playerLabel.setText(String.format("Player %d - %s", currentPlayer, configRepository.getPlayerConfig(currentPlayer - 1).getName()));
-        currentPhase = 0; // Land Grant
         currentPlayer = 1;
+        System.out.println("NUMBER OF TOTAL PLAYERS: " + numPlayers);
+        System.out.println("CURRENT PLAYER : " + currentPlayer);
+        playerLabel.setText(String.format("Player %d - %s", currentPlayer, configRepository.getPlayerConfig(currentPlayer).getName()));
+        currentPhase = 0; // Land Grant
     }
 
     /**
@@ -111,7 +107,7 @@ public class MapController implements Initializable {
 
             // Update the player label to the next player
             currentPlayer = (currentPlayer + 1 == numPlayers) ? numPlayers : (currentPlayer + 1) % numPlayers;
-            playerLabel.setText(String.format("Player %d: %s", currentPlayer, configRepository.getPlayerConfig(currentPlayer - 1).getName()));
+            playerLabel.setText(String.format("Player %d: %s", currentPlayer, configRepository.getPlayerConfig(currentPlayer).getName()));
         }
 
 
@@ -164,7 +160,7 @@ public class MapController implements Initializable {
             MasterController.getInstance().map();
         }
         currentPlayer = (currentPlayer + 1 == numPlayers) ? numPlayers : (currentPlayer + 1) % numPlayers;
-        playerLabel.setText(String.format("Player %d: %s", currentPlayer, configRepository.getPlayerConfig(currentPlayer - 1).getName()));
+        playerLabel.setText(String.format("Player %d: %s", currentPlayer, configRepository.getPlayerConfig(currentPlayer).getName()));
 
     }
 

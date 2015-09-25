@@ -4,7 +4,6 @@ import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.stage.Stage;
-import jdk.nashorn.internal.runtime.regexp.joni.Config;
 
 import java.io.IOException;
 
@@ -33,6 +32,8 @@ public class MasterController {
             loadGame = new Scene(root);
             root = FXMLLoader.load(getClass().getResource("/fxml/GameConfig.fxml"));
             gameConfig = new Scene(root);
+            root = FXMLLoader.load(getClass().getResource("/fxml/PlayerConfig.fxml"));
+            playerConfig = new Scene(root);
             root = FXMLLoader.load(getClass().getResource("/fxml/Town.fxml"));
             town = new Scene(root);
             root = FXMLLoader.load(getClass().getResource("/fxml/placeholder.fxml"));
@@ -65,27 +66,9 @@ public class MasterController {
     }
 
     public void playerConfig() {
-        try {
-            FXMLLoader loader = new FXMLLoader(getClass().getResource("/fxml/PlayerConfig.fxml"));
-            Parent root = loader.load();
-            playerConfig = new Scene(root);
-
-            ConfigurationController controller = loader.<ConfigurationController>getController();
-            controller.setNumPlayers(numPlayers);//Here
-            theStage.setScene(playerConfig);
-        } catch(Exception e) {
-            System.out.println(e);
-        }
+        theStage.setScene(playerConfig);
     }
 
-    public void createMap() {
-        try {
-            Parent root = FXMLLoader.load(getClass().getResource("/fxml/Map.fxml"));
-            map = new Scene(root);
-        } catch(Exception e) {
-            System.out.println(e);
-        }
-    }
     public void map() {
         theStage.setScene(map);
     }
@@ -96,5 +79,14 @@ public class MasterController {
 
     public void temp() {
         theStage.setScene(temp);
+    }
+
+    public void createMap() {
+        try {
+            Parent root = FXMLLoader.load(getClass().getResource("/fxml/Map.fxml"));
+            map = new Scene(root);
+        } catch(Exception e) {
+            System.out.println(e);
+        }
     }
 }

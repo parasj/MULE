@@ -1,12 +1,5 @@
 package com.byteme.Controllers;
 
-import javafx.scene.Parent;
-import javafx.fxml.FXMLLoader;
-import javafx.scene.Scene;
-import javafx.stage.Stage;
-
-import java.io.IOException;
-
 /**
  * Created by Siddarth on 9/10/2015.
  */

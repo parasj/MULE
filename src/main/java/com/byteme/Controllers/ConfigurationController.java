@@ -6,7 +6,6 @@ import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
 import javafx.scene.control.*;
 import java.util.Locale;
-import java.util.logging.Logger;
 
 /**
  * Created by Siddarth on 9/13/2015.
@@ -14,12 +13,8 @@ import java.util.logging.Logger;
 public class ConfigurationController {
 
     private ConfigRepository configRepository = ConfigRepository.getInstance();
-    private final static Logger log = Logger.getLogger(ConfigurationController.class.getName());
-
+    private static int numPlayers = -1;
     private int currentPlayer = 1;
-    private int numPlayers;
-    private Difficulty difficulty;
-    private MapType map;
 
     public void loadGameConfiguration() {
         // TODO: Open a previously existing game configuration
@@ -44,14 +39,18 @@ public class ConfigurationController {
      * Opens Player 1 settings configuration screen.
      */
     public void saveGameConfig() {
-        difficulty = selectedDifficultyButton();
-        numPlayers = (int) numPlayersSlider.getValue();
-        map = selectedMapType();
+        Difficulty difficulty = selectedDifficultyButton();
+        MapType map = selectedMapType();
+        int numPlayers = (int) numPlayersSlider.getValue();
 
-        log.info("Difficulty " + difficulty + ", Number Players " + numPlayers + ", Map " + map + "\t" + mapType.getValue());
+        System.out.println("========================================================================================================");
+        System.out.println("SAVING GAME CONFIGURATION INFORMATION");
+        System.out.println("========================================================================================================");
+        System.out.println("DIFFICULTY        : " + difficulty);
+        System.out.println("NUMBER OF PLAYERS : " + numPlayers);
+        System.out.println("MAP               : " + map + "\t" + mapType.getValue());
         configRepository.setGameConfig(new GameConfigParams(difficulty, map, numPlayers));
-
-        MasterController.getInstance().setNumPlayers(numPlayers);
+        this.numPlayers = numPlayers;
         MasterController.getInstance().playerConfig();
     }
 
@@ -95,27 +94,38 @@ public class ConfigurationController {
      * After all players done, opens map.
      */
     public void savePlayerConfig() {
-        String name;
-        String race;
-        String color;
-        int money;
-        if (!playerName.getText().equals("")) {
-            if (currentPlayer < numPlayers) {
+        if (!playerName.getText().isEmpty()) {
+            String name;
+            String race;
+            String color;
+            int money;
 
-                // Parse player's information
-                name = playerName.getText();
-                race = (String) playerRace.getValue();
-                color = (String) playerColor.getValue();
-                money = 400; //TODO: change depending on race
+            // Parse player's information
+            name = playerName.getText();
+            race = (String) playerRace.getValue();
+            color = (String) playerColor.getValue();
+            money = 400; //TODO: change depending on race
 
-                // Remove color already chosen by another player
-                ObservableList<String> remainingChoices = playerColor.getItems();
-                remainingChoices.remove(color);
-                playerColor.setItems(remainingChoices);
+            // Remove color already chosen by another player
+            ObservableList<String> remainingChoices = playerColor.getItems();
+            remainingChoices.remove(color);
+            playerColor.setItems(remainingChoices);
 
-                log.info("Name: " + name + "\nRace: " + race + "\nColor: " + color);
-                configRepository.setPlayerConfig(playerConfigParser(name, race, color, money), currentPlayer - 1);
+            System.out.println("========================================================================================================");
+            System.out.println("SAVING PLAYER CONFIGURATION INFORMATION");
+            System.out.println("========================================================================================================");
+            System.out.println("NAME       : " + name);
+            System.out.println("RACE       : " + race);
+            System.out.println("COLOR      : " + color);
+            configRepository.setPlayerConfig(playerConfigParser(name, race, color, money), currentPlayer);
 
+            if (currentPlayer >= numPlayers) {
+                // TODO: Create save dialog box for the player to save configuration options
+                // Go to Map screen.
+                MasterController.getInstance().setNumPlayers(numPlayers);
+                MasterController.getInstance().createMap();
+                MasterController.getInstance().map();
+            } else {
                 // Update the player label
                 currentPlayer++;
                 playerNumber.setText("Player " + currentPlayer);
@@ -123,20 +133,10 @@ public class ConfigurationController {
                 playerName.clear();
                 playerRace.getSelectionModel().selectFirst();
                 playerColor.getSelectionModel().selectFirst();
-            } else {
-                // TODO: Create save dialog box for the player to save configuration options
-                // Go to Map screen.
-                MasterController.getInstance().setNumPlayers(numPlayers);
-                MasterController.getInstance().createMap();
-                MasterController.getInstance().map();
             }
         } else {
             System.out.println("Set a name for your player!");
         }
-    }
-
-    public void setNumPlayers(int numPlayers) {
-        this.numPlayers = numPlayers;
     }
 
     private PlayerConfigParams playerConfigParser(String name, String race, String color, int money) {

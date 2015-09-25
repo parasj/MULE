@@ -2,14 +2,13 @@ package com.byteme.Models;
 
 import com.byteme.Schema.*;
 import java.util.*;
-import java.util.logging.Logger;
 
 /**
  * Created by parasjain on 9/9/15.
  */
 
 public class ConfigRepository {
-    private final static Logger log = Logger.getLogger(ConfigRepository.class.getName());
+    // private final static Logger log = Logger.getLogger(ConfigRepository.class.getName());
 
     // Singleton
     private static ConfigRepository instance = null;
@@ -35,7 +34,7 @@ public class ConfigRepository {
     }
 
     public void setGameConfig(GameConfigParams config) {
-        log.info("Saving game config, " + config);
+        // log.info("Saving game config, " + config);
         gameConfigParams = config;
         configStore.save(this);
     }
@@ -45,7 +44,7 @@ public class ConfigRepository {
     }
 
     public void setPlayerConfig(PlayerConfigParams player, int id) {
-        log.info("Saving player " + id + " config, " + player);
+        // log.info("Saving player " + id + " config, " + player);
         playerConfigList.put(id, player);
         configStore.save(this);
     }
@@ -54,6 +53,6 @@ public class ConfigRepository {
         return playerConfigList.get(id);
     }
     public int getTotalPlayers() {
-        return playerConfigList.keySet().size() + 1; // Dunno why we need +1 but apparently that makes the answer right.
+        return gameConfigParams.getNumPlayers();
     }
 }
