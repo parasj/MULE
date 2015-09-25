@@ -104,7 +104,7 @@ public class ConfigurationController {
             name = playerName.getText();
             race = (String) playerRace.getValue();
             color = (String) playerColor.getValue();
-            money = 400; //TODO: change depending on race
+            money = chooseMoneyAmount(race); //TODO: change depending on race
 
             // Remove color already chosen by another player
             ObservableList<String> remainingChoices = playerColor.getItems();
@@ -141,5 +141,17 @@ public class ConfigurationController {
     private PlayerConfigParams playerConfigParser(String name, String race, String color, int money) {
         Race parsedRace = Race.valueOf(race.toUpperCase(Locale.ENGLISH));
         return new PlayerConfigParams(name, parsedRace, color, money, null);
+    }
+
+    private int chooseMoneyAmount(String race) {
+        race = race.toLowerCase();
+
+        if (race.equals("flapper")) {
+            return 1600;
+        } else if (race.equals("human")) {
+            return 600;
+        } else {
+            return 1000;
+        }
     }
 }

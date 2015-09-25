@@ -139,7 +139,7 @@ public class MapController implements Initializable {
 
             // Remove cost from player's money
             // TODO: Parse actual cost of each property
-            int cost = 100;
+            int cost = 300;
             if (cost > ConfigRepository.getInstance().getPlayerConfig(currentPlayer).getMoney()) {
                 alertsLabel.setText("This costs more money than you have!");
                 alertsLabel.setVisible(true);
