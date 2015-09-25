@@ -134,7 +134,7 @@ public class MapController implements Initializable {
                 playerLabel.setText(String.format("Player %d: %s", currentPlayer, configRepository.getPlayerConfig(currentPlayer - 1).getName()));
                 passNumber = 0;
             } else { //change boolean
-                if (configRepository.getPlayerConfig(currentPlayer).getMoney() >= 300) {
+                if (configRepository.getPlayerConfig(currentPlayer - 1).getMoney() >= 300) {
                     ImageView tile = (ImageView) event.getSource();
                     if (setColorTile(configRepository.getPlayerConfig((currentPlayer - 1)% numPlayers).getColor(), map.getRowIndex(tile), map.getColumnIndex(tile))) {
                         configRepository.getPlayerConfig(currentPlayer).payMoney(300);
