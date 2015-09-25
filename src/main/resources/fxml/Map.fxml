@@ -41,7 +41,7 @@
             <Font size="24.0" />
          </font>
       </Button>
-      <Label fx:id="playerLabel" layoutX="1090.0" layoutY="14.0" prefHeight="135.0" prefWidth="146.0" text="Player 1" textFill="WHITE">
+      <Label fx:id="playerLabel" alignment="TOP_CENTER" contentDisplay="CENTER" layoutX="1090.0" layoutY="27.0" prefHeight="122.0" prefWidth="146.0" text="Player 1" textFill="WHITE" wrapText="true">
          <font>
             <Font size="24.0" />
          </font>

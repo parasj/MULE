@@ -4,8 +4,10 @@ import com.byteme.Models.ConfigRepository;
 import com.byteme.Models.MapBoard;
 import com.byteme.Schema.PlayerConfigParams;
 import com.byteme.Schema.Property;
+import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
+import javafx.scene.Node;
 import javafx.scene.control.*;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.image.ImageView;
@@ -14,6 +16,7 @@ import javafx.scene.layout.GridPane;
 import javafx.scene.image.Image;
 import javafx.scene.shape.Rectangle;
 
+import javax.swing.border.Border;
 import java.util.ArrayList;
 import java.util.Timer;
 
@@ -70,11 +73,10 @@ public class MapController implements Initializable {
             }
         }
 
+        // Keep track of which tiles have a player's color on them
         for (int a = 0; a < numPlayers; a++) {
-            PlayerConfigParams x = configRepository.getPlayerConfig(currentPlayer);
             ArrayList<Property> y = configRepository.getPlayerConfig(currentPlayer).getProperties();
             for (Property z : y) {
-                map.add(getImageView(x.getColor()), z.getColumn(), z.getRow());
                 mapSpots[z.getRow()][z.getColumn()] = true;
             }
         }
@@ -94,7 +96,7 @@ public class MapController implements Initializable {
         // Initialize game state for when the map is loaded for the first time
         numPlayers = configRepository.getTotalPlayers();
         currentPlayer = 1;
-        playerLabel.setText(String.format("Player %d\n%s", currentPlayer, configRepository.getPlayerConfig(currentPlayer).getName()));
+        playerLabel.setText(String.format("Player %d %s", currentPlayer, configRepository.getPlayerConfig(currentPlayer).getName()));
         phase.setText("Land Grant");
         currentPhase = 0; // Land Grant
     }
@@ -106,19 +108,20 @@ public class MapController implements Initializable {
      */
     public void tileChosen(MouseEvent event) {
 
+        // Get the square being clicked
+        BorderPane tile = (BorderPane) event.getSource();
+
         if (currentPhase == 0) {
-            // Get the square being clicked
-            BorderPane tile = (BorderPane) event.getSource();
+            // Change tile background color to player color
+            System.out.println(map.getRowIndex(tile) + " " + map.getColumnIndex(tile));
+            setColorTile(tile);
 
-            String color = configRepository.getPlayerConfig(currentPlayer).getColor();
-
-            tile.setStyle("-fx-border-color: " + color.toLowerCase() + ";" + "-fx-border-width: 2px;");
             //TODO: Save which tile was clicked by which player (currentPlayer is a static variable of this class)
             System.out.println("Player " + currentPlayer + ": " + map.getRowIndex(tile) + ", " + map.getColumnIndex(tile));
 
             // Update the player label to the next player
             currentPlayer = (currentPlayer + 1 == numPlayers) ? numPlayers : (currentPlayer + 1) % numPlayers;
-            playerLabel.setText(String.format("Player %d: %s", currentPlayer, configRepository.getPlayerConfig(currentPlayer).getName()));
+            playerLabel.setText(String.format("Player %d %s", currentPlayer, configRepository.getPlayerConfig(currentPlayer).getName()));
         }
 
 
@@ -126,24 +129,20 @@ public class MapController implements Initializable {
         if (buy) {
             if (freeLand < numPlayers * 2) {
 
-                // Get the square being clicked
-                ImageView tile = (ImageView) event.getSource();
-
                 //TODO: Save which tile was clicked by which player (currentPlayer is a static variable of this class)
                 System.out.println("Player " + currentPlayer + ": " + map.getRowIndex(tile) + ", " + map.getColumnIndex(tile));
 
-                if (setColorTile(configRepository.getPlayerConfig((currentPlayer - 1)% numPlayers).getColor(), map.getRowIndex(tile), map.getColumnIndex(tile))) {
+                if (setColorTile(tile)) {
                     freeLand++;
                 }
 
                 // Update the player label to the next player
                 currentPlayer = (currentPlayer + 1 == numPlayers) ? numPlayers : (currentPlayer + 1) % numPlayers;
-                playerLabel.setText(String.format("Player %d: %s", currentPlayer, configRepository.getPlayerConfig(currentPlayer - 1).getName()));
+                playerLabel.setText(String.format("Player %d %s", currentPlayer, configRepository.getPlayerConfig(currentPlayer - 1).getName()));
                 passNumber = 0;
             } else { //change boolean
                 if (configRepository.getPlayerConfig(currentPlayer - 1).getMoney() >= 300) {
-                    ImageView tile = (ImageView) event.getSource();
-                    if (setColorTile(configRepository.getPlayerConfig((currentPlayer - 1)% numPlayers).getColor(), map.getRowIndex(tile), map.getColumnIndex(tile))) {
+                    if (setColorTile(tile)) {
                         configRepository.getPlayerConfig(currentPlayer).payMoney(300);
                     }
                     int current = configRepository.getPlayerConfig(currentPlayer).getMoney();
@@ -164,6 +163,10 @@ public class MapController implements Initializable {
         MasterController.getInstance().town();
     }
 
+    /**
+     * Updates the player label to next player's name.
+     * Increments currentPlayer.
+     */
     public void updatePlayer() {
         passNumber++;
         if (passNumber == numPlayers) {
@@ -171,14 +174,23 @@ public class MapController implements Initializable {
             MasterController.getInstance().map();
         }
         currentPlayer = (currentPlayer + 1 == numPlayers) ? numPlayers : (currentPlayer + 1) % numPlayers;
-        playerLabel.setText(String.format("Player %d: %s", currentPlayer, configRepository.getPlayerConfig(currentPlayer).getName()));
+        playerLabel.setText(String.format("Player %d %s", currentPlayer, configRepository.getPlayerConfig(currentPlayer).getName()));
 
     }
 
-    private boolean setColorTile(String color, int row, int column) {
-        ImageView tile = getImageView(color);
+    /**
+     * Sets the color of a tile when clicked by a player.
+     * Only does so if tile is not already owned.
+     * @param tile The tile whose color must be set.
+     * @return Whether the tile was set or not
+     */
+    private boolean setColorTile(BorderPane tile) {
+        int row = map.getRowIndex(tile);
+        int column = map.getColumnIndex(tile);
         if (!mapSpots[row][column]) {
-            map.add(tile, column, row);
+            String color = configRepository.getPlayerConfig(currentPlayer).getColor();
+            tile.setStyle("-fx-border-color: " + color.toLowerCase() + ";" + "-fx-border-width: 2px;");
+            mapSpots[row][column] = true;
             return true;
         } else {
             System.out.println("Tile at " + row + " , " + column + " is taken already");
@@ -186,27 +198,4 @@ public class MapController implements Initializable {
         }
     }
 
-    private ImageView getImageView(String color) {
-        ImageView tile;
-        switch (color) {
-            case "Red":
-                tile = new ImageView(new Image("/images/red.png"));
-                break;
-            case "Blue":
-                tile = new ImageView(new Image("/images/blue.png"));
-                break;
-            case "Green":
-                tile = new ImageView(new Image("/images/green.png"));
-                break;
-            case "Yellow":
-                tile = new ImageView(new Image("/images/yellow.png"));
-                break;
-            case "Purple":
-                tile = new ImageView(new Image("/images/purple.png"));
-                break;
-            default:
-                throw new IllegalArgumentException("No color configured!");
-        }
-        return tile;
-    }
 }
