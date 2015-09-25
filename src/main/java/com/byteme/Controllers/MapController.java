@@ -2,21 +2,15 @@ package com.byteme.Controllers;
 
 import com.byteme.Models.ConfigRepository;
 import com.byteme.Models.MapBoard;
-import com.byteme.Schema.PlayerConfigParams;
 import com.byteme.Schema.Property;
-import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
-import javafx.scene.Node;
 import javafx.scene.control.*;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.GridPane;
-import javafx.scene.image.Image;
-import javafx.scene.shape.Rectangle;
 
-import javax.swing.border.Border;
 import java.util.ArrayList;
 import java.util.Timer;
 
@@ -26,28 +20,27 @@ import java.util.Timer;
  */
 public class MapController implements Initializable {
     private static ConfigRepository configRepository = ConfigRepository.getInstance();
-
+    private Timer timer;
+    private boolean[][] mapSpots;
     private int numPlayers;
     private int currentPlayer;
+    private int currentRound;
+    private int currentPhase;
+    // 0 or 1 = Land Grant
+    // >= 2   = Land Purchase
 
-    private int freeTurn = 0;
     private int freeLand = 0;
     private int passNumber;
-    private boolean[][] mapSpots;
     public boolean buy = false;
-    private int currentPhase;
-    // 0 = Land Grant
-    private Timer timer;
 
     @FXML
     private Label playerLabel;
     @FXML
-    private Label phase;
+    private Label moneyLabel;
+    @FXML
+    private Label phaseLabel;
     @FXML
     private GridPane map;
-    @FXML
-    private Button pass;
-
 
     /**
      * Runs right before the map screen is shown for the first time.
@@ -81,24 +74,22 @@ public class MapController implements Initializable {
             }
         }
 
-        // Force center tile to be Town.png
+        // Force center tile to be Town.png and center line to be river
         // Make the town tile run "goToTown()"
         ImageView townImage = new ImageView("/images/Town.png");
         townImage.setOnMouseClicked((MouseEvent e) -> goToTown());
         map.add(townImage, 4, 2);
-
-        // Setup the Pass button
-        pass.setOnMouseClicked((MouseEvent e) -> updatePlayer());
-
-        // Create the player turn timer
-        timer = new Timer();
+        // TODO: hardcode the river
 
         // Initialize game state for when the map is loaded for the first time
+        timer = new Timer();
         numPlayers = configRepository.getTotalPlayers();
         currentPlayer = 1;
         playerLabel.setText(String.format("Player %d %s", currentPlayer, configRepository.getPlayerConfig(currentPlayer).getName()));
-        phase.setText("Land Grant");
-        currentPhase = 0; // Land Grant
+        moneyLabel.setText("MONEY: " + ConfigRepository.getInstance().getPlayerConfig(currentPlayer).getMoney());
+        phaseLabel.setText("Land Grant");
+        currentPhase = 1; // Land Grant
+        currentRound = 1;
     }
 
     /**
@@ -111,20 +102,30 @@ public class MapController implements Initializable {
         // Get the square being clicked
         BorderPane tile = (BorderPane) event.getSource();
 
-        if (currentPhase == 0) {
+        if (currentPhase == 1) {
+            // LAND GRANT
+
             // Change tile background color to player color
-            System.out.println(map.getRowIndex(tile) + " " + map.getColumnIndex(tile));
             setColorTile(tile);
 
             //TODO: Save which tile was clicked by which player (currentPlayer is a static variable of this class)
             System.out.println("Player " + currentPlayer + ": " + map.getRowIndex(tile) + ", " + map.getColumnIndex(tile));
 
-            // Update the player label to the next player
-            currentPlayer = (currentPlayer + 1 == numPlayers) ? numPlayers : (currentPlayer + 1) % numPlayers;
-            playerLabel.setText(String.format("Player %d %s", currentPlayer, configRepository.getPlayerConfig(currentPlayer).getName()));
+            if (currentPlayer >= numPlayers) {
+                currentRound++;
+            }
+
+            // Land Grant is only 2 turns per player.
+            if (currentRound >= 3) {
+                currentPhase++;
+                currentRound = 0;
+            }
+
+            changePlayer();
         }
 
-
+        // TODO: get cost of tile from tile.
+        // ConfigRepository.getInstance().getPlayerConfig(currentPlayer).payMoney(100);
 
         if (buy) {
             if (freeLand < numPlayers * 2) {
@@ -163,10 +164,7 @@ public class MapController implements Initializable {
         MasterController.getInstance().town();
     }
 
-    /**
-     * Updates the player label to next player's name.
-     * Increments currentPlayer.
-     */
+
     public void updatePlayer() {
         passNumber++;
         if (passNumber == numPlayers) {
@@ -175,7 +173,18 @@ public class MapController implements Initializable {
         }
         currentPlayer = (currentPlayer + 1 == numPlayers) ? numPlayers : (currentPlayer + 1) % numPlayers;
         playerLabel.setText(String.format("Player %d %s", currentPlayer, configRepository.getPlayerConfig(currentPlayer).getName()));
+        moneyLabel.setText("MONEY: " + ConfigRepository.getInstance().getPlayerConfig(currentPlayer).getMoney());
+    }
 
+    /**
+     * Updates the player label to next player's name.
+     * Increments currentPlayer.
+     */
+    public void changePlayer() {
+        // Update current player label and currentPlayer variable
+        currentPlayer = (currentPlayer + 1 == numPlayers) ? numPlayers : (currentPlayer + 1) % numPlayers;
+        playerLabel.setText(String.format("Player %d %s", currentPlayer, configRepository.getPlayerConfig(currentPlayer).getName()));
+        moneyLabel.setText("MONEY: " + ConfigRepository.getInstance().getPlayerConfig(currentPlayer).getMoney());
     }
 
     /**
@@ -189,7 +198,7 @@ public class MapController implements Initializable {
         int column = map.getColumnIndex(tile);
         if (!mapSpots[row][column]) {
             String color = configRepository.getPlayerConfig(currentPlayer).getColor();
-            tile.setStyle("-fx-border-color: " + color.toLowerCase() + ";" + "-fx-border-width: 2px;");
+            tile.setStyle("-fx-border-color: " + color.toLowerCase() + ";" + "-fx-border-width: 6px;");
             mapSpots[row][column] = true;
             return true;
         } else {
