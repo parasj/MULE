@@ -36,7 +36,7 @@
             <Insets bottom="10.0" left="5.0" right="10.0" top="10.0" />
          </padding>
       </GridPane>
-      <Button fx:id="pass" layoutX="1110.0" layoutY="648.0" mnemonicParsing="false" onAction="#updatePlayer" prefHeight="43.0" prefWidth="146.0" text="Pass">
+      <Button fx:id="pass" layoutX="1110.0" layoutY="648.0" mnemonicParsing="false" onAction="#pass" prefHeight="43.0" prefWidth="146.0" text="Pass">
          <font>
             <Font size="24.0" />
          </font>
@@ -52,5 +52,10 @@
          </font>
       </Label>
       <Label fx:id="moneyLabel" layoutX="1090.0" layoutY="102.0" prefHeight="21.0" prefWidth="186.0" text="MONEY:" textFill="#39bf2a" />
+      <Label fx:id="alertsLabel" layoutX="37.0" layoutY="699.0" prefHeight="51.0" prefWidth="527.0" text="Alerts" textFill="RED">
+         <font>
+            <Font size="24.0" />
+         </font>
+      </Label>
    </children>
 </Pane>

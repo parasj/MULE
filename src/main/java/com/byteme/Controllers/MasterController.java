@@ -21,7 +21,6 @@ public class MasterController {
     private Scene town;
     private Scene temp;
     private Stage theStage;
-    private int numPlayers;
 
     private MasterController() {
         Parent root = null;
@@ -44,10 +43,6 @@ public class MasterController {
     }
 
     public static MasterController getInstance() { return instance;}
-
-    public void setNumPlayers(int numPlayers) {
-        this.numPlayers = numPlayers;
-    }
 
     public void setStage(Stage stage) {
         theStage = stage;

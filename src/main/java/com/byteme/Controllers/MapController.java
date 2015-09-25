@@ -22,16 +22,15 @@ public class MapController implements Initializable {
     private static ConfigRepository configRepository = ConfigRepository.getInstance();
     private Timer timer;
     private boolean[][] mapSpots;
+    private int passCounter; // Used to determine when to stop property selection immediately
+    private int purchaseOpportunities; // Used to determine duration of full property selection
     private int numPlayers;
     private int currentPlayer;
     private int currentRound;
     private int currentPhase;
-    // 0 or 1 = Land Grant
-    // >= 2   = Land Purchase
-
-    private int freeLand = 0;
-    private int passNumber;
-    public boolean buy = false;
+    // 1 = Land Grant
+    // 2 = Land Purchase
+    // 3 = Selection Phase Over
 
     @FXML
     private Label playerLabel;
@@ -39,6 +38,8 @@ public class MapController implements Initializable {
     private Label moneyLabel;
     @FXML
     private Label phaseLabel;
+    @FXML
+    private Label alertsLabel;
     @FXML
     private GridPane map;
 
@@ -83,6 +84,7 @@ public class MapController implements Initializable {
 
         // Initialize game state for when the map is loaded for the first time
         timer = new Timer();
+        alertsLabel.setVisible(false);
         numPlayers = configRepository.getTotalPlayers();
         currentPlayer = 1;
         playerLabel.setText(String.format("Player %d %s", currentPlayer, configRepository.getPlayerConfig(currentPlayer).getName()));
@@ -99,59 +101,70 @@ public class MapController implements Initializable {
      */
     public void tileChosen(MouseEvent event) {
 
+        alertsLabel.setVisible(false);
         // Get the square being clicked
         BorderPane tile = (BorderPane) event.getSource();
 
         if (currentPhase == 1) {
             // LAND GRANT
 
-            // Change tile background color to player color
-            setColorTile(tile);
-
-            //TODO: Save which tile was clicked by which player (currentPlayer is a static variable of this class)
-            System.out.println("Player " + currentPlayer + ": " + map.getRowIndex(tile) + ", " + map.getColumnIndex(tile));
-
-            if (currentPlayer >= numPlayers) {
-                currentRound++;
-            }
-
-            // Land Grant is only 2 turns per player.
-            if (currentRound >= 3) {
-                currentPhase++;
-                currentRound = 0;
-            }
-
-            changePlayer();
-        }
-
-        // TODO: get cost of tile from tile.
-        // ConfigRepository.getInstance().getPlayerConfig(currentPlayer).payMoney(100);
-
-        if (buy) {
-            if (freeLand < numPlayers * 2) {
+            if (!owned(tile)) {
+                // Change tile background color to player color
+                setColorTile(tile);
 
                 //TODO: Save which tile was clicked by which player (currentPlayer is a static variable of this class)
                 System.out.println("Player " + currentPlayer + ": " + map.getRowIndex(tile) + ", " + map.getColumnIndex(tile));
 
-                if (setColorTile(tile)) {
-                    freeLand++;
+                if (currentPlayer >= numPlayers) {
+                    currentRound++;
                 }
 
-                // Update the player label to the next player
-                currentPlayer = (currentPlayer + 1 == numPlayers) ? numPlayers : (currentPlayer + 1) % numPlayers;
-                playerLabel.setText(String.format("Player %d %s", currentPlayer, configRepository.getPlayerConfig(currentPlayer - 1).getName()));
-                passNumber = 0;
-            } else { //change boolean
-                if (configRepository.getPlayerConfig(currentPlayer - 1).getMoney() >= 300) {
-                    if (setColorTile(tile)) {
-                        configRepository.getPlayerConfig(currentPlayer).payMoney(300);
-                    }
-                    int current = configRepository.getPlayerConfig(currentPlayer).getMoney();
-                    System.out.println("You now have " + current + " money.");
-                } else {
-                    System.out.println("You cannot buy! You only have " + configRepository.getPlayerConfig(currentPlayer).getMoney() + " dollars!");
+                // Land Grant is only 2 turns per player.
+                if (currentRound >= 3) {
+                    phaseLabel.setText("Property Selection");
+                    currentPhase++;
+                    currentRound = 0;
                 }
-                passNumber = 0;
+
+                // Reset counters and change currentPlayer
+                passCounter = 0;
+                purchaseOpportunities = 0;
+                changePlayer();
+            } else {
+                // Property is owned, just display warning
+                ownedMessage();
+            }
+        } else if (currentPhase == 2) {
+            // PROPERTY PURCHASE/SELECTION
+
+            // Remove cost from player's money
+            // TODO: Parse actual cost of each property
+            int cost = 100;
+            if (cost > ConfigRepository.getInstance().getPlayerConfig(currentPlayer).getMoney()) {
+                alertsLabel.setText("This costs more money than you have!");
+                alertsLabel.setVisible(true);
+            } else {
+                if (!owned(tile)) {
+                    // Change tile background color to player color
+                    setColorTile(tile);
+
+                    ConfigRepository.getInstance().getPlayerConfig(currentPlayer).payMoney(cost);
+
+                    purchaseOpportunities++;
+                    passCounter = 0;
+
+                    if (purchaseOpportunities >= 43) {
+                        currentPhase = 3;
+                        phaseLabel.setText("Selection phase is over!");
+                        changePlayer(1);
+                    } else {
+                        changePlayer();
+                    }
+                } else {
+                    // Property is owned, just display warning
+                    ownedMessage();
+                }
+
             }
         }
     }
@@ -164,16 +177,19 @@ public class MapController implements Initializable {
         MasterController.getInstance().town();
     }
 
-
-    public void updatePlayer() {
-        passNumber++;
-        if (passNumber == numPlayers) {
-            System.out.println("Selection phase is over!");
-            MasterController.getInstance().map();
+    public void pass() {
+        alertsLabel.setVisible(false);
+        if (currentPhase == 2) {
+            purchaseOpportunities++;
         }
-        currentPlayer = (currentPlayer + 1 == numPlayers) ? numPlayers : (currentPlayer + 1) % numPlayers;
-        playerLabel.setText(String.format("Player %d %s", currentPlayer, configRepository.getPlayerConfig(currentPlayer).getName()));
-        moneyLabel.setText("MONEY: " + ConfigRepository.getInstance().getPlayerConfig(currentPlayer).getMoney());
+        passCounter++;
+        if (passCounter >= numPlayers) {
+            currentPhase = 3;
+            phaseLabel.setText("Selection phase is over!");
+            changePlayer(1);
+        } else {
+            changePlayer();
+        }
     }
 
     /**
@@ -188,23 +204,41 @@ public class MapController implements Initializable {
     }
 
     /**
+     * Updates the player label to next player's name.
+     * Increments currentPlayer.
+     * @param playerNumber The number of the player to be set
+     */
+    public void changePlayer(int playerNumber) {
+        // Update current player label and currentPlayer variable
+        currentPlayer = playerNumber;
+        playerLabel.setText(String.format("Player %d %s", currentPlayer, configRepository.getPlayerConfig(currentPlayer).getName()));
+        moneyLabel.setText("MONEY: " + ConfigRepository.getInstance().getPlayerConfig(currentPlayer).getMoney());
+    }
+
+    /**
      * Sets the color of a tile when clicked by a player.
      * Only does so if tile is not already owned.
      * @param tile The tile whose color must be set.
      * @return Whether the tile was set or not
      */
-    private boolean setColorTile(BorderPane tile) {
+    private void setColorTile(BorderPane tile) {
         int row = map.getRowIndex(tile);
         int column = map.getColumnIndex(tile);
-        if (!mapSpots[row][column]) {
-            String color = configRepository.getPlayerConfig(currentPlayer).getColor();
-            tile.setStyle("-fx-border-color: " + color.toLowerCase() + ";" + "-fx-border-width: 6px;");
-            mapSpots[row][column] = true;
-            return true;
-        } else {
-            System.out.println("Tile at " + row + " , " + column + " is taken already");
-            return false;
-        }
+        String color = configRepository.getPlayerConfig(currentPlayer).getColor();
+        tile.setStyle("-fx-border-color: " + color.toLowerCase() + ";" + "-fx-border-width: 6px;");
+        mapSpots[row][column] = true;
+
+    }
+
+    private boolean owned(BorderPane tile) {
+        int row = map.getRowIndex(tile);
+        int column = map.getColumnIndex(tile);
+        return mapSpots[row][column];
+    }
+
+    private void ownedMessage() {
+        alertsLabel.setText("This property is already owned!");
+        alertsLabel.setVisible(true);
     }
 
 }

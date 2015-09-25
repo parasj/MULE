@@ -122,7 +122,6 @@ public class ConfigurationController {
             if (currentPlayer >= numPlayers) {
                 // TODO: Create save dialog box for the player to save configuration options
                 // Go to Map screen.
-                MasterController.getInstance().setNumPlayers(numPlayers);
                 MasterController.getInstance().createMap();
                 MasterController.getInstance().map();
             } else {
