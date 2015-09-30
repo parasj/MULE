@@ -15,7 +15,7 @@
             <Rectangle arcHeight="5.0" arcWidth="5.0" fill="DODGERBLUE" height="133.0" layoutX="31.0" layoutY="22.0" stroke="BLACK" strokeType="INSIDE" width="241.0" />
             <Rectangle arcHeight="5.0" arcWidth="5.0" fill="DODGERBLUE" height="133.0" layoutX="465.0" layoutY="22.0" stroke="BLACK" strokeType="INSIDE" width="241.0" />
             <Rectangle fx:id="landoffice" arcHeight="5.0" arcWidth="5.0" fill="DODGERBLUE" height="133.0" layoutX="31.0" layoutY="308.0" stroke="BLACK" strokeType="INSIDE" width="241.0" />
-            <Rectangle arcHeight="5.0" arcWidth="5.0" fill="DODGERBLUE" height="133.0" layoutX="465.0" layoutY="298.0" stroke="BLACK" strokeType="INSIDE" width="241.0" />
+            <Rectangle fx:id="pub" arcHeight="5.0" arcWidth="5.0" fill="DODGERBLUE" height="133.0" layoutX="465.0" layoutY="298.0" stroke="BLACK" strokeType="INSIDE" width="241.0" />
             <Label layoutX="568.0" layoutY="354.0" text="Pub" />
             <Label layoutX="564.0" layoutY="78.0" text="Store" />
             <Label layoutX="114.0" layoutY="365.0" text="Land Office" />
