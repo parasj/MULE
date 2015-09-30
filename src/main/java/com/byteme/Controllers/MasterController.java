@@ -20,6 +20,7 @@ public class MasterController {
     private Scene map;
     private Scene town;
     private Scene temp;
+    public Scene pubScene;
     private Stage theStage;
 
     private MasterController() {
@@ -37,6 +38,8 @@ public class MasterController {
             town = new Scene(root);
             root = FXMLLoader.load(getClass().getResource("/fxml/placeholder.fxml"));
             temp = new Scene(root);
+            root = FXMLLoader.load(getClass().getResource("/fxml/Pub.fxml"));
+            pubScene = new Scene(root);
         } catch (IOException e) {
             e.printStackTrace();
         }
@@ -75,6 +78,8 @@ public class MasterController {
     public void temp() {
         theStage.setScene(temp);
     }
+
+    public void pubScene() { theStage.setScene(pubScene); }
 
     public void createMap() {
         try {

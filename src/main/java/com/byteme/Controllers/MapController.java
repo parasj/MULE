@@ -42,6 +42,7 @@ public class MapController implements Initializable {
     private Label alertsLabel;
     @FXML
     private GridPane map;
+    private static MapController instance = new MapController();
 
     /**
      * Runs right before the map screen is shown for the first time.
@@ -176,6 +177,11 @@ public class MapController implements Initializable {
     public void goToTown() {
         MasterController.getInstance().town();
     }
+
+//    public void goToMapFromPub() {
+//        MasterController.getInstance().map();
+//        changePlayer();
+//    }
 
     public void pass() {
         alertsLabel.setVisible(false);
