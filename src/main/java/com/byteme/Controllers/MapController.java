@@ -247,4 +247,7 @@ public class MapController implements Initializable {
         alertsLabel.setVisible(true);
     }
 
+    public static MapController getInstance() {
+        return instance;
+    }
 }
