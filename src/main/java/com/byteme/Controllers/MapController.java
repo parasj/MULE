@@ -13,6 +13,7 @@ import javafx.scene.layout.GridPane;
 
 import java.util.ArrayList;
 import java.util.Timer;
+import java.util.TimerTask;
 
 
 /**
@@ -23,7 +24,7 @@ public class MapController implements Initializable {
     private Timer timer;
     private boolean[][] mapSpots;
     private int passCounter; // Used to determine when to stop property selection immediately
-    private int purchaseOpportunities; // Used to determine duration of full property selection
+    private int purchaseOpportunities;// Used to determine duration of full property selection
     private int numPlayers;
     private int currentPlayer;
     private int currentRound;
@@ -42,7 +43,24 @@ public class MapController implements Initializable {
     private Label alertsLabel;
     @FXML
     private GridPane map;
-    private static MapController instance = new MapController();
+
+    //Constructor with all params
+    public MapController(Timer timer, boolean[][] mapSpots, int passCounter, int purchaseOpportunities, int numPlayers,
+                         int currentPlayer, int currentRound, int currentPhase) {
+        this.timer = timer;
+        this.mapSpots = mapSpots;
+        this.passCounter = passCounter;
+        this.purchaseOpportunities = purchaseOpportunities;
+        this.numPlayers = numPlayers;
+        this.currentPlayer = currentPlayer;
+        this.currentRound = currentRound;
+        this.currentPhase = currentPhase;
+    }
+
+    //No constructor initializer
+    public MapController() {
+        this(new Timer(), null, 0, 0, 0, 1, 0, 0);
+    }
 
     /**
      * Runs right before the map screen is shown for the first time.
@@ -53,6 +71,15 @@ public class MapController implements Initializable {
      */
     @Override
     public void initialize(java.net.URL location, java.util.ResourceBundle resources) {
+//        configRepository = ConfigRepository.getInstance();
+//        timer = MasterController.getMapInstance().timer;
+//        mapSpots = MasterController.getMapInstance().mapSpots;
+//        passCounter = MasterController.getMapInstance().passCounter; // Used to determine when to stop property selection immediately
+//        purchaseOpportunities = MasterController.getMapInstance().purchaseOpportunities; // Used to determine duration of full property selection
+//        numPlayers = MasterController.getMapInstance().numPlayers;
+//        currentPlayer = MasterController.getMapInstance().currentPlayer;
+//        currentRound = MasterController.getMapInstance().currentRound;
+//        currentPhase = MasterController.getMapInstance().currentPhase;
 
         // Create the map
         MapBoard possibleMaps = new MapBoard();
@@ -93,6 +120,16 @@ public class MapController implements Initializable {
         phaseLabel.setText("Land Grant");
         currentPhase = 1; // Land Grant
         currentRound = 1;
+        timer.scheduleAtFixedRate(new TimerTask() {
+            @Override
+            public void run() {
+//                if (MasterController.getInstance().getCurrStage().equals("Map")) {
+//                    currentPlayer = MasterController.getMapInstance().currentPlayer;
+//                    playerLabel.setText(String.format("Player %d %s", currentPlayer, configRepository.getPlayerConfig(currentPlayer).getName()));
+//                    moneyLabel.setText("MONEY: " + ConfigRepository.getInstance().getPlayerConfig(currentPlayer).getMoney());
+//                }
+            }
+        }, 0, 5000);
     }
 
     /**
@@ -175,13 +212,12 @@ public class MapController implements Initializable {
      * Changes scene to Town
      */
     public void goToTown() {
+        //Changes the Map instance
+        MasterController.getInstance().setMapInstance(new MapController(timer, mapSpots, passCounter,
+                purchaseOpportunities, numPlayers, currentPlayer, currentRound, currentPhase));
         MasterController.getInstance().town();
     }
 
-//    public void goToMapFromPub() {
-//        MasterController.getInstance().map();
-//        changePlayer();
-//    }
 
     public void pass() {
         alertsLabel.setVisible(false);
@@ -246,5 +282,20 @@ public class MapController implements Initializable {
         alertsLabel.setText("This property is already owned!");
         alertsLabel.setVisible(true);
     }
+    //For use in Pub Method
+    public void nextPlayer() {
+        //TODO reassign in the code when updating label
+        MasterController.getMapInstance().currentPlayer = (this.currentPlayer + 1 == this.numPlayers) ? this.numPlayers : (this.currentPlayer + 1)
+                % this.numPlayers;
+    }
+
+    public void stop() {
+        this.timer.cancel();
+    }
+
+    public Timer getTimer() {
+        return this.timer;
+    }
+
 
 }
