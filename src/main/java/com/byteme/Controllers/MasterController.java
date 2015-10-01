@@ -22,6 +22,9 @@ public class MasterController {
     private Scene temp;
     public Scene pubScene;
     private Stage theStage;
+    private String currStage;
+    //Creates a MapController Object. This will contain data specific to the map.
+    private static MapController mapInstance = new MapController();
 
     private MasterController() {
         Parent root = null;
@@ -52,34 +55,52 @@ public class MasterController {
     }
 
     public void startGame() {
+        currStage = "Start Game";
         theStage.setScene(startGame);
     }
 
     public void loadGame() {
+        currStage = "Load Game";
         theStage.setScene(loadGame);
     }
 
     public void gameConfig() {
+        currStage = "Game Config";
         theStage.setScene(gameConfig);
     }
 
     public void playerConfig() {
+        currStage = "Player Config";
         theStage.setScene(playerConfig);
     }
 
     public void map() {
+        currStage = "Map";
         theStage.setScene(map);
     }
 
+    public static MapController getMapInstance() {
+        return mapInstance;
+    }
+
+    public void setMapInstance(MapController mapInstance) {
+        this.mapInstance = mapInstance;
+    }
+
     public void town() {
+        currStage = "Town";
         theStage.setScene(town);
     }
 
     public void temp() {
+        currStage = "Temp";
         theStage.setScene(temp);
     }
 
-    public void pubScene() { theStage.setScene(pubScene); }
+    public void pubScene() {
+        currStage = "Pub";
+        theStage.setScene(pubScene);
+    }
 
     public void createMap() {
         try {
@@ -88,5 +109,9 @@ public class MasterController {
         } catch(Exception e) {
             System.out.println(e);
         }
+    }
+
+    public String getCurrStage() {
+        return currStage;
     }
 }

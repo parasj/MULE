@@ -11,6 +11,7 @@ import java.io.IOException;
  * Created by Daniel on 9/30/2015.
  */
 public class PubController {
+<<<<<<< HEAD
     //need to update Player
     public void goToMapFromPub(ActionEvent event) {
         try {
@@ -25,3 +26,12 @@ public class PubController {
         }
     }
 }
+=======
+    public void goToMap() {
+        //TODO Update the Label in Map.
+        MasterController.getMapInstance().nextPlayer();
+        MasterController.getInstance().map();
+    }
+
+}
+>>>>>>> origin/master
