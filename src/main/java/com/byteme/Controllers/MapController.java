@@ -29,6 +29,7 @@ public class MapController implements Initializable {
     private int currentPlayer;
     private int currentRound;
     private int currentPhase;
+    private int timeLeft;
     // 1 = Land Grant
     // 2 = Land Purchase
     // 3 = Selection Phase Over
@@ -46,7 +47,7 @@ public class MapController implements Initializable {
 
     //Constructor with all params
     public MapController(Timer timer, boolean[][] mapSpots, int passCounter, int purchaseOpportunities, int numPlayers,
-                         int currentPlayer, int currentRound, int currentPhase) {
+                         int currentPlayer, int currentRound, int currentPhase, int timeLeft) {
         this.timer = timer;
         this.mapSpots = mapSpots;
         this.passCounter = passCounter;
@@ -55,11 +56,12 @@ public class MapController implements Initializable {
         this.currentPlayer = currentPlayer;
         this.currentRound = currentRound;
         this.currentPhase = currentPhase;
+        this.timeLeft = timeLeft;
     }
 
     //No constructor initializer
     public MapController() {
-        this(new Timer(), null, 0, 0, 0, 1, 0, 0);
+        this(new Timer(), null, 0, 0, 0, 1, 0, 0, 0);
     }
 
     /**
@@ -119,17 +121,20 @@ public class MapController implements Initializable {
         moneyLabel.setText("MONEY: " + ConfigRepository.getInstance().getPlayerConfig(currentPlayer).getMoney());
         phaseLabel.setText("Land Grant");
         currentPhase = 1; // Land Grant
-        currentRound = 1;
+        currentRound = 0;
         timer.scheduleAtFixedRate(new TimerTask() {
             @Override
             public void run() {
+                if (timeLeft != 0) {
+                    timeLeft--;
+                }
 //                if (MasterController.getInstance().getCurrStage().equals("Map")) {
 //                    currentPlayer = MasterController.getMapInstance().currentPlayer;
 //                    playerLabel.setText(String.format("Player %d %s", currentPlayer, configRepository.getPlayerConfig(currentPlayer).getName()));
 //                    moneyLabel.setText("MONEY: " + ConfigRepository.getInstance().getPlayerConfig(currentPlayer).getMoney());
 //                }
             }
-        }, 0, 5000);
+        }, 0, 1000);
     }
 
     /**
@@ -214,7 +219,7 @@ public class MapController implements Initializable {
     public void goToTown() {
         //Changes the Map instance
         MasterController.getInstance().setMapInstance(new MapController(timer, mapSpots, passCounter,
-                purchaseOpportunities, numPlayers, currentPlayer, currentRound, currentPhase));
+                purchaseOpportunities, numPlayers, currentPlayer, currentRound, currentPhase, timeLeft));
         MasterController.getInstance().town();
     }
 
@@ -297,5 +302,23 @@ public class MapController implements Initializable {
         return this.timer;
     }
 
+    public int getCurrentPlayer() {
+        return this.currentPlayer;
+    }
+
+    public void incRound() {
+        currentRound++;
+    }
+
+    public int getCurrentRound() {
+        return this.currentRound;
+    }
+     public int getTimeLeft() {
+         return this.timeLeft;
+     }
+
+    public void setTimeLeft(int timeLeft) {
+        this.timeLeft = timeLeft;
+    }
 
 }
