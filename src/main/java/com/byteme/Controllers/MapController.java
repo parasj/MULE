@@ -2,6 +2,7 @@ package com.byteme.Controllers;
 
 import com.byteme.Models.ConfigRepository;
 import com.byteme.Models.MapBoard;
+import com.byteme.Models.MapStateStore;
 import com.byteme.Schema.Property;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
@@ -21,16 +22,10 @@ import java.util.TimerTask;
  */
 public class MapController implements Initializable {
     private static ConfigRepository configRepository = ConfigRepository.getInstance();
+    private static MapStateStore s = MapStateStore.getInstance();
     private static MapController instance = new MapController();
     private Timer timer;
     private boolean[][] mapSpots;
-    private int passCounter; // Used to determine when to stop property selection immediately
-    private int purchaseOpportunities;// Used to determine duration of full property selection
-    private int numPlayers;
-    private int currentPlayer;
-    private int currentRound;
-    private int currentPhase;
-    private int timeLeft;
     // 1 = Land Grant
     // 2 = Land Purchase
     // 3 = Selection Phase Over
@@ -47,17 +42,24 @@ public class MapController implements Initializable {
     private GridPane map;
 
     //Constructor with all params
+    public MapController(Timer timer, boolean[][] mapSpots) {
+        this.timer = timer;
+        this.mapSpots = mapSpots;
+    }
+
+    //Constructor with all params
     public MapController(Timer timer, boolean[][] mapSpots, int passCounter, int purchaseOpportunities, int numPlayers,
                          int currentPlayer, int currentRound, int currentPhase, int timeLeft) {
         this.timer = timer;
         this.mapSpots = mapSpots;
-        this.passCounter = passCounter;
-        this.purchaseOpportunities = purchaseOpportunities;
-        this.numPlayers = numPlayers;
-        this.currentPlayer = currentPlayer;
-        this.currentRound = currentRound;
-        this.currentPhase = currentPhase;
-        this.timeLeft = timeLeft;
+
+        s.setPassCounter(passCounter);
+        s.setPurchaseOpportunities(purchaseOpportunities);
+        s.setNumPlayers(numPlayers);
+        s.setCurrentPlayer(currentPlayer);
+        s.setCurrentRound(currentRound);
+        s.setCurrentPhase(currentPhase);
+        s.setTimeLeft(timeLeft);
     }
 
     //No constructor initializer
@@ -99,8 +101,8 @@ public class MapController implements Initializable {
         }
 
         // Keep track of which tiles have a player's color on them
-        for (int a = 0; a < numPlayers; a++) {
-            ArrayList<Property> y = configRepository.getPlayerConfig(currentPlayer).getProperties();
+        for (int a = 0; a < s.getNumPlayers(); a++) {
+            ArrayList<Property> y = configRepository.getPlayerConfig(s.getCurrentPlayer()).getProperties();
             for (Property z : y) {
                 mapSpots[z.getRow()][z.getColumn()] = true;
             }
@@ -116,18 +118,18 @@ public class MapController implements Initializable {
         // Initialize game state for when the map is loaded for the first time
         timer = new Timer();
         alertsLabel.setVisible(false);
-        numPlayers = configRepository.getTotalPlayers();
-        currentPlayer = 1;
-        playerLabel.setText(String.format("Player %d %s", currentPlayer, configRepository.getPlayerConfig(currentPlayer).getName()));
-        moneyLabel.setText("MONEY: " + ConfigRepository.getInstance().getPlayerConfig(currentPlayer).getMoney());
+        s.setNumPlayers(configRepository.getTotalPlayers());
+        s.setCurrentPlayer(1);
+        playerLabel.setText(String.format("Player %d %s", s.getCurrentPlayer(), configRepository.getPlayerConfig(s.getCurrentPlayer()).getName()));
+        moneyLabel.setText("MONEY: " + ConfigRepository.getInstance().getPlayerConfig(s.getCurrentPlayer()).getMoney());
         phaseLabel.setText("Land Grant");
-        currentPhase = 1; // Land Grant
-        currentRound = 0;
+        s.setCurrentPhase(1); // Land Grant
+        s.setCurrentRound(0);
         timer.scheduleAtFixedRate(new TimerTask() {
             @Override
             public void run() {
-                if (timeLeft != 0) {
-                    timeLeft--;
+                if (s.getTimeLeft() != 0) {
+                    s.setTimeLeft(s.getTimeLeft() - 1);
                 }
 //                if (MasterController.getInstance().getCurrStage().equals("Map")) {
 //                    currentPlayer = MasterController.getMapInstance().currentPlayer;
@@ -137,6 +139,7 @@ public class MapController implements Initializable {
             }
         }, 0, 1000);
     }
+
 
     /**
      * Runs when a tile is clicked.
@@ -149,7 +152,7 @@ public class MapController implements Initializable {
         // Get the square being clicked
         BorderPane tile = (BorderPane) event.getSource();
 
-        if (currentPhase == 1) {
+        if (s.getCurrentPhase() == 1) {
             // LAND GRANT
 
             if (!owned(tile)) {
@@ -157,34 +160,34 @@ public class MapController implements Initializable {
                 setColorTile(tile);
 
                 //TODO: Save which tile was clicked by which player (currentPlayer is a static variable of this class)
-                System.out.println("Player " + currentPlayer + ": " + map.getRowIndex(tile) + ", " + map.getColumnIndex(tile));
+                System.out.println("Player " + s.getCurrentPlayer() + ": " + map.getRowIndex(tile) + ", " + map.getColumnIndex(tile));
 
-                if (currentPlayer >= numPlayers) {
-                    currentRound++;
+                if (s.getCurrentPlayer() >= s.getNumPlayers()) {
+                    s.setCurrentRound(s.getCurrentRound() + 1);
                 }
 
                 // Land Grant is only 2 turns per player.
-                if (currentRound >= 3) {
+                if (s.getCurrentRound() >= 3) {
                     phaseLabel.setText("Property Selection");
-                    currentPhase++;
-                    currentRound = 0;
+                    s.setCurrentPhase(s.getCurrentPhase() + 1);
+                    s.setCurrentRound(0);
                 }
 
                 // Reset counters and change currentPlayer
-                passCounter = 0;
-                purchaseOpportunities = 0;
+                s.setPassCounter(0);
+                s.setPurchaseOpportunities(0);
                 changePlayer();
             } else {
                 // Property is owned, just display warning
                 ownedMessage();
             }
-        } else if (currentPhase == 2) {
+        } else if (s.getCurrentPhase() == 2) {
             // PROPERTY PURCHASE/SELECTION
 
             // Remove cost from player's money
             // TODO: Parse actual cost of each property
             int cost = 300;
-            if (cost > ConfigRepository.getInstance().getPlayerConfig(currentPlayer).getMoney()) {
+            if (cost > ConfigRepository.getInstance().getPlayerConfig(s.getCurrentPlayer()).getMoney()) {
                 alertsLabel.setText("This costs more money than you have!");
                 alertsLabel.setVisible(true);
             } else {
@@ -192,13 +195,13 @@ public class MapController implements Initializable {
                     // Change tile background color to player color
                     setColorTile(tile);
 
-                    ConfigRepository.getInstance().getPlayerConfig(currentPlayer).payMoney(cost);
+                    ConfigRepository.getInstance().getPlayerConfig(s.getCurrentPlayer()).payMoney(cost);
 
-                    purchaseOpportunities++;
-                    passCounter = 0;
+                    s.setPurchaseOpportunities(s.getPurchaseOpportunities() + 1);
+                    s.setPassCounter(0);
 
-                    if (purchaseOpportunities >= 43) {
-                        currentPhase = 3;
+                    if (s.getPurchaseOpportunities() >= 43) {
+                        s.setCurrentPhase(3);
                         phaseLabel.setText("Selection phase is over!");
                         changePlayer(1);
                     } else {
@@ -219,20 +222,19 @@ public class MapController implements Initializable {
      */
     public void goToTown() {
         //Changes the Map instance
-        MasterController.getInstance().setMapInstance(new MapController(timer, mapSpots, passCounter,
-                purchaseOpportunities, numPlayers, currentPlayer, currentRound, currentPhase, timeLeft));
+        MasterController.getInstance().setMapInstance(MapController.getInstance());
         MasterController.getInstance().town();
     }
 
 
     public void pass() {
         alertsLabel.setVisible(false);
-        if (currentPhase == 2) {
-            purchaseOpportunities++;
+        if (s.getCurrentPhase() == 2) {
+            s.setPurchaseOpportunities(s.getPurchaseOpportunities() + 1);
         }
-        passCounter++;
-        if (passCounter >= numPlayers) {
-            currentPhase = 3;
+        s.setPassCounter(s.getPassCounter() + 1);
+        if (s.getPassCounter() >= s.getNumPlayers()) {
+            s.setCurrentPhase(3);
             phaseLabel.setText("Selection phase is over!");
             changePlayer(1);
         } else {
@@ -246,9 +248,13 @@ public class MapController implements Initializable {
      */
     public void changePlayer() {
         // Update current player label and currentPlayer variable
-        currentPlayer = (currentPlayer + 1 == numPlayers) ? numPlayers : (currentPlayer + 1) % numPlayers;
-        playerLabel.setText(String.format("Player %d %s", currentPlayer, configRepository.getPlayerConfig(currentPlayer).getName()));
-        moneyLabel.setText("MONEY: " + ConfigRepository.getInstance().getPlayerConfig(currentPlayer).getMoney());
+        s.setCurrentPlayer((s.getCurrentPlayer() + 1 == s.getNumPlayers()) ? s.getNumPlayers() : (s.getCurrentPlayer() + 1) % s.getNumPlayers());
+        rerenderPlayerText();
+    }
+
+    private void rerenderPlayerText() {
+        if (playerLabel != null) playerLabel.setText(String.format("Player %d %s", s.getCurrentPlayer(), ConfigRepository.getInstance().getPlayerConfig(s.getCurrentPlayer()).getName()));
+        if (moneyLabel != null) moneyLabel.setText("MONEY: " + ConfigRepository.getInstance().getPlayerConfig(s.getCurrentPlayer()).getMoney());
     }
 
     /**
@@ -258,9 +264,8 @@ public class MapController implements Initializable {
      */
     public void changePlayer(int playerNumber) {
         // Update current player label and currentPlayer variable
-        currentPlayer = playerNumber;
-        playerLabel.setText(String.format("Player %d %s", currentPlayer, configRepository.getPlayerConfig(currentPlayer).getName()));
-        moneyLabel.setText("MONEY: " + ConfigRepository.getInstance().getPlayerConfig(currentPlayer).getMoney());
+        s.setCurrentPlayer(playerNumber);
+        rerenderPlayerText();
     }
 
     /**
@@ -272,7 +277,7 @@ public class MapController implements Initializable {
     private void setColorTile(BorderPane tile) {
         int row = map.getRowIndex(tile);
         int column = map.getColumnIndex(tile);
-        String color = configRepository.getPlayerConfig(currentPlayer).getColor();
+        String color = configRepository.getPlayerConfig(s.getCurrentPlayer()).getColor();
         tile.setStyle("-fx-border-color: " + color.toLowerCase() + ";" + "-fx-border-width: 6px;");
         mapSpots[row][column] = true;
 
@@ -288,12 +293,6 @@ public class MapController implements Initializable {
         alertsLabel.setText("This property is already owned!");
         alertsLabel.setVisible(true);
     }
-    //For use in Pub Method
-    public void nextPlayer() {
-        //TODO reassign in the code when updating label
-        MasterController.getMapInstance().currentPlayer = (this.currentPlayer + 1 == this.numPlayers) ? this.numPlayers : (this.currentPlayer + 1)
-                % this.numPlayers;
-    }
 
     public void stop() {
         this.timer.cancel();
@@ -304,22 +303,30 @@ public class MapController implements Initializable {
     }
 
     public int getCurrentPlayer() {
-        return this.currentPlayer;
+        return s.getCurrentPlayer();
     }
 
     public void incRound() {
-        currentRound++;
+        s.setCurrentRound(s.getCurrentRound() + 1);
     }
 
     public int getCurrentRound() {
-        return this.currentRound;
+        return s.getCurrentRound();
     }
      public int getTimeLeft() {
-         return this.timeLeft;
+         return s.getTimeLeft();
      }
 
     public void setTimeLeft(int timeLeft) {
-        this.timeLeft = timeLeft;
+        s.setTimeLeft(timeLeft);
+    }
+
+    public void rerender() {
+        System.out.println(s);
+        if (ConfigRepository.getInstance().getPlayerConfig(s.getCurrentPlayer()) != null) {
+            rerenderPlayerText();
+            System.out.println(s);
+        }
     }
 
     public static MapController getInstance() {

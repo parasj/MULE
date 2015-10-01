@@ -26,7 +26,7 @@ public class MasterController {
     private Stage theStage;
     private String currStage;
     //Creates a MapController Object. This will contain data specific to the map.
-    private static MapController mapInstance = new MapController();
+    private static MapController mapInstance = MapController.getInstance();
 
     private MasterController() {
         Parent root = null;
@@ -81,6 +81,7 @@ public class MasterController {
     public void map() {
         currStage = "Map";
         theStage.setScene(map);
+        mapInstance.rerender();
     }
 
     public static MapController getMapInstance() {

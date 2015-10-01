@@ -45,7 +45,7 @@ public class PubController {
         //TODO Increment Round Properly
         MasterController.getMapInstance().incRound();
         MasterController.getMapInstance().setTimeLeft(calcTimeLeft(null));
-        MasterController.getMapInstance().nextPlayer();
+        MasterController.getMapInstance().changePlayer();
         MasterController.getInstance().map();
     }
     private int calcTimeLeft(PlayerConfigParams player) {

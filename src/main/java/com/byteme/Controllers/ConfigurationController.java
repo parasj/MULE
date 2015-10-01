@@ -154,4 +154,6 @@ public class ConfigurationController {
             return 1000;
         }
     }
+
+    public void rerender() {}
 }
