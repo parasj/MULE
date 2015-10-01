@@ -17,11 +17,10 @@ import java.util.Random;
  * Created by Daniel on 9/30/2015.
  */
 public class PubController {
-<<<<<<< HEAD
+    private static PubController instance = new PubController();
     private static ConfigRepository configRepository = ConfigRepository.getInstance();
     private int[] roundBonusArr = {50, 50, 50, 100, 100, 100, 100, 150, 150, 150, 150, 200};
-=======
-<<<<<<< HEAD
+
     //need to update Player
     public void goToMapFromPub(ActionEvent event) {
         try {
@@ -35,9 +34,7 @@ public class PubController {
             e.printStackTrace();
         }
     }
-}
-=======
->>>>>>> origin/master
+
     public void goToMap() {
         //TODO Update the Label in Map.
         getMoney();
@@ -78,6 +75,4 @@ public class PubController {
         System.out.println(moneyBonus);
         currentPlayer.payMoney(-1 * moneyBonus);
     }
-
 }
->>>>>>> origin/master

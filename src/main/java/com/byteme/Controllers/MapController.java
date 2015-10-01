@@ -21,6 +21,7 @@ import java.util.TimerTask;
  */
 public class MapController implements Initializable {
     private static ConfigRepository configRepository = ConfigRepository.getInstance();
+    private static MapController instance = new MapController();
     private Timer timer;
     private boolean[][] mapSpots;
     private int passCounter; // Used to determine when to stop property selection immediately
