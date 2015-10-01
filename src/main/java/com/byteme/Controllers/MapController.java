@@ -321,4 +321,7 @@ public class MapController implements Initializable {
         this.timeLeft = timeLeft;
     }
 
+    public static MapController getInstance() {
+        return instance;
+    }
 }
