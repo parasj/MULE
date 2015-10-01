@@ -20,6 +20,7 @@
             <Label layoutX="564.0" layoutY="78.0" text="Store" />
             <Label layoutX="114.0" layoutY="365.0" text="Land Office" />
             <Label layoutX="111.0" layoutY="78.0" text="Assay Office" />
+            <ImageView fitHeight="150.0" fitWidth="200.0" layoutX="45.0" layoutY="33.0" pickOnBounds="true" preserveRatio="true" />
          </children>
       </AnchorPane>
       <Button layoutX="704.0" layoutY="603.0" mnemonicParsing="false" onAction="#goToMap" text="Back to Map">
@@ -27,5 +28,6 @@
             <Font size="24.0" />
          </font>
       </Button>
+      <ImageView fitHeight="150.0" fitWidth="200.0" pickOnBounds="true" preserveRatio="true" />
    </children>
 </Pane>

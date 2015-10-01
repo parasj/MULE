@@ -4,9 +4,11 @@ import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.stage.Stage;
+//import javafx.scene.text.Text;
 
 import java.io.IOException;
-
+//import java.util.Timer;
+//import java.util.TimerTask;
 /**
  * Created by Siddarth Senthilkumar on 9/24/15.
  */
@@ -43,6 +45,8 @@ public class MasterController {
             temp = new Scene(root);
             root = FXMLLoader.load(getClass().getResource("/fxml/Pub.fxml"));
             pubScene = new Scene(root);
+
+
         } catch (IOException e) {
             e.printStackTrace();
         }
@@ -114,4 +118,18 @@ public class MasterController {
     public String getCurrStage() {
         return currStage;
     }
+
+   /* public void countDownTimer() {
+        Timer timer = new Timer();
+        timer.schedule(new TimerTask() {
+            public void run() {
+                Platform.runLater(new Runnable() {
+                    public void run() {
+                        label.update();
+                        javafxcomponent.doSomething();
+                    }
+                });
+            }
+        }, 5000, 1000);
+    }*/
 }
