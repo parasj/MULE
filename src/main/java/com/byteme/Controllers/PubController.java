@@ -19,9 +19,6 @@ import java.util.Random;
 public class PubController {
 
     private static PubController instance = new PubController();
-    private static ConfigRepository configRepository = ConfigRepository.getInstance();
-    private int[] roundBonusArr = {50, 50, 50, 100, 100, 100, 100, 150, 150, 150, 150, 200};
-
 
     private static ConfigRepository configRepository = ConfigRepository.getInstance();
     private int[] roundBonusArr = {50, 50, 50, 100, 100, 100, 100, 150, 150, 150, 150, 200};
