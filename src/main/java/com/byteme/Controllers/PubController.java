@@ -57,7 +57,7 @@ public class PubController {
         } else if (timeLeft >= 12) {
             return 100;
         } else {
-            return 50;
+            return 0;
         }
     }
 
