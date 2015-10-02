@@ -111,7 +111,7 @@ public class MapController implements Initializable {
         timer.scheduleAtFixedRate(new TimerTask() {
             @Override
             public void run() {
-                if (s.getTimeLeft() != 0) {
+                if (s.getTimeLeft() > 0) {
                     s.setTimeLeft(s.getTimeLeft() - 1);
                 }
 //                if (MasterController.getInstance().getCurrStage().equals("Map")) {
