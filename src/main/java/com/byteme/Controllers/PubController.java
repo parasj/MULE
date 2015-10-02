@@ -1,6 +1,7 @@
 package com.byteme.Controllers;
 import com.byteme.Models.MapStateStore;
 import com.byteme.Models.ConfigRepository;
+import com.byteme.Schema.MapControllerStates;
 import com.byteme.Schema.PlayerConfigParams;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
@@ -37,10 +38,10 @@ public class PubController {
         //getMoney();
         //TODO Increment Round Properly
         //Change phase Mapstore 3
-        MapStateStore.getInstance().setCurrentPhase(3);
         MapStateStore.getInstance().setCurrentRound(MapStateStore.getInstance().getCurrentRound() + 1);
         MapStateStore.getInstance().setTimeLeft(calcTimeLeft(null));
         mapController.changePlayer();
+        MapStateStore.getInstance().setCurrentState(MapControllerStates.GAME_START);
         MasterController.getInstance().map();
     }
 

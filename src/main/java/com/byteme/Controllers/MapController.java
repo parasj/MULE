@@ -3,7 +3,9 @@ package com.byteme.Controllers;
 import com.byteme.Models.ConfigRepository;
 import com.byteme.Models.MapBoard;
 import com.byteme.Models.MapStateStore;
+import com.byteme.Schema.MapControllerStates;
 import com.byteme.Schema.Property;
+import javafx.application.Platform;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.*;
@@ -26,9 +28,12 @@ public class MapController implements Initializable {
 
     private Timer timer;
     private boolean[][] mapSpots;
+
+    private boolean initHappened;
     // 1 = Land Grant
     // 2 = Land Purchase
-    // 3 = Selection Phase Over/Game start
+    // 3 = Dummy phase 
+    // 4 = Selection Phase Over/Game start
 
     @FXML
     private Label playerLabel;
@@ -44,7 +49,7 @@ public class MapController implements Initializable {
     private Label timerLabel;
     //Constructor with all params
     private MapController(Timer timer, boolean[][] mapSpots, int passCounter, int purchaseOpportunities, int numPlayers,
-                         int currentPlayer, int currentRound, int currentPhase, int timeLeft) {
+                         int currentPlayer, int currentRound, MapControllerStates currentPhase, int timeLeft) {
         this.timer = timer;
         this.mapSpots = mapSpots;
 
@@ -53,13 +58,13 @@ public class MapController implements Initializable {
         s.setNumPlayers(numPlayers);
         s.setCurrentPlayer(currentPlayer);
         s.setCurrentRound(currentRound);
-        s.setCurrentPhase(currentPhase);
+        s.setCurrentState(currentPhase);
         s.setTimeLeft(timeLeft);
     }
 
     //No constructor initializer
     public MapController() {
-        this(new Timer(), null, 0, 0, 0, 1, 0, 0, 0);
+        this(new Timer(), null, 0, 0, 0, 1, 0, MapControllerStates.GAME_START, 0);
     }
 
     /**
@@ -108,20 +113,12 @@ public class MapController implements Initializable {
         s.setCurrentPlayer(1);
         rerenderPlayerText();
         phaseLabel.setText("Land Grant");
-        s.setCurrentPhase(1); // Land Grant
+        s.setCurrentState(MapControllerStates.LAND_GRANT); // Land Grant
         s.setCurrentRound(0);
         timer.scheduleAtFixedRate(new TimerTask() {
             @Override
-            public void run() {//IF PHASE 2
-                if (s.getCurrentPhase() == 3) {
-                    if (s.getTimeLeft() != 0) {
-                        s.setTimeLeft(s.getTimeLeft() - 1);
-                    } else {
-                        //Go to pub and change phase to 3.
-                        goToPub();
-                        s.setCurrentPhase(4);
-                    }
-                }
+            public void run() { //IF PHASE 2
+                tick();
             }
         }, 0, 1000);
     }
@@ -138,7 +135,7 @@ public class MapController implements Initializable {
         // Get the square being clicked
         BorderPane tile = (BorderPane) event.getSource();
 
-        if (s.getCurrentPhase() == 1) {
+        if (s.getCurrentState() == MapControllerStates.LAND_GRANT) {
             // LAND GRANT
 
             if (!owned(tile)) {
@@ -153,9 +150,9 @@ public class MapController implements Initializable {
                 }
 
                 // Land Grant is only 2 turns per player.
-                if (s.getCurrentRound() >= 3) {
+                if (s.getCurrentRound() >= 4) {
                     phaseLabel.setText("Property Selection");
-                    s.setCurrentPhase(s.getCurrentPhase() + 1);
+                    s.setCurrentState(MapControllerStates.LAND_PURCHASE);
                     s.setCurrentRound(0);
                 }
 
@@ -167,7 +164,7 @@ public class MapController implements Initializable {
                 // Property is owned, just display warning
                 ownedMessage();
             }
-        } else if (s.getCurrentPhase() == 2) {
+        } else if (s.getCurrentState() == MapControllerStates.LAND_PURCHASE) {
             // PROPERTY PURCHASE/SELECTION
 
             // Remove cost from player's money
@@ -187,7 +184,7 @@ public class MapController implements Initializable {
                     s.setPassCounter(0);
 
                     if (s.getPurchaseOpportunities() >= 43) {
-                        s.setCurrentPhase(3);
+                        s.setCurrentState(MapControllerStates.SELECTION_OVER);
                         phaseLabel.setText("Selection phase is over!");
                         s.setCurrentRound(s.getCurrentRound() + 1);
                         changePlayer(1);
@@ -208,7 +205,7 @@ public class MapController implements Initializable {
      * Changes scene to Town
      */
     public void goToTown() {
-        if (s.getCurrentPhase() != 1) {
+        if (s.getCurrentState() == MapControllerStates.GAME_START || s.getCurrentState() == MapControllerStates.SELECTION_OVER) {
             MasterController.getInstance().town();
         }
     }
@@ -224,12 +221,12 @@ public class MapController implements Initializable {
 
     public void pass() {
         alertsLabel.setVisible(false);
-        if (s.getCurrentPhase() == 2) {
+        if (s.getCurrentState() == MapControllerStates.LAND_PURCHASE) {
             s.setPurchaseOpportunities(s.getPurchaseOpportunities() + 1);
         }
         s.setPassCounter(s.getPassCounter() + 1);
         if (s.getPassCounter() >= s.getNumPlayers()) {
-            s.setCurrentPhase(3);
+            s.setCurrentState(MapControllerStates.SELECTION_OVER);
             phaseLabel.setText("Selection phase is over!");
             changePlayer(1);
             s.setCurrentRound(s.getCurrentRound() + 1);
@@ -314,6 +311,24 @@ public class MapController implements Initializable {
 
     public void setTimeLeft(int timeLeft) {
         s.setTimeLeft(timeLeft);
+    }
+
+    public void tick() {
+        System.out.println("Timer tick: " + s.getTimeLeft());
+        if (s.getCurrentState() == MapControllerStates.GAME_START) {
+            if (s.getTimeLeft() > 0) {
+                Platform.runLater(() -> {
+                    rerender();
+                    s.setTimeLeft(s.getTimeLeft() - 1);
+                });
+            } else {
+                // Go to pub and change phase to 4.
+                Platform.runLater(() -> {
+                    s.setCurrentState(MapControllerStates.SELECTION_OVER);
+                    goToPub();
+                });
+            }
+        }
     }
 
     public void rerender() {

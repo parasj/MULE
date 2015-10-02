@@ -1,5 +1,7 @@
 package com.byteme.Models;
 
+import com.byteme.Schema.MapControllerStates;
+
 /**
  * Created by parasjain on 10/1/15.
  */
@@ -10,19 +12,18 @@ public class MapStateStore {
         return ourInstance;
     }
 
+    public MapControllerStates getCurrentState() {
+        return currentState;
+    }
+
+    public void setCurrentState(MapControllerStates currentState) {
+        this.currentState = currentState;
+    }
+
+    private MapControllerStates currentState;
+
     private int currentPlayer;
     private int currentRound;
-    private int currentPhase;
-
-    public boolean isPendingRender() {
-        return pendingRender;
-    }
-
-    public void setPendingRender(boolean pendingRender) {
-        this.pendingRender = pendingRender;
-    }
-
-    private boolean pendingRender = false;
 
     private int passCounter; // Used to determine when to stop property selection immediately
     private int purchaseOpportunities; // Used to determine duration of full property selection
@@ -43,14 +44,6 @@ public class MapStateStore {
 
     public void setCurrentRound(int currentRound) {
         this.currentRound = currentRound;
-    }
-
-    public int getCurrentPhase() {
-        return currentPhase;
-    }
-
-    public void setCurrentPhase(int currentPhase) {
-        this.currentPhase = currentPhase;
     }
 
     public int getPassCounter() {
@@ -90,7 +83,6 @@ public class MapStateStore {
         return "MapStateStore{" +
                 "currentPlayer=" + currentPlayer +
                 ", currentRound=" + currentRound +
-                ", currentPhase=" + currentPhase +
                 ", passCounter=" + passCounter +
                 ", purchaseOpportunities=" + purchaseOpportunities +
                 ", numPlayers=" + numPlayers +
