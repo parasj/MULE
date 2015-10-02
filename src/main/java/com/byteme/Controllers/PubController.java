@@ -38,14 +38,14 @@ public class PubController {
         //getMoney();
         //TODO Increment Round Properly
         //Change phase Mapstore 3
-        MapStateStore.getInstance().setCurrentRound(MapStateStore.getInstance().getCurrentRound() + 1);
+        mapController.incRound();
         MapStateStore.getInstance().setTimeLeft(calcTimeLeft(null));
         mapController.changePlayer();
         MapStateStore.getInstance().setCurrentState(MapControllerStates.GAME_START);
         MasterController.getInstance().map();
     }
 
-    private int calcTimeLeft(PlayerConfigParams player) {
+    public int calcTimeLeft(PlayerConfigParams player) {
         //TODO calculate the time left
         return 10;
     }

@@ -112,6 +112,7 @@ public class MasterController {
     public void setMapController(MapController mc) {
         mapController = mc;
         pubController.setMapController(mc);
+        mapController.setPubController(pubController);
     }
 
     public void createMap() {

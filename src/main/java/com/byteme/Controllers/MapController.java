@@ -13,9 +13,6 @@ import javafx.scene.input.MouseEvent;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.GridPane;
-import javafx.animation.Timeline;
-import javafx.animation.KeyFrame;
-import javafx.util.Duration;
 
 import java.util.ArrayList;
 import java.util.Timer;
@@ -28,6 +25,12 @@ import java.util.TimerTask;
 public class MapController implements Initializable {
     private static ConfigRepository configRepository = ConfigRepository.getInstance();
     private static MapStateStore s = MapStateStore.getInstance();
+
+    private PubController pubController;
+
+    public void setPubController(PubController ctrl) {
+        pubController = ctrl;
+    }
 
     private Timer timer;
     private boolean[][] mapSpots;
@@ -118,7 +121,7 @@ public class MapController implements Initializable {
         rerenderPlayerText();
         phaseLabel.setText("Land Grant");
         s.setCurrentState(MapControllerStates.LAND_GRANT); // Land Grant
-        s.setCurrentRound(1);
+        s.setCurrentRound(0);
     }
 
 
@@ -144,7 +147,7 @@ public class MapController implements Initializable {
                 System.out.println("Player " + s.getCurrentPlayer() + ": " + map.getRowIndex(tile) + ", " + map.getColumnIndex(tile));
 
                 if (s.getCurrentPlayer() >= s.getNumPlayers()) {
-                    s.setCurrentRound(s.getCurrentRound() + 1);
+                    incRound();
                     rerenderPlayerText();
                 }
 
@@ -189,7 +192,7 @@ public class MapController implements Initializable {
                         changePlayer(1);
                     } else {
                         if (s.getCurrentPlayer() >= s.getNumPlayers()) {
-                            s.setCurrentRound(s.getCurrentRound() + 1);
+                            incRound();
                             rerenderPlayerText();
                         }
                         changePlayer();
@@ -229,12 +232,25 @@ public class MapController implements Initializable {
         }
         s.setPassCounter(s.getPassCounter() + 1);
         if (s.getPassCounter() >= s.getNumPlayers()) {
-            s.setCurrentState(MapControllerStates.SELECTION_OVER);
+            s.setPassCounter(0);
+            if (s.getCurrentState() == MapControllerStates.LAND_GRANT || s.getCurrentState() == MapControllerStates.LAND_PURCHASE || s.getCurrentState() == MapControllerStates.START)
+                s.setCurrentState(MapControllerStates.SELECTION_OVER);
+            else
+                s.setCurrentState(MapControllerStates.GAME_START);
             phaseLabel.setText("Selection phase is over!");
             changePlayer(1);
-            s.setCurrentRound(s.getCurrentRound() + 1);
+            MapStateStore.getInstance().setTimeLeft(pubController.calcTimeLeft(null));
+            incRound();
+            rerender();
+            MasterController.getInstance().map();
         } else {
-            changePlayer();
+            if (s.getCurrentState() == MapControllerStates.GAME_START || s.getCurrentState() == MapControllerStates.SELECTION_OVER)
+                pubController.goToMap();
+            else {
+                MapStateStore.getInstance().setTimeLeft(0);
+                changePlayer();
+                MasterController.getInstance().map();
+            }
         }
     }
 
@@ -246,13 +262,6 @@ public class MapController implements Initializable {
         changePlayer((s.getCurrentPlayer() + 1 == s.getNumPlayers()) ? s.getNumPlayers() : (s.getCurrentPlayer() + 1) % s.getNumPlayers());
     }
 
-    private void rerenderPlayerText() {
-        //System.out.println(this + " " + playerLabel + "  " + moneyLabel);
-        if (playerLabel != null) playerLabel.setText(String.format("Player %d %s", s.getCurrentPlayer(), ConfigRepository.getInstance().getPlayerConfig(s.getCurrentPlayer()).getName()));
-        if (moneyLabel != null) moneyLabel.setText("MONEY: " + ConfigRepository.getInstance().getPlayerConfig(s.getCurrentPlayer()).getMoney());
-        if (roundLabel != null) roundLabel.setText("ROUND: " + s.getCurrentRound());
-    }
-
     /**
      * Updates the player label to next player's name.
      * Increments currentPlayer.
@@ -262,6 +271,13 @@ public class MapController implements Initializable {
         // Update current player label and currentPlayer variable
         s.setCurrentPlayer(playerNumber);
         rerenderPlayerText();
+    }
+
+    private void rerenderPlayerText() {
+        //System.out.println(this + " " + playerLabel + "  " + moneyLabel);
+        if (playerLabel != null) playerLabel.setText(String.format("Player %d %s", s.getCurrentPlayer(), ConfigRepository.getInstance().getPlayerConfig(s.getCurrentPlayer()).getName()));
+        if (moneyLabel != null) moneyLabel.setText("MONEY: " + ConfigRepository.getInstance().getPlayerConfig(s.getCurrentPlayer()).getMoney());
+        if (roundLabel != null) roundLabel.setText("ROUND: " + s.getCurrentRound());
     }
 
     /**
@@ -303,6 +319,7 @@ public class MapController implements Initializable {
     }
 
     public void incRound() {
+        System.out.println("incRound \t" + s.getCurrentRound() + "\n\t" + java.util.Arrays.toString(Thread.currentThread().getStackTrace()));
         s.setCurrentRound(s.getCurrentRound() + 1);
     }
 
@@ -323,11 +340,11 @@ public class MapController implements Initializable {
     }
 
     public void initTimer() {
+        stopTimer();
         timer = new Timer();
         timer.scheduleAtFixedRate(new TimerTask() {
             @Override
             public void run() { //IF PHASE 2
-                System.out.println("Timer tick: " + s.getTimeLeft());
                 if (s.getCurrentState() == MapControllerStates.GAME_START) {
                     if (s.getTimeLeft() > 0) {
                         Platform.runLater(() -> {
