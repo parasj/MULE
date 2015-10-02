@@ -13,6 +13,9 @@ import javafx.scene.input.MouseEvent;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.GridPane;
+import javafx.animation.Timeline;
+import javafx.animation.KeyFrame;
+import javafx.util.Duration;
 
 import java.util.ArrayList;
 import java.util.Timer;
@@ -28,6 +31,7 @@ public class MapController implements Initializable {
 
     private Timer timer;
     private boolean[][] mapSpots;
+
     // 1 = Land Grant
     // 2 = Land Purchase
     // 3 = Dummy phase 
@@ -115,12 +119,6 @@ public class MapController implements Initializable {
         phaseLabel.setText("Land Grant");
         s.setCurrentState(MapControllerStates.LAND_GRANT); // Land Grant
         s.setCurrentRound(1);
-        timer.scheduleAtFixedRate(new TimerTask() {
-            @Override
-            public void run() { //IF PHASE 2
-                tick();
-            }
-        }, 0, 1000);
     }
 
 
@@ -319,26 +317,37 @@ public class MapController implements Initializable {
         s.setTimeLeft(timeLeft);
     }
 
-    public void tick() {
-        System.out.println("Timer tick: " + s.getTimeLeft());
-        if (s.getCurrentState() == MapControllerStates.GAME_START) {
-            if (s.getTimeLeft() > 0) {
-                Platform.runLater(() -> {
-                    rerender();
-                    s.setTimeLeft(s.getTimeLeft() - 1);
-                });
-            } else {
-                // Go to pub and change phase to 4.
-                Platform.runLater(() -> {
-                    s.setCurrentState(MapControllerStates.SELECTION_OVER);
-                    goToPub();
-                });
-            }
-        }
-    }
-
     public void rerender() {
         rerenderPlayerText();
         timerLabel.setText("Time Left: " + s.getTimeLeft());
+    }
+
+    public void initTimer() {
+        timer.scheduleAtFixedRate(new TimerTask() {
+            @Override
+            public void run() { //IF PHASE 2
+                System.out.println("Timer tick: " + s.getTimeLeft());
+                if (s.getCurrentState() == MapControllerStates.GAME_START) {
+                    if (s.getTimeLeft() > 0) {
+                        Platform.runLater(() -> {
+                            rerender();
+                            s.setTimeLeft(s.getTimeLeft() - 1);
+                        });
+                    } else {
+                        // Go to pub and change phase to 4.
+                        Platform.runLater(() -> {
+                            s.setCurrentState(MapControllerStates.SELECTION_OVER);
+                            goToPub();
+                            stopTimer();
+                        });
+                    }
+                }
+            }
+        }, 0, 1000);
+    }
+
+    public void stopTimer() {
+        timer.cancel();
+        timer = new Timer();
     }
 }

@@ -22,6 +22,16 @@ public class MapStateStore {
 
     private MapControllerStates currentState;
 
+    public boolean isFromTownGoToPub() {
+        return fromTownGoToPub;
+    }
+
+    public void setFromTownGoToPub(boolean fromTownGoToPub) {
+        this.fromTownGoToPub = fromTownGoToPub;
+    }
+
+    private boolean fromTownGoToPub;
+
     private int currentPlayer;
     private int currentRound;
 

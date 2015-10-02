@@ -84,6 +84,7 @@ public class MasterController {
         currStage = "Map";
         theStage.setScene(map);
         mapController.rerender();
+        mapController.initTimer();
     }
 
     public void town() {
@@ -98,8 +99,8 @@ public class MasterController {
 
     public void pubScene() {
         currStage = "Pub";
-        pubController.rerender();
         theStage.setScene(pubScene);
+        pubController.rerender();
     }
 
     public String getCurrStage() {
