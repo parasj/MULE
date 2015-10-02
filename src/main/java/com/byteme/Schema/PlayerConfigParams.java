@@ -20,11 +20,13 @@ public class PlayerConfigParams {
         this.properties = properties;
     }
 
-    public String getName() {
+    public String getName()
+    {
         return name;
     }
 
     public Race getRace() {
+
         return race;
     }
 
@@ -32,13 +34,17 @@ public class PlayerConfigParams {
         return color;
     }
 
-    public int getMoney() {return money;}
+    public int getMoney() {
+        return money;
+    }
 
     public void payMoney(int cost) {
+
         money = money - cost;
     }
 
     public ArrayList<Property> getProperties() {
+
         return properties;
     }
 
@@ -50,11 +56,13 @@ public class PlayerConfigParams {
         this.properties.add(property);
     }
 
-    public boolean removeProperty(Property property) {
+    public boolean removeProperty(Property property)
+    {
         return this.properties.remove(property);
     }
 
-    public String toString() {
+    public String toString()
+    {
         return color + " " + race + " named " + name;
     }
 }
