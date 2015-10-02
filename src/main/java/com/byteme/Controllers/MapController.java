@@ -186,6 +186,7 @@ public class MapController implements Initializable {
                     if (s.getPurchaseOpportunities() >= 43) {
                         s.setCurrentPhase(3);
                         phaseLabel.setText("Selection phase is over!");
+                        s.setCurrentRound(s.getCurrentRound() + 1);
                         changePlayer(1);
                     } else {
                         changePlayer();
@@ -204,7 +205,9 @@ public class MapController implements Initializable {
      * Changes scene to Town
      */
     public void goToTown() {
-        MasterController.getInstance().town();
+        if (s.getCurrentPhase() != 1) {
+            MasterController.getInstance().town();
+        }
     }
 
 
@@ -218,6 +221,7 @@ public class MapController implements Initializable {
             s.setCurrentPhase(3);
             phaseLabel.setText("Selection phase is over!");
             changePlayer(1);
+            s.setCurrentRound(s.getCurrentRound() + 1);
         } else {
             changePlayer();
         }
@@ -232,7 +236,7 @@ public class MapController implements Initializable {
     }
 
     private void rerenderPlayerText() {
-        System.out.println(this + " " + playerLabel + "  " + moneyLabel);
+        //System.out.println(this + " " + playerLabel + "  " + moneyLabel);
         if (playerLabel != null) playerLabel.setText(String.format("Player %d %s", s.getCurrentPlayer(), ConfigRepository.getInstance().getPlayerConfig(s.getCurrentPlayer()).getName()));
         if (moneyLabel != null) moneyLabel.setText("MONEY: " + ConfigRepository.getInstance().getPlayerConfig(s.getCurrentPlayer()).getMoney());
     }
@@ -302,7 +306,6 @@ public class MapController implements Initializable {
     }
 
     public void rerender() {
-        System.out.println(s);
         rerenderPlayerText();
     }
 }
