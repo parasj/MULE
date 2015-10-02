@@ -323,6 +323,7 @@ public class MapController implements Initializable {
     }
 
     public void initTimer() {
+        timer = new Timer();
         timer.scheduleAtFixedRate(new TimerTask() {
             @Override
             public void run() { //IF PHASE 2
@@ -330,15 +331,17 @@ public class MapController implements Initializable {
                 if (s.getCurrentState() == MapControllerStates.GAME_START) {
                     if (s.getTimeLeft() > 0) {
                         Platform.runLater(() -> {
-                            rerender();
                             s.setTimeLeft(s.getTimeLeft() - 1);
+                            rerender();
                         });
                     } else {
                         // Go to pub and change phase to 4.
                         Platform.runLater(() -> {
                             s.setCurrentState(MapControllerStates.SELECTION_OVER);
-                            goToPub();
-                            stopTimer();
+                            Platform.runLater(() -> {
+                                goToPub();
+                                stopTimer();
+                            });
                         });
                     }
                 }
@@ -348,6 +351,6 @@ public class MapController implements Initializable {
 
     public void stopTimer() {
         timer.cancel();
-        timer = new Timer();
+        timer.purge();
     }
 }

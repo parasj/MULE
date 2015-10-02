@@ -14,6 +14,7 @@ javafx {
 	mainClass = 'com.byteme.Main'
 	appID 'MULE'
 	appName 'MULE Game'
+  jvmArgs = ['-Djava.compiler=NONE']
 }
 
 jar {

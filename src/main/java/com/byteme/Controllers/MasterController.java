@@ -88,6 +88,7 @@ public class MasterController {
     }
 
     public void town() {
+        mapController.stopTimer();
         currStage = "Town";
         theStage.setScene(town);
     }
@@ -98,6 +99,7 @@ public class MasterController {
     }
 
     public void pubScene() {
+        mapController.stopTimer();
         currStage = "Pub";
         theStage.setScene(pubScene);
         pubController.rerender();
