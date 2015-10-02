@@ -115,7 +115,7 @@ public class ConfigurationController {
     public void savePlayerConfig() {
         // TODO: remove the below line
         // Below line is to make testing easier
-        playerName.setText("PlayerNameLabel " + currentPlayer);
+        playerName.setText("Bob " + currentPlayer);
         if (!playerName.getText().isEmpty()) {
             String name;
             String race;
