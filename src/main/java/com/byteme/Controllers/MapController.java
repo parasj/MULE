@@ -28,7 +28,7 @@ public class MapController implements Initializable {
     private boolean[][] mapSpots;
     // 1 = Land Grant
     // 2 = Land Purchase
-    // 3 = Selection Phase Over
+    // 3 = Selection Phase Over/Game start
 
     @FXML
     private Label playerLabel;
@@ -113,13 +113,13 @@ public class MapController implements Initializable {
         timer.scheduleAtFixedRate(new TimerTask() {
             @Override
             public void run() {//IF PHASE 2
-                if (s.getCurrentPhase() == 2) {
+                if (s.getCurrentPhase() == 3) {
                     if (s.getTimeLeft() != 0) {
                         s.setTimeLeft(s.getTimeLeft() - 1);
                     } else {
                         //Go to pub and change phase to 3.
                         goToPub();
-                        s.setCurrentPhase(3);
+                        s.setCurrentPhase(4);
                     }
                 }
             }
