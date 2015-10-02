@@ -22,11 +22,13 @@ public class MasterController {
     private Scene map;
     private Scene town;
     private Scene temp;
-    public Scene pubScene;
+    private Scene pubScene;
     private Stage theStage;
     private String currStage;
-    //Creates a MapController Object. This will contain data specific to the map.
-    private static MapController mapInstance = MapController.getInstance();
+
+    private MapController mapController;
+    private PubController pubController;
+
 
     private MasterController() {
         Parent root = null;
@@ -43,10 +45,10 @@ public class MasterController {
             town = new Scene(root);
             root = FXMLLoader.load(getClass().getResource("/fxml/placeholder.fxml"));
             temp = new Scene(root);
-            root = FXMLLoader.load(getClass().getResource("/fxml/Pub.fxml"));
-            pubScene = new Scene(root);
 
-
+            FXMLLoader loader = new FXMLLoader(getClass().getResource("/fxml/Pub.fxml"));
+            pubScene = new Scene(loader.load());
+            pubController = loader.getController();
         } catch (IOException e) {
             e.printStackTrace();
         }
@@ -81,15 +83,7 @@ public class MasterController {
     public void map() {
         currStage = "Map";
         theStage.setScene(map);
-        mapInstance.rerender();
-    }
-
-    public static MapController getMapInstance() {
-        return mapInstance;
-    }
-
-    public void setMapInstance(MapController mapInstance) {
-        this.mapInstance = mapInstance;
+        mapController.rerender();
     }
 
     public void town() {
@@ -107,17 +101,23 @@ public class MasterController {
         theStage.setScene(pubScene);
     }
 
-    public void createMap() {
-        try {
-            Parent root = FXMLLoader.load(getClass().getResource("/fxml/Map.fxml"));
-            map = new Scene(root);
-        } catch(Exception e) {
-            System.out.println(e);
-        }
-    }
-
     public String getCurrStage() {
         return currStage;
+    }
+
+    public void setMapController(MapController mc) {
+        mapController = mc;
+        pubController.setMapController(mc);
+    }
+
+    public void createMap() {
+        try {
+            FXMLLoader loader = new FXMLLoader(getClass().getResource("/fxml/Map.fxml"));
+            map = new Scene(loader.load());
+            setMapController(loader.getController());
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
     }
 
    /* public void countDownTimer() {

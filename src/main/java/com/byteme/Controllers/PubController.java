@@ -1,16 +1,7 @@
 package com.byteme.Controllers;
-import javafx.event.ActionEvent;
-import javafx.fxml.FXMLLoader;
-import javafx.scene.Parent;
-import javafx.scene.layout.Pane;
-
-import java.io.IOException;
-
-
+import com.byteme.Models.MapStateStore;
 import com.byteme.Models.ConfigRepository;
 import com.byteme.Schema.PlayerConfigParams;
-import javafx.fxml.Initializable;
-
 import java.util.Random;
 
 /**
@@ -18,33 +9,25 @@ import java.util.Random;
  */
 public class PubController {
 
-    private static PubController instance = new PubController();
-
     private static ConfigRepository configRepository = ConfigRepository.getInstance();
     private int[] roundBonusArr = {50, 50, 50, 100, 100, 100, 100, 150, 150, 150, 150, 200};
-    //need to update Player
-    public void goToMapFromPub(ActionEvent event) {
-        try {
-            FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("/fxml/Map.fxml"));
-            Parent root = (Parent)fxmlLoader.load();
-            MapController mapController = fxmlLoader.getController();
-            MasterController.getInstance().map();
-            mapController.changePlayer();
-            //MapController.getInstance().changePlayer(); this doesn't work either
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
+
+    private MapController mapController;
+
+    public void setMapController(MapController mapController) {
+        this.mapController = mapController;
     }
 
     public void goToMap() {
         //TODO Update the Label in Map.
-        getMoney();
+//        getMoney();
         //TODO Increment Round Properly
-        MasterController.getMapInstance().incRound();
-        MasterController.getMapInstance().setTimeLeft(calcTimeLeft(null));
-        MasterController.getMapInstance().changePlayer();
+        MapStateStore.getInstance().setCurrentRound(MapStateStore.getInstance().getCurrentRound() + 1);
+        MapStateStore.getInstance().setTimeLeft(calcTimeLeft(null));
+        mapController.changePlayer();
         MasterController.getInstance().map();
     }
+
     private int calcTimeLeft(PlayerConfigParams player) {
         //TODO calculate the time left
         return 10;
@@ -62,10 +45,10 @@ public class PubController {
     }
 
     private void getMoney() {
-        int currentPlayerIndex = MasterController.getMapInstance().getCurrentPlayer();
+        int currentPlayerIndex = MapStateStore.getInstance().getCurrentPlayer();
         PlayerConfigParams currentPlayer = configRepository.getPlayerConfig(currentPlayerIndex);
-        int timeLeft = MasterController.getMapInstance().getTimeLeft();
-        int roundBonus = roundBonusArr[MasterController.getMapInstance().getCurrentRound() - 1];
+        int timeLeft = MapStateStore.getInstance().getTimeLeft();
+        int roundBonus = roundBonusArr[MapStateStore.getInstance().getCurrentRound() - 1];
         Random rand = new Random();
         int timeBonus = rand.nextInt(getTimeBonus(timeLeft) + 1);
         System.out.println(timeBonus);

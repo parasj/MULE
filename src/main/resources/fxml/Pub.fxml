@@ -20,7 +20,7 @@
                     <Image url="@../images/moneybag.png" />
                 </image>
         </ImageView>
-        <Button layoutX="800.0" layoutY="603.0" mnemonicParsing="false" onAction="#goToMapFromPub" text="OK">
+        <Button layoutX="800.0" layoutY="603.0" mnemonicParsing="false" onAction="#goToMap" text="OK">
             <font>
                 <Font size="24.0" />
             </font>

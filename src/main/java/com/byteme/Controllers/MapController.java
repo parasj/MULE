@@ -23,7 +23,7 @@ import java.util.TimerTask;
 public class MapController implements Initializable {
     private static ConfigRepository configRepository = ConfigRepository.getInstance();
     private static MapStateStore s = MapStateStore.getInstance();
-    private static MapController instance = new MapController();
+
     private Timer timer;
     private boolean[][] mapSpots;
     // 1 = Land Grant
@@ -42,13 +42,7 @@ public class MapController implements Initializable {
     private GridPane map;
 
     //Constructor with all params
-    public MapController(Timer timer, boolean[][] mapSpots) {
-        this.timer = timer;
-        this.mapSpots = mapSpots;
-    }
-
-    //Constructor with all params
-    public MapController(Timer timer, boolean[][] mapSpots, int passCounter, int purchaseOpportunities, int numPlayers,
+    private MapController(Timer timer, boolean[][] mapSpots, int passCounter, int purchaseOpportunities, int numPlayers,
                          int currentPlayer, int currentRound, int currentPhase, int timeLeft) {
         this.timer = timer;
         this.mapSpots = mapSpots;
@@ -76,16 +70,6 @@ public class MapController implements Initializable {
      */
     @Override
     public void initialize(java.net.URL location, java.util.ResourceBundle resources) {
-//        configRepository = ConfigRepository.getInstance();
-//        timer = MasterController.getMapInstance().timer;
-//        mapSpots = MasterController.getMapInstance().mapSpots;
-//        passCounter = MasterController.getMapInstance().passCounter; // Used to determine when to stop property selection immediately
-//        purchaseOpportunities = MasterController.getMapInstance().purchaseOpportunities; // Used to determine duration of full property selection
-//        numPlayers = MasterController.getMapInstance().numPlayers;
-//        currentPlayer = MasterController.getMapInstance().currentPlayer;
-//        currentRound = MasterController.getMapInstance().currentRound;
-//        currentPhase = MasterController.getMapInstance().currentPhase;
-
         // Create the map
         MapBoard possibleMaps = new MapBoard();
         mapSpots = new boolean[possibleMaps.getHeight()][possibleMaps.getWidth()];
@@ -120,8 +104,7 @@ public class MapController implements Initializable {
         alertsLabel.setVisible(false);
         s.setNumPlayers(configRepository.getTotalPlayers());
         s.setCurrentPlayer(1);
-        playerLabel.setText(String.format("Player %d %s", s.getCurrentPlayer(), configRepository.getPlayerConfig(s.getCurrentPlayer()).getName()));
-        moneyLabel.setText("MONEY: " + ConfigRepository.getInstance().getPlayerConfig(s.getCurrentPlayer()).getMoney());
+        rerenderPlayerText();
         phaseLabel.setText("Land Grant");
         s.setCurrentPhase(1); // Land Grant
         s.setCurrentRound(0);
@@ -221,8 +204,6 @@ public class MapController implements Initializable {
      * Changes scene to Town
      */
     public void goToTown() {
-        //Changes the Map instance
-        MasterController.getInstance().setMapInstance(MapController.getInstance());
         MasterController.getInstance().town();
     }
 
@@ -247,12 +228,11 @@ public class MapController implements Initializable {
      * Increments currentPlayer.
      */
     public void changePlayer() {
-        // Update current player label and currentPlayer variable
-        s.setCurrentPlayer((s.getCurrentPlayer() + 1 == s.getNumPlayers()) ? s.getNumPlayers() : (s.getCurrentPlayer() + 1) % s.getNumPlayers());
-        rerenderPlayerText();
+        changePlayer((s.getCurrentPlayer() + 1 == s.getNumPlayers()) ? s.getNumPlayers() : (s.getCurrentPlayer() + 1) % s.getNumPlayers());
     }
 
     private void rerenderPlayerText() {
+        System.out.println(this + " " + playerLabel + "  " + moneyLabel);
         if (playerLabel != null) playerLabel.setText(String.format("Player %d %s", s.getCurrentPlayer(), ConfigRepository.getInstance().getPlayerConfig(s.getCurrentPlayer()).getName()));
         if (moneyLabel != null) moneyLabel.setText("MONEY: " + ConfigRepository.getInstance().getPlayerConfig(s.getCurrentPlayer()).getMoney());
     }
@@ -323,13 +303,6 @@ public class MapController implements Initializable {
 
     public void rerender() {
         System.out.println(s);
-        if (ConfigRepository.getInstance().getPlayerConfig(s.getCurrentPlayer()) != null) {
-            rerenderPlayerText();
-            System.out.println(s);
-        }
-    }
-
-    public static MapController getInstance() {
-        return instance;
+        rerenderPlayerText();
     }
 }

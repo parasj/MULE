@@ -14,6 +14,16 @@ public class MapStateStore {
     private int currentRound;
     private int currentPhase;
 
+    public boolean isPendingRender() {
+        return pendingRender;
+    }
+
+    public void setPendingRender(boolean pendingRender) {
+        this.pendingRender = pendingRender;
+    }
+
+    private boolean pendingRender = false;
+
     private int passCounter; // Used to determine when to stop property selection immediately
     private int purchaseOpportunities; // Used to determine duration of full property selection
     private int numPlayers;
