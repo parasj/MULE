@@ -52,10 +52,14 @@
          </font>
       </Label>
       <Label fx:id="moneyLabel" layoutX="1090.0" layoutY="102.0" prefHeight="21.0" prefWidth="186.0" text="MONEY:" textFill="#39bf2a" />
-      <!-- <Label fx:id="timerlabel" layoutX="109.5" layoutY="102.5" prefHeight="21.5" prefWidth="186.5" text="TimeLeft:" textFill="#39bf2a" />-->
       <Label fx:id="alertsLabel" layoutX="37.0" layoutY="699.0" prefHeight="51.0" prefWidth="527.0" text="Alerts" textFill="RED">
          <font>
             <Font size="24.0" />
+         </font>
+      </Label>
+       <Label fx:id="timerLabel" layoutX="1090.0" layoutY="138.0" prefHeight="21.5" prefWidth="186.5" text="TimeLeft:" textFill="#bd882a">
+         <font>
+            <Font size="15.0" />
          </font>
       </Label>
    </children>

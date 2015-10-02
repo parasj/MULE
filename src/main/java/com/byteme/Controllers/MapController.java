@@ -40,7 +40,8 @@ public class MapController implements Initializable {
     private Label alertsLabel;
     @FXML
     private GridPane map;
-
+    @FXML
+    private Label timerLabel;
     //Constructor with all params
     private MapController(Timer timer, boolean[][] mapSpots, int passCounter, int purchaseOpportunities, int numPlayers,
                          int currentPlayer, int currentRound, int currentPhase, int timeLeft) {
@@ -102,6 +103,7 @@ public class MapController implements Initializable {
         // Initialize game state for when the map is loaded for the first time
         timer = new Timer();
         alertsLabel.setVisible(false);
+        timerLabel.setVisible(true);
         s.setNumPlayers(configRepository.getTotalPlayers());
         s.setCurrentPlayer(1);
         rerenderPlayerText();
@@ -110,15 +112,16 @@ public class MapController implements Initializable {
         s.setCurrentRound(0);
         timer.scheduleAtFixedRate(new TimerTask() {
             @Override
-            public void run() {
-                if (s.getTimeLeft() != 0) {
-                    s.setTimeLeft(s.getTimeLeft() - 1);
+            public void run() {//IF PHASE 2
+                if (s.getCurrentPhase() == 2) {
+                    if (s.getTimeLeft() != 0) {
+                        s.setTimeLeft(s.getTimeLeft() - 1);
+                    } else {
+                        //Go to pub and change phase to 3.
+                        goToPub();
+                        s.setCurrentPhase(3);
+                    }
                 }
-//                if (MasterController.getInstance().getCurrStage().equals("Map")) {
-//                    currentPlayer = MasterController.getMapInstance().currentPlayer;
-//                    playerLabel.setText(String.format("Player %d %s", currentPlayer, configRepository.getPlayerConfig(currentPlayer).getName()));
-//                    moneyLabel.setText("MONEY: " + ConfigRepository.getInstance().getPlayerConfig(currentPlayer).getMoney());
-//                }
             }
         }, 0, 1000);
     }
@@ -210,6 +213,14 @@ public class MapController implements Initializable {
         }
     }
 
+
+    /**
+     * Runs when player clicks the Pub.
+     * Changes scene to Pub.
+     */
+    public void goToPub() {
+        MasterController.getInstance().pubScene();
+    }
 
     public void pass() {
         alertsLabel.setVisible(false);
@@ -307,5 +318,6 @@ public class MapController implements Initializable {
 
     public void rerender() {
         rerenderPlayerText();
+        timerLabel.setText("Time Left: " + s.getTimeLeft());
     }
 }

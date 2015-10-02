@@ -34,7 +34,10 @@ public class PubController {
 
     public void goToMap() {
         //TODO Update the Label in Map.
+        //getMoney();
         //TODO Increment Round Properly
+        //Change phase Mapstore 3
+        MapStateStore.getInstance().setCurrentPhase(3);
         MapStateStore.getInstance().setCurrentRound(MapStateStore.getInstance().getCurrentRound() + 1);
         MapStateStore.getInstance().setTimeLeft(calcTimeLeft(null));
         mapController.changePlayer();
