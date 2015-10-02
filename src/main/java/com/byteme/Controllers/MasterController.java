@@ -98,7 +98,6 @@ public class MasterController {
 
     public void pubScene() {
         currStage = "Pub";
-        pubController = new PubController();
         pubController.rerender();
         theStage.setScene(pubScene);
     }
