@@ -152,7 +152,7 @@ public class MapController implements Initializable {
                 }
 
                 // Land Grant is only 2 turns per player.
-                if (s.getCurrentRound() >= 4) {
+                if (s.getCurrentRound() >= 2) {
                     phaseLabel.setText("Property Selection");
                     s.setCurrentState(MapControllerStates.LAND_PURCHASE);
 					rerenderPlayerText();
@@ -234,7 +234,7 @@ public class MapController implements Initializable {
         if (s.getPassCounter() >= s.getNumPlayers()) {
             s.setPassCounter(0);
             if (s.getCurrentState() == MapControllerStates.LAND_GRANT || s.getCurrentState() == MapControllerStates.LAND_PURCHASE || s.getCurrentState() == MapControllerStates.START)
-                s.setCurrentState(MapControllerStates.SELECTION_OVER);
+                s.setCurrentState(MapControllerStates.GAME_START);
             else
                 s.setCurrentState(MapControllerStates.GAME_START);
             phaseLabel.setText("Selection phase is over!");
@@ -242,7 +242,7 @@ public class MapController implements Initializable {
             MapStateStore.getInstance().setTimeLeft(pubController.calcTimeLeft(null));
             incRound();
             rerender();
-            MasterController.getInstance().map();
+            initTimer();
         } else {
             if (s.getCurrentState() == MapControllerStates.GAME_START || s.getCurrentState() == MapControllerStates.SELECTION_OVER)
                 pubController.goToMap();
