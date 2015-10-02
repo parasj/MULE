@@ -28,8 +28,6 @@ public class MapController implements Initializable {
 
     private Timer timer;
     private boolean[][] mapSpots;
-
-    private boolean initHappened;
     // 1 = Land Grant
     // 2 = Land Purchase
     // 3 = Dummy phase 
@@ -43,6 +41,8 @@ public class MapController implements Initializable {
     private Label phaseLabel;
     @FXML
     private Label alertsLabel;
+    @FXML
+    private Label roundLabel;
     @FXML
     private GridPane map;
     @FXML
@@ -114,7 +114,7 @@ public class MapController implements Initializable {
         rerenderPlayerText();
         phaseLabel.setText("Land Grant");
         s.setCurrentState(MapControllerStates.LAND_GRANT); // Land Grant
-        s.setCurrentRound(0);
+        s.setCurrentRound(1);
         timer.scheduleAtFixedRate(new TimerTask() {
             @Override
             public void run() { //IF PHASE 2
@@ -147,12 +147,14 @@ public class MapController implements Initializable {
 
                 if (s.getCurrentPlayer() >= s.getNumPlayers()) {
                     s.setCurrentRound(s.getCurrentRound() + 1);
+                    rerenderPlayerText();
                 }
 
                 // Land Grant is only 2 turns per player.
                 if (s.getCurrentRound() >= 4) {
                     phaseLabel.setText("Property Selection");
                     s.setCurrentState(MapControllerStates.LAND_PURCHASE);
+					rerenderPlayerText();
                     s.setCurrentRound(0);
                 }
 
@@ -186,9 +188,12 @@ public class MapController implements Initializable {
                     if (s.getPurchaseOpportunities() >= 43) {
                         s.setCurrentState(MapControllerStates.SELECTION_OVER);
                         phaseLabel.setText("Selection phase is over!");
-                        s.setCurrentRound(s.getCurrentRound() + 1);
                         changePlayer(1);
                     } else {
+                        if (s.getCurrentPlayer() >= s.getNumPlayers()) {
+                            s.setCurrentRound(s.getCurrentRound() + 1);
+                            rerenderPlayerText();
+                        }
                         changePlayer();
                     }
                 } else {
@@ -247,6 +252,7 @@ public class MapController implements Initializable {
         //System.out.println(this + " " + playerLabel + "  " + moneyLabel);
         if (playerLabel != null) playerLabel.setText(String.format("Player %d %s", s.getCurrentPlayer(), ConfigRepository.getInstance().getPlayerConfig(s.getCurrentPlayer()).getName()));
         if (moneyLabel != null) moneyLabel.setText("MONEY: " + ConfigRepository.getInstance().getPlayerConfig(s.getCurrentPlayer()).getMoney());
+        if (roundLabel != null) roundLabel.setText("ROUND: " + s.getCurrentRound());
     }
 
     /**
