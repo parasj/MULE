@@ -31,7 +31,7 @@ public class MasterController {
 
 
     private MasterController() {
-        Parent root = null;
+        Parent root;
         try {
             root = FXMLLoader.load(getClass().getResource("/fxml/StartGame.fxml"));
             startGame = new Scene(root);

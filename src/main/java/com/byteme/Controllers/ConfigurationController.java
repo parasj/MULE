@@ -25,7 +25,13 @@ public class ConfigurationController {
         MasterController.getInstance().gameConfig();
     }
 
-    // GAME CONFIGURATION SCREEN VARIABLES & METHODS
+    /*
+        * GAME CONFIGURATION SCREEN VARIABLES & METHODS
+        *
+        * The following code saves the Game Configuration settings.
+        * This includes Difficulty, Number of Players, and the Map Type
+     */
+
     @FXML
     private RadioButton difficultyEasy, difficultyNormal, difficultyHard;
     @FXML
@@ -40,6 +46,7 @@ public class ConfigurationController {
      */
     public void saveGameConfig() {
         Difficulty difficulty = selectedDifficultyButton();
+        // TODO: parse map info
         MapType map = selectedMapType();
         int numPlayers = (int) numPlayersSlider.getValue();
 
@@ -54,7 +61,12 @@ public class ConfigurationController {
         MasterController.getInstance().playerConfig();
     }
 
+    /**
+     * Parse MapType
+     * @return The selected MapType
+     */
     private MapType selectedMapType() {
+        // TODO: Give different maps based on player input
         switch ((String) mapType.getValue()) {
             default: return MapType.STANDARD;
         }
@@ -73,13 +85,20 @@ public class ConfigurationController {
         } else if (difficultyHard.isSelected()) {
             return Difficulty.TOURNAMENT;
         } else {
-            return null;
+            // Default to standard difficulty if there's some error
+            return Difficulty.STANDARD;
         }
     }
 
-    // PLAYER CONFIGURATION SCREEN VARIABLES & METHODS
+    /*
+        * PLAYER CONFIGURATION SCREEN VARIABLES & METHODS
+        *
+        * The following code saves each player's configuration settings.
+        * This includes player name, race, color, and starting money.
+    */
+
     @FXML
-    private TextField playerName;;
+    private TextField playerName;
     @FXML
     private ChoiceBox playerRace;
     @FXML
@@ -94,6 +113,9 @@ public class ConfigurationController {
      * After all players done, opens map.
      */
     public void savePlayerConfig() {
+        // TODO: remove the below line
+        // Below line is to make testing easier
+        playerName.setText("PlayerNameLabel " + currentPlayer);
         if (!playerName.getText().isEmpty()) {
             String name;
             String race;
@@ -104,7 +126,7 @@ public class ConfigurationController {
             name = playerName.getText();
             race = (String) playerRace.getValue();
             color = (String) playerColor.getValue();
-            money = chooseMoneyAmount(race); //TODO: change depending on race
+            money = chooseMoneyAmount(race);
 
             // Remove color already chosen by another player
             ObservableList<String> remainingChoices = playerColor.getItems();
@@ -134,15 +156,28 @@ public class ConfigurationController {
                 playerColor.getSelectionModel().selectFirst();
             }
         } else {
-            System.out.println("Set a name for your player!");
+            playerName.setText("Set a name for your player!");
         }
     }
 
+    /**
+     * Creates a player configuration based on the player's options
+     * @param name The name of the player
+     * @param race The race of the player
+     * @param color The color of the player
+     * @param money The starting money of the player
+     * @return A PlayerConfigParams object containing this player's information
+     */
     private PlayerConfigParams playerConfigParser(String name, String race, String color, int money) {
         Race parsedRace = Race.valueOf(race.toUpperCase(Locale.ENGLISH));
         return new PlayerConfigParams(name, parsedRace, color, money, null);
     }
 
+    /**
+     * Chooses the starting money for a player based on his race.
+     * @param race The race of the player as parsed by the ChoiceBox
+     * @return The starting money for the player
+     */
     private int chooseMoneyAmount(String race) {
         race = race.toLowerCase();
 
@@ -154,6 +189,4 @@ public class ConfigurationController {
             return 1000;
         }
     }
-
-    public void rerender() {}
 }

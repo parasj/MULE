@@ -47,7 +47,7 @@ public class PubController {
 
     public int calcTimeLeft(PlayerConfigParams player) {
         //TODO calculate the time left
-        return 10;
+        return 15;
     }
     private int getTimeBonus(int timeLeft) {
         if (timeLeft >= 37) {
