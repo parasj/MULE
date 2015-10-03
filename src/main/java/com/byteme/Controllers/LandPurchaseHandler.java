@@ -38,9 +38,9 @@ public class LandPurchaseHandler extends MapStateHandler {
             getBoardController().ownedMessage(); // Property is owned, just display warning
         else {
             // Change tile background color to player color
-            getBoardController().setColorTile(tile, s.getCurrentPlayer());
-            checkIfDone();
             if (s.getCurrentPlayer().getMoney() > getBoardController().getCost()) {
+                getBoardController().setColorTile(tile, s.getCurrentPlayer());
+                checkIfDone();
                 s.getCurrentPlayer().payMoney(getBoardController().getCost());
             } else {
                 log("You do not have enough money!");
