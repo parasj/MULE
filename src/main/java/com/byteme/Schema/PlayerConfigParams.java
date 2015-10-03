@@ -49,8 +49,11 @@ public class PlayerConfigParams {
     }
 
     public void payMoney(int cost) {
-
         money = money - cost;
+    }
+
+    public void makeMoney(int cost) {
+        money = money + cost;
     }
 
     public ArrayList<Property> getProperties() {

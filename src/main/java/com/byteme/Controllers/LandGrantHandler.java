@@ -2,10 +2,7 @@ package com.byteme.Controllers;
 
 import com.byteme.Models.MapStateStore;
 import com.byteme.Schema.MapControllerStates;
-import javafx.fxml.Initializable;
-
 import javafx.scene.input.MouseEvent;
-
 import java.net.URL;
 import java.util.ResourceBundle;
 
