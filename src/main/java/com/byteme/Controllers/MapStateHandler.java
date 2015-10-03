@@ -1,11 +1,13 @@
 package com.byteme.Controllers;
 
 import com.byteme.Models.MapStateStore;
+import com.byteme.Util.CanTick;
+import javafx.scene.input.MouseEvent;
 
 /**
  * Created by rishav on 10/2/2015.
  */
-public abstract class MapStateHandler {
+public abstract class MapStateHandler implements CanTick {
 
     private BoardController boardController;
     private MapStateStore s = MapStateStore.getInstance();
@@ -47,4 +49,8 @@ public abstract class MapStateHandler {
     public abstract void handlePass();
     public abstract void handleTileChosen();
     public abstract void handleTownButtonClicked();
+
+    public abstract void tileChosen(MouseEvent event);
+
+    public abstract void stateChanged();
 }
