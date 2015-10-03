@@ -90,26 +90,4 @@ public class LandGrantHandler extends MapStateHandler {
     public void tick() {
 
     }
-
-    /**
-     * Updates the player label to next player's name.
-     * Increments currentPlayer.
-     */
-    public void changePlayer() {
-        if (s.getCurrentPlayer() + 1 == s.getNumPlayers()) {
-            changePlayer(s.getNumPlayers());
-        } else {
-            changePlayer((s.getCurrentPlayer() + 1) % s.getNumPlayers());
-        }
-    }
-
-    /**
-     * Updates the player label to next player's name.
-     * Increments currentPlayer.
-     * @param playerNumber The number of the player to be set
-     */
-    public void changePlayer(int playerNumber) {
-        s.setCurrentPlayer(playerNumber);
-        //rerenderPlayerText();
-    }
 }
