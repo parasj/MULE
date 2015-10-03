@@ -4,6 +4,7 @@ import com.byteme.Models.ConfigRepository;
 import com.byteme.Models.MapBoard;
 import com.byteme.Models.MapStateStore;
 import com.byteme.Schema.MapControllerStates;
+import com.byteme.Schema.PlayerConfigParams;
 import com.byteme.Schema.Property;
 import com.byteme.Util.CanTick;
 import com.byteme.Util.GlobalTimer;
@@ -168,6 +169,10 @@ public class BoardController implements Initializable, CanTick {
 
     public Label getTimerLabel() {
         return timerLabel;
+    }
+
+    public void setPlayer(PlayerConfigParams player) {
+        playerLabel.setText(String.format("Player %d %s", player.getOrder(), player.getName()));
     }
 
     /**
