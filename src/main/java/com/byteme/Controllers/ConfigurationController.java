@@ -16,6 +16,18 @@ public class ConfigurationController {
     private static int numPlayers = -1;
     private int currentPlayer = 1;
 
+    /**
+     * Runs when player clicks on the screen in the Start screen.
+     * Opens the screen asking player whether they want to
+     * open an old game file or create a new one.
+     */
+    public void startGame() {
+        MasterController.getInstance().loadGame();
+    }
+
+    /**
+     * Load a pre-configured game and player settings file
+     */
     public void loadGameConfiguration() {
         // TODO: Open a previously existing game configuration
         MasterController.getInstance().temp();
@@ -161,19 +173,6 @@ public class ConfigurationController {
     }
 
     /**
-     * Creates a player configuration based on the player's options
-     * @param name The name of the player
-     * @param race The race of the player
-     * @param color The color of the player
-     * @param money The starting money of the player
-     * @return A PlayerConfigParams object containing this player's information
-     */
-    private PlayerConfigParams playerConfigParser(String name, String race, String color, int money) {
-        Race parsedRace = Race.valueOf(race.toUpperCase(Locale.ENGLISH));
-        return new PlayerConfigParams(name, parsedRace, color, money, null);
-    }
-
-    /**
      * Chooses the starting money for a player based on his race.
      * @param race The race of the player as parsed by the ChoiceBox
      * @return The starting money for the player
@@ -188,5 +187,18 @@ public class ConfigurationController {
         } else {
             return 1000;
         }
+    }
+
+    /**
+     * Creates a player configuration based on the player's options
+     * @param name The name of the player
+     * @param race The race of the player
+     * @param color The color of the player
+     * @param money The starting money of the player
+     * @return A PlayerConfigParams object containing this player's information
+     */
+    private PlayerConfigParams playerConfigParser(String name, String race, String color, int money) {
+        Race parsedRace = Race.valueOf(race.toUpperCase(Locale.ENGLISH));
+        return new PlayerConfigParams(name, parsedRace, color, money, null);
     }
 }

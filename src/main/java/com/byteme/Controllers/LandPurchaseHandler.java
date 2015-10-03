@@ -64,6 +64,8 @@ public class LandPurchaseHandler extends MapStateHandler {
     @Override
     public void stateChanged() {
         getBoardController().getPhaseLabel().setText("Purchase Selection");
+        getBoardController().getRoundLabel().setText("");
+        getBoardController().getTimerLabel().setText("");
     }
 
     @Override
