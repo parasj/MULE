@@ -1,13 +1,8 @@
 package com.byteme.Controllers;
 
-import com.byteme.Models.ConfigRepository;
-import com.byteme.Models.MapBoard;
-import com.byteme.Models.MapStateStore;
-import com.byteme.Schema.MapControllerStates;
-import com.byteme.Schema.PlayerConfigParams;
-import com.byteme.Schema.Property;
-import com.byteme.Util.CanTick;
-import com.byteme.Util.GlobalTimer;
+import com.byteme.Models.*;
+import com.byteme.Schema.*;
+import com.byteme.Util.*;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.Label;
@@ -17,8 +12,7 @@ import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.GridPane;
 
 import java.net.URL;
-import java.util.ArrayList;
-import java.util.ResourceBundle;
+import java.util.*;
 
 /**
  * Created by parasjain on 10/2/15.
@@ -51,8 +45,10 @@ public class BoardController implements Initializable, CanTick {
     private Label timerLabel;
 
     // implementations of MapStateHandler
-    // ...
-    // TODO - fill this in
+    private final MapStateHandler landPurchaseHander = new LandPurchaseHandler(this);
+    private final MapStateHandler gameStartHandler = new GameStartHandler(this);
+    private final MapStateHandler landGrantHander = new LandGrantHandler(this);
+    private final MapStateHandler emptyHandler = new EmptyHandler(this);
 
 
 
@@ -65,6 +61,7 @@ public class BoardController implements Initializable, CanTick {
     /**** Initialize ****/
     @Override
     public void initialize(URL location, ResourceBundle resources) {
+        log("Initializing");
         initBoard();
         initRiver();
         initBoardCleanup();
@@ -119,7 +116,14 @@ public class BoardController implements Initializable, CanTick {
     public void updateState(MapControllerStates newState) {
         state = newState;
         // TODO - switch controller as needed
-        // if (state = MapControllerStates.GAME_START)
+        if (state == MapControllerStates.LAND_GRANT)
+            childController = landGrantHander;
+        else if (state == MapControllerStates.LAND_PURCHASE)
+            childController = landPurchaseHander;
+        else if (state == MapControllerStates.GAME_START)
+            childController = gameStartHandler;
+        else
+            childController = emptyHandler;
 
         childController.stateChanged();
     }

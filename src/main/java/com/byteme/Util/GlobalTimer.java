@@ -43,7 +43,9 @@ public class GlobalTimer {
     }
 
     private void stopTimer() {
-        timer.cancel();
-        timer.purge();
+        if (timer != null) {
+            timer.cancel();
+            timer.purge();
+        }
     }
 }
