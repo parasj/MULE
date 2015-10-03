@@ -16,6 +16,15 @@ public class ConfigurationController {
     private static int numPlayers = -1;
     private int currentPlayer = 1;
 
+    /**
+     * Runs when player clicks on the screen in the Start screen.
+     * Opens the screen asking player whether they want to
+     * open an old game file or create a new one.
+     */
+    public void startGame() {
+        MasterController.getInstance().loadGame();
+    }
+
     public void loadGameConfiguration() {
         // TODO: Open a previously existing game configuration
         MasterController.getInstance().temp();
