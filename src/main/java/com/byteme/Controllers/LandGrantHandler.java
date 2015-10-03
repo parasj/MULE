@@ -1,8 +1,11 @@
 package com.byteme.Controllers;
 
+import com.byteme.Models.ConfigRepository;
 import com.byteme.Models.MapStateStore;
 import com.byteme.Schema.MapControllerStates;
 import javafx.scene.input.MouseEvent;
+import javafx.scene.layout.BorderPane;
+
 import java.net.URL;
 import java.util.ResourceBundle;
 
@@ -46,12 +49,42 @@ public class LandGrantHandler extends MapStateHandler {
 
     @Override
     public void handleTownButtonClicked() {
-
+        log("Cannot go to town during land grant phase!");
     }
 
     @Override
     public void tileChosen(MouseEvent event) {
 
+        getBoardController().getAlertsLabel().setVisible(false);
+        BorderPane tile = (BorderPane) event.getSource();
+        if (!owned(tile)) {
+            // Change tile background color to player color
+            setColorTile(tile);
+
+            //TODO: Save which tile was clicked by which player (currentPlayer is a static variable of this class)
+            System.out.println("Player " + s.getCurrentPlayer() + ": " + map.getRowIndex(tile) + ", " + map.getColumnIndex(tile));
+
+            if (s.getCurrentPlayer() >= s.getNumPlayers()) {
+                incRound();
+                rerenderPlayerText();
+            }
+
+            // Land Grant is only 2 turns per player.
+            if (s.getCurrentRound() >= 2) {
+                phaseLabel.setText("Property Selection");
+                s.setCurrentState(MapControllerStates.LAND_PURCHASE);
+                rerenderPlayerText();
+                s.setCurrentRound(0);
+            }
+
+            // Reset counters and change currentPlayer
+            s.setPassCounter(0);
+            s.setPurchaseOpportunities(0);
+            changePlayer();
+        } else {
+            // Property is owned, just display warning
+            ownedMessage();
+        }
     }
 
     @Override
@@ -67,5 +100,27 @@ public class LandGrantHandler extends MapStateHandler {
     @Override
     public void tick() {
 
+    }
+
+    /**
+     * Updates the player label to next player's name.
+     * Increments currentPlayer.
+     */
+    public void changePlayer() {
+        if (s.getCurrentPlayer() + 1 == s.getNumPlayers()) {
+            changePlayer(s.getNumPlayers());
+        } else {
+            changePlayer((s.getCurrentPlayer() + 1) % s.getNumPlayers());
+        }
+    }
+
+    /**
+     * Updates the player label to next player's name.
+     * Increments currentPlayer.
+     * @param playerNumber The number of the player to be set
+     */
+    public void changePlayer(int playerNumber) {
+        s.setCurrentPlayer(playerNumber);
+        //rerenderPlayerText();
     }
 }
