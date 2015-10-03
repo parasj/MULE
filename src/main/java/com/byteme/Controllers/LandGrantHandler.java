@@ -20,6 +20,7 @@ public class LandGrantHandler extends MapStateHandler {
         super(boardController);
     }
 
+    @Override
     public void handlePass() {
         s.incrPlayer();
         checkIfDone();
