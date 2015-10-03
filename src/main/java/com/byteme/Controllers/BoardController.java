@@ -113,6 +113,7 @@ public class BoardController implements Initializable, CanTick {
         childController.tick();
     }
 
+
     /**** Data Binding ****/
     public void updateState(MapControllerStates newState) {
         state = newState;
@@ -167,6 +168,20 @@ public class BoardController implements Initializable, CanTick {
 
     public Label getTimerLabel() {
         return timerLabel;
+    }
+
+    /**
+     * Sets the color of a tile when clicked by a player.
+     * Only does so if tile is not already owned.
+     * @param tile The tile whose color must be set.
+     * @return Whether the tile was set or not
+     */
+    private void setColorTile(BorderPane tile) {
+        int row = map.getRowIndex(tile);
+        int column = map.getColumnIndex(tile);
+        String color = configRepository.getPlayerConfig(s.getCurrentPlayer()).getColor();
+        tile.setStyle("-fx-border-color: " + color.toLowerCase() + ";" + "-fx-border-width: 6px;");
+        mapSpots[row][column] = true;
     }
 
 
