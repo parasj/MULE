@@ -11,7 +11,7 @@ public class ConfigRepository {
     // private final static Logger log = Logger.getLogger(ConfigRepository.class.getName());
 
     // Singleton
-    private static ConfigRepository instance = null;
+    private static ConfigRepository instance;
     public static ConfigRepository getInstance() {
         if(instance == null) {
             instance = new ConfigRepository();
