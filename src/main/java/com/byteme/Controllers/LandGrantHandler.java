@@ -1,5 +1,6 @@
 package com.byteme.Controllers;
 
+import com.byteme.Models.ConfigRepository;
 import com.byteme.Models.LandGrantStore;
 import com.byteme.Schema.MapControllerStates;
 import javafx.scene.input.MouseEvent;
@@ -22,7 +23,6 @@ public class LandGrantHandler extends MapStateHandler {
 
     @Override
     public void handlePass() {
-        s.incrPlayer();
         checkIfDone();
     }
 
@@ -34,8 +34,7 @@ public class LandGrantHandler extends MapStateHandler {
     @Override
     public void tileChosen(MouseEvent event) {
         BorderPane tile = (BorderPane) event.getSource();
-        if (getBoardController().owned(tile))
-            getBoardController().owned(tile); // Property is owned, just display warning
+        if (getBoardController().owned(tile)) getBoardController().ownedMessage(); // Property is owned, just display warning
         else {
             // Change tile background color to player color
             getBoardController().setColorTile(tile, s.getCurrentPlayer());
@@ -45,16 +44,22 @@ public class LandGrantHandler extends MapStateHandler {
 
     private void checkIfDone() {
         // Land Grant is only 2 turns per player
+        s.incrPlayer();
         if (s.getCurrentPropertyCount() < MAX_PROPERTIES) {
-            s.incrPlayer();
             getBoardController().setPlayer(s.getCurrentPlayer());
         } else {
+            getBoardController().setPlayer(ConfigRepository.getInstance().getPlayerConfig(1));
             getBoardController().updateState(MapControllerStates.LAND_PURCHASE);
         }
     }
 
     @Override
-    public void stateChanged() {}
+    public void stateChanged() {
+        getBoardController().getPhaseLabel().setText("Property Selection");
+        getBoardController().getMoneyLabel().setText("");
+        getBoardController().getRoundLabel().setText("");
+        getBoardController().getTimerLabel().setText("");
+    }
 
     @Override
     public void initialize(URL location, ResourceBundle resources) {}

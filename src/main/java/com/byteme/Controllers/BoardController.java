@@ -51,8 +51,6 @@ public class BoardController implements Initializable, CanTick {
     private final MapStateHandler landGrantHander = new LandGrantHandler(this);
     private final MapStateHandler emptyHandler = new EmptyHandler(this);
 
-
-
     public BoardController() {
         updateState(MapControllerStates.START);
         timer.setTickHandler(this);
