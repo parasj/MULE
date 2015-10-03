@@ -5,5 +5,7 @@ package com.byteme.Controllers;
  */
 public abstract class MapStateController {
     public abstract void handlePass();
+
+    public abstract void tick();
     //Defiine functions necessary here
 }
