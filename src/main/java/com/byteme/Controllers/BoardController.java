@@ -62,6 +62,7 @@ public class BoardController implements Initializable, CanTick {
     @Override
     public void initialize(URL location, ResourceBundle resources) {
         log("Initializing");
+        setPlayer(configRepository.getPlayerConfig(1));
         initBoard();
         initRiver();
         initBoardCleanup();
@@ -82,7 +83,9 @@ public class BoardController implements Initializable, CanTick {
                 map.add(tileContainer, j, i); // Place the image on the grid
             }
         }
+    }
 
+    public void reCalcPlayerProperties() {
         // Keep track of which tiles have a player's color on them
         configRepository.getPlayers().forEach((player) ->
                 player.getProperties().forEach((z) ->
@@ -185,10 +188,10 @@ public class BoardController implements Initializable, CanTick {
      * @param tile The tile whose color must be set.
      * @return Whether the tile was set or not
      */
-    public void setColorTile(BorderPane tile) {
+    public void setColorTile(BorderPane tile, PlayerConfigParams player) {
         int row = map.getRowIndex(tile);
         int column = map.getColumnIndex(tile);
-        String color = configRepository.getPlayerConfig(s.getCurrentPlayer()).getColor();
+        String color = player.getColor();
         tile.setStyle("-fx-border-color: " + color.toLowerCase() + ";" + "-fx-border-width: 6px;");
         mapSpots[row][column] = true;
     }

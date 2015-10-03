@@ -1,8 +1,6 @@
 package com.byteme.Controllers;
 
 import com.byteme.Models.LandGrantStore;
-import com.byteme.Models.ConfigRepository;
-import com.byteme.Models.MapStateStore;
 import com.byteme.Schema.MapControllerStates;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.BorderPane;
@@ -64,7 +62,7 @@ public class LandGrantHandler extends MapStateHandler {
             getBoardController().owned(tile); // Property is owned, just display warning
         else {
             // Change tile background color to player color
-            getBoardController().setColorTile(tile);
+            getBoardController().setColorTile(tile, s.getCurrentPlayer());
 
             // Land Grant is only 2 turns per player
             if (s.getCurrentPropertyCount() < MAX_PROPERTIES) {
@@ -77,17 +75,11 @@ public class LandGrantHandler extends MapStateHandler {
     }
 
     @Override
-    public void stateChanged() {
-
-    }
+    public void stateChanged() {}
 
     @Override
-    public void initialize(URL location, ResourceBundle resources) {
-
-    }
+    public void initialize(URL location, ResourceBundle resources) {}
 
     @Override
-    public void tick() {
-
-    }
+    public void tick() {}
 }
