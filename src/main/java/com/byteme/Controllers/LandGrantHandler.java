@@ -1,5 +1,6 @@
 package com.byteme.Controllers;
 
+import com.byteme.Models.ConfigRepository;
 import com.byteme.Models.LandGrantStore;
 import com.byteme.Schema.MapControllerStates;
 import javafx.scene.input.MouseEvent;
@@ -47,12 +48,18 @@ public class LandGrantHandler extends MapStateHandler {
         if (s.getCurrentPropertyCount() < MAX_PROPERTIES) {
             getBoardController().setPlayer(s.getCurrentPlayer());
         } else {
+            getBoardController().setPlayer(ConfigRepository.getInstance().getPlayerConfig(1));
             getBoardController().updateState(MapControllerStates.LAND_PURCHASE);
         }
     }
 
     @Override
-    public void stateChanged() {}
+    public void stateChanged() {
+        getBoardController().getPhaseLabel().setText("Property Selection");
+        getBoardController().getMoneyLabel().setText("");
+        getBoardController().getRoundLabel().setText("");
+        getBoardController().getTimerLabel().setText("");
+    }
 
     @Override
     public void initialize(URL location, ResourceBundle resources) {}

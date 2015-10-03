@@ -49,13 +49,14 @@ public class LandPurchaseHandler extends MapStateHandler {
             s.incrPlayer();
             getBoardController().setPlayer(s.getCurrentPlayer());
         } else {
+            getBoardController().setPlayer(s.getCurrentPlayer());
             getBoardController().updateState(MapControllerStates.LAND_PURCHASE);
         }
     }
 
     @Override
     public void stateChanged() {
-
+        getBoardController().getPhaseLabel().setText("Property Selection");
     }
 
     @Override
@@ -65,6 +66,6 @@ public class LandPurchaseHandler extends MapStateHandler {
 
     @Override
     public void initialize(URL location, ResourceBundle resources) {
-        getBoardController().getPhaseLabel().setText("Property Selection");
+
     }
 }
