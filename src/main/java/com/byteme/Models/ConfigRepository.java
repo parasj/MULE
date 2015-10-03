@@ -55,4 +55,7 @@ public class ConfigRepository {
     public int getTotalPlayers() {
         return gameConfigParams.getNumPlayers();
     }
+    public Collection<PlayerConfigParams> getPlayers() {
+        return playerConfigList.values();
+    }
 }

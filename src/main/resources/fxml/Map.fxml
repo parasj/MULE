@@ -8,7 +8,7 @@
 <?import java.lang.*?>
 <?import javafx.scene.layout.*?>
 
-<Pane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="784.0" prefWidth="1313.0" style="-fx-background-color: #000099;" xmlns="http://javafx.com/javafx/8.0.40" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.byteme.Controllers.MapController">
+<Pane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="784.0" prefWidth="1313.0" style="-fx-background-color: #000099;" xmlns="http://javafx.com/javafx/8.0.40" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.byteme.Controllers.BoardController">
    <children>
       <GridPane fx:id="map" gridLinesVisible="true" hgap="10.0" layoutX="18.0" layoutY="21.0" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="580.0" prefWidth="1056.0" style="-fx-border-color: Orange; -fx-border-width: 10px;" vgap="10.0">
         <columnConstraints>
@@ -36,7 +36,7 @@
             <Insets bottom="10.0" left="5.0" right="10.0" top="10.0" />
          </padding>
       </GridPane>
-      <Button fx:id="pass" layoutX="1110.0" layoutY="648.0" mnemonicParsing="false" onAction="#pass" prefHeight="43.0" prefWidth="146.0" text="Pass">
+      <Button fx:id="pass" layoutX="1110.0" layoutY="648.0" mnemonicParsing="false" onAction="#passButtonClicked" prefHeight="43.0" prefWidth="146.0" text="Pass">
          <font>
             <Font size="24.0" />
          </font>

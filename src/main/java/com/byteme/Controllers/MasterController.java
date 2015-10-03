@@ -26,7 +26,7 @@ public class MasterController {
     private Stage theStage;
     private String currStage;
 
-    private MapController mapController;
+    private BoardController boardController;
     private PubController pubController;
 
 
@@ -83,12 +83,9 @@ public class MasterController {
     public void map() {
         currStage = "Map";
         theStage.setScene(map);
-        mapController.rerender();
-        mapController.initTimer();
     }
 
     public void town() {
-        mapController.stopTimer();
         currStage = "Town";
         theStage.setScene(town);
     }
@@ -99,7 +96,6 @@ public class MasterController {
     }
 
     public void pubScene() {
-        mapController.stopTimer();
         currStage = "Pub";
         theStage.setScene(pubScene);
         pubController.rerender();
@@ -109,17 +105,15 @@ public class MasterController {
         return currStage;
     }
 
-    public void setMapController(MapController mc) {
-        mapController = mc;
-        pubController.setMapController(mc);
-        mapController.setPubController(pubController);
+    public void setBoardController(BoardController mc) {
+        boardController = mc;
     }
 
     public void createMap() {
         try {
             FXMLLoader loader = new FXMLLoader(getClass().getResource("/fxml/Map.fxml"));
             map = new Scene(loader.load());
-            setMapController(loader.getController());
+            setBoardController(loader.getController());
         } catch (IOException e) {
             e.printStackTrace();
         }

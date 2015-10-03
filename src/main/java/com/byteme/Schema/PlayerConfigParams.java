@@ -10,6 +10,16 @@ public class PlayerConfigParams {
     private Race race;
     private String color;
     private int money;
+
+    public int getOrder() {
+        return order;
+    }
+
+    public void setOrder(int order) {
+        this.order = order;
+    }
+
+    private int order;
     private ArrayList<Property> properties;
 
     public PlayerConfigParams(String name, Race race, String color, int money, ArrayList<Property> properties) {
@@ -39,8 +49,11 @@ public class PlayerConfigParams {
     }
 
     public void payMoney(int cost) {
-
         money = money - cost;
+    }
+
+    public void makeMoney(int cost) {
+        money = money + cost;
     }
 
     public ArrayList<Property> getProperties() {
