@@ -27,9 +27,8 @@ public class LandGrantStore {
     private int currentPropertyCount;
 
     public void incrPlayer() {
-        if (currentPlayer == players.size() - 1) {
+        if (currentPlayer == players.size() - 1)
             incrPropertyCount();
-        }
         currentPlayer = (currentPlayer + 1) % players.size();
     }
 
