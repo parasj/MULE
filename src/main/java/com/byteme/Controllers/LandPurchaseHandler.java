@@ -38,7 +38,7 @@ public class LandPurchaseHandler extends MapStateHandler {
             getBoardController().owned(tile); // Property is owned, just display warning
         else {
             // Change tile background color to player color
-            getBoardController().setColorTile(tile);
+            getBoardController().setColorTile(tile, s.getCurrentPlayer());
             checkIfDone();
         }
     }
