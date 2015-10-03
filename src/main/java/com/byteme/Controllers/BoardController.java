@@ -21,6 +21,7 @@ public class BoardController implements Initializable, CanTick {
     private final static ConfigRepository configRepository = ConfigRepository.getInstance();
     private final static MapStateStore s = MapStateStore.getInstance();
     private final static GlobalTimer timer = GlobalTimer.getInstance();
+    public final static int cost = 300;
 
     private MapBoard possibleMaps;
     private boolean[][] mapSpots;
@@ -180,6 +181,10 @@ public class BoardController implements Initializable, CanTick {
 
     public void setPlayer(PlayerConfigParams player) {
         playerLabel.setText(String.format("Player %d %s", player.getOrder(), player.getName()));
+    }
+
+    public static int getCost() {
+        return cost;
     }
 
     /**

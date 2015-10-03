@@ -48,4 +48,12 @@ public class LandPurchaseStore {
     public int getCurrentPlayerId() {
         return currentPlayer;
     }
+
+    public List<PlayerConfigParams> getPlayers() {
+        return players;
+    }
+
+    public void setCurrentPropertyCount(int currentPropertyCount) {
+        this.currentPropertyCount = currentPropertyCount;
+    }
 }
