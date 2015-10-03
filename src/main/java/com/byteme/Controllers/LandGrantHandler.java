@@ -40,4 +40,8 @@ public class LandGrantHandler extends MapStateHandler implements Initializable{
 //            }
 //        }
     }
+
+    public void handleTileChosen() {
+
+    }
 }
