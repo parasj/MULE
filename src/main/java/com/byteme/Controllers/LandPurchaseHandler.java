@@ -19,11 +19,6 @@ public class LandPurchaseHandler extends MapStateHandler {
     }
 
     @Override
-    public void handleTileChosen() {
-
-    }
-
-    @Override
     public void handleTownButtonClicked() {
 
     }
@@ -45,6 +40,6 @@ public class LandPurchaseHandler extends MapStateHandler {
 
     @Override
     public void initialize(URL location, ResourceBundle resources) {
-
+        getBoardController().getPhaseLabel().setText("Property Selection");
     }
 }

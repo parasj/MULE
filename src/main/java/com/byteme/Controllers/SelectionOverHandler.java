@@ -19,11 +19,6 @@ public class SelectionOverHandler extends MapStateHandler {
     }
 
     @Override
-    public void handleTileChosen() {
-
-    }
-
-    @Override
     public void handleTownButtonClicked() {
 
     }

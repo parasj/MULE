@@ -48,10 +48,7 @@ public abstract class MapStateHandler implements CanTick, Initializable {
     }
 
     public abstract void handlePass();
-    public abstract void handleTileChosen();
     public abstract void handleTownButtonClicked();
-
     public abstract void tileChosen(MouseEvent event);
-
     public abstract void stateChanged();
 }

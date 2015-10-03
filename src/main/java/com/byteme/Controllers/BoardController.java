@@ -181,7 +181,7 @@ public class BoardController implements Initializable, CanTick {
      * @param tile The tile whose color must be set.
      * @return Whether the tile was set or not
      */
-    private void setColorTile(BorderPane tile) {
+    public void setColorTile(BorderPane tile) {
         int row = map.getRowIndex(tile);
         int column = map.getColumnIndex(tile);
         String color = configRepository.getPlayerConfig(s.getCurrentPlayer()).getColor();
@@ -189,13 +189,13 @@ public class BoardController implements Initializable, CanTick {
         mapSpots[row][column] = true;
     }
 
-    private boolean owned(BorderPane tile) {
+    public boolean owned(BorderPane tile) {
         int row = map.getRowIndex(tile);
         int column = map.getColumnIndex(tile);
         return mapSpots[row][column];
     }
 
-    private void ownedMessage() {
+    public void ownedMessage() {
         alertsLabel.setText("This property is already owned!");
         alertsLabel.setVisible(true);
     }
