@@ -189,6 +189,17 @@ public class BoardController implements Initializable, CanTick {
         mapSpots[row][column] = true;
     }
 
+    private boolean owned(BorderPane tile) {
+        int row = map.getRowIndex(tile);
+        int column = map.getColumnIndex(tile);
+        return mapSpots[row][column];
+    }
+
+    private void ownedMessage() {
+        alertsLabel.setText("This property is already owned!");
+        alertsLabel.setVisible(true);
+    }
+
 
     /**** Util functions ****/
     private void log(String s) {
