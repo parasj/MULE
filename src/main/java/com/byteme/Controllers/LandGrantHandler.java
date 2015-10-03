@@ -55,7 +55,7 @@ public class LandGrantHandler extends MapStateHandler {
 
     @Override
     public void stateChanged() {
-        getBoardController().getPhaseLabel().setText("Property Selection");
+        getBoardController().getPhaseLabel().setText("Land Grant");
         getBoardController().getMoneyLabel().setText("");
         getBoardController().getRoundLabel().setText("");
         getBoardController().getTimerLabel().setText("");

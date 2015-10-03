@@ -21,7 +21,6 @@ public class LandPurchaseHandler extends MapStateHandler {
 
     @Override
     public void handlePass() {
-        s.incrPlayer();
         checkIfDone();
     }
 
@@ -32,18 +31,19 @@ public class LandPurchaseHandler extends MapStateHandler {
 
     @Override
     public void tileChosen(MouseEvent event) {
-        s.setCurrentPropertyCount(0);
         BorderPane tile = (BorderPane) event.getSource();
         if (getBoardController().owned(tile))
             getBoardController().ownedMessage(); // Property is owned, just display warning
         else {
             // Change tile background color to player color
-            if (s.getCurrentPlayer().getMoney() > getBoardController().getCost()) {
+            if (s.getCurrentPlayer().getMoney() >= getBoardController().getCost()) {
+                s.setCurrentPropertyCount(0);
                 getBoardController().setColorTile(tile, s.getCurrentPlayer());
-                checkIfDone();
                 s.getCurrentPlayer().payMoney(getBoardController().getCost());
+                checkIfDone();
             } else {
                 log("You do not have enough money!");
+                getBoardController().getPhaseLabel().setText("Out of Money");
             }
         }
     }
@@ -51,17 +51,19 @@ public class LandPurchaseHandler extends MapStateHandler {
     private void checkIfDone() {
         // Land Purchase is only 2 turns per player
         if (s.getCurrentPropertyCount() < s.getPlayers().size()) {
-            s.incrPlayer();
             getBoardController().setPlayer(s.getCurrentPlayer());
+            getBoardController().setMoney(s.getCurrentPlayer());
+            s.incrPlayer();
         } else {
             getBoardController().updateState(MapControllerStates.GAME_START);
-            getBoardController().setPlayer(s.getCurrentPlayer());
+            getBoardController().setPlayer(s.getPlayers().get(0));
+            getBoardController().setMoney(s.getPlayers().get(0));
         }
     }
 
     @Override
     public void stateChanged() {
-        getBoardController().getPhaseLabel().setText("Property Selection");
+        getBoardController().getPhaseLabel().setText("Purchase Selection");
     }
 
     @Override

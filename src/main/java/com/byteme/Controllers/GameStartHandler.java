@@ -30,7 +30,7 @@ public class GameStartHandler extends MapStateHandler {
 
     @Override
     public void stateChanged() {
-
+        getBoardController().getPhaseLabel().setText("Game Start");
     }
 
     @Override
