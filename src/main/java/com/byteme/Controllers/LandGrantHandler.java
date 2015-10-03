@@ -6,14 +6,21 @@ import javafx.fxml.Initializable;
 
 import javafx.scene.input.MouseEvent;
 
+import java.net.URL;
+import java.util.ResourceBundle;
+
 /**
  * Created by rishav on 10/2/2015.
  */
-public class LandGrantHandler extends MapStateHandler implements Initializable{
+public class LandGrantHandler extends MapStateHandler {
     private MapStateStore s = MapStateStore.getInstance();
 
+    public LandGrantHandler(BoardController boardController) {
+        super(boardController);
+    }
+
     public void handlePass() {
-        alertsLabel.setVisible(false);
+        getBoardController().getAlertsLabel().setVisible(false);
         if (s.getCurrentState() == MapControllerStates.LAND_PURCHASE) {
             s.setPurchaseOpportunities(s.getPurchaseOpportunities() + 1);
         }
@@ -24,12 +31,10 @@ public class LandGrantHandler extends MapStateHandler implements Initializable{
                 s.setCurrentState(MapControllerStates.GAME_START);
             else
                 s.setCurrentState(MapControllerStates.GAME_START);
-            phaseLabel.setText("Selection phase is over!");
+            getBoardController().getPhaseLabel().setText("Selection phase is over!");
             changePlayer(1);
             s.setTimeLeft(pubController.calcTimeLeft(null));
-            incRound();
-            rerender();
-            initTimer();
+            getBoardController().updateState(MapControllerStates.LAND_PURCHASE);
         }
 //        Not used in Land Grant Stage
 //        } else {
@@ -41,5 +46,35 @@ public class LandGrantHandler extends MapStateHandler implements Initializable{
 //                MasterController.getInstance().map();
 //            }
 //        }
+    }
+
+    @Override
+    public void handleTileChosen() {
+
+    }
+
+    @Override
+    public void handleTownButtonClicked() {
+
+    }
+
+    @Override
+    public void tileChosen(MouseEvent event) {
+
+    }
+
+    @Override
+    public void stateChanged() {
+
+    }
+
+    @Override
+    public void initialize(URL location, ResourceBundle resources) {
+
+    }
+
+    @Override
+    public void tick() {
+
     }
 }
