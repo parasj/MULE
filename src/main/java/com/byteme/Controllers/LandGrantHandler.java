@@ -23,7 +23,8 @@ public class LandGrantHandler extends MapStateHandler {
     }
 
     public void handlePass() {
-
+        s.incrPlayer();
+        checkIfDone();
 //        getBoardController().getAlertsLabel().setVisible(false);
 //        if (s.getCurrentState() == MapControllerStates.LAND_PURCHASE) {
 //            s.setPurchaseOpportunities(s.getPurchaseOpportunities() + 1);
@@ -65,14 +66,17 @@ public class LandGrantHandler extends MapStateHandler {
         else {
             // Change tile background color to player color
             getBoardController().setColorTile(tile);
+            checkIfDone();
+        }
+    }
 
-            // Land Grant is only 2 turns per player
-            if (s.getCurrentPropertyCount() < MAX_PROPERTIES) {
-                s.incrPlayer();
-                getBoardController().setPlayer(s.getCurrentPlayer());
-            } else {
-                getBoardController().updateState(MapControllerStates.LAND_PURCHASE);
-            }
+    private void checkIfDone() {
+        // Land Grant is only 2 turns per player
+        if (s.getCurrentPropertyCount() < MAX_PROPERTIES) {
+            s.incrPlayer();
+            getBoardController().setPlayer(s.getCurrentPlayer());
+        } else {
+            getBoardController().updateState(MapControllerStates.LAND_PURCHASE);
         }
     }
 
