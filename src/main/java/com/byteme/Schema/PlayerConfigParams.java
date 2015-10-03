@@ -57,7 +57,6 @@ public class PlayerConfigParams {
     }
 
     public ArrayList<Property> getProperties() {
-
         return properties;
     }
 

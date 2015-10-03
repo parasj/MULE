@@ -1,6 +1,7 @@
 package com.byteme.Controllers;
 
 import com.byteme.Models.LandGrantStore;
+import com.byteme.Models.LandPurchaseStore;
 import com.byteme.Schema.MapControllerStates;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.BorderPane;
@@ -12,9 +13,7 @@ import java.util.ResourceBundle;
  * Created by rishav on 10/2/2015.
  */
 public class LandPurchaseHandler extends MapStateHandler {
-    private LandGrantStore s = LandGrantStore.getInstance();
-
-    private static final int MAX_PROPERTIES = 2;
+    private LandPurchaseStore s = LandPurchaseStore.getInstance();
 
     public LandPurchaseHandler(BoardController boardController) {
         super(boardController);
@@ -28,29 +27,35 @@ public class LandPurchaseHandler extends MapStateHandler {
 
     @Override
     public void handleTownButtonClicked() {
-        log("Cannot go to town during land grant phase!");
+        log("Cannot go to town during land purchase phase!");
     }
 
     @Override
     public void tileChosen(MouseEvent event) {
+        s.setCurrentPropertyCount(0);
         BorderPane tile = (BorderPane) event.getSource();
         if (getBoardController().owned(tile))
-            getBoardController().owned(tile); // Property is owned, just display warning
+            getBoardController().ownedMessage(); // Property is owned, just display warning
         else {
             // Change tile background color to player color
-            getBoardController().setColorTile(tile, s.getCurrentPlayer());
-            checkIfDone();
+            if (s.getCurrentPlayer().getMoney() > getBoardController().getCost()) {
+                getBoardController().setColorTile(tile, s.getCurrentPlayer());
+                checkIfDone();
+                s.getCurrentPlayer().payMoney(getBoardController().getCost());
+            } else {
+                log("You do not have enough money!");
+            }
         }
     }
 
     private void checkIfDone() {
         // Land Purchase is only 2 turns per player
-        if (s.getCurrentPropertyCount() < MAX_PROPERTIES) {
+        if (s.getCurrentPropertyCount() < s.getPlayers().size()) {
             s.incrPlayer();
             getBoardController().setPlayer(s.getCurrentPlayer());
         } else {
+            getBoardController().updateState(MapControllerStates.GAME_START);
             getBoardController().setPlayer(s.getCurrentPlayer());
-            getBoardController().updateState(MapControllerStates.LAND_PURCHASE);
         }
     }
 
