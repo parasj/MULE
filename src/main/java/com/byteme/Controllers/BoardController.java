@@ -4,14 +4,19 @@ import com.byteme.Models.ConfigRepository;
 import com.byteme.Models.MapBoard;
 import com.byteme.Models.MapStateStore;
 import com.byteme.Schema.MapControllerStates;
+import com.byteme.Schema.Property;
 import com.byteme.Util.CanTick;
 import com.byteme.Util.GlobalTimer;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.Label;
+import javafx.scene.image.ImageView;
+import javafx.scene.input.MouseEvent;
+import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.GridPane;
 
 import java.net.URL;
+import java.util.ArrayList;
 import java.util.ResourceBundle;
 
 /**
@@ -20,9 +25,10 @@ import java.util.ResourceBundle;
 public class BoardController implements Initializable, CanTick {
     private final static ConfigRepository configRepository = ConfigRepository.getInstance();
     private final static MapStateStore s = MapStateStore.getInstance();
+    private final static GlobalTimer timer = GlobalTimer.getInstance();
 
-    private final MapBoard possibleMaps = new MapBoard();
-    private final GlobalTimer timer = GlobalTimer.getInstance();
+    private MapBoard possibleMaps;
+    private boolean[][] mapSpots;
 
     private MapControllerStates state;
     private MapStateHandler childController;
@@ -50,13 +56,53 @@ public class BoardController implements Initializable, CanTick {
 
 
     public BoardController() {
-        updateState(MapControllerStates.GAME_START);
+        updateState(MapControllerStates.START);
         timer.setTickHandler(this);
     }
 
+
+    /**** Initialize ****/
     @Override
     public void initialize(URL location, ResourceBundle resources) {
+        initBoard();
+        initRiver();
+        initBoardCleanup();
+        updateState(MapControllerStates.LAND_GRANT);
+    }
 
+    private void initBoard() {
+        possibleMaps = new MapBoard();
+        mapSpots = new boolean[possibleMaps.getHeight()][possibleMaps.getWidth()];
+
+        // inject images
+        for (int i = 0; i < possibleMaps.getHeight(); i++) {
+            for (int j = 0; j < possibleMaps.getWidth(); j++) {
+                ImageView tile = new ImageView(possibleMaps.getTile(i, j).imagePath());
+                BorderPane tileContainer = new BorderPane();
+                tileContainer.setCenter(tile);
+                tileContainer.setOnMouseClicked(this::tileChosen);
+                map.add(tileContainer, j, i); // Place the image on the grid
+            }
+        }
+
+        // Keep track of which tiles have a player's color on them
+        configRepository.getPlayers().forEach((player) ->
+                player.getProperties().forEach((z) ->
+                        mapSpots[z.getRow()][z.getColumn()] = true));
+    }
+
+    private void initRiver() {
+        // Force center tile to be Town.png and center line to be river
+        // Make the town tile run "goToTown()"
+        ImageView townImage = new ImageView("/images/Town.png");
+        townImage.setOnMouseClicked((MouseEvent e) -> townButtonClicked());
+        map.add(townImage, 4, 2);
+        // TODO: hardcode the river
+    }
+
+    private void initBoardCleanup() {
+        alertsLabel.setVisible(false);
+        timerLabel.setVisible(true);
     }
 
 
@@ -72,6 +118,8 @@ public class BoardController implements Initializable, CanTick {
         state = newState;
         // TODO - switch controller as needed
         // if (state = MapControllerStates.GAME_START)
+
+        childController.stateChanged();
     }
 
 
@@ -81,10 +129,14 @@ public class BoardController implements Initializable, CanTick {
         childController.handlePass();
     }
 
-    public void tileChosen() {
+    public void tileChosen(MouseEvent event) {
         log("Tile chosen");
-        childController.handlePass(); // todo change this
+        childController.tileChosen(event);
+    }
 
+    private void townButtonClicked() {
+        log("Town button clicked");
+        childController.handleTownButtonClicked();
     }
 
 
