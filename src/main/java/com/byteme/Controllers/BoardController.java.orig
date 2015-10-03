@@ -17,15 +17,21 @@ import java.util.ResourceBundle;
 /**
  * Created by parasjain on 10/2/15.
  */
+<<<<<<< HEAD
 public class BoardController implements Initializable, CanTick {
     private final static ConfigRepository configRepository = ConfigRepository.getInstance();
     private final static MapStateStore s = MapStateStore.getInstance();
 
+=======
+public class BoardController {
+    private MapStateHandler childController;
+    private final MapStateStore s = MapStateStore.getInstance();
+>>>>>>> origin/refactor-map
     private final MapBoard possibleMaps = new MapBoard();
     private final GlobalTimer timer = GlobalTimer.getInstance();
 
     private MapControllerStates state;
-    private MapStateHandler childController;
+    private MapStateController childController;
 
     /*** FXML UI items ***/
     @FXML
