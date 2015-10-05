@@ -56,4 +56,8 @@ public class LandPurchaseStore {
     public void setCurrentPropertyCount(int currentPropertyCount) {
         this.currentPropertyCount = currentPropertyCount;
     }
+
+    public void setCurrentPlayerId(int currentPlayer) {
+        this.currentPlayer = currentPlayer;
+    }
 }

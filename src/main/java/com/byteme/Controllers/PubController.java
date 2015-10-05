@@ -23,6 +23,7 @@ public class PubController {
     private static ConfigRepository configRepository = ConfigRepository.getInstance();
     private int[] roundBonusArr = {50, 50, 50, 100, 100, 100, 100, 150, 150, 150, 150, 200};
     private MapStateStore s = MapStateStore.getInstance();
+    public ConfigRepository r = ConfigRepository.getInstance();
 
 //    private MapController mapController;
 
@@ -35,6 +36,14 @@ public class PubController {
 //    }
 
     public void goToMap() {
+        if (s.getCurrentPlayer() < r.getTotalPlayers() - 1) {
+            s.getPlayerAt(s.getCurrentPlayer()).calcTimeLeft();
+            s.setCurrentPlayer(s.getCurrentPlayer() + 1);
+        } else {
+            s.setCurrentRound(s.getCurrentRound() + 1);
+            s.setCurrentPlayer(0);
+            s.sortPlayers();
+        }
         MapStateStore.getInstance().setCurrentState(MapControllerStates.GAME_START);
         MasterController.getInstance().map();
     }

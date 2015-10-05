@@ -50,7 +50,7 @@ public class MapStateStore {
     }
 
     public void setCurrentPlayer(int currentPlayer) {
-        this.currentPlayer = currentPlayer;
+        this.currentPlayer = currentPlayer % r.getTotalPlayers();
     }
 
     public int getCurrentRound() {

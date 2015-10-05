@@ -49,14 +49,6 @@ public class GameStartHandler extends MapStateHandler {
         } else {
             getBoardController().updateState(MapControllerStates.TURN_OVER);
             MasterController.getInstance().pubScene();
-            if (m.getCurrentPlayer() < m.getNumPlayers() - 1) {
-                m.setCurrentPlayer(m.getCurrentPlayer() + 1);
-                m.getPlayerAt(m.getCurrentPlayer()).getTimeLeft();
-            } else {
-                m.setCurrentRound(m.getCurrentRound() + 1);
-                m.setCurrentPlayer(0);
-                m.sortPlayers();
-            }
         }
     }
 

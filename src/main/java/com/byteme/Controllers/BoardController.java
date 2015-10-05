@@ -22,6 +22,7 @@ public class BoardController implements Initializable, CanTick {
     private final static MapStateStore s = MapStateStore.getInstance();
     private final static GlobalTimer timer = GlobalTimer.getInstance();
     public final static int cost = 300;
+    public final static MapStateStore m = MapStateStore.getInstance();
 
     private MapBoard possibleMaps;
     private boolean[][] mapSpots;
@@ -182,7 +183,7 @@ public class BoardController implements Initializable, CanTick {
     }
 
     public void setPlayer(PlayerConfigParams player) {
-        playerLabel.setText(String.format("Player %d %s", player.getOrder(), player.getName()));
+        playerLabel.setText(String.format("Player %d %s", m.getCurrentPlayer(), player.getName()));
     }
 
     public void setMoney(PlayerConfigParams player) {

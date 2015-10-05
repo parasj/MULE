@@ -17,6 +17,7 @@ import java.util.ResourceBundle;
  */
 public class LandPurchaseHandler extends MapStateHandler {
     private LandPurchaseStore s = LandPurchaseStore.getInstance();
+    private MapStateStore m = MapStateStore.getInstance();
 
     public LandPurchaseHandler(BoardController boardController) {
         super(boardController);
@@ -24,6 +25,7 @@ public class LandPurchaseHandler extends MapStateHandler {
 
     @Override
     public void handlePass() {
+        s.incrPropertyCount();
         checkIfDone();
     }
 
@@ -40,10 +42,9 @@ public class LandPurchaseHandler extends MapStateHandler {
         else {
             // Change tile background color to player color
             if (s.getCurrentPlayer().getMoney() >= getBoardController().getCost()) {
-                s.setCurrentPropertyCount(0);
+                s.incrPropertyCount();
                 getBoardController().setColorTile(tile, s.getCurrentPlayer());
                 s.getCurrentPlayer().payMoney(getBoardController().getCost());
-
                 checkIfDone();
             } else {
                 log("You do not have enough money!");
@@ -54,22 +55,26 @@ public class LandPurchaseHandler extends MapStateHandler {
 
     private void checkIfDone() {
         // Land Purchase is only 2 turns per player
-        if (s.getCurrentPropertyCount() < s.getPlayers().size()) {
+        if (s.getCurrentPropertyCount() <= 2 * s.getPlayers().size()) {
             getBoardController().setPlayer(s.getCurrentPlayer());
             getBoardController().setMoney(s.getCurrentPlayer());
+            m.setCurrentPlayer(m.getCurrentPlayer() + 1);
             s.incrPlayer();
         } else {
             getBoardController().updateState(MapControllerStates.GAME_START);
             MapStateStore.getInstance().sortPlayers();
-            getBoardController().setPlayer(s.getPlayers().get(0));
-            getBoardController().setMoney(s.getPlayers().get(0));
-            s.getPlayers().get(0).calcTimeLeft();
+            m.setCurrentPlayer(0);
+            getBoardController().setPlayer(m.getPlayerAt(0));
+            getBoardController().setMoney(m.getPlayerAt(0));
+            m.getPlayerAt(0).calcTimeLeft();
         }
     }
 
     @Override
     public void stateChanged() {
         getBoardController().getPhaseLabel().setText("Purchase Selection");
+        getBoardController().setPlayer(s.getCurrentPlayer());
+        m.setCurrentPlayer(m.getCurrentPlayer() + 1);
         getBoardController().getRoundLabel().setText("");
         getBoardController().getTimerLabel().setText("");
     }
