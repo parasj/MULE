@@ -24,18 +24,17 @@ public class PubController {
     private int[] roundBonusArr = {50, 50, 50, 100, 100, 100, 100, 150, 150, 150, 150, 200};
     private MapStateStore s = MapStateStore.getInstance();
 
-    private MapController mapController;
+//    private MapController mapController;
 
     public PubController() {
 
     }
 
-    public void setMapController(MapController mapController) {
-        this.mapController = mapController;
-    }
+//    public void setMapController(MapController mapController) {
+//        this.mapController = mapController;
+//    }
 
     public void goToMap() {
-        MapStateStore.getInstance().setTimeLeft(s.getPlayerAt(s.getCurrentPlayer()).calcTimeLeft());
         MapStateStore.getInstance().setCurrentState(MapControllerStates.GAME_START);
         MasterController.getInstance().map();
     }
@@ -54,7 +53,7 @@ public class PubController {
 
     private void getMoney() {
         PlayerConfigParams currentPlayer = s.getPlayerAt(s.getCurrentPlayer());
-        int timeLeft = MapStateStore.getInstance().getTimeLeft();
+        int timeLeft = currentPlayer.getTimeLeft();
         int roundBonus = roundBonusArr[MapStateStore.getInstance().getCurrentRound()];
         Random rand = new Random();
         int timeBonus = rand.nextInt(getTimeBonus(timeLeft) + 1);

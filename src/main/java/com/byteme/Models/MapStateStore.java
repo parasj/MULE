@@ -42,7 +42,6 @@ public class MapStateStore {
     private int passCounter; // Used to determine when to stop property selection immediately
     private int purchaseOpportunities; // Used to determine duration of full property selection
     private int numPlayers;
-    private int timeLeft;
     public ArrayList<PlayerConfigParams> players;
     public ConfigRepository r = ConfigRepository.getInstance();
 
@@ -86,14 +85,6 @@ public class MapStateStore {
         this.numPlayers = numPlayers;
     }
 
-    public int getTimeLeft() {
-        return timeLeft;
-    }
-
-    public void setTimeLeft(int timeLeft) {
-        this.timeLeft = timeLeft;
-    }
-
     @Override
     public String toString() {
         return "MapStateStore{" +
@@ -101,9 +92,7 @@ public class MapStateStore {
                 ", currentRound=" + currentRound +
                 ", passCounter=" + passCounter +
                 ", purchaseOpportunities=" + purchaseOpportunities +
-                ", numPlayers=" + numPlayers +
-                ", timeLeft=" + timeLeft +
-                '}';
+                ", numPlayers=" + numPlayers + '}';
     }
 
     private MapStateStore() {
