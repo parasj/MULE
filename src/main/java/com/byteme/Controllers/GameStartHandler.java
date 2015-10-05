@@ -43,6 +43,7 @@ public class GameStartHandler extends MapStateHandler {
     public void tick() {
         if (m.getTimeLeft() > 0) {
             m.setTimeLeft(m.getTimeLeft() - 1);
+            getBoardController().getTimerLabel().setText("" + m.getTimeLeft());
         } else {
             getBoardController().updateState(MapControllerStates.TURN_OVER);
             MasterController.getInstance().pubScene();

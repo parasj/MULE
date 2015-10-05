@@ -5,6 +5,8 @@ import com.byteme.Schema.*;
 import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
 import javafx.scene.control.*;
+
+import java.util.ArrayList;
 import java.util.Locale;
 
 /**
@@ -125,9 +127,9 @@ public class ConfigurationController {
      * After all players done, opens map.
      */
     public void savePlayerConfig() {
-        // TODO: remove the below line
-        // Below line is to make testing easier
-        playerName.setText("Bob " + currentPlayer);
+        // TODO: Fix Default player name for testing
+        // Doesn't work, changes config repository despite input and doesn't show up on screen
+        // playerName.setText("Bob " + currentPlayer);
         if (!playerName.getText().isEmpty()) {
             String name;
             String race;
@@ -200,6 +202,6 @@ public class ConfigurationController {
      */
     private PlayerConfigParams playerConfigParser(String name, String race, String color, int money) {
         Race parsedRace = Race.valueOf(race.toUpperCase(Locale.ENGLISH));
-        return new PlayerConfigParams(name, parsedRace, color, money, null);
+        return new PlayerConfigParams(name, parsedRace, color, money, new ArrayList<Property>());
     }
 }

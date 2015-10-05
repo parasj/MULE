@@ -23,6 +23,7 @@ import java.util.TimerTask;
  * Created by Siddarth on 9/13/2015.
  */
 public class MapController implements Initializable {
+    //THIS IS NOT USED ANYMORE
     private static ConfigRepository configRepository = ConfigRepository.getInstance();
     private static MapStateStore s = MapStateStore.getInstance();
 
@@ -239,7 +240,7 @@ public class MapController implements Initializable {
                 s.setCurrentState(MapControllerStates.GAME_START);
             phaseLabel.setText("Selection phase is over!");
             changePlayer(1);
-            MapStateStore.getInstance().setTimeLeft(pubController.calcTimeLeft(null));
+            //MapStateStore.getInstance().setTimeLeft(pubController.calcTimeLeft());
             incRound();
             rerender();
             initTimer();

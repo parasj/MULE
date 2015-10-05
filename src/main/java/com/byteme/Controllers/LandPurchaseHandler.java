@@ -5,6 +5,7 @@ import com.byteme.Models.LandGrantStore;
 import com.byteme.Models.LandPurchaseStore;
 import com.byteme.Models.MapStateStore;
 import com.byteme.Schema.MapControllerStates;
+import com.byteme.Schema.Property;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.BorderPane;
 
@@ -42,6 +43,7 @@ public class LandPurchaseHandler extends MapStateHandler {
                 s.setCurrentPropertyCount(0);
                 getBoardController().setColorTile(tile, s.getCurrentPlayer());
                 s.getCurrentPlayer().payMoney(getBoardController().getCost());
+
                 checkIfDone();
             } else {
                 log("You do not have enough money!");
@@ -61,6 +63,7 @@ public class LandPurchaseHandler extends MapStateHandler {
             MapStateStore.getInstance().sortPlayers();
             getBoardController().setPlayer(s.getPlayers().get(0));
             getBoardController().setMoney(s.getPlayers().get(0));
+            s.getPlayers().get(0).calcTimeLeft();
         }
     }
 

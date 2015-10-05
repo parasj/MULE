@@ -35,15 +35,11 @@ public class PubController {
     }
 
     public void goToMap() {
-        MapStateStore.getInstance().setTimeLeft(calcTimeLeft(s.getPlayerAt(s.getCurrentPlayer())));
+        MapStateStore.getInstance().setTimeLeft(s.getPlayerAt(s.getCurrentPlayer()).calcTimeLeft());
         MapStateStore.getInstance().setCurrentState(MapControllerStates.GAME_START);
         MasterController.getInstance().map();
     }
 
-    public int calcTimeLeft(PlayerConfigParams player) {
-        //TODO calculate the time left
-        return 15;
-    }
     private int getTimeBonus(int timeLeft) {
         if (timeLeft >= 37) {
             return 200;
@@ -72,7 +68,11 @@ public class PubController {
 
     public void rerender() {
         getMoney();
-        if (playerLabel != null) playerLabel.setText(String.format("Player %d %s", MapStateStore.getInstance().getCurrentPlayer(), s.getPlayerAt(s.getCurrentPlayer()).getName()));
-        if (moneyLabel != null) moneyLabel.setText("MONEY: " + s.getPlayerAt(s.getCurrentPlayer()).getMoney());
+        if (playerLabel != null) {
+            playerLabel.setText(String.format("Player %d %s", MapStateStore.getInstance().getCurrentPlayer(), s.getPlayerAt(s.getCurrentPlayer()).getName()));
+        }
+        if (moneyLabel != null) {
+            moneyLabel.setText("MONEY: " + s.getPlayerAt(s.getCurrentPlayer()).getMoney());
+        }
     }
 }

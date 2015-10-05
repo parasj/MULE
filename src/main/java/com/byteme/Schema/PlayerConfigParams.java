@@ -84,6 +84,11 @@ public class PlayerConfigParams implements Comparable<PlayerConfigParams> {
         return (this.money + 500 * properties.size());
     }
 
+    public int calcTimeLeft() {
+        //TODO calculate the time left
+        return 25;
+    }
+
     @Override
     public int compareTo(PlayerConfigParams otherPlayer) {
         return (this.calcScore() - otherPlayer.calcScore());

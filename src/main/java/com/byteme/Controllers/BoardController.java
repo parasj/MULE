@@ -204,6 +204,7 @@ public class BoardController implements Initializable, CanTick {
         int column = map.getColumnIndex(tile);
         String color = player.getColor();
         tile.setStyle("-fx-border-color: " + color.toLowerCase() + ";" + "-fx-border-width: 6px;");
+        player.addProperty(new Property(column, row, player));
         mapSpots[row][column] = true;
     }
 
