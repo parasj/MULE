@@ -22,6 +22,7 @@ public class PubController {
 
     private static ConfigRepository configRepository = ConfigRepository.getInstance();
     private int[] roundBonusArr = {50, 50, 50, 100, 100, 100, 100, 150, 150, 150, 150, 200};
+    private MapStateStore s = MapStateStore.getInstance();
 
     private MapController mapController;
 
@@ -34,11 +35,7 @@ public class PubController {
     }
 
     public void goToMap() {
-        //TODO Increment Round Properly
-        //Change phase Mapstore 3
-        mapController.incRound();
-        MapStateStore.getInstance().setTimeLeft(calcTimeLeft(null));
-        mapController.changePlayer();
+        MapStateStore.getInstance().setTimeLeft(calcTimeLeft(s.getPlayerAt(s.getCurrentPlayer())));
         MapStateStore.getInstance().setCurrentState(MapControllerStates.GAME_START);
         MasterController.getInstance().map();
     }
@@ -60,10 +57,9 @@ public class PubController {
     }
 
     private void getMoney() {
-        int currentPlayerIndex = MapStateStore.getInstance().getCurrentPlayer();
-        PlayerConfigParams currentPlayer = configRepository.getPlayerConfig(currentPlayerIndex);
+        PlayerConfigParams currentPlayer = s.getPlayerAt(s.getCurrentPlayer());
         int timeLeft = MapStateStore.getInstance().getTimeLeft();
-        int roundBonus = roundBonusArr[MapStateStore.getInstance().getCurrentRound() - 1];
+        int roundBonus = roundBonusArr[MapStateStore.getInstance().getCurrentRound()];
         Random rand = new Random();
         int timeBonus = rand.nextInt(getTimeBonus(timeLeft) + 1);
         int moneyBonus = roundBonus * timeBonus;
@@ -76,7 +72,7 @@ public class PubController {
 
     public void rerender() {
         getMoney();
-        if (playerLabel != null) playerLabel.setText(String.format("Player %d %s", MapStateStore.getInstance().getCurrentPlayer(), ConfigRepository.getInstance().getPlayerConfig(MapStateStore.getInstance().getCurrentPlayer()).getName()));
-        if (moneyLabel != null) moneyLabel.setText("MONEY: " + ConfigRepository.getInstance().getPlayerConfig(MapStateStore.getInstance().getCurrentPlayer()).getMoney());
+        if (playerLabel != null) playerLabel.setText(String.format("Player %d %s", MapStateStore.getInstance().getCurrentPlayer(), s.getPlayerAt(s.getCurrentPlayer()).getName()));
+        if (moneyLabel != null) moneyLabel.setText("MONEY: " + s.getPlayerAt(s.getCurrentPlayer()).getMoney());
     }
 }

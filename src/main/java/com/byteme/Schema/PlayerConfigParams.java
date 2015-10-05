@@ -81,7 +81,7 @@ public class PlayerConfigParams implements Comparable<PlayerConfigParams> {
 
     public int calcScore() {
         //TODO Take into account resources
-        return (getMoney() + 500 * properties.size());
+        return (this.money + 500 * properties.size());
     }
 
     @Override

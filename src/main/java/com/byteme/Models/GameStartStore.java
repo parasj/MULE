@@ -15,20 +15,8 @@ public class GameStartStore {
         return ourInstance;
     }
 
-    public ConfigRepository r = ConfigRepository.getInstance();
 
-    public ArrayList<PlayerConfigParams> players;
     private GameStartStore() {
-        players = new ArrayList<>(r.getPlayers());
     }
-
-    public void sort() {
-        Collections.sort(players);
-    }
-
-    public PlayerConfigParams get(int index) {
-        return players.get(index);
-    }
-
 
 }

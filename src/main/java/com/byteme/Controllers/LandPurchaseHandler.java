@@ -3,6 +3,7 @@ package com.byteme.Controllers;
 import com.byteme.Models.GameStartStore;
 import com.byteme.Models.LandGrantStore;
 import com.byteme.Models.LandPurchaseStore;
+import com.byteme.Models.MapStateStore;
 import com.byteme.Schema.MapControllerStates;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.BorderPane;
@@ -57,10 +58,10 @@ public class LandPurchaseHandler extends MapStateHandler {
             s.incrPlayer();
         } else {
             getBoardController().updateState(MapControllerStates.GAME_START);
-            GameStartStore.getInstance().sort();
+            MapStateStore.getInstance().sortPlayers();
             getBoardController().setPlayer(s.getPlayers().get(0));
             getBoardController().setMoney(s.getPlayers().get(0));
-        } 
+        }
     }
 
     @Override

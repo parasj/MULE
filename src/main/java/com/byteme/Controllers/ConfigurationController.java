@@ -158,6 +158,7 @@ public class ConfigurationController {
                 // Go to Map screen.
                 MasterController.getInstance().createMap();
                 MasterController.getInstance().map();
+                MapStateStore.getInstance().refreshPlayers();
             } else {
                 // Update the player label
                 currentPlayer++;

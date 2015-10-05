@@ -1,6 +1,10 @@
 package com.byteme.Models;
 
 import com.byteme.Schema.MapControllerStates;
+import com.byteme.Schema.PlayerConfigParams;
+
+import java.util.ArrayList;
+import java.util.Collections;
 
 /**
  * Created by parasjain on 10/1/15.
@@ -39,6 +43,8 @@ public class MapStateStore {
     private int purchaseOpportunities; // Used to determine duration of full property selection
     private int numPlayers;
     private int timeLeft;
+    public ArrayList<PlayerConfigParams> players;
+    public ConfigRepository r = ConfigRepository.getInstance();
 
     public int getCurrentPlayer() {
         return currentPlayer;
@@ -101,6 +107,19 @@ public class MapStateStore {
     }
 
     private MapStateStore() {
+    }
 
+    public void sortPlayers() {
+        Collections.sort(players);
+    }
+
+    public PlayerConfigParams getPlayerAt(int index) {
+        return players.get(index);
+    }
+
+
+    //Super hacky, paras fix me
+    public void refreshPlayers() {
+        this.players = new ArrayList<>(r.getPlayers());
     }
 }
