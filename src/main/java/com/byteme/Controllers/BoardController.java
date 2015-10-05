@@ -50,6 +50,7 @@ public class BoardController implements Initializable, CanTick {
     private final MapStateHandler gameStartHandler = new GameStartHandler(this);
     private final MapStateHandler landGrantHander = new LandGrantHandler(this);
     private final MapStateHandler emptyHandler = new EmptyHandler(this);
+    private final MapStateHandler turnOverHandler = new TurnOverHandler(this);
 
     public BoardController() {
         updateState(MapControllerStates.START);
@@ -125,7 +126,9 @@ public class BoardController implements Initializable, CanTick {
             childController = landPurchaseHander;
         else if (state == MapControllerStates.GAME_START)
             childController = gameStartHandler;
-        else
+        else if (state == MapControllerStates.TURN_OVER) {
+            childController = turnOverHandler;
+        } else
             childController = emptyHandler;
 
         childController.stateChanged();

@@ -34,8 +34,6 @@ public class PubController {
     }
 
     public void goToMap() {
-        //TODO Update the Label in Map.
-        //getMoney();
         //TODO Increment Round Properly
         //Change phase Mapstore 3
         mapController.incRound();

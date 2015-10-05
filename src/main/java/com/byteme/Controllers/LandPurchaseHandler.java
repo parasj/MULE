@@ -1,5 +1,6 @@
 package com.byteme.Controllers;
 
+import com.byteme.Models.GameStartStore;
 import com.byteme.Models.LandGrantStore;
 import com.byteme.Models.LandPurchaseStore;
 import com.byteme.Schema.MapControllerStates;
@@ -56,9 +57,10 @@ public class LandPurchaseHandler extends MapStateHandler {
             s.incrPlayer();
         } else {
             getBoardController().updateState(MapControllerStates.GAME_START);
+            GameStartStore.getInstance().sort();
             getBoardController().setPlayer(s.getPlayers().get(0));
             getBoardController().setMoney(s.getPlayers().get(0));
-        }
+        } 
     }
 
     @Override
