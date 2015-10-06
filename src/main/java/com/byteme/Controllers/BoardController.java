@@ -19,6 +19,8 @@ import javafx.scene.layout.GridPane;
 import java.net.URL;
 import java.util.ResourceBundle;
 
+import static com.byteme.Schema.MapControllerStates.*;
+
 
 public class BoardController implements Initializable, CanTick {
     private final static ConfigRepository configRepository = ConfigRepository.getInstance();
@@ -58,7 +60,7 @@ public class BoardController implements Initializable, CanTick {
     private final MapStateHandler turnOverHandler = new TurnOverHandler(this);
 
     public BoardController() {
-        updateState(MapControllerStates.START);
+        updateState(START);
         timer.setTickHandler(this);
     }
 
@@ -73,7 +75,7 @@ public class BoardController implements Initializable, CanTick {
         initBoard();
         initRiver();
         initBoardCleanup();
-        updateState(MapControllerStates.LAND_GRANT);
+        updateState(LAND_GRANT);
     }
 
     private void initBoard() {
@@ -130,16 +132,23 @@ public class BoardController implements Initializable, CanTick {
         log("State updated to: " + newState);
         state = newState;
         // TODO - switch controller as needed
-        if (state == MapControllerStates.LAND_GRANT)
-            childController = landGrantHandler;
-        else if (state == MapControllerStates.LAND_PURCHASE)
-            childController = landPurchaseHandler;
-        else if (state == MapControllerStates.GAME_START)
-            childController = gameStartHandler;
-        else if (state == MapControllerStates.TURN_OVER) {
-            childController = turnOverHandler;
-        } else
-            childController = emptyHandler;
+
+        switch (state) {
+            case START:
+                childController = emptyHandler;
+            case LAND_GRANT:
+                childController = landGrantHandler;
+            case LAND_PURCHASE: childController = landPurchaseHandler;
+                childController = landPurchaseHandler;
+            case SELECTION_OVER:
+                childController = emptyHandler;
+            case GAME_START:
+                childController = gameStartHandler;
+            case TURN_OVER:
+                childController = turnOverHandler;
+            default:
+                childController = emptyHandler;
+        }
 
         childController.stateChanged();
     }
