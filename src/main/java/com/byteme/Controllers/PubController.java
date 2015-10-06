@@ -80,12 +80,10 @@ public class PubController {
 
     public void rerender() {
         getMoney();
-        if (playerLabel != null) {
+        if (playerLabel != null)
             playerLabel.setText(String.format("Player %d %s", g.getCurrentPlayer() + 1, s.getPlayerAt(g.getCurrentPlayer()).getName()));
-        }
-        if (moneyLabel != null) {
-            moneyLabel.setText("MONEY: " + s.getPlayerAt(s.getCurrentPlayer()).getMoney());
-        }
+        if (moneyLabel != null)
+            moneyLabel.setText("Money: " + s.getPlayerAt(s.getCurrentPlayer()).getMoney());
     }
 
     public void setBoardController(BoardController boardController) {
