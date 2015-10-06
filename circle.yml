@@ -5,3 +5,4 @@ machine:
 test:
   post:
     - cp -R build/* $CIRCLE_ARTIFACTS
+    - cp -R build/test-results/* $CIRCLE_TEST_REPORTS
