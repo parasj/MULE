@@ -24,12 +24,13 @@ public class PlayerConfigParams implements Comparable<PlayerConfigParams> {
     private int order;
     private ArrayList<Property> properties;
 
-    public PlayerConfigParams(String name, Race race, String color, int money, ArrayList<Property> properties) {
+    public PlayerConfigParams(String name, Race race, String color, int money, ArrayList<Property> properties, int order) {
         this.name = name;
         this.race = race;
         this.color = color;
         this.money = money;
         this.properties = properties;
+        this.order = order;
     }
 
     public String getName()

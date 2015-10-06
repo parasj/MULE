@@ -27,7 +27,6 @@ public class BoardController implements Initializable, CanTick {
     private final static MapStateStore s = MapStateStore.getInstance();
     private final static GlobalTimer timer = GlobalTimer.getInstance();
     public final static int cost = 300;
-    public final static MapStateStore m = MapStateStore.getInstance();
 
     private MapBoard possibleMaps;
     private boolean[][] mapSpots;
