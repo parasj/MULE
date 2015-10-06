@@ -20,10 +20,6 @@ public class MapStateStore {
         return currentState;
     }
 
-    public void setCurrentState(MapControllerStates currentState) {
-        this.currentState = currentState;
-    }
-
     private MapControllerStates currentState;
 
     public boolean isFromTownGoToPub() {

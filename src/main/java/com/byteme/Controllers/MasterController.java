@@ -120,6 +120,10 @@ public class MasterController {
         }
     }
 
+    public BoardController getBoardController() {
+        return boardController;
+    }
+
    /* public void countDownTimer() {
         Timer timer = new Timer();
         timer.schedule(new TimerTask() {

@@ -14,9 +14,9 @@ import java.util.ResourceBundle;
  * MULE
  */
 public class GameStartHandler extends MapStateHandler {
-    private GameStartStore st = GameStartStore.getInstance();
+    private final static GameStartStore st = GameStartStore.getInstance();
     private final static MapStateStore m = MapStateStore.getInstance();
-    public ConfigRepository r = ConfigRepository.getInstance();
+    private final static ConfigRepository r = ConfigRepository.getInstance();
 
     public GameStartHandler(BoardController boardController) {
         super(boardController);

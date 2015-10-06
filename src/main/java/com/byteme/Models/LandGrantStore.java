@@ -17,7 +17,7 @@ public class LandGrantStore {
     }
 
     private LandGrantStore() {
-        players = new ArrayList<PlayerConfigParams>(configRepository.getPlayers());
+        players = new ArrayList<>(configRepository.getPlayers());
         currentPlayer = 0;
         currentPropertyCount = 0;
     }
