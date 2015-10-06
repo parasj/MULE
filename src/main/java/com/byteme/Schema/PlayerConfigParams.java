@@ -11,6 +11,8 @@ public class PlayerConfigParams implements Comparable<PlayerConfigParams> {
     private Race race;
     private String color;
     private int money;
+    //Paras, should this be stored here?
+    private int timeLeft;
 
     public int getOrder() {
         return order;
@@ -82,6 +84,19 @@ public class PlayerConfigParams implements Comparable<PlayerConfigParams> {
     public int calcScore() {
         //TODO Take into account resources
         return (this.money + 500 * properties.size());
+    }
+
+    public void calcTimeLeft() {
+        //TODO calculate the time left
+        this.timeLeft = 25;
+    }
+
+    public int getTimeLeft() {
+        return timeLeft;
+    }
+
+    public void setTimeLeft(int timeLeft) {
+        this.timeLeft = timeLeft;
     }
 
     @Override

@@ -2,6 +2,7 @@ package com.byteme.Controllers;
 
 import com.byteme.Models.ConfigRepository;
 import com.byteme.Models.LandGrantStore;
+import com.byteme.Models.MapStateStore;
 import com.byteme.Schema.MapControllerStates;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.BorderPane;
@@ -14,6 +15,7 @@ import java.util.ResourceBundle;
  */
 public class LandGrantHandler extends MapStateHandler {
     private LandGrantStore s = LandGrantStore.getInstance();
+    public final static MapStateStore m = MapStateStore.getInstance();
 
     private static final int MAX_PROPERTIES = 2;
 
@@ -46,9 +48,11 @@ public class LandGrantHandler extends MapStateHandler {
         // Land Grant is only 2 turns per player
         s.incrPlayer();
         if (s.getCurrentPropertyCount() < MAX_PROPERTIES) {
+            m.setCurrentPlayer(m.getCurrentPlayer() + 1);
             getBoardController().setPlayer(s.getCurrentPlayer());
         } else {
             getBoardController().setPlayer(ConfigRepository.getInstance().getPlayerConfig(1));
+            m.setCurrentPlayer(0);
             getBoardController().updateState(MapControllerStates.LAND_PURCHASE);
         }
     }
@@ -56,6 +60,7 @@ public class LandGrantHandler extends MapStateHandler {
     @Override
     public void stateChanged() {
         getBoardController().getPhaseLabel().setText("Land Grant");
+        getBoardController().setPlayer(s.getCurrentPlayer());
         getBoardController().getMoneyLabel().setText("");
         getBoardController().getRoundLabel().setText("");
         getBoardController().getTimerLabel().setText("");

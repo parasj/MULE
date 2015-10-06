@@ -23,27 +23,31 @@ public class PubController {
     private static ConfigRepository configRepository = ConfigRepository.getInstance();
     private int[] roundBonusArr = {50, 50, 50, 100, 100, 100, 100, 150, 150, 150, 150, 200};
     private MapStateStore s = MapStateStore.getInstance();
+    public ConfigRepository r = ConfigRepository.getInstance();
 
-    private MapController mapController;
+//    private MapController mapController;
 
     public PubController() {
 
     }
 
-    public void setMapController(MapController mapController) {
-        this.mapController = mapController;
-    }
+//    public void setMapController(MapController mapController) {
+//        this.mapController = mapController;
+//    }
 
     public void goToMap() {
-        MapStateStore.getInstance().setTimeLeft(calcTimeLeft(s.getPlayerAt(s.getCurrentPlayer())));
+        if (s.getCurrentPlayer() < r.getTotalPlayers() - 1) {
+            s.getPlayerAt(s.getCurrentPlayer()).calcTimeLeft();
+            s.setCurrentPlayer(s.getCurrentPlayer() + 1);
+        } else {
+            s.setCurrentRound(s.getCurrentRound() + 1);
+            s.setCurrentPlayer(0);
+            s.sortPlayers();
+        }
         MapStateStore.getInstance().setCurrentState(MapControllerStates.GAME_START);
         MasterController.getInstance().map();
     }
 
-    public int calcTimeLeft(PlayerConfigParams player) {
-        //TODO calculate the time left
-        return 15;
-    }
     private int getTimeBonus(int timeLeft) {
         if (timeLeft >= 37) {
             return 200;
@@ -58,7 +62,7 @@ public class PubController {
 
     private void getMoney() {
         PlayerConfigParams currentPlayer = s.getPlayerAt(s.getCurrentPlayer());
-        int timeLeft = MapStateStore.getInstance().getTimeLeft();
+        int timeLeft = currentPlayer.getTimeLeft();
         int roundBonus = roundBonusArr[MapStateStore.getInstance().getCurrentRound()];
         Random rand = new Random();
         int timeBonus = rand.nextInt(getTimeBonus(timeLeft) + 1);
@@ -72,7 +76,11 @@ public class PubController {
 
     public void rerender() {
         getMoney();
-        if (playerLabel != null) playerLabel.setText(String.format("Player %d %s", MapStateStore.getInstance().getCurrentPlayer(), s.getPlayerAt(s.getCurrentPlayer()).getName()));
-        if (moneyLabel != null) moneyLabel.setText("MONEY: " + s.getPlayerAt(s.getCurrentPlayer()).getMoney());
+        if (playerLabel != null) {
+            playerLabel.setText(String.format("Player %d %s", MapStateStore.getInstance().getCurrentPlayer(), s.getPlayerAt(s.getCurrentPlayer()).getName()));
+        }
+        if (moneyLabel != null) {
+            moneyLabel.setText("MONEY: " + s.getPlayerAt(s.getCurrentPlayer()).getMoney());
+        }
     }
 }

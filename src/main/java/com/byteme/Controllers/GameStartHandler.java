@@ -3,6 +3,7 @@ package com.byteme.Controllers;
 import com.byteme.Models.GameStartStore;
 import com.byteme.Models.MapStateStore;
 import com.byteme.Schema.MapControllerStates;
+import com.byteme.Schema.PlayerConfigParams;
 import javafx.scene.input.MouseEvent;
 
 import java.net.URL;
@@ -68,18 +69,13 @@ public class GameStartHandler extends MapStateHandler {
 
     @Override
     public void tick() {
-        if (m.getTimeLeft() > 0) {
-            m.setTimeLeft(m.getTimeLeft() - 1);
+        PlayerConfigParams p = m.getPlayerAt(m.getCurrentPlayer());
+        if (p.getTimeLeft() > 0) {
+            p.setTimeLeft(p.getTimeLeft() - 1);
+            getBoardController().getTimerLabel().setText("" + p.getTimeLeft());
         } else {
             getBoardController().updateState(MapControllerStates.TURN_OVER);
             MasterController.getInstance().pubScene();
-            if (m.getCurrentPlayer() < m.getNumPlayers() - 1) {
-                m.setCurrentPlayer(m.getCurrentPlayer() + 1);
-            } else {
-                m.setCurrentRound(m.getCurrentRound() + 1);
-                m.setCurrentPlayer(0);
-                m.sortPlayers();
-            }
         }
     }
 
