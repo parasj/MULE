@@ -224,11 +224,10 @@ public class BoardController implements Initializable, CanTick {
      * Only does so if tile is not already owned.
      *
      * @param tile The tile whose color must be set.
-     * @return Whether the tile was set or not
      */
     public void setColorTile(BorderPane tile, PlayerConfigParams player) {
-        int row = map.getRowIndex(tile);
-        int column = map.getColumnIndex(tile);
+        int row = GridPane.getRowIndex(tile);
+        int column = GridPane.getColumnIndex(tile);
         String color = player.getColor();
         tile.setStyle("-fx-border-color: " + color.toLowerCase() + ";" + "-fx-border-width: 6px;");
         player.addProperty(new Property(column, row, player));
@@ -236,8 +235,8 @@ public class BoardController implements Initializable, CanTick {
     }
 
     public boolean owned(BorderPane tile) {
-        int row = map.getRowIndex(tile);
-        int column = map.getColumnIndex(tile);
+        int row = GridPane.getRowIndex(tile);
+        int column = GridPane.getColumnIndex(tile);
         return mapSpots[row][column];
     }
 

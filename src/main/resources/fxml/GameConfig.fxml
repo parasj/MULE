@@ -1,64 +1,58 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
-<?import javafx.collections.FXCollections?>
-<?import javafx.scene.control.*?>
-<?import javafx.scene.layout.Pane?>
+<?import javafx.geometry.*?>
 <?import javafx.scene.text.*?>
-<?import java.lang.String?>
-<Pane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0"
-      prefWidth="600.0" style="-fx-background-color: #000099;" xmlns="http://javafx.com/javafx/8.0.40"
-      xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.byteme.Controllers.ConfigurationController">
-    <Label layoutX="43.0" layoutY="115.0" text="Difficulty" textFill="RED">
-        <font>
-            <Font size="24.0"/>
-        </font>
-    </Label>
-   <Label layoutX="43.0" layoutY="263.0" text="Number of Players" textFill="RED">
-       <font>
-           <Font size="24.0"/>
-       </font>
-   </Label>
-   <Button id="btnOk" fx:id="gameConfigBtn" alignment="BASELINE_CENTER" defaultButton="true" layoutX="384.0"
-           layoutY="251.0" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity"
-           mnemonicParsing="false" onAction="#saveGameConfig" prefHeight="39.0" prefWidth="110.0" text="OK"
-           textAlignment="CENTER">
-       <font>
-           <Font size="18.0"/>
-       </font>
-   </Button>
-   <Label layoutX="364.0" layoutY="112.0" text="Map" textFill="RED">
-       <font>
-           <Font size="24.0"/>
-       </font>
-   </Label>
-   <ChoiceBox fx:id="mapType" layoutX="364.0" layoutY="158.0" prefWidth="150.0" value="Standard Map">
-       <FXCollections fx:factory="observableArrayList">
-           <String fx:value="Standard Map"/>
-           <String fx:value="Map 2"/>
-           <String fx:value="Map 3"/>
-           <String fx:value="Random Map"/>
-       </FXCollections>
-   </ChoiceBox>
-   <Slider fx:id="numPlayersSlider" blockIncrement="1.0" layoutX="43.0" layoutY="318.0" majorTickUnit="1.0" max="4.0"
-           min="2.0" minorTickCount="0" prefHeight="17.0" prefWidth="255.0" showTickMarks="true" snapToTicks="true"
-           value="2.0"/>
-   <Label layoutX="188.0" layoutY="37.0" text="Game Configurations" textFill="RED">
-       <font>
-           <Font size="24.0"/>
-       </font>
-   </Label>
-   <Separator layoutX="122.0" layoutY="36.0" prefHeight="2.0" prefWidth="373.0"/>
-   <Separator layoutX="122.0" layoutY="71.0" prefHeight="2.0" prefWidth="373.0"/>
-   <RadioButton fx:id="difficultyEasy" layoutX="43.0" layoutY="160.0" mnemonicParsing="false" selected="true"
-                text="Beginner" textFill="#fc0000">
-       <toggleGroup>
-           <ToggleGroup fx:id="DifficultyGroup"/>
-       </toggleGroup>
-   </RadioButton>
-   <RadioButton fx:id="difficultyNormal" layoutX="43.0" layoutY="191.0" mnemonicParsing="false" text="Normal"
-                textFill="#fc0000" toggleGroup="$DifficultyGroup"/>
-   <RadioButton fx:id="difficultyHard" layoutX="43.0" layoutY="219.0" mnemonicParsing="false" text="Tournament"
-                textFill="#fc0000" toggleGroup="$DifficultyGroup"/>
-   <Label layoutX="43.0" layoutY="345.0" prefHeight="21.0" prefWidth="255.0"
-          text="  2                           3                          4" textFill="RED"/>
+<?import javafx.scene.control.*?>
+<?import java.lang.*?>
+<?import javafx.scene.layout.*?>
+<?import javafx.collections.*?>
+
+<Pane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0" style="-fx-background-color: #000099;" xmlns="http://javafx.com/javafx/8.0.40" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.byteme.Controllers.ConfigurationController">
+   <children>
+      <Label layoutX="43.0" layoutY="115.0" text="Difficulty" textFill="RED">
+         <font>
+            <Font size="24.0" />
+         </font>
+      </Label>
+      <Label layoutX="43.0" layoutY="263.0" text="Number of Players" textFill="RED">
+         <font>
+            <Font size="24.0" />
+         </font>
+      </Label>
+      <Button id="btnOk" fx:id="gameConfigBtn" alignment="BASELINE_CENTER" defaultButton="true" layoutX="384.0" layoutY="251.0" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" mnemonicParsing="false" onAction="#saveGameConfig" prefHeight="39.0" prefWidth="110.0" text="OK" textAlignment="CENTER">
+         <font>
+            <Font size="18.0" />
+         </font>
+      </Button>
+      <Label layoutX="364.0" layoutY="112.0" text="Map" textFill="RED">
+         <font>
+            <Font size="24.0" />
+         </font>
+      </Label>
+      <ChoiceBox fx:id="mapType" layoutX="364.0" layoutY="158.0" prefWidth="150.0" value="Standard Map">
+         <items>
+            <FXCollections fx:factory="observableArrayList">
+               <String fx:value="Standard Map" />
+               <String fx:value="Map 2" />
+               <String fx:value="Map 3" />
+               <String fx:value="Random Map" />
+            </FXCollections>
+         </items>
+      </ChoiceBox>
+      <Slider fx:id="numPlayersSlider" blockIncrement="1.0" layoutX="43.0" layoutY="318.0" majorTickUnit="1.0" max="4.0" min="2.0" minorTickCount="0" prefHeight="17.0" prefWidth="255.0" showTickMarks="true" snapToTicks="true" value="2.0" />
+      <Label layoutX="188.0" layoutY="37.0" text="Game Configurations" textFill="RED">
+         <font>
+            <Font size="24.0" />
+         </font>
+      </Label>
+      <Separator layoutX="122.0" layoutY="36.0" prefHeight="2.0" prefWidth="373.0" />
+      <Separator layoutX="122.0" layoutY="71.0" prefHeight="2.0" prefWidth="373.0" />
+      <RadioButton fx:id="difficultyEasy" layoutX="43.0" layoutY="160.0" mnemonicParsing="false" selected="true" text="Beginner" textFill="#fc0000">
+         <toggleGroup>
+            <ToggleGroup fx:id="DifficultyGroup" />
+         </toggleGroup></RadioButton>
+      <RadioButton fx:id="difficultyNormal" layoutX="43.0" layoutY="191.0" mnemonicParsing="false" text="Normal" textFill="#fc0000" toggleGroup="$DifficultyGroup" />
+      <RadioButton fx:id="difficultyHard" layoutX="43.0" layoutY="219.0" mnemonicParsing="false" text="Tournament" textFill="#fc0000" toggleGroup="$DifficultyGroup" />
+      <Label layoutX="43.0" layoutY="345.0" prefHeight="21.0" prefWidth="255.0" text="  2                           3                          4" textFill="RED" />
+   </children>
 </Pane>

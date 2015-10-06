@@ -10,7 +10,7 @@ import java.util.ArrayList;
 import java.util.Locale;
 
 /**
- * Created by Siddarth on 9/13/2015.
+ * MULE
  */
 public class ConfigurationController {
 
@@ -71,7 +71,7 @@ public class ConfigurationController {
         System.out.println("NUMBER OF PLAYERS : " + numPlayers);
         System.out.println("MAP               : " + map + "\t" + mapType.getValue());
         configRepository.setGameConfig(new GameConfigParams(difficulty, map, numPlayers));
-        this.numPlayers = numPlayers;
+        ConfigurationController.numPlayers = numPlayers;
         MasterController.getInstance().playerConfig();
     }
 
@@ -114,9 +114,9 @@ public class ConfigurationController {
     @FXML
     private TextField playerName;
     @FXML
-    private ChoiceBox<String> playerRace;
+    private ChoiceBox playerRace;
     @FXML
-    private ChoiceBox<String> playerColor;
+    private ChoiceBox playerColor;
     @FXML
     private Label playerNumber;
 

@@ -6,7 +6,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 /**
- * Created by parasjain on 10/3/15.
+ * MULE
  */
 public class LandGrantStore {
     private final static ConfigRepository configRepository = ConfigRepository.getInstance();
@@ -36,7 +36,7 @@ public class LandGrantStore {
         return players.get(currentPlayer);
     }
 
-    public void incrPropertyCount() {
+    private void incrPropertyCount() {
         currentPropertyCount++;
     }
 

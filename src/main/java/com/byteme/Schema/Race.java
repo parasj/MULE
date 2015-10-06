@@ -1,7 +1,7 @@
 package com.byteme.Schema;
 
 /**
- * Created by parasjain on 9/9/15.
+ * MULE
  */
 public enum Race {
     FLAPPER, HUMAN, BONZOID, UGAITE, BUZZITE;

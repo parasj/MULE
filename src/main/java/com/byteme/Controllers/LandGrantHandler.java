@@ -11,11 +11,11 @@ import java.net.URL;
 import java.util.ResourceBundle;
 
 /**
- * Created by rishav on 10/2/2015.
+ * MULE
  */
 public class LandGrantHandler extends MapStateHandler {
     private final LandGrantStore s = LandGrantStore.getInstance();
-    public final static MapStateStore m = MapStateStore.getInstance();
+    private final static MapStateStore m = MapStateStore.getInstance();
 
     private static final int MAX_PROPERTIES = 2;
 

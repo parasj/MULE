@@ -10,7 +10,7 @@ import javafx.scene.control.Label;
 import java.util.Random;
 
 /**
- * Created by Daniel on 9/30/2015.
+ * MULE
  */
 public class PubController {
 

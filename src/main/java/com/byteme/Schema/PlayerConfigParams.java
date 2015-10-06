@@ -3,7 +3,7 @@ package com.byteme.Schema;
 import java.util.ArrayList;
 
 /**
- * Created by parasjain on 9/9/15.
+ * MULE
  */
 public class PlayerConfigParams implements Comparable<PlayerConfigParams> {
     private final String name;

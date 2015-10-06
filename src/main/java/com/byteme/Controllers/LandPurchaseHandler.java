@@ -10,7 +10,7 @@ import java.net.URL;
 import java.util.ResourceBundle;
 
 /**
- * Created by rishav on 10/2/2015.
+ * MULE
  */
 public class LandPurchaseHandler extends MapStateHandler {
     private final LandPurchaseStore s = LandPurchaseStore.getInstance();
@@ -38,10 +38,10 @@ public class LandPurchaseHandler extends MapStateHandler {
             getBoardController().ownedMessage(); // Property is owned, just display warning
         else {
             // Change tile background color to player color
-            if (s.getCurrentPlayer().getMoney() >= getBoardController().getCost()) {
+            if (s.getCurrentPlayer().getMoney() >= BoardController.getCost()) {
                 s.incrPropertyCount();
                 getBoardController().setColorTile(tile, s.getCurrentPlayer());
-                s.getCurrentPlayer().payMoney(getBoardController().getCost());
+                s.getCurrentPlayer().payMoney(BoardController.getCost());
                 checkIfDone();
             } else {
                 log("You do not have enough money!");

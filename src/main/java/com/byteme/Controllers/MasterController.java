@@ -10,7 +10,7 @@ import java.io.IOException;
 //import java.util.Timer;
 //import java.util.TimerTask;
 /**
- * Created by Siddarth Senthilkumar on 9/24/15.
+ * MULE
  */
 public class MasterController {
 
@@ -105,7 +105,7 @@ public class MasterController {
         return currStage;
     }
 
-    public void setBoardController(BoardController mc) {
+    private void setBoardController(BoardController mc) {
         boardController = mc;
     }
 

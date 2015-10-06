@@ -4,7 +4,7 @@ import com.byteme.Models.MapStateStore;
 import com.byteme.Schema.MapControllerStates;
 
 /**
- * Created by Daniel on 9/18/2015.
+ * MULE
  */
 public class TownController {
 
