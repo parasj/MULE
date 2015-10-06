@@ -11,6 +11,8 @@ import java.util.Collections;
 public class GameStartStore {
     private static GameStartStore ourInstance = new GameStartStore();
 
+    private int currentPlayer;
+
     public static GameStartStore getInstance() {
         return ourInstance;
     }
@@ -19,4 +21,15 @@ public class GameStartStore {
     private GameStartStore() {
     }
 
+    public int getCurrentPlayer() {
+        return currentPlayer;
+    }
+
+    public void setCurrentPlayer(int currentPlayer) {
+        this.currentPlayer = currentPlayer;
+    }
+
+    public void incCurrentPlayer() {
+        currentPlayer = (currentPlayer + 1) % ConfigRepository.getInstance().getTotalPlayers();
+    }
 }

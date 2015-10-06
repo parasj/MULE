@@ -53,10 +53,10 @@ public class LandPurchaseHandler extends MapStateHandler {
     private void checkIfDone() {
         // Land Purchase is only 2 turns per player
         if (s.getCurrentPropertyCount() <= 2 * s.getPlayers().size()) {
-            getBoardController().setPlayer(s.getCurrentPlayer());
-            getBoardController().setMoney(s.getCurrentPlayer());
             m.setCurrentPlayer(m.getCurrentPlayer() + 1);
             s.incrPlayer();
+            getBoardController().setPlayer(s.getCurrentPlayer());
+            getBoardController().setMoney(s.getCurrentPlayer());
         } else {
             getBoardController().updateState(MapControllerStates.GAME_START);
             MapStateStore.getInstance().sortPlayers();
@@ -73,7 +73,8 @@ public class LandPurchaseHandler extends MapStateHandler {
         getBoardController().getMoneyLabel().setText("");
         getBoardController().getRoundLabel().setText("");
         getBoardController().getTimerLabel().setText("");
-        checkIfDone();
+        getBoardController().setPlayer(s.getCurrentPlayer());
+        getBoardController().setMoney(s.getCurrentPlayer());
     }
 
     @Override

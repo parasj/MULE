@@ -37,7 +37,7 @@ public class MapStateStore {
     private boolean fromTownGoToPub;
 
     private int currentPlayer;
-    private int currentRound;
+    private int currentRound = 1;
 
     private int passCounter; // Used to determine when to stop property selection immediately
     private int purchaseOpportunities; // Used to determine duration of full property selection
@@ -100,6 +100,9 @@ public class MapStateStore {
 
     public void sortPlayers() {
         Collections.sort(players);
+        for (int index = 0; index < players.size(); index++) {
+            players.get(index).setOrder(index + 1);
+        }
     }
 
     public PlayerConfigParams getPlayerAt(int index) {

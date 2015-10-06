@@ -1,4 +1,5 @@
 package com.byteme.Controllers;
+import com.byteme.Models.GameStartStore;
 import com.byteme.Models.MapStateStore;
 import com.byteme.Models.ConfigRepository;
 import com.byteme.Schema.MapControllerStates;
@@ -20,7 +21,7 @@ public class PubController {
     @FXML
     private Label moneyLabel;
 
-    private static ConfigRepository configRepository = ConfigRepository.getInstance();
+    private GameStartStore g = GameStartStore.getInstance();
     private int[] roundBonusArr = {50, 50, 50, 100, 100, 100, 100, 150, 150, 150, 150, 200};
     private MapStateStore s = MapStateStore.getInstance();
     public ConfigRepository r = ConfigRepository.getInstance();
@@ -36,16 +37,16 @@ public class PubController {
 //    }
 
     public void goToMap() {
-        if (s.getCurrentPlayer() < r.getTotalPlayers() - 1) {
-            s.getPlayerAt(s.getCurrentPlayer()).calcTimeLeft();
-            s.setCurrentPlayer(s.getCurrentPlayer() + 1);
+        if (g.getCurrentPlayer() < r.getTotalPlayers() - 1) {
+            g.incCurrentPlayer();
+            s.getPlayerAt(g.getCurrentPlayer()).calcTimeLeft();
         } else {
             s.setCurrentRound(s.getCurrentRound() + 1);
-            s.setCurrentPlayer(0);
+            g.setCurrentPlayer(1);
             s.sortPlayers();
         }
-        MapStateStore.getInstance().setCurrentState(MapControllerStates.GAME_START);
         MasterController.getInstance().map();
+        MapStateStore.getInstance().setCurrentState(MapControllerStates.GAME_START);
     }
 
     private int getTimeBonus(int timeLeft) {
@@ -61,7 +62,7 @@ public class PubController {
     }
 
     private void getMoney() {
-        PlayerConfigParams currentPlayer = s.getPlayerAt(s.getCurrentPlayer());
+        PlayerConfigParams currentPlayer = s.getPlayerAt(g.getCurrentPlayer());
         int timeLeft = currentPlayer.getTimeLeft();
         int roundBonus = roundBonusArr[MapStateStore.getInstance().getCurrentRound()];
         Random rand = new Random();
