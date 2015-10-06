@@ -183,12 +183,13 @@ public class ConfigurationController {
     private int chooseMoneyAmount(String race) {
         race = race.toLowerCase();
 
-        if (race.equals("flapper")) {
-            return 1600;
-        } else if (race.equals("human")) {
-            return 600;
-        } else {
-            return 1000;
+        switch (race) {
+            case "flapper":
+                return 1600;
+            case "human":
+                return 600;
+            default:
+                return 1000;
         }
     }
 
