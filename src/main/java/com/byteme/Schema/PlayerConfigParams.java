@@ -1,15 +1,14 @@
 package com.byteme.Schema;
 
 import java.util.ArrayList;
-import java.util.Comparator;
 
 /**
  * Created by parasjain on 9/9/15.
  */
 public class PlayerConfigParams implements Comparable<PlayerConfigParams> {
-    private String name;
-    private Race race;
-    private String color;
+    private final String name;
+    private final Race race;
+    private final String color;
     private int money;
     private int timeLeft;
 

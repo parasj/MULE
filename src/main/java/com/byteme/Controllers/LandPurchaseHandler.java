@@ -13,8 +13,8 @@ import java.util.ResourceBundle;
  * Created by rishav on 10/2/2015.
  */
 public class LandPurchaseHandler extends MapStateHandler {
-    private LandPurchaseStore s = LandPurchaseStore.getInstance();
-    private MapStateStore m = MapStateStore.getInstance();
+    private final LandPurchaseStore s = LandPurchaseStore.getInstance();
+    private final MapStateStore m = MapStateStore.getInstance();
 
     public LandPurchaseHandler(BoardController boardController) {
         super(boardController);

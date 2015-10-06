@@ -19,7 +19,7 @@ public class ConfigRepository {
         return instance;
     }
 
-    private ConfigStore configStore;
+    private final ConfigStore configStore;
     private GameConfigParams gameConfigParams;
     private Map<Integer, PlayerConfigParams> playerConfigList;
 

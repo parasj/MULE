@@ -7,7 +7,8 @@ import com.byteme.Schema.MapType;
  * Created by parasjain on 9/16/15.
  */
 public class MapBoard {
-    private int height, width;
+    private final int height;
+    private final int width;
     private MapTile[][] board;
 
     private final MapTile[][] standardMap =

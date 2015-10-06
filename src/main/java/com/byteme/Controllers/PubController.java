@@ -4,7 +4,6 @@ import com.byteme.Models.ConfigRepository;
 import com.byteme.Schema.MapControllerStates;
 import com.byteme.Schema.PlayerConfigParams;
 import javafx.fxml.FXML;
-import javafx.fxml.Initializable;
 import javafx.scene.control.Label;
 
 import java.util.Random;
@@ -21,9 +20,9 @@ public class PubController {
     private Label moneyLabel;
 
     private static ConfigRepository configRepository = ConfigRepository.getInstance();
-    private int[] roundBonusArr = {50, 50, 50, 100, 100, 100, 100, 150, 150, 150, 150, 200};
-    private MapStateStore s = MapStateStore.getInstance();
-    public ConfigRepository r = ConfigRepository.getInstance();
+    private final int[] roundBonusArr = {50, 50, 50, 100, 100, 100, 100, 150, 150, 150, 150, 200};
+    private final MapStateStore s = MapStateStore.getInstance();
+    public final ConfigRepository r = ConfigRepository.getInstance();
 
 //    private MapController mapController;
 

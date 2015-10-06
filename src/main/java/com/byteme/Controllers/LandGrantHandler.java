@@ -14,7 +14,7 @@ import java.util.ResourceBundle;
  * Created by rishav on 10/2/2015.
  */
 public class LandGrantHandler extends MapStateHandler {
-    private LandGrantStore s = LandGrantStore.getInstance();
+    private final LandGrantStore s = LandGrantStore.getInstance();
     public final static MapStateStore m = MapStateStore.getInstance();
 
     private static final int MAX_PROPERTIES = 2;

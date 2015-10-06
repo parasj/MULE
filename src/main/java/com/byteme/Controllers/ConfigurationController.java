@@ -14,7 +14,7 @@ import java.util.Locale;
  */
 public class ConfigurationController {
 
-    private ConfigRepository configRepository = ConfigRepository.getInstance();
+    private final ConfigRepository configRepository = ConfigRepository.getInstance();
     private static int numPlayers = -1;
     private int currentPlayer = 1;
 
@@ -114,9 +114,9 @@ public class ConfigurationController {
     @FXML
     private TextField playerName;
     @FXML
-    private ChoiceBox playerRace;
+    private ChoiceBox<String> playerRace;
     @FXML
-    private ChoiceBox playerColor;
+    private ChoiceBox<String> playerColor;
     @FXML
     private Label playerNumber;
 

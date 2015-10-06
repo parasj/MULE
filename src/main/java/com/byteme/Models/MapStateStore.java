@@ -10,7 +10,7 @@ import java.util.Collections;
  * Created by parasjain on 10/1/15.
  */
 public class MapStateStore {
-    private static MapStateStore ourInstance = new MapStateStore();
+    private static final MapStateStore ourInstance = new MapStateStore();
 
     public static MapStateStore getInstance() {
         return ourInstance;
@@ -43,7 +43,7 @@ public class MapStateStore {
     private int purchaseOpportunities; // Used to determine duration of full property selection
     private int numPlayers;
     public ArrayList<PlayerConfigParams> players;
-    public ConfigRepository r = ConfigRepository.getInstance();
+    public final ConfigRepository r = ConfigRepository.getInstance();
 
     public int getCurrentPlayer() {
         return currentPlayer;
