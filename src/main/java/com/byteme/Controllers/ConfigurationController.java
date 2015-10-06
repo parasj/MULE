@@ -203,6 +203,6 @@ public class ConfigurationController {
      */
     private PlayerConfigParams playerConfigParser(String name, String race, String color, int money, int order) {
         Race parsedRace = Race.valueOf(race.toUpperCase(Locale.ENGLISH));
-        return new PlayerConfigParams(name, parsedRace, color, money, new ArrayList<Property>(), order);
+        return new PlayerConfigParams(name, parsedRace, color, money, new ArrayList<>(), order);
     }
 }
