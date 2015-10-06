@@ -12,3 +12,7 @@ Samuel Isang
 
 ## Running the program
 `gradle run`
+
+
+[![Bitdeli Badge](https://d2weczhvl823v0.cloudfront.net/parasj/mule/trend.png)](https://bitdeli.com/free "Bitdeli Badge")
+
