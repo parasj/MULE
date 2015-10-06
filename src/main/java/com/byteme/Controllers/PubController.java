@@ -46,6 +46,7 @@ public class PubController {
         if (timeLeft >= 37) return 200;
         else if (timeLeft >= 25) return 150;
         else if (timeLeft >= 12) return 100;
+        else if (timeLeft >= 0) return 50;
         else return 0;
     }
 

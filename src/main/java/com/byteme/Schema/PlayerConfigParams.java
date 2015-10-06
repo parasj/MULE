@@ -87,7 +87,7 @@ public class PlayerConfigParams implements Comparable<PlayerConfigParams> {
 
     public void calcTimeLeft() {
         //TODO calculate the time left
-        this.timeLeft = 25;
+        this.timeLeft = 15;
     }
 
     public int getTimeLeft() {
