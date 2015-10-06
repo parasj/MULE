@@ -114,9 +114,9 @@ public class ConfigurationController {
     @FXML
     private TextField playerName;
     @FXML
-    private ChoiceBox<String> playerRace;
+    private ChoiceBox playerRace;
     @FXML
-    private ChoiceBox<String> playerColor;
+    private ChoiceBox playerColor;
     @FXML
     private Label playerNumber;
 
