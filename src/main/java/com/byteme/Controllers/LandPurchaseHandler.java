@@ -76,6 +76,7 @@ public class LandPurchaseHandler extends MapStateHandler {
         getBoardController().getMoneyLabel().setText("");
         getBoardController().getRoundLabel().setText("");
         getBoardController().getTimerLabel().setText("");
+        checkIfDone();
     }
 
     @Override
