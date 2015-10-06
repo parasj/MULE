@@ -153,7 +153,7 @@ public class ConfigurationController {
             System.out.println("NAME       : " + name);
             System.out.println("RACE       : " + race);
             System.out.println("COLOR      : " + color);
-            configRepository.setPlayerConfig(playerConfigParser(name, race, color, money), currentPlayer);
+            configRepository.setPlayerConfig(playerConfigParser(name, race, color, money, currentPlayer), currentPlayer);
 
             if (currentPlayer >= numPlayers) {
                 // TODO: Create save dialog box for the player to save configuration options
@@ -200,8 +200,8 @@ public class ConfigurationController {
      * @param money The starting money of the player
      * @return A PlayerConfigParams object containing this player's information
      */
-    private PlayerConfigParams playerConfigParser(String name, String race, String color, int money) {
+    private PlayerConfigParams playerConfigParser(String name, String race, String color, int money, int order) {
         Race parsedRace = Race.valueOf(race.toUpperCase(Locale.ENGLISH));
-        return new PlayerConfigParams(name, parsedRace, color, money, new ArrayList<Property>());
+        return new PlayerConfigParams(name, parsedRace, color, money, new ArrayList<Property>(), order);
     }
 }

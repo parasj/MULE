@@ -48,11 +48,10 @@ public class LandGrantHandler extends MapStateHandler {
         // Land Grant is only 2 turns per player
         s.incrPlayer();
         if (s.getCurrentPropertyCount() < MAX_PROPERTIES) {
-            m.setCurrentPlayer(m.getCurrentPlayer() + 1);
             getBoardController().setPlayer(s.getCurrentPlayer());
         } else {
             getBoardController().setPlayer(ConfigRepository.getInstance().getPlayerConfig(1));
-            m.setCurrentPlayer(0);
+            m.setCurrentPlayer(1);
             getBoardController().updateState(MapControllerStates.LAND_PURCHASE);
         }
     }
