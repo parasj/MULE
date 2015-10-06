@@ -14,6 +14,7 @@ public class GameStartStore {
 
 
     private GameStartStore() {
+
     }
 
     public int getCurrentPlayer() {
