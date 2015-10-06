@@ -67,7 +67,7 @@ public class PubController {
     private void getMoney() {
         PlayerConfigParams currentPlayer = s.getPlayerAt(g.getCurrentPlayer());
         int timeLeft = currentPlayer.getTimeLeft();
-        int roundBonus = roundBonusArr[MapStateStore.getInstance().getCurrentRound()];
+        int roundBonus = roundBonusArr[MapStateStore.getInstance().getCurrentRound() - 1];
         Random rand = new Random();
         int timeBonus = rand.nextInt(getTimeBonus(timeLeft) + 1);
         int moneyBonus = roundBonus * timeBonus;
@@ -84,7 +84,7 @@ public class PubController {
             playerLabel.setText(String.format("Player %d %s", g.getCurrentPlayer() + 1, s.getPlayerAt(g.getCurrentPlayer()).getName()));
         }
         if (moneyLabel != null) {
-            moneyLabel.setText("MONEY: " + s.getPlayerAt(s.getCurrentPlayer()).getMoney());
+            moneyLabel.setText("MONEY: " + s.getPlayerAt(g.getCurrentPlayer()).getMoney());
         }
     }
 
