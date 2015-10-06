@@ -252,4 +252,8 @@ public class BoardController implements Initializable, CanTick {
     private void log(String s) {
         System.out.println(s);
     }
+
+    public MapStateHandler getChildController() {
+        return childController;
+    }
 }

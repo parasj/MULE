@@ -1,5 +1,6 @@
 package com.byteme.Controllers;
 
+import com.byteme.Models.ConfigRepository;
 import com.byteme.Models.GameStartStore;
 import com.byteme.Models.MapStateStore;
 import com.byteme.Schema.MapControllerStates;
@@ -15,6 +16,7 @@ import java.util.ResourceBundle;
 public class GameStartHandler extends MapStateHandler {
     private GameStartStore s = GameStartStore.getInstance();
     private final static MapStateStore m = MapStateStore.getInstance();
+    public ConfigRepository r = ConfigRepository.getInstance();
 
     public GameStartHandler(BoardController boardController) {
         super(boardController);
@@ -71,5 +73,16 @@ public class GameStartHandler extends MapStateHandler {
     @Override
     public void initialize(URL location, ResourceBundle resources) {
 
+    }
+
+    public void nextPlayer() {
+        if (s.getCurrentPlayer() < r.getTotalPlayers() - 1) {
+            s.incCurrentPlayer();
+            m.getPlayerAt(s.getCurrentPlayer()).calcTimeLeft();
+        } else {
+            m.setCurrentRound(m.getCurrentRound() + 1);
+            s.setCurrentPlayer(1);
+            m.sortPlayers();
+        }
     }
 }

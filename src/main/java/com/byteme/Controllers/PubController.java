@@ -26,6 +26,7 @@ public class PubController {
     public ConfigRepository r = ConfigRepository.getInstance();
 
 //    private MapController mapController;
+    private BoardController boardController;
 
     public PubController() {
 
@@ -36,14 +37,17 @@ public class PubController {
 //    }
 
     public void goToMap() {
-        if (g.getCurrentPlayer() < r.getTotalPlayers() - 1) {
-            g.incCurrentPlayer();
-            s.getPlayerAt(g.getCurrentPlayer()).calcTimeLeft();
-        } else {
-            s.setCurrentRound(s.getCurrentRound() + 1);
-            g.setCurrentPlayer(1);
-            s.sortPlayers();
-        }
+//        if (g.getCurrentPlayer() < r.getTotalPlayers() - 1) {
+//            g.incCurrentPlayer();
+//            s.getPlayerAt(g.getCurrentPlayer()).calcTimeLeft();
+//        } else {
+//            s.setCurrentRound(s.getCurrentRound() + 1);
+//            g.setCurrentPlayer(1);
+//            s.sortPlayers();
+//        }
+
+        GameStartHandler gameStartHandler = (GameStartHandler) boardController.getChildController();
+        gameStartHandler.nextPlayer();
         MasterController.getInstance().map();
         MapStateStore.getInstance().setCurrentState(MapControllerStates.GAME_START);
     }
@@ -82,5 +86,9 @@ public class PubController {
         if (moneyLabel != null) {
             moneyLabel.setText("MONEY: " + s.getPlayerAt(s.getCurrentPlayer()).getMoney());
         }
+    }
+
+    public void setBoardController(BoardController boardController) {
+        this.boardController = boardController;
     }
 }

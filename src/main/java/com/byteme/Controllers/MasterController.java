@@ -114,6 +114,7 @@ public class MasterController {
             FXMLLoader loader = new FXMLLoader(getClass().getResource("/fxml/Map.fxml"));
             map = new Scene(loader.load());
             setBoardController(loader.getController());
+            pubController.setBoardController(boardController);
         } catch (IOException e) {
             e.printStackTrace();
         }
