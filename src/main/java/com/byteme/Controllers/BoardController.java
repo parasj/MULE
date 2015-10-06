@@ -111,7 +111,7 @@ public class BoardController implements Initializable, CanTick {
     /**** Timer ****/
     @Override
     public void tick() {
-        log("Tick");
+//        log("Tick");
         childController.tick();
     }
 
@@ -187,7 +187,19 @@ public class BoardController implements Initializable, CanTick {
     }
 
     public void setMoney(PlayerConfigParams player) {
-        moneyLabel.setText("MONEY: " + player.getMoney());
+        renderMoney(player.getMoney());
+    }
+
+    public void renderMoney(int m) {
+        getMoneyLabel().setText(String.format("Money: %6d", m));
+    }
+
+    public void renderRound(int r) {
+        getRoundLabel().setText(String.format("Round: %6d", r));
+    }
+
+    public void renderTimer(int t) {
+        getTimerLabel().setText(String.format("Timer: %6d", t));
     }
 
     public static int getCost() {
