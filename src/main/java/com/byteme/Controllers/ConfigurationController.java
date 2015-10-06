@@ -114,9 +114,9 @@ public class ConfigurationController {
     @FXML
     private TextField playerName;
     @FXML
-    private ChoiceBox playerRace;
+    private ChoiceBox<String> playerRace;
     @FXML
-    private ChoiceBox playerColor;
+    private ChoiceBox<String> playerColor;
     @FXML
     private Label playerNumber;
 
@@ -138,8 +138,8 @@ public class ConfigurationController {
 
             // Parse player's information
             name = playerName.getText();
-            race = (String) playerRace.getValue();
-            color = (String) playerColor.getValue();
+            race = playerRace.getValue();
+            color = playerColor.getValue();
             money = chooseMoneyAmount(race);
 
             // Remove color already chosen by another player

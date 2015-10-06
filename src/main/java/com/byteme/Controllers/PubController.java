@@ -13,28 +13,18 @@ import java.util.Random;
  * MULE
  */
 public class PubController {
+    private static final GameStartStore g = GameStartStore.getInstance();
+    private static final MapStateStore s = MapStateStore.getInstance();
+    public static final ConfigRepository r = ConfigRepository.getInstance();
+    private static final int[] roundBonusArr = {50, 50, 50, 100, 100, 100, 100, 150, 150, 150, 150, 200};
 
+    private BoardController boardController;
 
     @FXML
     private Label playerLabel;
     @FXML
     private Label moneyLabel;
 
-    private GameStartStore g = GameStartStore.getInstance();
-    private int[] roundBonusArr = {50, 50, 50, 100, 100, 100, 100, 150, 150, 150, 150, 200};
-    private MapStateStore s = MapStateStore.getInstance();
-    public ConfigRepository r = ConfigRepository.getInstance();
-
-//    private MapController mapController;
-    private BoardController boardController;
-
-    public PubController() {
-
-    }
-
-//    public void setMapController(MapController mapController) {
-//        this.mapController = mapController;
-//    }
 
     public void goToMap() {
 //        if (g.getCurrentPlayer() < r.getTotalPlayers() - 1) {
@@ -53,15 +43,10 @@ public class PubController {
     }
 
     private int getTimeBonus(int timeLeft) {
-        if (timeLeft >= 37) {
-            return 200;
-        } else if (timeLeft >= 25) {
-            return 150;
-        } else if (timeLeft >= 12) {
-            return 100;
-        } else {
-            return 0;
-        }
+        if (timeLeft >= 37) return 200;
+        else if (timeLeft >= 25) return 150;
+        else if (timeLeft >= 12) return 100;
+        else return 0;
     }
 
     private void getMoney() {

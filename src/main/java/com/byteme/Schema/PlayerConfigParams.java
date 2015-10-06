@@ -111,12 +111,12 @@ public class PlayerConfigParams implements Comparable<PlayerConfigParams> {
         PlayerConfigParams that = (PlayerConfigParams) o;
 
         if (money != that.money) return false;
+        if (timeLeft != that.timeLeft) return false;
         if (order != that.order) return false;
-        if (!name.equals(that.name)) return false;
+        if (name != null ? !name.equals(that.name) : that.name != null) return false;
         if (race != that.race) return false;
-        if (!color.equals(that.color)) return false;
-        return !(properties != null ? !properties.equals(that.properties) : that.properties != null);
-
+        if (color != null ? !color.equals(that.color) : that.color != null) return false;
+        return properties.equals(that.properties);
     }
 
     @Override

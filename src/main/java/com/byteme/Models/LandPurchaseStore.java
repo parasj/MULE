@@ -21,7 +21,7 @@ public class LandPurchaseStore {
     }
 
     private LandPurchaseStore() {
-        players = new ArrayList<PlayerConfigParams>(configRepository.getPlayers());
+        players = new ArrayList<>(configRepository.getPlayers());
         currentPlayer = 0;
         currentPropertyCount = 0;
     }
