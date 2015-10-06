@@ -83,5 +83,6 @@ public class GameStartHandler extends MapStateHandler {
         }
         st.incCurrentPlayer();
         m.getPlayerAt(st.getCurrentPlayer()).calcTimeLeft();
+        log("Player changed to " + st.getCurrentPlayer());
     }
 }
