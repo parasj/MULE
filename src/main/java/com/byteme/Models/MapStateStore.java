@@ -7,7 +7,7 @@ import java.util.ArrayList;
 import java.util.Collections;
 
 /**
- * Created by parasjain on 10/1/15.
+ * MULE
  */
 public class MapStateStore {
     private static final MapStateStore ourInstance = new MapStateStore();
@@ -42,8 +42,8 @@ public class MapStateStore {
     private int passCounter; // Used to determine when to stop property selection immediately
     private int purchaseOpportunities; // Used to determine duration of full property selection
     private int numPlayers;
-    public ArrayList<PlayerConfigParams> players;
-    public final ConfigRepository r = ConfigRepository.getInstance();
+    private ArrayList<PlayerConfigParams> players;
+    private final ConfigRepository r = ConfigRepository.getInstance();
 
     public int getCurrentPlayer() {
         return currentPlayer;

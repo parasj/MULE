@@ -4,7 +4,7 @@ import com.byteme.Schema.MapTile;
 import com.byteme.Schema.MapType;
 
 /**
- * Created by parasjain on 9/16/15.
+ * MULE
  */
 public class MapBoard {
     private final int height;

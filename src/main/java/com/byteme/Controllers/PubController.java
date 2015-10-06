@@ -9,7 +9,7 @@ import javafx.scene.control.Label;
 import java.util.Random;
 
 /**
- * Created by Daniel on 9/30/2015.
+ * MULE
  */
 public class PubController {
 
@@ -22,7 +22,7 @@ public class PubController {
     private static ConfigRepository configRepository = ConfigRepository.getInstance();
     private final int[] roundBonusArr = {50, 50, 50, 100, 100, 100, 100, 150, 150, 150, 150, 200};
     private final MapStateStore s = MapStateStore.getInstance();
-    public final ConfigRepository r = ConfigRepository.getInstance();
+    private final ConfigRepository r = ConfigRepository.getInstance();
 
 //    private MapController mapController;
 

@@ -4,7 +4,7 @@ import java.util.HashMap;
 import java.util.Map;
 
 /**
- * Created by parasjain on 9/18/15.
+ * MULE
  */
 public class FeatureSwitches {
     private static final FeatureSwitches ourInstance = new FeatureSwitches();

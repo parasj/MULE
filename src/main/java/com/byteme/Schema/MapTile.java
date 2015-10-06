@@ -4,7 +4,7 @@ import java.util.HashMap;
 import java.util.Map;
 
 /**
- * Created by parasjain on 9/16/15.
+ * MULE
  */
 public enum MapTile {
     P, M1, M2, M3, R, Town;

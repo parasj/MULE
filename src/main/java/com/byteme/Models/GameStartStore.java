@@ -1,7 +1,7 @@
 package com.byteme.Models;
 
 /**
- * Created by rishavbose365 on 10/5/2015.
+ * MULE
  */
 public class GameStartStore {
     private static final GameStartStore ourInstance = new GameStartStore();

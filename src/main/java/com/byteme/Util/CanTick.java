@@ -1,7 +1,7 @@
 package com.byteme.Util;
 
 /**
- * Created by parasjain on 10/3/15.
+ * MULE
  */
 public interface CanTick {
     void tick();

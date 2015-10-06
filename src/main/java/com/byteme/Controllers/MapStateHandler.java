@@ -6,7 +6,7 @@ import javafx.fxml.Initializable;
 import javafx.scene.input.MouseEvent;
 
 /**
- * Created by rishav on 10/2/2015.
+ * MULE
  */
 public abstract class MapStateHandler implements CanTick, Initializable {
 

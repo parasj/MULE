@@ -1,12 +1,12 @@
 package com.byteme.Schema;
 
 /**
- * Created by Rishav on 9/22/2015.
+ * MULE
  */
 public class Property {
-    public int column;
-    public int row;
-    public PlayerConfigParams owner;
+    private int column;
+    private int row;
+    private PlayerConfigParams owner;
     public Property(int column, int row, PlayerConfigParams owner) {
         this.row = row;
         this.column = column;

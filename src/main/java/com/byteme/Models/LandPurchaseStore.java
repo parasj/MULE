@@ -6,7 +6,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 /**
- * Created by rishav on 10/3/2015.
+ * MULE
  */
 public class LandPurchaseStore {
     private final static ConfigRepository configRepository = ConfigRepository.getInstance();

@@ -10,7 +10,7 @@ import java.net.URL;
 import java.util.ResourceBundle;
 
 /**
- * Created by rishav on 10/2/2015.
+ * MULE
  */
 public class GameStartHandler extends MapStateHandler {
     private GameStartStore s = GameStartStore.getInstance();

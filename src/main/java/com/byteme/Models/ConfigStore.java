@@ -1,7 +1,7 @@
 package com.byteme.Models;
 
 /**
- * Created by parasjain on 9/9/15.
+ * MULE
  */
 public interface ConfigStore {
     void save(ConfigRepository repo);

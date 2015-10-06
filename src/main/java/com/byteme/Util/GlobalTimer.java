@@ -6,7 +6,7 @@ import java.util.Timer;
 import java.util.TimerTask;
 
 /**
- * Created by parasjain on 10/3/15.
+ * MULE
  */
 public class GlobalTimer {
     private static final GlobalTimer ourInstance = new GlobalTimer();
@@ -25,7 +25,7 @@ public class GlobalTimer {
         this.tickHandler = tickHandler;
     }
 
-    public void tick() {
+    private void tick() {
         if (tickHandler != null) {
             tickHandler.tick();
         }
