@@ -44,15 +44,15 @@ public class GameStartHandler extends MapStateHandler {
     }
 
     private void renderMoney(int m) {
-        getBoardController().getMoneyLabel().setText(String.format("Money: %6d", m);
+        getBoardController().getMoneyLabel().setText(String.format("Money: %6d", m));
     }
 
     private void renderRound(int r) {
-        getBoardController().getRoundLabel().setText(String.format("Round: %6d", r);
+        getBoardController().getRoundLabel().setText(String.format("Round: %6d", r));
     }
 
     private void renderTimer(int t) {
-        getBoardController().getTimerLabel().setText(String.format("Timer: %6d", t);
+        getBoardController().getTimerLabel().setText(String.format("Timer: %6d", t));
     }
 
     private void setMoney(int m) {
