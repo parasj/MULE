@@ -7,12 +7,12 @@ import java.util.Map;
  * Created by parasjain on 9/18/15.
  */
 public class FeatureSwitches {
-    private static FeatureSwitches ourInstance = new FeatureSwitches();
+    private static final FeatureSwitches ourInstance = new FeatureSwitches();
     public static FeatureSwitches getInstance() {
         return ourInstance;
     }
 
-    private Map<String, Boolean> switches;
+    private final Map<String, Boolean> switches;
 
     private FeatureSwitches() {
         switches = new HashMap<>();

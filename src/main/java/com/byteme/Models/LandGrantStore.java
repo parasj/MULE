@@ -11,7 +11,7 @@ import java.util.List;
 public class LandGrantStore {
     private final static ConfigRepository configRepository = ConfigRepository.getInstance();
 
-    private static LandGrantStore ourInstance = new LandGrantStore();
+    private static final LandGrantStore ourInstance = new LandGrantStore();
     public static LandGrantStore getInstance() {
         return ourInstance;
     }

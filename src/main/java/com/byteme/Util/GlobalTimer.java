@@ -9,7 +9,7 @@ import java.util.TimerTask;
  * Created by parasjain on 10/3/15.
  */
 public class GlobalTimer {
-    private static GlobalTimer ourInstance = new GlobalTimer();
+    private static final GlobalTimer ourInstance = new GlobalTimer();
     public static GlobalTimer getInstance() {
         return ourInstance;
     }

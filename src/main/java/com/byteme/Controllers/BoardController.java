@@ -19,9 +19,7 @@ import javafx.scene.layout.GridPane;
 import java.net.URL;
 import java.util.ResourceBundle;
 
-/**
- * Created by parasjain on 10/2/15.
- */
+
 public class BoardController implements Initializable, CanTick {
     private final static ConfigRepository configRepository = ConfigRepository.getInstance();
     private final static MapStateStore s = MapStateStore.getInstance();
@@ -53,9 +51,9 @@ public class BoardController implements Initializable, CanTick {
     private Label timerLabel;
 
     // implementations of MapStateHandler
-    private final MapStateHandler landPurchaseHander = new LandPurchaseHandler(this);
+    private final MapStateHandler landPurchaseHandler = new LandPurchaseHandler(this);
     private final MapStateHandler gameStartHandler = new GameStartHandler(this);
-    private final MapStateHandler landGrantHander = new LandGrantHandler(this);
+    private final MapStateHandler landGrantHandler = new LandGrantHandler(this);
     private final MapStateHandler emptyHandler = new EmptyHandler(this);
     private final MapStateHandler turnOverHandler = new TurnOverHandler(this);
 
@@ -133,9 +131,9 @@ public class BoardController implements Initializable, CanTick {
         state = newState;
         // TODO - switch controller as needed
         if (state == MapControllerStates.LAND_GRANT)
-            childController = landGrantHander;
+            childController = landGrantHandler;
         else if (state == MapControllerStates.LAND_PURCHASE)
-            childController = landPurchaseHander;
+            childController = landPurchaseHandler;
         else if (state == MapControllerStates.GAME_START)
             childController = gameStartHandler;
         else if (state == MapControllerStates.TURN_OVER) {

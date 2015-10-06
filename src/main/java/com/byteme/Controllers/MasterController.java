@@ -14,7 +14,7 @@ import java.io.IOException;
  */
 public class MasterController {
 
-    private static MasterController instance = new MasterController();
+    private static final MasterController instance = new MasterController();
     private Scene startGame;
     private Scene loadGame;
     private Scene gameConfig;

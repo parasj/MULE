@@ -10,7 +10,7 @@ import java.util.List;
  */
 public class LandPurchaseStore {
     private final static ConfigRepository configRepository = ConfigRepository.getInstance();
-    private static LandPurchaseStore ourInstance = new LandPurchaseStore();
+    private static final LandPurchaseStore ourInstance = new LandPurchaseStore();
 
     private List<PlayerConfigParams> players;
     private int currentPlayer;

@@ -5,7 +5,6 @@ import com.byteme.Models.ConfigRepository;
 import com.byteme.Schema.MapControllerStates;
 import com.byteme.Schema.PlayerConfigParams;
 import javafx.fxml.FXML;
-import javafx.fxml.Initializable;
 import javafx.scene.control.Label;
 
 import java.util.Random;

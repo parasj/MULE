@@ -5,9 +5,9 @@ package com.byteme.Schema;
  */
 
 public class GameConfigParams {
-    private Difficulty difficulty;
-    private MapType maptype;
-    private int numplayers;
+    private final Difficulty difficulty;
+    private final MapType maptype;
+    private final int numplayers;
 
     public GameConfigParams(Difficulty diff, MapType type, int n) {
         difficulty = diff;

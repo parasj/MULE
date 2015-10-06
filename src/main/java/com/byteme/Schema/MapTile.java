@@ -9,7 +9,7 @@ import java.util.Map;
 public enum MapTile {
     P, M1, M2, M3, R, Town;
 
-    private Map<String, String> imagePath;
+    private final Map<String, String> imagePath;
 
     MapTile() {
         imagePath = new HashMap<>();
