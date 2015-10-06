@@ -14,7 +14,7 @@ import java.util.ResourceBundle;
  * MULE
  */
 public class GameStartHandler extends MapStateHandler {
-    private GameStartStore s = GameStartStore.getInstance();
+    private GameStartStore st = GameStartStore.getInstance();
     private final static MapStateStore m = MapStateStore.getInstance();
     public ConfigRepository r = ConfigRepository.getInstance();
 
@@ -40,9 +40,10 @@ public class GameStartHandler extends MapStateHandler {
     @Override
     public void stateChanged() {
         getBoardController().getPhaseLabel().setText("Game Start");
-        getBoardController().renderMoney(0);
-        getBoardController().renderRound(1);
-        getBoardController().renderTimer(0);
+        getBoardController().setPlayer(m.getPlayerAt(st.getCurrentPlayer()));
+        getBoardController().renderMoney(m.getPlayerAt(st.getCurrentPlayer()).getMoney());
+        getBoardController().renderRound(m.getCurrentRound());
+        getBoardController().renderTimer(m.getPlayerAt(st.getCurrentPlayer()).getTimeLeft());
     }
 
     private void setMoney(int m) {
@@ -59,7 +60,7 @@ public class GameStartHandler extends MapStateHandler {
 
     @Override
     public void tick() {
-        PlayerConfigParams p = m.getPlayerAt(s.getCurrentPlayer());
+        PlayerConfigParams p = m.getPlayerAt(st.getCurrentPlayer());
         if (p.getTimeLeft() > 0) {
             getBoardController().renderTimer(p.getTimeLeft());
             p.setTimeLeft(p.getTimeLeft() - 1);
@@ -75,13 +76,12 @@ public class GameStartHandler extends MapStateHandler {
     }
 
     public void nextPlayer() {
-        if (s.getCurrentPlayer() < r.getTotalPlayers() - 1) {
-            s.incCurrentPlayer();
-            m.getPlayerAt(s.getCurrentPlayer()).calcTimeLeft();
-        } else {
+        if (st.getCurrentPlayer() == r.getTotalPlayers() - 1) {
             m.setCurrentRound(m.getCurrentRound() + 1);
-            s.setCurrentPlayer(1);
+            st.setCurrentPlayer(1);
             m.sortPlayers();
         }
+        st.incCurrentPlayer();
+        m.getPlayerAt(st.getCurrentPlayer()).calcTimeLeft();
     }
 }

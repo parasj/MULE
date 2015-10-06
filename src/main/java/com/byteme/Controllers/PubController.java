@@ -46,10 +46,10 @@ public class PubController {
 //            s.sortPlayers();
 //        }
 
-        GameStartHandler gameStartHandler = (GameStartHandler) boardController.getChildController();
+        GameStartHandler gameStartHandler = (GameStartHandler) boardController.getGameStartHandler();
         gameStartHandler.nextPlayer();
         MasterController.getInstance().map();
-        MapStateStore.getInstance().setCurrentState(MapControllerStates.GAME_START);
+        boardController.updateState(MapControllerStates.GAME_START);
     }
 
     private int getTimeBonus(int timeLeft) {
@@ -81,7 +81,7 @@ public class PubController {
     public void rerender() {
         getMoney();
         if (playerLabel != null) {
-            playerLabel.setText(String.format("Player %d %s", MapStateStore.getInstance().getCurrentPlayer(), s.getPlayerAt(s.getCurrentPlayer()).getName()));
+            playerLabel.setText(String.format("Player %d %s", g.getCurrentPlayer() + 1, s.getPlayerAt(g.getCurrentPlayer()).getName()));
         }
         if (moneyLabel != null) {
             moneyLabel.setText("MONEY: " + s.getPlayerAt(s.getCurrentPlayer()).getMoney());

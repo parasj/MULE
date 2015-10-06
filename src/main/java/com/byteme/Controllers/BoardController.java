@@ -256,4 +256,24 @@ public class BoardController implements Initializable, CanTick {
     public MapStateHandler getChildController() {
         return childController;
     }
+
+    public MapStateHandler getLandPurchaseHandler() {
+        return landPurchaseHandler;
+    }
+
+    public MapStateHandler getGameStartHandler() {
+        return gameStartHandler;
+    }
+
+    public MapStateHandler getLandGrantHandler() {
+        return landGrantHandler;
+    }
+
+    public MapStateHandler getEmptyHandler() {
+        return emptyHandler;
+    }
+
+    public MapStateHandler getTurnOverHandler() {
+        return turnOverHandler;
+    }
 }

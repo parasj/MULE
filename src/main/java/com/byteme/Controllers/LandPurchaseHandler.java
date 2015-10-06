@@ -58,12 +58,12 @@ public class LandPurchaseHandler extends MapStateHandler {
             getBoardController().setPlayer(s.getCurrentPlayer());
             getBoardController().setMoney(s.getCurrentPlayer());
         } else {
-            getBoardController().updateState(MapControllerStates.GAME_START);
             MapStateStore.getInstance().sortPlayers();
             m.setCurrentPlayer(0);
             getBoardController().setPlayer(m.getPlayerAt(0));
             getBoardController().setMoney(m.getPlayerAt(0));
             m.getPlayerAt(0).calcTimeLeft();
+            getBoardController().updateState(MapControllerStates.GAME_START);
         }
     }
 
