@@ -11,7 +11,6 @@ public class PlayerConfigParams implements Comparable<PlayerConfigParams> {
     private Race race;
     private String color;
     private int money;
-    //Paras, should this be stored here?
     private int timeLeft;
 
     public int getOrder() {

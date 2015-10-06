@@ -183,7 +183,7 @@ public class BoardController implements Initializable, CanTick {
     }
 
     public void setPlayer(PlayerConfigParams player) {
-        playerLabel.setText(String.format("Player %d %s", m.getCurrentPlayer(), player.getName()));
+        playerLabel.setText(String.format("Player %d %s", player.getOrder(), player.getName()));
     }
 
     public void setMoney(PlayerConfigParams player) {
