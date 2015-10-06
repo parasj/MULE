@@ -133,22 +133,16 @@ public class BoardController implements Initializable, CanTick {
         state = newState;
         // TODO - switch controller as needed
 
-        switch (state) {
-            case START:
-                childController = emptyHandler;
-            case LAND_GRANT:
-                childController = landGrantHandler;
-            case LAND_PURCHASE: childController = landPurchaseHandler;
-                childController = landPurchaseHandler;
-            case SELECTION_OVER:
-                childController = emptyHandler;
-            case GAME_START:
-                childController = gameStartHandler;
-            case TURN_OVER:
-                childController = turnOverHandler;
-            default:
-                childController = emptyHandler;
-        }
+        if (state == LAND_GRANT)
+            childController = landGrantHandler;
+        else if (state == LAND_PURCHASE)
+            childController = landPurchaseHandler;
+        else if (state == GAME_START)
+            childController = gameStartHandler;
+        else if (state == TURN_OVER)
+            childController = turnOverHandler;
+        else
+            childController = emptyHandler;
 
         childController.stateChanged();
     }
