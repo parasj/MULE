@@ -12,10 +12,10 @@ public class InMemoryConfigStore implements ConfigStore {
     private final static Logger log = Logger.getLogger(InMemoryConfigStore.class.getName());
 
     public void save(ConfigRepository repo) {
-        // log.info("Saving game configuration");
+         log.info("Saving game configuration");
     }
 
     public void restore() {
-
+        log.info("Restoring game configuration");
     }
 }
