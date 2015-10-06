@@ -138,8 +138,8 @@ public class ConfigurationController {
 
             // Parse player's information
             name = playerName.getText();
-            race = playerRace.getValue();
-            color = playerColor.getValue();
+            race = (String) playerRace.getValue();
+            color = (String) playerColor.getValue();
             money = chooseMoneyAmount(race);
 
             // Remove color already chosen by another player
