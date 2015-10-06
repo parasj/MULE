@@ -60,7 +60,7 @@ public class GameStartHandler extends MapStateHandler {
         PlayerConfigParams p = m.getPlayerAt(m.getCurrentPlayer());
         if (p.getTimeLeft() > 0) {
             p.setTimeLeft(p.getTimeLeft() - 1);
-            renderTimer(p.getTimeLeft());
+            getBoardController().renderTimer(p.getTimeLeft());
         } else {
             getBoardController().updateState(MapControllerStates.TURN_OVER);
             MasterController.getInstance().pubScene();
