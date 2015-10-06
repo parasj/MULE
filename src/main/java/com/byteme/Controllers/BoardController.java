@@ -1,8 +1,13 @@
 package com.byteme.Controllers;
 
-import com.byteme.Models.*;
-import com.byteme.Schema.*;
-import com.byteme.Util.*;
+import com.byteme.Models.ConfigRepository;
+import com.byteme.Models.MapBoard;
+import com.byteme.Models.MapStateStore;
+import com.byteme.Schema.MapControllerStates;
+import com.byteme.Schema.PlayerConfigParams;
+import com.byteme.Schema.Property;
+import com.byteme.Util.CanTick;
+import com.byteme.Util.GlobalTimer;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.Label;
@@ -12,7 +17,7 @@ import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.GridPane;
 
 import java.net.URL;
-import java.util.*;
+import java.util.ResourceBundle;
 
 /**
  * Created by parasjain on 10/2/15.
@@ -30,7 +35,9 @@ public class BoardController implements Initializable, CanTick {
     private MapControllerStates state;
     private MapStateHandler childController;
 
-    /*** FXML UI items ***/
+    /***
+     * FXML UI items
+     ***/
     @FXML
     private Label playerLabel;
     @FXML
@@ -59,7 +66,9 @@ public class BoardController implements Initializable, CanTick {
     }
 
 
-    /**** Initialize ****/
+    /****
+     * Initialize
+     ****/
     @Override
     public void initialize(URL location, ResourceBundle resources) {
         log("Initializing");
@@ -108,17 +117,20 @@ public class BoardController implements Initializable, CanTick {
     }
 
 
-    /**** Timer ****/
+    /****
+     * Timer
+     ****/
     @Override
     public void tick() {
-//        log("Tick");
         childController.tick();
     }
 
 
-    /**** Data Binding ****/
+    /****
+     * Data Binding
+     ****/
     public void updateState(MapControllerStates newState) {
-    	log("State updated to: " + newState);
+        log("State updated to: " + newState);
         state = newState;
         // TODO - switch controller as needed
         if (state == MapControllerStates.LAND_GRANT)
@@ -136,7 +148,9 @@ public class BoardController implements Initializable, CanTick {
     }
 
 
-    /**** UI Events ****/
+    /****
+     * UI Events
+     ****/
     public void passButtonClicked() {
         log("Pass button clicked");
         childController.handlePass();
@@ -153,7 +167,9 @@ public class BoardController implements Initializable, CanTick {
     }
 
 
-    /**** UI Elements ****/
+    /****
+     * UI Elements
+     ****/
     public Label getPlayerLabel() {
         return playerLabel;
     }
@@ -209,6 +225,7 @@ public class BoardController implements Initializable, CanTick {
     /**
      * Sets the color of a tile when clicked by a player.
      * Only does so if tile is not already owned.
+     *
      * @param tile The tile whose color must be set.
      * @return Whether the tile was set or not
      */
@@ -233,7 +250,9 @@ public class BoardController implements Initializable, CanTick {
     }
 
 
-    /**** Util functions ****/
+    /****
+     * Util functions
+     ****/
     private void log(String s) {
         System.out.println(s);
     }

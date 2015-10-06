@@ -4,7 +4,6 @@ import com.byteme.Models.MapStateStore;
 import com.byteme.Util.CanTick;
 import javafx.fxml.Initializable;
 import javafx.scene.input.MouseEvent;
-import javafx.scene.layout.BorderPane;
 
 /**
  * Created by rishav on 10/2/2015.
@@ -27,8 +26,11 @@ public abstract class MapStateHandler implements CanTick, Initializable {
     }
 
     public abstract void handlePass();
+
     public abstract void handleTownButtonClicked();
+
     public abstract void tileChosen(MouseEvent event);
+
     public abstract void stateChanged();
 
     public void log(String log) {

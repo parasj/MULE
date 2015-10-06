@@ -1,11 +1,8 @@
 package com.byteme.Controllers;
 
-import com.byteme.Models.GameStartStore;
-import com.byteme.Models.LandGrantStore;
 import com.byteme.Models.LandPurchaseStore;
 import com.byteme.Models.MapStateStore;
 import com.byteme.Schema.MapControllerStates;
-import com.byteme.Schema.Property;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.BorderPane;
 
