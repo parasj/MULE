@@ -107,8 +107,8 @@ public class MapStateStore {
     }
 
 
-    //Super hacky, paras fix me
-    public void refreshPlayers() {
+    //TODO FIX me
+    public void refresh() {
         this.players = new ArrayList<>(r.getPlayers());
     }
 }

@@ -38,9 +38,9 @@ public class GameStartHandler extends MapStateHandler {
     @Override
     public void stateChanged() {
         getBoardController().getPhaseLabel().setText("Game Start");
-        renderMoney(-1);
-        renderRound(-1);
-        renderTimer(-1);
+        renderMoney(0);
+        renderRound(0);
+        renderTimer(0);
     }
 
     private void renderMoney(int m) {
@@ -72,7 +72,7 @@ public class GameStartHandler extends MapStateHandler {
         PlayerConfigParams p = m.getPlayerAt(m.getCurrentPlayer());
         if (p.getTimeLeft() > 0) {
             p.setTimeLeft(p.getTimeLeft() - 1);
-            getBoardController().getTimerLabel().setText("" + p.getTimeLeft());
+            renderTimer(p.getTimeLeft());
         } else {
             getBoardController().updateState(MapControllerStates.TURN_OVER);
             MasterController.getInstance().pubScene();
