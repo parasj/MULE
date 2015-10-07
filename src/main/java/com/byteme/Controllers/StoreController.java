@@ -181,22 +181,22 @@ public class StoreController {
     public void tradeCrystite() {
         PlayerConfigParams p = m.getPlayerAt(st.getCurrentPlayer());
         if (s.getState()) {
-            if (p.getMoney() >= s.getFoodPrice() && s.getFoodQuantity() > 0) {
-                p.payMoney(s.getFoodPrice());
-                s.setFoodQuantity(s.getFoodQuantity() - 1);
-                p.addFood();
+            if (p.getCrystite() >= s.getCrystitePrice() && s.getCrystiteQuantity() > 0) {
+                p.payMoney(s.getCrystitePrice());
+                s.setCrystiteQuantity(s.getCrystiteQuantity() - 1);
+                p.addCrystite();
                 reRender();
             } else {
-                log("Cannot buy food");
+                log("Cannot buy crystite");
             }
         } else {
-            if (p.getFood() > 0) {
-                p.payMoney(-1 * s.getFoodPrice());
-                s.setFoodQuantity(s.getFoodQuantity() + 1);
-                p.subFood();
+            if (p.getCrystite() > 0) {
+                p.payMoney(-1 * s.getCrystitePrice());
+                s.setCrystiteQuantity(s.getCrystiteQuantity() + 1);
+                p.subCrystite();
                 reRender();
             } else {
-                log("Cannot buy food");
+                log("Cannot sell crystite");
             }
         }
     }
