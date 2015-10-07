@@ -17,4 +17,8 @@ public class TownController {
         MasterController.getInstance().pubScene();
     }
 
+    public void goToStore() {
+        MasterController.getInstance().store();
+    }
+
 }

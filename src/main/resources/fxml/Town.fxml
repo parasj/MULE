@@ -13,7 +13,7 @@
       <AnchorPane layoutX="104.0" layoutY="47.0" prefHeight="480.0" prefWidth="728.0" style="-fx-background-color: #EFDD6F;">
          <children>
             <Rectangle arcHeight="5.0" arcWidth="5.0" fill="DODGERBLUE" height="133.0" layoutX="31.0" layoutY="22.0" stroke="BLACK" strokeType="INSIDE" width="241.0" />
-            <Rectangle arcHeight="5.0" arcWidth="5.0" fill="DODGERBLUE" height="133.0" layoutX="465.0" layoutY="22.0" stroke="BLACK" strokeType="INSIDE" width="241.0" />
+            <Rectangle fx:id="store" onMouseClicked="#goToStore" arcHeight="5.0" arcWidth="5.0" fill="DODGERBLUE" height="133.0" layoutX="465.0" layoutY="22.0" stroke="BLACK" strokeType="INSIDE" width="241.0" />
             <Rectangle fx:id="landoffice" arcHeight="5.0" arcWidth="5.0" fill="DODGERBLUE" height="133.0" layoutX="31.0" layoutY="308.0" stroke="BLACK" strokeType="INSIDE" width="241.0" />
             <Rectangle fx:id="pub" onMouseClicked="#goToPub" arcHeight="5.0" arcWidth="5.0" fill="DODGERBLUE" height="133.0" layoutX="465.0" layoutY="298.0" stroke="BLACK" strokeType="INSIDE" width="241.0" />
             <Label layoutX="568.0" layoutY="354.0" text="Pub" />

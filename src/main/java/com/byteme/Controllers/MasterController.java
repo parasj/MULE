@@ -23,11 +23,13 @@ public class MasterController {
     private Scene town;
     private Scene temp;
     private Scene pubScene;
+    private Scene storeScene;
     private Stage theStage;
     private String currStage;
 
     private BoardController boardController;
     private PubController pubController;
+    private StoreController storeController;
 
 
     private MasterController() {
@@ -49,6 +51,10 @@ public class MasterController {
             FXMLLoader loader = new FXMLLoader(getClass().getResource("/fxml/Pub.fxml"));
             pubScene = new Scene(loader.load());
             pubController = loader.getController();
+
+            loader = new FXMLLoader(getClass().getResource("/fxml/Store.fxml"));
+            storeScene = new Scene(loader.load());
+            storeController = loader.getController();
         } catch (IOException e) {
             e.printStackTrace();
         }
@@ -101,6 +107,11 @@ public class MasterController {
         pubController.rerender();
     }
 
+    public void store() {
+        currStage = "Store";
+        theStage.setScene(storeScene);
+    }
+
     public String getCurrStage() {
         return currStage;
     }
@@ -115,6 +126,7 @@ public class MasterController {
             map = new Scene(loader.load());
             setBoardController(loader.getController());
             pubController.setBoardController(boardController);
+            storeController.setBoardController(boardController);
         } catch (IOException e) {
             e.printStackTrace();
         }

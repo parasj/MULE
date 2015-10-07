@@ -27,15 +27,6 @@ public class PubController {
 
 
     public void goToMap() {
-//        if (g.getCurrentPlayer() < r.getTotalPlayers() - 1) {
-//            g.incCurrentPlayer();
-//            s.getPlayerAt(g.getCurrentPlayer()).calcTimeLeft();
-//        } else {
-//            s.setCurrentRound(s.getCurrentRound() + 1);
-//            g.setCurrentPlayer(1);
-//            s.sortPlayers();
-//        }
-
         GameStartHandler gameStartHandler = (GameStartHandler) boardController.getGameStartHandler();
         gameStartHandler.nextPlayer();
         MasterController.getInstance().map();
@@ -46,7 +37,7 @@ public class PubController {
         if (timeLeft >= 37) return 200;
         else if (timeLeft >= 25) return 150;
         else if (timeLeft >= 12) return 100;
-        else if (timeLeft >= 0) return 50;
+        else if (timeLeft > 0) return 50;
         else return 0;
     }
 
