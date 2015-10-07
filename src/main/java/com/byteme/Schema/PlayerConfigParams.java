@@ -11,6 +11,7 @@ public class PlayerConfigParams implements Comparable<PlayerConfigParams> {
     private final String color;
     private int money;
     private int timeLeft;
+    private int muleCount;
 
     private int food;
     private int energy;
@@ -171,6 +172,22 @@ public class PlayerConfigParams implements Comparable<PlayerConfigParams> {
         this.crystite--;
     }
 
+    public void addMule() {
+        this.muleCount++;
+    }
+
+    public void subMule() {
+        this.muleCount--;
+    }
+
+    public int getMuleCount() {
+        return muleCount;
+    }
+
+    public void setMuleCount(int muleCount) {
+        this.muleCount = muleCount;
+    }
+
     @Override
     public int compareTo(PlayerConfigParams otherPlayer) {
         return (this.calcScore() - otherPlayer.calcScore());
@@ -185,11 +202,17 @@ public class PlayerConfigParams implements Comparable<PlayerConfigParams> {
 
         if (money != that.money) return false;
         if (timeLeft != that.timeLeft) return false;
+        if (muleCount != that.muleCount) return false;
+        if (food != that.food) return false;
+        if (energy != that.energy) return false;
+        if (smithore != that.smithore) return false;
+        if (crystite != that.crystite) return false;
         if (order != that.order) return false;
-        if (name != null ? !name.equals(that.name) : that.name != null) return false;
+        if (!name.equals(that.name)) return false;
         if (race != that.race) return false;
-        if (color != null ? !color.equals(that.color) : that.color != null) return false;
-        return properties.equals(that.properties);
+        if (!color.equals(that.color)) return false;
+        return !(properties != null ? !properties.equals(that.properties) : that.properties != null);
+
     }
 
     @Override
@@ -198,6 +221,12 @@ public class PlayerConfigParams implements Comparable<PlayerConfigParams> {
         result = 31 * result + race.hashCode();
         result = 31 * result + color.hashCode();
         result = 31 * result + money;
+        result = 31 * result + timeLeft;
+        result = 31 * result + muleCount;
+        result = 31 * result + food;
+        result = 31 * result + energy;
+        result = 31 * result + smithore;
+        result = 31 * result + crystite;
         result = 31 * result + order;
         result = 31 * result + (properties != null ? properties.hashCode() : 0);
         return result;

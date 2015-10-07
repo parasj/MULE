@@ -61,10 +61,7 @@ public class StoreController {
 
 
     public void goToMap() {
-        GameStartHandler gameStartHandler = (GameStartHandler) boardController.getGameStartHandler();
-        gameStartHandler.nextPlayer();
         MasterController.getInstance().map();
-        boardController.updateState(MapControllerStates.GAME_START);
     }
 
     public void setBoardController(BoardController boardController) {
@@ -203,7 +200,29 @@ public class StoreController {
     }
 
     public void tradeMule() {
-        log("Trade Mule");
+        PlayerConfigParams p = m.getPlayerAt(st.getCurrentPlayer());
+        if (s.getState()) {
+            if (p.getMoney() >= s.getMulePrice() && s.getMuleQuantity() > 0) {
+                boardController.updateState(MapControllerStates.PLACE_MULE);
+                goToMap();
+                //DOESNT WAIT UNTIL SELECTED
+                p.payMoney(s.getMulePrice());
+                s.setMuleQuantity(s.getMuleQuantity() - 1);
+                p.addMule();
+                reRender();
+            } else {
+                log("Cannot buy Mule");
+            }
+        } else {
+            if (p.getMuleCount() > 0) {
+                p.payMoney(-1 * s.getMulePrice());
+                s.setMuleQuantity(s.getMuleQuantity() + 1);
+                p.subMule();
+                reRender();
+            } else {
+                log("Cannot sell Mule");
+            }
+        }
     }
 
     public void log(String string) {
@@ -217,7 +236,7 @@ public class StoreController {
         log("Energy: " + p.getEnergy());
         log("Smithore: " + p.getSmithore());
         log("Crystite: " + p.getCrystite());
-        log("----------------------------------------------------");
+        log("==================================================");
     }
 
 }
