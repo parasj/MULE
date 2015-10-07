@@ -46,4 +46,27 @@ public class Property {
     public boolean hasMule() {
         return this.mule != null;
     }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+
+        Property property = (Property) o;
+
+        if (column != property.column) return false;
+        if (row != property.row) return false;
+        if (!owner.equals(property.owner)) return false;
+        return !(mule != null ? !mule.equals(property.mule) : property.mule != null);
+
+    }
+
+    @Override
+    public int hashCode() {
+        int result = column;
+        result = 31 * result + row;
+        result = 31 * result + owner.hashCode();
+        result = 31 * result + (mule != null ? mule.hashCode() : 0);
+        return result;
+    }
 }

@@ -2,8 +2,11 @@ package com.byteme.Controllers;
 
 import com.byteme.Models.GameStartStore;
 import com.byteme.Models.MapStateStore;
+import com.byteme.Models.PlaceMuleStore;
 import com.byteme.Models.StoreStateStore;
 import com.byteme.Schema.MapControllerStates;
+import com.byteme.Schema.Mule;
+import com.byteme.Schema.MuleType;
 import com.byteme.Schema.PlayerConfigParams;
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
@@ -18,6 +21,7 @@ public class StoreController {
     private final static GameStartStore st = GameStartStore.getInstance();
     private final static MapStateStore m = MapStateStore.getInstance();
     private StoreStateStore s = StoreStateStore.getInstance();
+    private PlaceMuleStore pm = PlaceMuleStore.getInstance();
     private BoardController boardController;
 
     @FXML
@@ -205,6 +209,7 @@ public class StoreController {
             if (p.getMoney() >= s.getMulePrice() && s.getMuleQuantity() > 0) {
                 boardController.updateState(MapControllerStates.PLACE_MULE);
                 goToMap();
+                pm.setMule(new Mule(getType((String) muleType.getValue())));
                 //DOESNT WAIT UNTIL SELECTED
                 p.payMoney(s.getMulePrice());
                 s.setMuleQuantity(s.getMuleQuantity() - 1);
@@ -237,6 +242,20 @@ public class StoreController {
         log("Smithore: " + p.getSmithore());
         log("Crystite: " + p.getCrystite());
         log("==================================================");
+    }
+
+    public MuleType getType(String s) {
+        if (s.equals("Food")) {
+            return MuleType.FOOD;
+        } else if (s.equals("Energy")) {
+            return MuleType.ENERGY;
+        } else if (s.equals("Smithore")) {
+            return MuleType.SMITHORE;
+        } else if (s.equals("Crystite")) {
+            return MuleType.CRYSTITE;
+        } else {
+            return null;
+        }
     }
 
 }

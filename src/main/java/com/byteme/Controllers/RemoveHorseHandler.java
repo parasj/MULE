@@ -1,6 +1,5 @@
 package com.byteme.Controllers;
 
-import com.byteme.Models.ConfigRepository;
 import com.byteme.Models.GameStartStore;
 import com.byteme.Models.MapStateStore;
 import com.byteme.Models.PlaceMuleStore;
@@ -18,16 +17,18 @@ import java.util.ArrayList;
 import java.util.ResourceBundle;
 
 /**
- * Created by rishavbose365 on 10/7/2015.
+ * Created by rishav on 10/7/2015.
  */
-public class PlaceMuleHandler extends MapStateHandler {
+public class RemoveHorseHandler extends MapStateHandler {
+    public RemoveHorseHandler(BoardController boardController) {
+        super(boardController);
+    }
+
+
+    //TODO Make this remove
     private final static GameStartStore st = GameStartStore.getInstance();
     private final static PlaceMuleStore pm = PlaceMuleStore.getInstance();
     private final static MapStateStore m = MapStateStore.getInstance();
-
-    public PlaceMuleHandler(BoardController boardController) {
-        super(boardController);
-    }
 
     @Override
     public void handlePass() {

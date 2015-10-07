@@ -13,15 +13,24 @@ public class PlaceMuleStore {
     }
 
     public static Mule mule;
+    public static  boolean toStore;
 
     private PlaceMuleStore() {
     }
 
-    public static Mule getMule() {
+    public Mule getMule() {
         return mule;
     }
 
     public static void setMule(Mule mule) {
         PlaceMuleStore.mule = mule;
+    }
+
+    public static boolean getToStore() {
+        return toStore;
+    }
+
+    public static void setToStore(boolean toStore) {
+        PlaceMuleStore.toStore = toStore;
     }
 }
