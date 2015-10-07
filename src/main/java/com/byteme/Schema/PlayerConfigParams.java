@@ -12,6 +12,11 @@ public class PlayerConfigParams implements Comparable<PlayerConfigParams> {
     private int money;
     private int timeLeft;
 
+    private int food;
+    private int energy;
+    private int smithore;
+    private int crystite;
+
     public int getOrder() {
         return order;
     }
@@ -87,7 +92,7 @@ public class PlayerConfigParams implements Comparable<PlayerConfigParams> {
 
     public void calcTimeLeft() {
         //TODO calculate the time left
-        this.timeLeft = 15;
+        this.timeLeft = 3000;
     }
 
     public int getTimeLeft() {
@@ -96,6 +101,74 @@ public class PlayerConfigParams implements Comparable<PlayerConfigParams> {
 
     public void setTimeLeft(int timeLeft) {
         this.timeLeft = timeLeft;
+    }
+
+    public void setMoney(int money) {
+        this.money = money;
+    }
+
+    public int getFood() {
+        return food;
+    }
+
+    public void setFood(int food) {
+        this.food = food;
+    }
+
+    public int getEnergy() {
+        return energy;
+    }
+
+    public void setEnergy(int energy) {
+        this.energy = energy;
+    }
+
+    public int getSmithore() {
+        return smithore;
+    }
+
+    public void setSmithore(int smithore) {
+        this.smithore = smithore;
+    }
+
+    public int getCrystite() {
+        return crystite;
+    }
+
+    public void setCrystite(int crystite) {
+        this.crystite = crystite;
+    }
+
+    public void addFood() {
+        this.food++;
+    }
+
+    public void addEnergy() {
+        this.energy++;
+    }
+
+    public void addSmithore() {
+        this.smithore++;
+    }
+
+    public void addCrystite() {
+        this.crystite++;
+    }
+
+    public void subFood() {
+        this.food--;
+    }
+
+    public void subEnergy() {
+        this.energy--;
+    }
+
+    public void subSmithore() {
+        this.smithore--;
+    }
+
+    public void subCrystite() {
+        this.crystite--;
     }
 
     @Override

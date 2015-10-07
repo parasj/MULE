@@ -7,6 +7,7 @@
 <?import java.lang.*?>
 <?import javafx.scene.image.*?>
 <?import javafx.scene.layout.*?>
+<?import javafx.collections.*?>
 
 <Pane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="700.0" prefWidth="935.0" style="-fx-background-color: #2C3E50;" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.byteme.Controllers.StoreController">
    <children>
@@ -25,7 +26,7 @@
                    <Image url="@../images/food.png" />
                </image>
            </ImageView>
-           <Button fx:id= "foodButton" layoutX="109.0" layoutY="315.0" mnemonicParsing="false" prefHeight="0.0" prefWidth="106.0" text="Buy Food">
+           <Button fx:id= "foodButton" layoutX="109.0" layoutY="315.0" mnemonicParsing="false" prefHeight="0.0" prefWidth="106.0" onAction="#tradeFood" text="Buy Food">
                <font>
                    <Font size="15.0" />
                </font>
@@ -46,7 +47,7 @@
                    <Image url="@../images/energy.png" />
                </image>
            </ImageView>
-           <Button fx:id= "energyButton" layoutX="419.0" layoutY="315.0" mnemonicParsing="false" prefHeight="0.0" prefWidth="106.0" text="Buy Energy">
+           <Button fx:id= "energyButton" layoutX="419.0" layoutY="315.0" mnemonicParsing="false" prefHeight="0.0" prefWidth="106.0" onAction="#tradeEnergy" text="Buy Energy">
                <font>
                    <Font size="15.0" />
                </font>
@@ -67,7 +68,7 @@
                    <Image url="@../images/smithore.png" />
                </image>
            </ImageView>
-           <Button fx:id= "smithoreButton" layoutX="708.0" layoutY="315.0" mnemonicParsing="false" prefHeight="31.0" prefWidth="119.0" text="Buy Smithore">
+           <Button fx:id= "smithoreButton" layoutX="708.0" layoutY="315.0" mnemonicParsing="false" prefHeight="31.0" prefWidth="119.0" onAction="#tradeSmithore" text="Buy Smithore">
                <font>
                    <Font size="15.0" />
                </font>
@@ -88,7 +89,7 @@
                    <Image url="@../images/crystite.png" />
                </image>
            </ImageView>
-           <Button fx:id= "crystiteButton" layoutX="148.0" layoutY="638.0" mnemonicParsing="false" prefHeight="31.0" prefWidth="119.0" text="Buy Crystite">
+           <Button fx:id= "crystiteButton" layoutX="148.0" layoutY="638.0" mnemonicParsing="false" prefHeight="31.0" prefWidth="119.0" onAction="#tradeCrystite" text="Buy Crystite">
                <font>
                    <Font size="15.0" />
                </font>
@@ -109,7 +110,7 @@
                    <Image url="@../images/horse.png" />
                </image>
            </ImageView>
-           <Button fx:id= "muleButton" layoutX="448.0" layoutY="638.0" mnemonicParsing="false" prefHeight="31.0" prefWidth="119.0" text="Buy Crystite">
+           <Button fx:id= "muleButton" layoutX="448.0" layoutY="638.0" mnemonicParsing="false" prefHeight="31.0" prefWidth="119.0" onAction="#tradeMule" text="Buy Mule">
                <font>
                    <Font size="15.0" />
                </font>
@@ -126,6 +127,26 @@
                    <Font size="24.0" />
                </font>
            </Button>
+           <Label fx:id="moneyLabel" layoutX="375.0" layoutY="10.0" prefHeight="100.0" prefWidth="246.0" text="Money:" textFill="WHITE">
+               <font>
+                   <Font size="25.0" />
+               </font>
+           </Label>
+           <Label fx:id="money" layoutX="500.0" layoutY="10.0" prefHeight="100.0" prefWidth="246.0" text="" textFill="WHITE">
+               <font>
+                   <Font size="25.0" />
+               </font>
+           </Label>
+           <ChoiceBox fx:id="muleType" layoutX="433.0" layoutY="600.0" prefWidth="150.0" value="Red">
+               <items>
+                   <FXCollections fx:id="muleTypes" fx:factory="observableArrayList">
+                       <String fx:value="Food" />
+                       <String fx:value="Energy" />
+                       <String fx:value="Smithore" />
+                       <String fx:value="Crystite" />
+                   </FXCollections>
+               </items>
+           </ChoiceBox>
    </children>
 
 </Pane>

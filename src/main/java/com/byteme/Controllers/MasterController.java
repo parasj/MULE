@@ -110,6 +110,7 @@ public class MasterController {
     public void store() {
         currStage = "Store";
         theStage.setScene(storeScene);
+        storeController.reRender();
     }
 
     public String getCurrStage() {
