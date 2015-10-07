@@ -90,6 +90,7 @@ public class StoreController {
             changeState.setText("Change to Sell");
             s.setState(true);
         }
+        log("State changed!");
     }
 
     public void reRender() {
@@ -135,7 +136,7 @@ public class StoreController {
     public void tradeEnergy() {
         PlayerConfigParams p = m.getPlayerAt(st.getCurrentPlayer());
         if (s.getState()) {
-            if (p.getEnergy() >= s.getEnergyPrice() && s.getEnergyQuantity() > 0) {
+            if (p.getMoney() >= s.getEnergyPrice() && s.getEnergyQuantity() > 0) {
                 p.payMoney(s.getEnergyPrice());
                 s.setEnergyQuantity(s.getEnergyQuantity() - 1);
                 p.addEnergy();
@@ -158,7 +159,7 @@ public class StoreController {
     public void tradeSmithore() {
         PlayerConfigParams p = m.getPlayerAt(st.getCurrentPlayer());
         if (s.getState()) {
-            if (p.getSmithore() >= s.getSmithorePrice() && s.getSmithoreQuantity() > 0) {
+            if (p.getMoney() >= s.getSmithorePrice() && s.getSmithoreQuantity() > 0) {
                 p.payMoney(s.getSmithorePrice());
                 s.setSmithoreQuantity(s.getSmithoreQuantity() - 1);
                 p.addSmithore();
@@ -181,7 +182,7 @@ public class StoreController {
     public void tradeCrystite() {
         PlayerConfigParams p = m.getPlayerAt(st.getCurrentPlayer());
         if (s.getState()) {
-            if (p.getCrystite() >= s.getCrystitePrice() && s.getCrystiteQuantity() > 0) {
+            if (p.getMoney() >= s.getCrystitePrice() && s.getCrystiteQuantity() > 0) {
                 p.payMoney(s.getCrystitePrice());
                 s.setCrystiteQuantity(s.getCrystiteQuantity() - 1);
                 p.addCrystite();
@@ -211,10 +212,12 @@ public class StoreController {
 
     public void logPlayer() {
         PlayerConfigParams p = m.getPlayerAt(st.getCurrentPlayer());
+        log("Player: " + p.getName());
         log("Food: " + p.getFood());
         log("Energy: " + p.getEnergy());
         log("Smithore: " + p.getSmithore());
         log("Crystite: " + p.getCrystite());
+        log("----------------------------------------------------");
     }
 
 }
