@@ -202,12 +202,14 @@ public class StoreController {
 
     public void tradeMule() {
         PlayerConfigParams p = m.getPlayerAt(st.getCurrentPlayer());
+        int muleCost = s.getMulePrice() + s.getMuleTypeCost((String) muleType.getValue());
+        log("" + muleCost);
         if (s.getState()) {
-            if (p.getMoney() >= s.getMulePrice() && s.getMuleQuantity() > 0) {
+            if (p.getMoney() >= muleCost && s.getMuleQuantity() > 0) {
                 pm.setMule(new Mule(getType((String) muleType.getValue())));
                 boardController.updateState(MapControllerStates.PLACE_MULE);
                 goToMap();
-                p.payMoney(s.getMulePrice() + s.getMuleTypeCost((String) muleType.getValue()));
+                p.payMoney(muleCost);
                 s.setMuleQuantity(s.getMuleQuantity() - 1);
                 reRender();
             } else {
