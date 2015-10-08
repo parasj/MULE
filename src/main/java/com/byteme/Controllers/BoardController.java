@@ -12,6 +12,7 @@ import com.byteme.Util.GlobalTimer;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.Label;
+import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.BorderPane;
@@ -30,6 +31,8 @@ public class BoardController implements Initializable, CanTick {
 
     private MapBoard possibleMaps;
     private boolean[][] mapSpots;
+    private boolean[][] mules;
+    private ImageView[][] boardImages;
 
     private MapControllerStates state;
     private MapStateHandler childController;
@@ -83,13 +86,15 @@ public class BoardController implements Initializable, CanTick {
     private void initBoard() {
         possibleMaps = new MapBoard();
         mapSpots = new boolean[possibleMaps.getHeight()][possibleMaps.getWidth()];
+        mules = new boolean[possibleMaps.getHeight()][possibleMaps.getWidth()];
+        boardImages = new ImageView[possibleMaps.getHeight()][possibleMaps.getWidth()];
 
         // inject images
         for (int i = 0; i < possibleMaps.getHeight(); i++) {
             for (int j = 0; j < possibleMaps.getWidth(); j++) {
-                ImageView tile = new ImageView(possibleMaps.getTile(i, j).imagePath());
+                boardImages[i][j] = new ImageView(possibleMaps.getTile(i, j).imagePath());
                 BorderPane tileContainer = new BorderPane();
-                tileContainer.setCenter(tile);
+                tileContainer.setCenter(boardImages[i][j]);
                 tileContainer.setOnMouseClicked(this::tileChosen);
                 map.add(tileContainer, j, i); // Place the image on the grid
             }
@@ -252,6 +257,12 @@ public class BoardController implements Initializable, CanTick {
     public void ownedMessage() {
         alertsLabel.setText("This property is already owned!");
         alertsLabel.setVisible(true);
+    }
+
+    public void propertyUpdated(Property prop) {
+        boolean add = prop.getMule() == null;
+        mules[prop.getRow()][prop.getRow()] = add;
+        boardImages[prop.getRow()][prop.getColumn()].setImage(new Image(possibleMaps.getTile(prop.getRow(), prop.getColumn()).imagePath(add)));
     }
 
 

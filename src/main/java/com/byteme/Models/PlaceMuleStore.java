@@ -12,8 +12,8 @@ public class PlaceMuleStore {
         return ourInstance;
     }
 
-    private static Mule mule;
-    private static  boolean toStore;
+    private Mule mule;
+    private boolean toStore;
 
     private PlaceMuleStore() {
     }
@@ -22,15 +22,15 @@ public class PlaceMuleStore {
         return mule;
     }
 
-    public static void setMule(Mule mule) {
-        PlaceMuleStore.mule = mule;
+    public void setMule(Mule mule) {
+        this.mule = mule;
     }
 
-    public static boolean getToStore() {
+    public boolean getToStore() {
         return toStore;
     }
 
-    public static void setToStore(boolean toStore) {
-        PlaceMuleStore.toStore = toStore;
+    public void setToStore(boolean toStore) {
+        this.toStore = toStore;
     }
 }

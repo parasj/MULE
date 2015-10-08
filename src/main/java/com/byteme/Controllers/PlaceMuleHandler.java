@@ -54,7 +54,8 @@ public class PlaceMuleHandler extends MapStateHandler {
         int index = properties.indexOf(curr);
         if (index != -1) {
             getBoardController().getAlertsLabel().setText("");
-            properties.get(index).setMule(pm.getMule());
+            properties.get(index).addMule(pm.getMule());
+            MasterController.getInstance().getBoardController().propertyUpdated(properties.get(index));
             pm.setToStore(true);
             //TODO Add horse properly
             //tile.setCenter(horse);
