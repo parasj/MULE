@@ -30,7 +30,7 @@ public class BoardController implements Initializable, CanTick {
     private MapBoard possibleMaps;
     private boolean[][] mapSpots;
     private boolean[][] mules;
-    private ImageView[][] boardImages;
+    private BorderPane[][] boardImages;
 
     private MapControllerStates state;
     private MapStateHandler childController;
@@ -84,16 +84,16 @@ public class BoardController implements Initializable, CanTick {
         possibleMaps = new MapBoard();
         mapSpots = new boolean[possibleMaps.getHeight()][possibleMaps.getWidth()];
         mules = new boolean[possibleMaps.getHeight()][possibleMaps.getWidth()];
-        boardImages = new ImageView[possibleMaps.getHeight()][possibleMaps.getWidth()];
+        boardImages = new BorderPane[possibleMaps.getHeight()][possibleMaps.getWidth()];
 
         // inject images
         for (int i = 0; i < possibleMaps.getHeight(); i++) {
             for (int j = 0; j < possibleMaps.getWidth(); j++) {
-                boardImages[i][j] = new ImageView(possibleMaps.getTile(i, j).imagePath());
-                BorderPane tileContainer = new BorderPane();
-                tileContainer.setCenter(boardImages[i][j]);
-                tileContainer.setOnMouseClicked(this::tileChosen);
-                map.add(tileContainer, j, i); // Place the image on the grid
+                ImageView img = new ImageView(possibleMaps.getTile(i, j).imagePath());
+                boardImages[i][j] = new BorderPane();
+                boardImages[i][j].setCenter(img);
+                boardImages[i][j].setOnMouseClicked(this::tileChosen);
+                map.add(boardImages[i][j], j, i); // Place the image on the grid
             }
         }
     }
@@ -261,7 +261,10 @@ public class BoardController implements Initializable, CanTick {
     public void propertyUpdated(Property prop) {
         boolean add = prop.getMule() == null;
         mules[prop.getRow()][prop.getColumn()] = add;
-        boardImages[prop.getRow()][prop.getColumn()].setImage(new Image(possibleMaps.getTile(prop.getRow(), prop.getColumn()).imagePath(add)));
+
+        Image newImage = new Image(possibleMaps.getTile(prop.getRow(), prop.getColumn()).imagePath(add));
+        BorderPane bp = boardImages[prop.getRow()][prop.getColumn()];
+        ((ImageView) bp.getCenter()).setImage(newImage);
     }
 
 
