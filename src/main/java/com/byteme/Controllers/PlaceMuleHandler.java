@@ -50,7 +50,7 @@ public class PlaceMuleHandler extends MapStateHandler {
         //Check if current property is owned by person
         int index = properties.indexOf(curr);
         if (index != -1) {
-            properties.get(index).setMule(pm.getMule());
+            properties.get(index).addMule(pm.getMule());
 			MasterController.getInstance().getBoardController().propertyUpdated(properties.get(index));
             pm.setEmpty(true);
             //TODO Add horse properly

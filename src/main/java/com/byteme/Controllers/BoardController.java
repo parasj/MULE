@@ -256,7 +256,7 @@ public class BoardController implements Initializable, CanTick {
 
     public void propertyUpdated(Property prop) {
         boolean add = prop.getMule() == null;
-        mules[prop.getRow()][prop.getRow()] = add;
+        mules[prop.getRow()][prop.getColumn()] = add;
         boardImages[prop.getRow()][prop.getColumn()].setImage(new Image(possibleMaps.getTile(prop.getRow(), prop.getColumn()).imagePath(add)));
     }
 

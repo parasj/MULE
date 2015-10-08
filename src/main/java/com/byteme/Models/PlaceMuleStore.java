@@ -13,10 +13,9 @@ public class PlaceMuleStore {
     }
 
     private Mule mule;
-    private boolean toStore;
+    private boolean empty; // hasMule?
 
-    private PlaceMuleStore() {
-    }
+    private PlaceMuleStore() {}
 
     public Mule getMule() {
         return mule;
