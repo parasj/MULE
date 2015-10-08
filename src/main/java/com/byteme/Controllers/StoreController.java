@@ -1,9 +1,6 @@
 package com.byteme.Controllers;
 
-import com.byteme.Models.GameStartStore;
-import com.byteme.Models.MapStateStore;
-import com.byteme.Models.PlaceMuleStore;
-import com.byteme.Models.StoreStateStore;
+import com.byteme.Models.*;
 import com.byteme.Schema.MapControllerStates;
 import com.byteme.Schema.Mule;
 import com.byteme.Schema.MuleType;
@@ -78,7 +75,7 @@ public class StoreController {
             energyButton.setText("Sell Energy");
             smithoreButton.setText("Sell Smith Ore");
             crystiteButton.setText("Sell Crystite");
-            muleButton.setText("Sell Mule");
+            muleButton.setDisable(true);
             changeState.setText("Change to Buy");
             s.setState(false);
 
@@ -87,7 +84,7 @@ public class StoreController {
             energyButton.setText("Buy Energy");
             smithoreButton.setText("Buy Smith Ore");
             crystiteButton.setText("Buy Crystite");
-            muleButton.setText("Buy Mule");
+            muleButton.setDisable(false);
             changeState.setText("Change to Sell");
             s.setState(true);
         }
@@ -207,30 +204,20 @@ public class StoreController {
         PlayerConfigParams p = m.getPlayerAt(st.getCurrentPlayer());
         if (s.getState()) {
             if (p.getMoney() >= s.getMulePrice() && s.getMuleQuantity() > 0) {
+                pm.setMule(new Mule(getType((String) muleType.getValue())));
                 boardController.updateState(MapControllerStates.PLACE_MULE);
                 goToMap();
-                pm.setMule(new Mule(getType((String) muleType.getValue())));
-                //DOESNT WAIT UNTIL SELECTED
                 p.payMoney(s.getMulePrice() + s.getMuleTypeCost((String) muleType.getValue()));
                 s.setMuleQuantity(s.getMuleQuantity() - 1);
-                p.addMule();
+                if (pm.isEmpty()) {
+                    p.addMule();
+                }
                 reRender();
             } else {
                 log("Cannot buy Mule");
             }
         } else {
-            if (p.getMuleCount() > 0) {
-                boardController.updateState(MapControllerStates.REMOVE_MULE);
-                goToMap();
-                pm.setMule(null);
-                //Doesn't wait
-                p.payMoney(-1 * (s.getMulePrice() + s.getMuleTypeCost((String) muleType.getValue())));
-                s.setMuleQuantity(s.getMuleQuantity() + 1);
-                p.subMule();
-                reRender();
-            } else {
-                log("Cannot sell Mule");
-            }
+            log("Cannot sell Mule");
         }
     }
 

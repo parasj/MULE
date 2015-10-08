@@ -2,8 +2,6 @@ package com.byteme.Controllers;
 
 import com.byteme.Models.ConfigRepository;
 import com.byteme.Models.MapBoard;
-import com.byteme.Models.MapStateStore;
-import com.byteme.Models.RemoveHorseStore;
 import com.byteme.Schema.MapControllerStates;
 import com.byteme.Schema.PlayerConfigParams;
 import com.byteme.Schema.Property;
@@ -62,7 +60,6 @@ public class BoardController implements Initializable, CanTick {
     private final MapStateHandler emptyHandler = new EmptyHandler(this);
     private final MapStateHandler turnOverHandler = new TurnOverHandler(this);
     private final MapStateHandler placeMuleHandler = new PlaceMuleHandler(this);
-    private final MapStateHandler removeMuleHandler = new RemoveHorseHandler(this);
 
     public BoardController() {
         updateState(START);
@@ -150,8 +147,6 @@ public class BoardController implements Initializable, CanTick {
             childController = turnOverHandler;
         else if (state == PLACE_MULE)
             childController = placeMuleHandler;
-        else if (state == REMOVE_MULE)
-            childController = removeMuleHandler;
         else
             childController = emptyHandler;
 
@@ -163,17 +158,17 @@ public class BoardController implements Initializable, CanTick {
      * UI Events
      ****/
     public void passButtonClicked() {
-        log("Pass button clicked");
+        //log("Pass button clicked");
         childController.handlePass();
     }
 
     public void tileChosen(MouseEvent event) {
-        log("Tile chosen");
+        //log("Tile chosen");
         childController.tileChosen(event);
     }
 
     private void townButtonClicked() {
-        log("Town button clicked");
+        //log("Town button clicked");
         childController.handleTownButtonClicked();
     }
 

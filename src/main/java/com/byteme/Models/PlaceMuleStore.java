@@ -26,11 +26,11 @@ public class PlaceMuleStore {
         this.mule = mule;
     }
 
-    public boolean getToStore() {
-        return toStore;
+    public boolean isEmpty() {
+        return empty;
     }
 
-    public void setToStore(boolean toStore) {
-        this.toStore = toStore;
+    public void setEmpty(boolean empty) {
+        this.empty = empty;
     }
 }
