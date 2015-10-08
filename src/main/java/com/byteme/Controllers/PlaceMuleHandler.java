@@ -47,16 +47,28 @@ public class PlaceMuleHandler extends MapStateHandler {
         int column = GridPane.getColumnIndex(tile);
         Property curr = new Property(column, row, p, null);
 
-        //Check if current property is owned by person
-        int index = properties.indexOf(curr);
-        if (index != -1) {
-            properties.get(index).addMule(pm.getMule());
-			MasterController.getInstance().getBoardController().propertyUpdated(properties.get(index));
+//        //Check if current property is owned by person
+//        int index = properties.indexOf(curr);
+//        if (index != -1) {
+//            properties.get(index).addMule(pm.getMule());
+//            MasterController.getInstance().getBoardController().propertyUpdated(properties.get(index));
             //TODO Add horse properly
             //tile.setCenter(horse);
 
             //TODO REPLACE MULE AT PROPERTY IF IT HAS ONE
-        } else {
+        boolean found = false;
+        for (int i = 0; i < p.getProperties().size(); i++) {
+            Property a = p.getProperties().get(i);
+            if (a.getOwner().equals(p) && a.getRow() == row && a.getColumn() == column) {
+                log("You can place a mule here!");
+                a.addMule(pm.getMule());
+                log("Placed MULE: " + pm.getMule().toString());
+                //MasterController.getInstance().getBoardController().propertyUpdated(properties.get(i));
+                found = true;
+                break;
+            }
+        }
+        if (!found) {
             log("********************************************");
             log("* Cannot place M.U.L.E here! M.U.L.E lost! *");
             log("********************************************");

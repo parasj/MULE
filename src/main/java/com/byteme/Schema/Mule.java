@@ -16,4 +16,11 @@ public class Mule {
     public void setType(MuleType type) {
         this.type = type;
     }
+
+    @Override
+    public String toString() {
+        return "Mule{" +
+                "type=" + type +
+                '}';
+    }
 }
