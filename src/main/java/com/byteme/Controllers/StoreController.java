@@ -211,7 +211,7 @@ public class StoreController {
                 goToMap();
                 pm.setMule(new Mule(getType((String) muleType.getValue())));
                 //DOESNT WAIT UNTIL SELECTED
-                p.payMoney(s.getMulePrice());
+                p.payMoney(s.getMulePrice() + s.getMuleTypeCost((String) muleType.getValue()));
                 s.setMuleQuantity(s.getMuleQuantity() - 1);
                 p.addMule();
                 reRender();
@@ -220,7 +220,11 @@ public class StoreController {
             }
         } else {
             if (p.getMuleCount() > 0) {
-                p.payMoney(-1 * s.getMulePrice());
+                boardController.updateState(MapControllerStates.REMOVE_MULE);
+                goToMap();
+                pm.setMule(null);
+                //Doesn't wait
+                p.payMoney(-1 * (s.getMulePrice() + s.getMuleTypeCost((String) muleType.getValue())));
                 s.setMuleQuantity(s.getMuleQuantity() + 1);
                 p.subMule();
                 reRender();

@@ -55,7 +55,7 @@ public class RemoveHorseHandler extends MapStateHandler {
         int index = properties.indexOf(curr);
         if (index != -1) {
             getBoardController().getAlertsLabel().setText("");
-            properties.get(index).setMule(pm.getMule());
+            properties.get(index).setMule(null);
             pm.setToStore(true);
             //TODO Add horse properly
             //tile.setCenter(horse);

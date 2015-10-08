@@ -1,5 +1,7 @@
 package com.byteme.Models;
 
+import com.byteme.Schema.MuleType;
+
 /**
  * Created by rishavbose365 on 10/7/2015.
  */
@@ -132,5 +134,19 @@ public class StoreStateStore {
 
     public void setMulePrice(int mulePrice) {
         this.mulePrice = mulePrice;
+    }
+
+    public int getMuleTypeCost(String s) {
+        if (s.equals("Food")) {
+            return foodMuleCost;
+        } else if (s.equals("Energy")) {
+            return energyMuleCost;
+        } else if (s.equals("Smithore")) {
+            return smithoreMuleCost;
+        } else if (s.equals("Crystite")) {
+            return crystiteMuleCost;
+        } else {
+            return 0;
+        }
     }
 }

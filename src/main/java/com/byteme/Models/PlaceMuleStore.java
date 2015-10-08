@@ -12,8 +12,8 @@ public class PlaceMuleStore {
         return ourInstance;
     }
 
-    public static Mule mule;
-    public static  boolean toStore;
+    private static Mule mule;
+    private static  boolean toStore;
 
     private PlaceMuleStore() {
     }
