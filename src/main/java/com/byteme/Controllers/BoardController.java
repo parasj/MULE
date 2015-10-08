@@ -135,7 +135,6 @@ public class BoardController implements Initializable, CanTick {
     public void updateState(MapControllerStates newState) {
         log("State updated to: " + newState);
         state = newState;
-        // TODO - switch controller as needed
 
         if (state == LAND_GRANT)
             childController = landGrantHandler;

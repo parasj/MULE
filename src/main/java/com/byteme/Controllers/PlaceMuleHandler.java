@@ -47,7 +47,6 @@ public class PlaceMuleHandler extends MapStateHandler {
             //TODO Add horse properly
             //tile.setCenter(horse);
 
-            //TODO REPLACE MULE AT PROPERTY IF IT HAS ONE
         boolean found = false;
         for (int i = 0; i < p.getProperties().size(); i++) {
             Property a = p.getProperties().get(i);

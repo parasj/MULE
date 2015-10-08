@@ -105,8 +105,6 @@ public class MapStateStore {
         return players.get(index);
     }
 
-
-    //TODO FIX me
     public void refresh() {
         this.players = new ArrayList<>(r.getPlayers());
     }
