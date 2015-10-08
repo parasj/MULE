@@ -19,7 +19,6 @@ public class StoreController {
     private final static MapStateStore m = MapStateStore.getInstance();
     private StoreStateStore s = StoreStateStore.getInstance();
     private PlaceMuleStore pm = PlaceMuleStore.getInstance();
-    private RemoveHorseStore rh = RemoveHorseStore.getInstance();
     private BoardController boardController;
 
     @FXML
@@ -76,7 +75,7 @@ public class StoreController {
             energyButton.setText("Sell Energy");
             smithoreButton.setText("Sell Smith Ore");
             crystiteButton.setText("Sell Crystite");
-            muleButton.setText("Sell Mule");
+            muleButton.setDisable(true);
             changeState.setText("Change to Buy");
             s.setState(false);
 
@@ -85,7 +84,7 @@ public class StoreController {
             energyButton.setText("Buy Energy");
             smithoreButton.setText("Buy Smith Ore");
             crystiteButton.setText("Buy Crystite");
-            muleButton.setText("Buy Mule");
+            muleButton.setDisable(false);
             changeState.setText("Change to Sell");
             s.setState(true);
         }
@@ -208,7 +207,6 @@ public class StoreController {
                 pm.setMule(new Mule(getType((String) muleType.getValue())));
                 boardController.updateState(MapControllerStates.PLACE_MULE);
                 goToMap();
-                //DOESNT WAIT UNTIL SELECTED
                 p.payMoney(s.getMulePrice() + s.getMuleTypeCost((String) muleType.getValue()));
                 s.setMuleQuantity(s.getMuleQuantity() - 1);
                 if (pm.isEmpty()) {
@@ -219,19 +217,7 @@ public class StoreController {
                 log("Cannot buy Mule");
             }
         } else {
-            if (p.getMuleCount() > 0) {
-                rh.setMule(new Mule(getType((String) muleType.getValue())));
-                boardController.updateState(MapControllerStates.REMOVE_MULE);
-                goToMap();
-                pm.setMule(null);
-                //Doesn't wait
-                p.payMoney(-1 * (s.getMulePrice() + s.getMuleTypeCost((String) muleType.getValue())));
-                s.setMuleQuantity(s.getMuleQuantity() + 1);
-                p.subMule();
-                reRender();
-            } else {
-                log("Cannot sell Mule");
-            }
+            log("Cannot sell Mule");
         }
     }
 

@@ -18,7 +18,7 @@ import java.util.ArrayList;
 import java.util.ResourceBundle;
 
 /**
- * Created by rishavbose365 on 10/7/2015.
+ * MULE
  */
 public class PlaceMuleHandler extends MapStateHandler {
     private final static GameStartStore st = GameStartStore.getInstance();
@@ -40,36 +40,28 @@ public class PlaceMuleHandler extends MapStateHandler {
 
     @Override
     public void tileChosen(MouseEvent event) {
-        //TODO handle when user chooses a tile to place mule on
-        pm.setToStore(false);
         BorderPane tile = (BorderPane) event.getSource();
         PlayerConfigParams p = m.getPlayerAt(st.getCurrentPlayer());
         ArrayList<Property> properties = p.getProperties();
         int row = GridPane.getRowIndex(tile);
         int column = GridPane.getColumnIndex(tile);
         Property curr = new Property(column, row, p, null);
-        ImageView horse = new ImageView(new Image("/images/horse.png"));
 
         //Check if current property is owned by person
         int index = properties.indexOf(curr);
         if (index != -1) {
             properties.get(index).setMule(pm.getMule());
-            pm.setToStore(true);
             pm.setEmpty(true);
             //TODO Add horse properly
             //tile.setCenter(horse);
 
-            //TODO REPLACE MULE AT PROPERTY
-//        } else if(p.equals(curr.getOwner())) {
-//            properties.get(index).setMule(pm.getMule());
-//            pm.setToStore(true);
-//            pm.setEmpty(false);
+            //TODO REPLACE MULE AT PROPERTY IF IT HAS ONE
         } else {
-            log("Cannot place mule here!");
+            log("********************************************");
+            log("* Cannot place M.U.L.E here! M.U.L.E lost! *");
+            log("********************************************");
         }
-        if (pm.getToStore()) {
-            goToStore();
-        }
+        goToStore();
     }
 
     @Override
@@ -100,7 +92,6 @@ public class PlaceMuleHandler extends MapStateHandler {
             getBoardController().renderTimer(p.getTimeLeft());
             p.setTimeLeft(p.getTimeLeft() - 1);
         } else {
-            //TODO handle if time runs out and you still have to place mule
             getBoardController().updateState(MapControllerStates.TURN_OVER);
             MasterController.getInstance().pubScene();
         }
