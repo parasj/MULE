@@ -9,6 +9,7 @@ import com.byteme.Util.CanTick;
 import com.byteme.Util.GlobalTimer;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
+import javafx.scene.Node;
 import javafx.scene.control.Label;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
@@ -16,6 +17,7 @@ import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.GridPane;
 
+import javax.swing.border.Border;
 import java.net.URL;
 import java.util.ResourceBundle;
 
@@ -30,7 +32,6 @@ public class BoardController implements Initializable, CanTick {
     private MapBoard possibleMaps;
     private boolean[][] mapSpots;
     private boolean[][] mules;
-    private BorderPane[][] boardImages;
 
     private MapControllerStates state;
     private MapStateHandler childController;
@@ -84,16 +85,15 @@ public class BoardController implements Initializable, CanTick {
         possibleMaps = new MapBoard();
         mapSpots = new boolean[possibleMaps.getHeight()][possibleMaps.getWidth()];
         mules = new boolean[possibleMaps.getHeight()][possibleMaps.getWidth()];
-        boardImages = new BorderPane[possibleMaps.getHeight()][possibleMaps.getWidth()];
 
         // inject images
         for (int i = 0; i < possibleMaps.getHeight(); i++) {
             for (int j = 0; j < possibleMaps.getWidth(); j++) {
                 ImageView img = new ImageView(possibleMaps.getTile(i, j).imagePath());
-                boardImages[i][j] = new BorderPane();
-                boardImages[i][j].setCenter(img);
-                boardImages[i][j].setOnMouseClicked(this::tileChosen);
-                map.add(boardImages[i][j], j, i); // Place the image on the grid
+                BorderPane bp = new BorderPane();
+                bp.setCenter(img);
+                bp.setOnMouseClicked(this::tileChosen);
+                map.add(bp, j, i); // Place the image on the grid
             }
         }
     }
@@ -258,14 +258,6 @@ public class BoardController implements Initializable, CanTick {
         alertsLabel.setText("");
         alertsLabel.setVisible(false);
     }
-    public void propertyUpdated(Property prop) {
-        boolean add = prop.getMule() == null;
-        mules[prop.getRow()][prop.getColumn()] = add;
-
-        Image newImage = new Image(possibleMaps.getTile(prop.getRow(), prop.getColumn()).imagePath(add));
-        BorderPane bp = boardImages[prop.getRow()][prop.getColumn()];
-        ((ImageView) bp.getCenter()).setImage(newImage);
-    }
 
 
     /****
@@ -297,5 +289,9 @@ public class BoardController implements Initializable, CanTick {
 
     public MapStateHandler getTurnOverHandler() {
         return turnOverHandler;
+    }
+
+    public MapBoard getPossibleMaps() {
+        return possibleMaps;
     }
 }

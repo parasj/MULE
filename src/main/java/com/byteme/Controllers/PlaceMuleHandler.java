@@ -44,10 +44,8 @@ public class PlaceMuleHandler extends MapStateHandler {
         PlayerConfigParams p = m.getPlayerAt(st.getCurrentPlayer());
         int row = GridPane.getRowIndex(tile);
         int column = GridPane.getColumnIndex(tile);
-            //TODO Add horse properly
-            //tile.setCenter(horse);
 
-            //TODO REPLACE MULE AT PROPERTY IF IT HAS ONE
+        //TODO REPLACE MULE AT PROPERTY IF IT HAS ONE
         boolean found = false;
         for (int i = 0; i < p.getProperties().size(); i++) {
             Property a = p.getProperties().get(i);
@@ -55,7 +53,7 @@ public class PlaceMuleHandler extends MapStateHandler {
                 log("You can place a mule here!");
                 a.addMule(pm.getMule());
                 log("Placed MULE: " + pm.getMule().toString());
-                //MasterController.getInstance().getBoardController().propertyUpdated(properties.get(i));
+                tile.setCenter(new ImageView(new Image(getBoardController().getPossibleMaps().getTile(row, column).imagePath(true))));
                 found = true;
                 break;
             }
