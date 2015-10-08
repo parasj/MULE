@@ -22,7 +22,7 @@ public class Property {
         return this.column;
     }
     public int getRow() {
-        return this.column;
+        return this.row;
     }
     public PlayerConfigParams getOwner() {
         return this.owner;

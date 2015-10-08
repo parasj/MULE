@@ -47,10 +47,8 @@ public class PlaceMuleHandler extends MapStateHandler {
         boolean found = false;
         for (int i = 0; i < p.getProperties().size(); i++) {
             Property a = p.getProperties().get(i);
-            if (a.getOwner().equals(p) && a.getRow() == row && a.getColumn() == column) {
-                log("You can place a mule here!");
+            if (a.getRow() == row && a.getColumn() == column  ) {
                 a.addMule(pm.getMule());
-                log("Placed MULE: " + pm.getMule().toString());
                 tile.setCenter(new ImageView(new Image(getBoardController().getPossibleMaps().getTile(row, column).imagePath(true))));
                 found = true;
                 break;
