@@ -209,9 +209,6 @@ public class StoreController {
                 goToMap();
                 p.payMoney(s.getMulePrice() + s.getMuleTypeCost((String) muleType.getValue()));
                 s.setMuleQuantity(s.getMuleQuantity() - 1);
-                if (pm.isEmpty()) {
-                    p.addMule();
-                }
                 reRender();
             } else {
                 log("Cannot buy Mule");

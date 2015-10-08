@@ -33,6 +33,7 @@ public class LandPurchaseHandler extends MapStateHandler {
 
     @Override
     public void tileChosen(MouseEvent event) {
+        getBoardController().clearOwnedMessage();
         BorderPane tile = (BorderPane) event.getSource();
         if (getBoardController().owned(tile))
             getBoardController().ownedMessage(); // Property is owned, just display warning

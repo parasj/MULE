@@ -249,6 +249,11 @@ public class BoardController implements Initializable, CanTick {
         alertsLabel.setVisible(true);
     }
 
+    public void clearOwnedMessage() {
+        alertsLabel.setText("");
+        alertsLabel.setVisible(false);
+    }
+
 
     /****
      * Util functions
