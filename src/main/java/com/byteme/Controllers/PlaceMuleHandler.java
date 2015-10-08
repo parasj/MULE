@@ -42,16 +42,8 @@ public class PlaceMuleHandler extends MapStateHandler {
     public void tileChosen(MouseEvent event) {
         BorderPane tile = (BorderPane) event.getSource();
         PlayerConfigParams p = m.getPlayerAt(st.getCurrentPlayer());
-        ArrayList<Property> properties = p.getProperties();
         int row = GridPane.getRowIndex(tile);
         int column = GridPane.getColumnIndex(tile);
-        Property curr = new Property(column, row, p, null);
-
-//        //Check if current property is owned by person
-//        int index = properties.indexOf(curr);
-//        if (index != -1) {
-//            properties.get(index).addMule(pm.getMule());
-//            MasterController.getInstance().getBoardController().propertyUpdated(properties.get(index));
             //TODO Add horse properly
             //tile.setCenter(horse);
 
