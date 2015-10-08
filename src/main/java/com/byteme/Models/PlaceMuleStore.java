@@ -14,14 +14,13 @@ public class PlaceMuleStore {
 
     private static Mule mule;
 
-    private PlaceMuleStore() {
-    }
+    private PlaceMuleStore() {}
 
     public Mule getMule() {
         return mule;
     }
 
-    public static void setMule(Mule mule) {
-        PlaceMuleStore.mule = mule;
+    public void setMule(Mule mule) {
+        this.mule = mule;
     }
 }

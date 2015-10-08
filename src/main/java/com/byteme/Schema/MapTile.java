@@ -22,11 +22,21 @@ public enum MapTile {
     }
 
     public String imagePath() {
-        return imagePath.getOrDefault(this.name(), imagePath.get("P"));
+        return imagePath(false);
     }
 
     @Override
     public String toString() {
         return EnumHumanizer.humanizeEnum(super.toString());
+    }
+
+    public String imagePath(boolean mule) {
+        String path = imagePath.getOrDefault(this.name(), imagePath.get("P"));
+        if (mule) {
+            // add a mule to the path
+            return "/images/Town.png";
+        } else {
+            return path;
+        }
     }
 }

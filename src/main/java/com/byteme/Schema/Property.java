@@ -1,5 +1,7 @@
 package com.byteme.Schema;
 
+import com.byteme.Controllers.MasterController;
+
 import java.util.ArrayList;
 
 /**
@@ -39,8 +41,16 @@ public class Property {
         return mule;
     }
 
-    public void setMule(Mule mule) {
-        this.mule = mule;
+    public void addMule(Mule mule) {
+        if (mule != null) {
+            this.mule = mule;
+        } else {
+            removeMule();
+        }
+    }
+
+    public void removeMule() {
+        mule = null;
     }
 
     public boolean hasMule() {
