@@ -86,8 +86,7 @@ public class PlayerConfigParams implements Comparable<PlayerConfigParams> {
     }
 
     public int calcScore() {
-        //TODO Take into account resources
-        return (this.money + 500 * properties.size());
+        return (this.money + 500 * properties.size()) + this.crystite + this.energy + this.food + this.smithore;
     }
 
     public void calcTimeLeft() {
