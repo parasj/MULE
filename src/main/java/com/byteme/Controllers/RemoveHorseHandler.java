@@ -3,6 +3,7 @@ package com.byteme.Controllers;
 import com.byteme.Models.GameStartStore;
 import com.byteme.Models.MapStateStore;
 import com.byteme.Models.PlaceMuleStore;
+import com.byteme.Models.RemoveHorseStore;
 import com.byteme.Schema.MapControllerStates;
 import com.byteme.Schema.PlayerConfigParams;
 import com.byteme.Schema.Property;
@@ -29,6 +30,7 @@ public class RemoveHorseHandler extends MapStateHandler {
     private final static GameStartStore st = GameStartStore.getInstance();
     private final static PlaceMuleStore pm = PlaceMuleStore.getInstance();
     private final static MapStateStore m = MapStateStore.getInstance();
+    private final static RemoveHorseStore rs = RemoveHorseStore.getInstance();
 
     @Override
     public void handlePass() {
@@ -48,7 +50,7 @@ public class RemoveHorseHandler extends MapStateHandler {
         ArrayList<Property> properties =  p.getProperties();
         int row = GridPane.getRowIndex(tile);
         int column = GridPane.getColumnIndex(tile);
-        Property curr = new Property(column, row, p, null);
+        Property curr = new Property(column, row, p, rs.getMule());
         ImageView horse = new ImageView(new Image("/images/horse.png"));
 
         //Check if current property is owned by person
@@ -61,7 +63,7 @@ public class RemoveHorseHandler extends MapStateHandler {
             //tile.setCenter(horse);
 
         } else {
-            log("Cannot place mule here!");
+            log("Cannot remove mule from here!");
         }
         if (pm.getToStore()) {
             goToStore();

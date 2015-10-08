@@ -44,7 +44,7 @@ public class PlaceMuleHandler extends MapStateHandler {
         pm.setToStore(false);
         BorderPane tile = (BorderPane) event.getSource();
         PlayerConfigParams p = m.getPlayerAt(st.getCurrentPlayer());
-        ArrayList<Property> properties =  p.getProperties();
+        ArrayList<Property> properties = p.getProperties();
         int row = GridPane.getRowIndex(tile);
         int column = GridPane.getColumnIndex(tile);
         Property curr = new Property(column, row, p, null);
@@ -53,12 +53,17 @@ public class PlaceMuleHandler extends MapStateHandler {
         //Check if current property is owned by person
         int index = properties.indexOf(curr);
         if (index != -1) {
-            getBoardController().getAlertsLabel().setText("");
             properties.get(index).setMule(pm.getMule());
             pm.setToStore(true);
+            pm.setEmpty(true);
             //TODO Add horse properly
             //tile.setCenter(horse);
 
+            //TODO REPLACE MULE AT PROPERTY
+//        } else if(p.equals(curr.getOwner())) {
+//            properties.get(index).setMule(pm.getMule());
+//            pm.setToStore(true);
+//            pm.setEmpty(false);
         } else {
             log("Cannot place mule here!");
         }

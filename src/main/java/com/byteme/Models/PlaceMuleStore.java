@@ -13,7 +13,8 @@ public class PlaceMuleStore {
     }
 
     private static Mule mule;
-    private static  boolean toStore;
+    private static boolean toStore;
+    private static boolean empty = true;
 
     private PlaceMuleStore() {
     }
@@ -32,5 +33,13 @@ public class PlaceMuleStore {
 
     public static void setToStore(boolean toStore) {
         PlaceMuleStore.toStore = toStore;
+    }
+
+    public static boolean isEmpty() {
+        return empty;
+    }
+
+    public static void setEmpty(boolean empty) {
+        PlaceMuleStore.empty = empty;
     }
 }

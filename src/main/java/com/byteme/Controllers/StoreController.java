@@ -1,9 +1,6 @@
 package com.byteme.Controllers;
 
-import com.byteme.Models.GameStartStore;
-import com.byteme.Models.MapStateStore;
-import com.byteme.Models.PlaceMuleStore;
-import com.byteme.Models.StoreStateStore;
+import com.byteme.Models.*;
 import com.byteme.Schema.MapControllerStates;
 import com.byteme.Schema.Mule;
 import com.byteme.Schema.MuleType;
@@ -22,6 +19,7 @@ public class StoreController {
     private final static MapStateStore m = MapStateStore.getInstance();
     private StoreStateStore s = StoreStateStore.getInstance();
     private PlaceMuleStore pm = PlaceMuleStore.getInstance();
+    private RemoveHorseStore rh = RemoveHorseStore.getInstance();
     private BoardController boardController;
 
     @FXML
@@ -207,19 +205,22 @@ public class StoreController {
         PlayerConfigParams p = m.getPlayerAt(st.getCurrentPlayer());
         if (s.getState()) {
             if (p.getMoney() >= s.getMulePrice() && s.getMuleQuantity() > 0) {
+                pm.setMule(new Mule(getType((String) muleType.getValue())));
                 boardController.updateState(MapControllerStates.PLACE_MULE);
                 goToMap();
-                pm.setMule(new Mule(getType((String) muleType.getValue())));
                 //DOESNT WAIT UNTIL SELECTED
                 p.payMoney(s.getMulePrice() + s.getMuleTypeCost((String) muleType.getValue()));
                 s.setMuleQuantity(s.getMuleQuantity() - 1);
-                p.addMule();
+                if (pm.isEmpty()) {
+                    p.addMule();
+                }
                 reRender();
             } else {
                 log("Cannot buy Mule");
             }
         } else {
             if (p.getMuleCount() > 0) {
+                rh.setMule(new Mule(getType((String) muleType.getValue())));
                 boardController.updateState(MapControllerStates.REMOVE_MULE);
                 goToMap();
                 pm.setMule(null);
