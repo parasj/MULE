@@ -203,7 +203,7 @@ public class StoreController {
     public void tradeMule() {
         PlayerConfigParams p = m.getPlayerAt(st.getCurrentPlayer());
         int muleCost = s.getMulePrice() + s.getMuleTypeCost((String) muleType.getValue());
-        log("" + muleCost);
+        //log("" + muleCost);
         if (s.getState()) {
             if (p.getMoney() >= muleCost && s.getMuleQuantity() > 0) {
                 pm.setMule(new Mule(getType((String) muleType.getValue())));
