@@ -3,6 +3,7 @@ package com.byteme.Schema;
 import com.byteme.Controllers.MasterController;
 
 import java.util.ArrayList;
+import java.util.Map;
 
 /**
  * MULE
@@ -12,11 +13,13 @@ public class Property {
     private int row;
     private PlayerConfigParams owner;
     private Mule mule;
-    public Property(int column, int row, PlayerConfigParams owner, Mule mules) {
+    private MapTile maptile;
+    public Property(int column, int row, PlayerConfigParams owner, Mule mule, MapTile mapTile) {
         this.row = row;
         this.column = column;
         this.owner = owner;
         this.mule = mule;
+        this.maptile = mapTile;
     }
     public int getColumn() {
         return this.column;
@@ -55,6 +58,14 @@ public class Property {
 
     public boolean hasMule() {
         return this.mule != null;
+    }
+
+    public MapTile getMaptile() {
+        return maptile;
+    }
+
+    public void setMaptile(MapTile maptile) {
+        this.maptile = maptile;
     }
 
     @Override

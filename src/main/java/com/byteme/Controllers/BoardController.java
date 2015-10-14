@@ -238,7 +238,7 @@ public class BoardController implements Initializable, CanTick {
         int column = GridPane.getColumnIndex(tile);
         String color = player.getColor();
         tile.setStyle("-fx-border-color: " + color.toLowerCase() + ";" + "-fx-border-width: 6px;");
-        player.addProperty(new Property(column, row, player, null));
+        player.addProperty(new Property(column, row, player, null, possibleMaps.getTile(row, column)));
         mapSpots[row][column] = true;
     }
 

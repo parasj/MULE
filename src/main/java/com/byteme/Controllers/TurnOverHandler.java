@@ -40,6 +40,5 @@ public class TurnOverHandler extends MapStateHandler{
 
     @Override
     public void initialize(URL location, ResourceBundle resources) {
-
     }
 }

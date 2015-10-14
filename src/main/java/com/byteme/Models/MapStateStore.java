@@ -108,4 +108,8 @@ public class MapStateStore {
     public void refresh() {
         this.players = new ArrayList<>(r.getPlayers());
     }
+
+    public ArrayList<PlayerConfigParams> getPlayers() {
+        return players;
+    }
 }

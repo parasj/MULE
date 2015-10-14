@@ -170,6 +170,15 @@ public class PlayerConfigParams implements Comparable<PlayerConfigParams> {
         this.crystite--;
     }
 
+    public String getResources() {
+        return "Player: " + getName() + "\n"
+            + "Food: " + getFood() + "\n"
+            + "Energy: " + getEnergy() + "\n"
+            + "Smithore: " + getSmithore() + "\n"
+            + "Crystite: " + getCrystite() + "\n"
+            + "==================================================";
+    }
+
 
     @Override
     public int compareTo(PlayerConfigParams otherPlayer) {

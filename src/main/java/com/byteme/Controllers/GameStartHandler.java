@@ -4,11 +4,13 @@ import com.byteme.Models.ConfigRepository;
 import com.byteme.Models.GameStartStore;
 import com.byteme.Models.MapStateStore;
 import com.byteme.Schema.MapControllerStates;
+import com.byteme.Schema.Mule;
 import com.byteme.Schema.PlayerConfigParams;
 import com.byteme.Schema.Property;
 import javafx.scene.input.MouseEvent;
 
 import java.net.URL;
+import java.util.Random;
 import java.util.ResourceBundle;
 
 /**
@@ -25,7 +27,8 @@ public class GameStartHandler extends MapStateHandler {
 
     @Override
     public void handlePass() {
-
+        MasterController.getInstance().getBoardController().updateState(MapControllerStates.TURN_OVER);
+        MasterController.getInstance().pubScene();
     }
 
     @Override
@@ -79,11 +82,109 @@ public class GameStartHandler extends MapStateHandler {
     public void nextPlayer() {
         if (st.getCurrentPlayer() == r.getTotalPlayers() - 1) {
             m.setCurrentRound(m.getCurrentRound() + 1);
+            calculateProduction();
             st.setCurrentPlayer(1);
             m.sortPlayers();
         }
         st.incCurrentPlayer();
         m.getPlayerAt(st.getCurrentPlayer()).calcTimeLeft();
         log("Player changed to " + st.getCurrentPlayer());
+    }
+
+    private void calculateProduction() {
+        Random rand = new Random();
+        for (PlayerConfigParams player: m.getPlayers()) {
+            for (Property prop : player.getProperties()) {
+                Mule mule = prop.getMule();
+                if (mule != null && player.getEnergy() > 0) {
+                    log("Property is: " + prop.getMaptile());
+                    switch (prop.getMaptile()) {
+                        case R:
+                            switch (mule.getType()) {
+                                case FOOD:
+                                    player.setFood(player.getFood() + 4);
+                                    break;
+                                case ENERGY:
+                                    player.setEnergy(player.getEnergy() + 2);
+                                    break;
+                                case SMITHORE:
+                                    break;
+                                case CRYSTITE:
+                                    break;
+                            }
+                            break;
+                        case P:
+                            switch (mule.getType()) {
+                                case FOOD:
+                                    player.setFood(player.getFood() + 2);
+                                    break;
+                                case ENERGY:
+                                    player.setEnergy(player.getEnergy() + 3);
+                                    break;
+                                case SMITHORE:
+                                    player.setSmithore(player.getSmithore() + 1);
+                                    break;
+                                case CRYSTITE:
+                                    player.setCrystite(player.getCrystite() + rand.nextInt(5));
+                                    break;
+                            }
+                            break;
+                        case M1:
+                            switch (mule.getType()) {
+                                case FOOD:
+                                    player.setFood(player.getFood() + 1);
+                                    break;
+                                case ENERGY:
+                                    player.setEnergy(player.getEnergy() + 1);
+                                    break;
+                                case SMITHORE:
+                                    player.setSmithore(player.getSmithore() + 2);
+                                    break;
+                                case CRYSTITE:
+                                    player.setCrystite(player.getCrystite() + rand.nextInt(5));
+                                    break;
+                            }
+                            break;
+                        case M2:
+                            switch (mule.getType()) {
+                                case FOOD:
+                                    player.setFood(player.getFood() + 1);
+                                    break;
+                                case ENERGY:
+                                    player.setEnergy(player.getEnergy() + 1);
+                                    break;
+                                case SMITHORE:
+                                    player.setSmithore(player.getSmithore() + 3);
+                                    break;
+                                case CRYSTITE:
+                                    player.setCrystite(player.getCrystite() + rand.nextInt(5));
+                                    break;
+                            }
+                            break;
+                        case M3:
+                            switch (mule.getType()) {
+                                case FOOD:
+                                    player.setFood(player.getFood() + 1);
+                                    break;
+                                case ENERGY:
+                                    player.setEnergy(player.getEnergy() + 1);
+                                    break;
+                                case SMITHORE:
+                                    player.setSmithore(player.getSmithore() + 4);
+                                    break;
+                                case CRYSTITE:
+                                    player.setCrystite(player.getCrystite() + rand.nextInt(5));
+                                    break;
+                            }
+                            break;
+
+                    }
+                    player.subEnergy();
+                }
+            }
+            log("==================================================");
+            log("Your resources are:\n");
+            log(player.getResources());
+        }
     }
 }

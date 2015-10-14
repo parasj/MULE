@@ -40,6 +40,5 @@ public class SelectionOverHandler extends MapStateHandler {
 
     @Override
     public void initialize(URL location, ResourceBundle resources) {
-
     }
 }
