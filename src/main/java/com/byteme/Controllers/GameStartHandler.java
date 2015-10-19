@@ -92,7 +92,7 @@ public class GameStartHandler extends MapStateHandler {
         calculateRandomEvents();
     }
 
-    private void calculateRandomEvents() {
+    public void calculateRandomEvents() {
         PlayerConfigParams p = m.getPlayerAt(st.getCurrentPlayer());
         RandomEvent evt = evtGen.getEvent(lastPlace(p));
         p.setFood(evt.calcFood(p.getFood()));

@@ -58,4 +58,8 @@ public class ConfigRepository {
     public Collection<PlayerConfigParams> getPlayers() {
         return playerConfigList.values();
     }
+
+    public PlayerConfigParams getFirstPlayerConfig() {
+        return playerConfigList.get(1);
+    }
 }

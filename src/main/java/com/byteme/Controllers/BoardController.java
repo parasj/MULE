@@ -9,15 +9,12 @@ import com.byteme.Util.CanTick;
 import com.byteme.Util.GlobalTimer;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
-import javafx.scene.Node;
 import javafx.scene.control.Label;
-import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.GridPane;
 
-import javax.swing.border.Border;
 import java.net.URL;
 import java.util.ResourceBundle;
 
@@ -27,11 +24,10 @@ import static com.byteme.Schema.MapControllerStates.*;
 public class BoardController implements Initializable, CanTick {
     private final static ConfigRepository configRepository = ConfigRepository.getInstance();
     private final static GlobalTimer timer = GlobalTimer.getInstance();
-    public final static int cost = 300;
+    private final static int cost = 300;
 
     private MapBoard possibleMaps;
     private boolean[][] mapSpots;
-    private boolean[][] mules;
 
     private MapControllerStates state;
     private MapStateHandler childController;
@@ -74,7 +70,7 @@ public class BoardController implements Initializable, CanTick {
     @Override
     public void initialize(URL location, ResourceBundle resources) {
         log("Initializing");
-        setPlayer(configRepository.getPlayerConfig(1));
+        setPlayer(configRepository.getFirstPlayerConfig());
         initBoard();
         initRiver();
         initBoardCleanup();
@@ -84,7 +80,6 @@ public class BoardController implements Initializable, CanTick {
     private void initBoard() {
         possibleMaps = new MapBoard();
         mapSpots = new boolean[possibleMaps.getHeight()][possibleMaps.getWidth()];
-        mules = new boolean[possibleMaps.getHeight()][possibleMaps.getWidth()];
 
         // inject images
         for (int i = 0; i < possibleMaps.getHeight(); i++) {
@@ -129,12 +124,17 @@ public class BoardController implements Initializable, CanTick {
     }
 
 
+    public MapControllerStates getState() {
+        return state;
+    }
+
     /****
      * Data Binding
      ****/
     public void updateState(MapControllerStates newState) {
         log("State updated to: " + newState);
         state = newState;
+
 
         if (state == LAND_GRANT)
             childController = landGrantHandler;
@@ -238,7 +238,7 @@ public class BoardController implements Initializable, CanTick {
         int column = GridPane.getColumnIndex(tile);
         String color = player.getColor();
         tile.setStyle("-fx-border-color: " + color.toLowerCase() + ";" + "-fx-border-width: 6px;");
-        player.addProperty(new Property(column, row, player, null, possibleMaps.getTile(row, column)));
+        player.addProperty(new Property(column, row, player, possibleMaps.getTile(row, column)));
         mapSpots[row][column] = true;
     }
 

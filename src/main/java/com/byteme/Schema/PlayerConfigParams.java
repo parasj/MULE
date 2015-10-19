@@ -207,23 +207,8 @@ public class PlayerConfigParams implements Comparable<PlayerConfigParams> {
         if (!name.equals(that.name)) return false;
         if (race != that.race) return false;
         if (!color.equals(that.color)) return false;
-        return !(properties != null ? !properties.equals(that.properties) : that.properties != null);
+        return !(properties != null ?
+                !properties.equals(that.properties) : that.properties != null);
 
-    }
-
-    @Override
-    public int hashCode() {
-        int result = name.hashCode();
-        result = 31 * result + race.hashCode();
-        result = 31 * result + color.hashCode();
-        result = 31 * result + money;
-        result = 31 * result + timeLeft;
-        result = 31 * result + food;
-        result = 31 * result + energy;
-        result = 31 * result + smithore;
-        result = 31 * result + crystite;
-        result = 31 * result + order;
-        result = 31 * result + (properties != null ? properties.hashCode() : 0);
-        return result;
     }
 }

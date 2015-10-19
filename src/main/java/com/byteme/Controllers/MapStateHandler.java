@@ -33,7 +33,7 @@ public abstract class MapStateHandler implements CanTick, Initializable {
 
     public abstract void stateChanged();
 
-    public void log(String log) {
+    protected void log(String log) {
         System.out.println(log);
     }
 

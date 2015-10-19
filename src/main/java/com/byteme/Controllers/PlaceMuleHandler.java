@@ -1,6 +1,5 @@
 package com.byteme.Controllers;
 
-import com.byteme.Models.ConfigRepository;
 import com.byteme.Models.GameStartStore;
 import com.byteme.Models.MapStateStore;
 import com.byteme.Models.PlaceMuleStore;
@@ -14,7 +13,6 @@ import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.GridPane;
 
 import java.net.URL;
-import java.util.ArrayList;
 import java.util.ResourceBundle;
 
 /**
@@ -99,7 +97,8 @@ public class PlaceMuleHandler extends MapStateHandler {
     public void initialize(URL location, ResourceBundle resources) {
 
     }
-    public void goToStore() {
+
+    private void goToStore() {
         MasterController.getInstance().store();
         getBoardController().updateState(MapControllerStates.GAME_START);
     }
