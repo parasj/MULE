@@ -29,6 +29,8 @@ public class RandomEventGenerator {
     }
 
     private boolean flipCoin(int probability) {
-        return random.nextInt(100) <= probability;
+        int flip = random.nextInt(100);
+        System.out.println("Probability flipped: " + flip);
+        return flip <= probability;
     }
 }

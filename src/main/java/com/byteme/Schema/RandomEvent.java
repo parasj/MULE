@@ -27,11 +27,11 @@ public enum RandomEvent {
         NOTHING.str = "No random event occurs.";
         GT_ALUMNI_PACKAGE.str = "You just received a package from the GT Alumni containing 3 food and 2 energy units.";
         TECH_STUDENT_HOSPITALITY.str = "A wandering Tech student repaid your hospitality by leaving two bars of ore.";
-        MUSEUM_COMPUTER.str = "The mueseum bought your antique personal computer for $8m.";
-        MOOSE_RAT.str = "You found a dead moose rat and sold the hide for $2m.";
-        FLYING_CAT_BUGS.str = "Flying cat-bugs are the roof off your house. Repairs cost $4m.";
-        UGA_STUDENTS.str = "Mischevous UGA students broke into your storage shed and stole half your food.";
-        SPACE_INLAWS.str = "Your space gypsy inlaws made a mess of the town. It cost you $6m to clean it up.";
+        MUSEUM_COMPUTER.str = "The museum bought your antique personal computer for $8###.";
+        MOOSE_RAT.str = "You found a dead moose rat and sold the hide for $2###.";
+        FLYING_CAT_BUGS.str = "Flying cat-bugs are the roof off your house. Repairs cost $4###.";
+        UGA_STUDENTS.str = "Mischievous UGA students broke into your storage shed and stole half your food.";
+        SPACE_INLAWS.str = "Your space gypsy inlaws made a mess of the town. It cost you $6### to clean it up.";
 
         NOTHING.isGood = true;
         GT_ALUMNI_PACKAGE.isGood = true;
@@ -96,8 +96,10 @@ public enum RandomEvent {
         return oldEnergy + energyEffect;
     }
 
-    public int calcMoney(int oldMoney) {
-        return oldMoney + moneyEffect;
+    public int calcMoney(int oldMoney, int round) {
+        int roundMultiple = roundMultiple(round);
+        int 
+        return oldMoney + moneyEffect * roundMultiple;
     }
 
     public static RandomEvent getRandomEvent() {
@@ -108,5 +110,13 @@ public enum RandomEvent {
     @Override
     public String toString() {
         return str;
+    }
+
+    private int roundMultiple(int round) {
+        if (round > 0 && round < 4) return 25;
+        else if (round < 8) return 50;
+        else if (round < 12) return 75;
+        else if (round == 12) return 100;
+        else return 0;
     }
 }
