@@ -20,9 +20,19 @@ public enum RandomEvent {
 
     private boolean isGood;
     private int foodEffect, energyEffect, oreEffect, moneyEffect;
+    private String str;
     private static final SecureRandom random = new SecureRandom();
 
     static {
+        NOTHING.str = "No random event occurs.";
+        GT_ALUMNI_PACKAGE.str = "You just received a package from the GT Alumni containing 3 food and 2 energy units.";
+        TECH_STUDENT_HOSPITALITY.str = "A wandering Tech student repaid your hospitality by leaving two bars of ore.";
+        MUSEUM_COMPUTER.str = "The mueseum bought your antique personal computer for $8m.";
+        MOOSE_RAT.str = "You found a dead moose rat and sold the hide for $2m.";
+        FLYING_CAT_BUGS.str = "Flying cat-bugs are the roof off your house. Repairs cost $4m.";
+        UGA_STUDENTS.str = "Mischevous UGA students broke into your storage shed and stole half your food.";
+        SPACE_INLAWS.str = "Your space gypsy inlaws made a mess of the town. It cost you $6m to clean it up.";
+
         NOTHING.isGood = true;
         GT_ALUMNI_PACKAGE.isGood = true;
         TECH_STUDENT_HOSPITALITY.isGood = true;
@@ -93,5 +103,10 @@ public enum RandomEvent {
     public static RandomEvent getRandomEvent() {
         int x = random.nextInt(RandomEvent.class.getEnumConstants().length);
         return RandomEvent.class.getEnumConstants()[x];
+    }
+
+    @Override
+    public String toString() {
+        return str;
     }
 }

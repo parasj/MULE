@@ -3,7 +3,6 @@ package com.byteme.Models;
 import com.byteme.Schema.RandomEvent;
 
 import java.security.SecureRandom;
-import java.util.Random;
 
 /**
  * MULE
@@ -11,11 +10,11 @@ import java.util.Random;
 public class RandomEventGenerator {
     private static final SecureRandom random = new SecureRandom();
 
-    private RandomEvent getEvent() {
+    public RandomEvent getEvent() {
         return getEvent(false);
     }
 
-    private RandomEvent getEvent(boolean onlyGood) {
+    public RandomEvent getEvent(boolean onlyGood) {
         if (!flipCoin(27)) return RandomEvent.NOTHING;
         if (onlyGood) return getRandomEvent(false, false);
         return getRandomEvent(true, false);

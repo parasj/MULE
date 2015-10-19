@@ -3,10 +3,8 @@ package com.byteme.Controllers;
 import com.byteme.Models.ConfigRepository;
 import com.byteme.Models.GameStartStore;
 import com.byteme.Models.MapStateStore;
-import com.byteme.Schema.MapControllerStates;
-import com.byteme.Schema.Mule;
-import com.byteme.Schema.PlayerConfigParams;
-import com.byteme.Schema.Property;
+import com.byteme.Models.RandomEventGenerator;
+import com.byteme.Schema.*;
 import javafx.scene.input.MouseEvent;
 
 import java.net.URL;
@@ -20,6 +18,7 @@ public class GameStartHandler extends MapStateHandler {
     private final static GameStartStore st = GameStartStore.getInstance();
     private final static MapStateStore m = MapStateStore.getInstance();
     private final static ConfigRepository r = ConfigRepository.getInstance();
+    private final static RandomEventGenerator evtGen = new RandomEventGenerator();
 
     public GameStartHandler(BoardController boardController) {
         super(boardController);
@@ -83,12 +82,33 @@ public class GameStartHandler extends MapStateHandler {
         if (st.getCurrentPlayer() == r.getTotalPlayers() - 1) {
             m.setCurrentRound(m.getCurrentRound() + 1);
             calculateProduction();
+            calculateRandomEvents();
             st.setCurrentPlayer(1);
             m.sortPlayers();
         }
         st.incCurrentPlayer();
         m.getPlayerAt(st.getCurrentPlayer()).calcTimeLeft();
         log("Player changed to " + st.getCurrentPlayer());
+    }
+
+    private void calculateRandomEvents() {
+        PlayerConfigParams p = m.getPlayerAt(st.getCurrentPlayer());
+        RandomEvent evt = evtGen.getEvent(lastPlace(p));
+        p.setFood(evt.calcFood(p.getFood()));
+        p.setEnergy(evt.calcEnergy(p.getEnergy()));
+        p.setMoney(evt.calcMoney(p.getMoney()));
+        p.setSmithore(evt.calcOre(p.getSmithore()));
+
+        String evtName = evt.toString();
+        log("Random Event: " + evtName);
+    }
+
+    private boolean lastPlace(PlayerConfigParams p) {
+        int pScore = p.calcScore();
+        int minPScore = Integer.MIN_VALUE;
+        for (PlayerConfigParams pl : m.getPlayers())
+            minPScore = Math.min(minPScore, pl.calcScore());
+        return pScore <= minPScore;
     }
 
     private void calculateProduction() {
