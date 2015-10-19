@@ -16,15 +16,6 @@ public class PlayerConfigParams implements Comparable<PlayerConfigParams> {
     private int energy;
     private int smithore;
     private int crystite;
-
-    public int getOrder() {
-        return order;
-    }
-
-    public void setOrder(int order) {
-        this.order = order;
-    }
-
     private int order;
     private ArrayList<Property> properties;
 
@@ -37,13 +28,19 @@ public class PlayerConfigParams implements Comparable<PlayerConfigParams> {
         this.order = order;
     }
 
-    public String getName()
-    {
+    public int getOrder() {
+        return order;
+    }
+
+    public void setOrder(int order) {
+        this.order = order;
+    }
+
+    public String getName() {
         return name;
     }
 
     public Race getRace() {
-
         return race;
     }
 
@@ -53,6 +50,10 @@ public class PlayerConfigParams implements Comparable<PlayerConfigParams> {
 
     public int getMoney() {
         return money;
+    }
+
+    public void setMoney(int money) {
+        this.money = money;
     }
 
     public void payMoney(int cost) {
@@ -75,13 +76,11 @@ public class PlayerConfigParams implements Comparable<PlayerConfigParams> {
         this.properties.add(property);
     }
 
-    public boolean removeProperty(Property property)
-    {
+    public boolean removeProperty(Property property) {
         return this.properties.remove(property);
     }
 
-    public String toString()
-    {
+    public String toString() {
         return color + " " + race + " named " + name;
     }
 
@@ -100,10 +99,6 @@ public class PlayerConfigParams implements Comparable<PlayerConfigParams> {
 
     public void setTimeLeft(int timeLeft) {
         this.timeLeft = timeLeft;
-    }
-
-    public void setMoney(int money) {
-        this.money = money;
     }
 
     public int getFood() {
@@ -172,11 +167,11 @@ public class PlayerConfigParams implements Comparable<PlayerConfigParams> {
 
     public String getResources() {
         return "Player: " + getName() + "\n"
-            + "Food: " + getFood() + "\n"
-            + "Energy: " + getEnergy() + "\n"
-            + "Smithore: " + getSmithore() + "\n"
-            + "Crystite: " + getCrystite() + "\n"
-            + "==================================================";
+                + "Food: " + getFood() + "\n"
+                + "Energy: " + getEnergy() + "\n"
+                + "Smithore: " + getSmithore() + "\n"
+                + "Crystite: " + getCrystite() + "\n"
+                + "==================================================";
     }
 
 
