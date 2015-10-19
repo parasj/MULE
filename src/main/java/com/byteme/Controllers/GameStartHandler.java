@@ -5,6 +5,7 @@ import com.byteme.Models.GameStartStore;
 import com.byteme.Models.MapStateStore;
 import com.byteme.Models.RandomEventGenerator;
 import com.byteme.Schema.*;
+import javafx.scene.control.Alert;
 import javafx.scene.input.MouseEvent;
 
 import java.net.URL;
@@ -96,11 +97,27 @@ public class GameStartHandler extends MapStateHandler {
         RandomEvent evt = evtGen.getEvent(lastPlace(p));
         p.setFood(evt.calcFood(p.getFood()));
         p.setEnergy(evt.calcEnergy(p.getEnergy()));
-        p.setMoney(evt.calcMoney(p.getMoney()));
+        p.setMoney(evt.calcMoney(p.getMoney(), m.getCurrentRound()));
         p.setSmithore(evt.calcOre(p.getSmithore()));
 
         String evtName = evt.toString();
         log("Random Event: " + evtName);
+
+        if (!evt.equals(RandomEvent.NOTHING)) {
+            Alert.AlertType alertType = Alert.AlertType.INFORMATION;
+            String header = "Good fortune, " + m.getPlayerAt(st.getCurrentPlayer()).getName() + "!";
+            if (!evt.isGood()) {
+                alertType = Alert.AlertType.WARNING;
+                header = "Better luck next time, " + m.getPlayerAt(st.getCurrentPlayer()).getName() + "!";
+            }
+
+            Alert alert = new Alert(alertType);
+            alert.setTitle("Random Event");
+            alert.setHeaderText(header);
+            alert.setContentText(evtName);
+
+            alert.showAndWait();
+        }
     }
 
     private boolean lastPlace(PlayerConfigParams p) {
