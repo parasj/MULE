@@ -83,13 +83,13 @@ public class GameStartHandler extends MapStateHandler {
         if (st.getCurrentPlayer() == r.getTotalPlayers() - 1) {
             m.setCurrentRound(m.getCurrentRound() + 1);
             calculateProduction();
-            calculateRandomEvents();
             st.setCurrentPlayer(1);
             m.sortPlayers();
         }
         st.incCurrentPlayer();
         m.getPlayerAt(st.getCurrentPlayer()).calcTimeLeft();
         log("Player changed to " + st.getCurrentPlayer());
+        calculateRandomEvents();
     }
 
     private void calculateRandomEvents() {
