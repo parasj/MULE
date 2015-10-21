@@ -10,7 +10,7 @@ import javafx.util.Duration;
 import java.io.IOException;
 import java.net.URL;
 
-public class Main extends Application {
+class Main extends Application {
 
     public static void main(String[] args) {
         launch(args);

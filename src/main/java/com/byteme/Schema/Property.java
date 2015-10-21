@@ -1,10 +1,5 @@
 package com.byteme.Schema;
 
-import com.byteme.Controllers.MasterController;
-
-import java.util.ArrayList;
-import java.util.Map;
-
 /**
  * MULE
  */
@@ -14,11 +9,11 @@ public class Property {
     private PlayerConfigParams owner;
     private Mule mule;
     private MapTile maptile;
-    public Property(int column, int row, PlayerConfigParams owner, Mule mule, MapTile mapTile) {
+    public Property(int column, int row, PlayerConfigParams owner, MapTile mapTile) {
         this.row = row;
         this.column = column;
         this.owner = owner;
-        this.mule = mule;
+        this.mule = null;
         this.maptile = mapTile;
     }
     public int getColumn() {

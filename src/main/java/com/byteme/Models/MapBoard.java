@@ -11,7 +11,7 @@ public class MapBoard {
     private final int width;
     private MapTile[][] board;
 
-    private final MapTile[][] standardMap =
+    private static final MapTile[][] standardMap =
             {{MapTile.P,    MapTile.P,  MapTile.M1, MapTile.P,  MapTile.R,      MapTile.P,  MapTile.M3, MapTile.P,  MapTile.P},
              {MapTile.P,    MapTile.M1, MapTile.P,  MapTile.P,  MapTile.R,      MapTile.P,  MapTile.P,  MapTile.P,  MapTile.M3},
              {MapTile.M3,   MapTile.P,  MapTile.P,  MapTile.P,  MapTile.Town,   MapTile.P,  MapTile.P,  MapTile.P,  MapTile.M1},
@@ -35,7 +35,7 @@ public class MapBoard {
         this.width = width;
 
         if (type == MapType.RANDOM) {
-            board = new MapTile[height][width];
+            board = new MapTile[height][9];
         } else if (type == MapType.STANDARD) {
             board = standardMap;
 

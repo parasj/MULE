@@ -1,12 +1,10 @@
 package com.byteme.Models;
 
-import com.byteme.Schema.MuleType;
-
 /**
  * Created by rishavbose365 on 10/7/2015.
  */
 public class StoreStateStore {
-    private static StoreStateStore ourInstance = new StoreStateStore();
+    private static final StoreStateStore ourInstance = new StoreStateStore();
 
     public static StoreStateStore getInstance() {
         return ourInstance;
@@ -25,13 +23,12 @@ public class StoreStateStore {
     private int muleQuantity = 25;
     private int mulePrice = 100;
 
-    private int foodMuleCost = 25;
-    private int energyMuleCost = 50;
-    private int smithoreMuleCost = 75;
-    private int crystiteMuleCost = 25;
+    private static final int foodMuleCost = 25;
+    private static final int energyMuleCost = 50;
+    private static final int smithoreMuleCost = 75;
+    private static final int crystiteMuleCost = 25;
 
-    private StoreStateStore() {
-    }
+    private StoreStateStore() {}
 
     public boolean getState() {
         return state;

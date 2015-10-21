@@ -17,9 +17,9 @@ public class StoreController {
 
     private final static GameStartStore st = GameStartStore.getInstance();
     private final static MapStateStore m = MapStateStore.getInstance();
-    private StoreStateStore s = StoreStateStore.getInstance();
-    private PlaceMuleStore pm = PlaceMuleStore.getInstance();
-    private BoardController boardController;
+    private final static StoreStateStore s = StoreStateStore.getInstance();
+    private final static PlaceMuleStore pm = PlaceMuleStore.getInstance();
+    private static BoardController boardController;
 
     @FXML
     private Label foodQuantity;
@@ -65,8 +65,8 @@ public class StoreController {
         MasterController.getInstance().map();
     }
 
-    public void setBoardController(BoardController boardController) {
-        this.boardController = boardController;
+    public static void setBoardController(BoardController boardController1) {
+        boardController = boardController1;
     }
 
     public void changeState() {
