@@ -32,7 +32,7 @@ public class MasterController {
     private StoreController storeController;
 
 
-    private MasterController() {
+    public MasterController() {
         Parent root;
         try {
             root = FXMLLoader.load(getClass().getResource("/fxml/StartGame.fxml"));

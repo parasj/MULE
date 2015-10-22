@@ -10,8 +10,7 @@ import javafx.util.Duration;
 import java.io.IOException;
 import java.net.URL;
 
-class Main extends Application {
-
+public class Main extends Application {
     public static void main(String[] args) {
         launch(args);
     }
@@ -25,11 +24,7 @@ class Main extends Application {
         URL resource = getClass().getResource("/music/stupidblues01.mp3");
         Media media = new Media(resource.toString());
         MediaPlayer mediaPlayer = new MediaPlayer(media);
-        mediaPlayer.setOnEndOfMedia(new Runnable() {
-            public void run() {
-                mediaPlayer.seek(Duration.ZERO);
-            }
-        });
+        mediaPlayer.setOnEndOfMedia(() -> mediaPlayer.seek(Duration.ZERO));
         mediaPlayer.play();
         stage.setTitle("M.U.L.E. - ByteMe");
         stage.setResizable(false);
