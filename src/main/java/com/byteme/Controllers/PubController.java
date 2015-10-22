@@ -27,9 +27,9 @@ public class PubController {
 
 
     public void goToMap() {
+        MasterController.getInstance().map();
         GameStartHandler gameStartHandler = (GameStartHandler) boardController.getGameStartHandler();
         gameStartHandler.nextPlayer();
-        MasterController.getInstance().map();
         boardController.updateState(MapControllerStates.GAME_START);
     }
 
