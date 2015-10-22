@@ -9,7 +9,7 @@ import java.security.SecureRandom;
  */
 public class RandomEventGenerator {
     private static final SecureRandom random = new SecureRandom();
-    private static final int PROB = 100;
+    private static final int PROB = 27;
 
     public RandomEvent getEvent() {
         return getEvent(false);
