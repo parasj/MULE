@@ -48,6 +48,7 @@ public class GameStartHandler extends MapStateHandler {
         getBoardController().renderMoney(m.getPlayerAt(st.getCurrentPlayer()).getMoney());
         getBoardController().renderRound(m.getCurrentRound());
         getBoardController().renderTimer(m.getPlayerAt(st.getCurrentPlayer()).getTimeLeft());
+        log("Score: " + m.getPlayerAt(st.getCurrentPlayer()).calcScore());
     }
 
     private void setMoney(int m) {
