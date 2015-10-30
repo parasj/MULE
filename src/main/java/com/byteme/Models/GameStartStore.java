@@ -6,6 +6,10 @@ import java.io.Serializable;
  * MULE
  */
 public class GameStartStore implements Serializable {
+    public static GameStartStore getInstance() {
+        return MULEStore.getInstance().getGameStartStore();
+    }
+
     private int currentPlayer;
 
     public GameStartStore() {
@@ -18,9 +22,10 @@ public class GameStartStore implements Serializable {
 
     public void setCurrentPlayer(int currentPlayer) {
         this.currentPlayer = currentPlayer;
+        MULEStore.getInstance().save();
     }
 
     public void incCurrentPlayer() {
-        currentPlayer = (currentPlayer + 1) % ConfigRepository.getInstance().getTotalPlayers();
+        setCurrentPlayer((getCurrentPlayer() + 1) % ConfigRepository.getInstance().getTotalPlayers());
     }
 }
