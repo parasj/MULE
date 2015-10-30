@@ -66,6 +66,12 @@ public class MULEStore {
     public void load() {
         System.out.println("LOADING GAME TO DISK!");
         configRepository = (ConfigRepository) loadFromDisk("ConfigRepository.mule");
+        gameStartStore = (GameStartStore) loadFromDisk("GameStartStore.mule");
+        landGrantStore = (LandGrantStore) loadFromDisk("LandGrantStore.mule");
+        landPurchaseStore = (LandPurchaseStore) loadFromDisk("LandPurchaseStore.mule");
+        mapStateStore = (MapStateStore) loadFromDisk("MapStateStore.mule");
+        placeMuleStore = (PlaceMuleStore) loadFromDisk("PlaceMuleStore.mule");
+        storeStateStore = (StoreStateStore) loadFromDisk("StoreStateStore.mule");
     }
 
     public void save() {
