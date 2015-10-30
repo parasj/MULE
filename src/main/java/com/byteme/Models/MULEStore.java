@@ -70,7 +70,13 @@ public class MULEStore {
 
     public void save() {
         System.out.println("SAVING GAME TO DISK!");
+        saveToDisk("ConfigRepository.mule", configRepository);
         saveToDisk("GameStartStore.mule", gameStartStore);
+        saveToDisk("LandGrantStore.mule", landGrantStore);
+        saveToDisk("LandPurchaseStore.mule", landPurchaseStore);
+        saveToDisk("MapStateStore.mule", mapStateStore);
+        saveToDisk("PlaceMuleStore.mule", placeMuleStore);
+        saveToDisk("StoreStateStore.mule", storeStateStore);
     }
 
     private void saveToDisk(String s, Serializable inst) {
