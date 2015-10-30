@@ -47,3 +47,5 @@ gradle-app.setting
 Thumbs.db
 
 *.orig
+
+*.mule
