@@ -12,9 +12,7 @@ public class GameStartStore implements Serializable {
 
     private int currentPlayer;
 
-    public GameStartStore() {
-
-    }
+    public GameStartStore() {}
 
     public int getCurrentPlayer() {
         return currentPlayer;
@@ -22,7 +20,6 @@ public class GameStartStore implements Serializable {
 
     public void setCurrentPlayer(int currentPlayer) {
         this.currentPlayer = currentPlayer;
-        MULEStore.getInstance().save();
     }
 
     public void incCurrentPlayer() {
