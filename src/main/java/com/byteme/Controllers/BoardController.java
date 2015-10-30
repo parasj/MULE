@@ -174,6 +174,7 @@ public class BoardController implements Initializable, CanTick {
 
     public void saveButtonClicked() {
         System.out.println("Save Button clicked!");
+        MULEStore.getInstance().save();
     }
 
 
