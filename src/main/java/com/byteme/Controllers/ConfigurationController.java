@@ -32,6 +32,8 @@ public class ConfigurationController {
      */
     public void loadGameConfiguration() {
         // TODO: Open a previously existing game configuration
+        System.out.println("Loading Game!");
+
         MasterController.getInstance().temp();
     }
 
