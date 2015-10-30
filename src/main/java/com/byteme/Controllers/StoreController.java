@@ -16,9 +16,9 @@ import javafx.scene.control.Label;
 public class StoreController {
 
     private final static GameStartStore st = GameStartStore.getInstance();
-    private final static MapStateStore m = MapStateStore.getInstance();
-    private final static StoreStateStore s = StoreStateStore.getInstance();
-    private final static PlaceMuleStore pm = PlaceMuleStore.getInstance();
+    private final static MapStateStore m = MULEStore.getInstance().getMapStateStore();
+    private final static StoreStateStore s = MULEStore.getInstance().getStoreStateStore();
+    private final static PlaceMuleStore pm = MULEStore.getInstance().getPlaceMuleStore();
     private static BoardController boardController;
 
     @FXML

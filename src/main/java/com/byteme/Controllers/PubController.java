@@ -1,5 +1,6 @@
 package com.byteme.Controllers;
 import com.byteme.Models.GameStartStore;
+import com.byteme.Models.MULEStore;
 import com.byteme.Models.MapStateStore;
 import com.byteme.Models.ConfigRepository;
 import com.byteme.Schema.MapControllerStates;
@@ -14,8 +15,8 @@ import java.util.Random;
  */
 public class PubController {
     private static final GameStartStore g = GameStartStore.getInstance();
-    private static final MapStateStore s = MapStateStore.getInstance();
-    public static final ConfigRepository r = ConfigRepository.getInstance();
+    private static final MapStateStore s = MULEStore.getInstance().getMapStateStore();
+    public static final ConfigRepository r = MULEStore.getInstance().getConfigRepository();
     private static final int[] roundBonusArr = {50, 50, 50, 100, 100, 100, 100, 150, 150, 150, 150, 200};
 
     private BoardController boardController;
@@ -44,7 +45,7 @@ public class PubController {
     private void getMoney() {
         PlayerConfigParams currentPlayer = s.getPlayerAt(g.getCurrentPlayer());
         int timeLeft = currentPlayer.getTimeLeft();
-        int roundBonus = roundBonusArr[MapStateStore.getInstance().getCurrentRound() - 1];
+        int roundBonus = roundBonusArr[s.getCurrentRound() - 1];
         Random rand = new Random();
         int timeBonus = rand.nextInt(getTimeBonus(timeLeft) + 1);
         int moneyBonus = roundBonus * timeBonus;

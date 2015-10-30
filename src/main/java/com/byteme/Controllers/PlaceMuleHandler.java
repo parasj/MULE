@@ -1,6 +1,7 @@
 package com.byteme.Controllers;
 
 import com.byteme.Models.GameStartStore;
+import com.byteme.Models.MULEStore;
 import com.byteme.Models.MapStateStore;
 import com.byteme.Models.PlaceMuleStore;
 import com.byteme.Schema.MapControllerStates;
@@ -20,8 +21,8 @@ import java.util.ResourceBundle;
  */
 public class PlaceMuleHandler extends MapStateHandler {
     private final static GameStartStore st = GameStartStore.getInstance();
-    private final static PlaceMuleStore pm = PlaceMuleStore.getInstance();
-    private final static MapStateStore m = MapStateStore.getInstance();
+    private final static PlaceMuleStore pm = MULEStore.getInstance().getPlaceMuleStore();
+    private final static MapStateStore m = MULEStore.getInstance().getMapStateStore();
 
     public PlaceMuleHandler(BoardController boardController) {
         super(boardController);

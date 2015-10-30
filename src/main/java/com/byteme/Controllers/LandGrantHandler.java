@@ -52,7 +52,7 @@ public class LandGrantHandler extends MapStateHandler {
         if (s.getCurrentPropertyCount() < MAX_PROPERTIES) {
             getBoardController().setPlayer(s.getCurrentPlayer());
         } else {
-            getBoardController().setPlayer(ConfigRepository.getInstance().getFirstPlayerConfig());
+            getBoardController().setPlayer(MULEStore.getInstance().getConfigRepository().getFirstPlayerConfig());
             m.setCurrentPlayer(1);
             getBoardController().updateState(MapControllerStates.LAND_PURCHASE);
         }

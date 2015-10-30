@@ -1,6 +1,7 @@
 package com.byteme.Controllers;
 
 import com.byteme.Models.LandPurchaseStore;
+import com.byteme.Models.MULEStore;
 import com.byteme.Models.MapStateStore;
 import com.byteme.Schema.MapControllerStates;
 import javafx.scene.input.MouseEvent;
@@ -13,8 +14,8 @@ import java.util.ResourceBundle;
  * MULE
  */
 public class LandPurchaseHandler extends MapStateHandler {
-    private final LandPurchaseStore s = LandPurchaseStore.getInstance();
-    private final MapStateStore m = MapStateStore.getInstance();
+    private final LandPurchaseStore s = MULEStore.getInstance().getLandPurchaseStore();
+    private final MapStateStore m = MULEStore.getInstance().getMapStateStore();
 
     public LandPurchaseHandler(BoardController boardController) {
         super(boardController);
@@ -59,7 +60,7 @@ public class LandPurchaseHandler extends MapStateHandler {
             getBoardController().setPlayer(s.getCurrentPlayer());
             getBoardController().setMoney(s.getCurrentPlayer());
         } else {
-            MapStateStore.getInstance().sortPlayers();
+            MULEStore.getInstance().getMapStateStore().sortPlayers();
             m.setCurrentPlayer(0);
             getBoardController().setPlayer(m.getPlayerAt(0));
             getBoardController().setMoney(m.getPlayerAt(0));
