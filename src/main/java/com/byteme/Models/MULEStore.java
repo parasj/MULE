@@ -2,10 +2,7 @@ package com.byteme.Models;
 
 import com.byteme.Schema.Mule;
 
-import java.io.FileOutputStream;
-import java.io.IOException;
-import java.io.ObjectOutputStream;
-import java.io.Serializable;
+import java.io.*;
 
 /**
  * MULE
@@ -66,7 +63,10 @@ public class MULEStore {
         storeStateStore = new StoreStateStore();
     }
 
-    public void load() {}
+    public void load() {
+        System.out.println("LOADING GAME TO DISK!");
+        configRepository = (ConfigRepository) loadFromDisk("ConfigRepository.mule");
+    }
 
     public void save() {
         System.out.println("SAVING GAME TO DISK!");
@@ -90,5 +90,24 @@ public class MULEStore {
         } catch(IOException i) {
             i.printStackTrace();
         }
+    }
+
+    private Object loadFromDisk(String s) {
+        Object obj = null;
+        try {
+            FileInputStream fileIn = new FileInputStream("/tmp/employee.ser");
+            ObjectInputStream in = new ObjectInputStream(fileIn);
+            obj = in.readObject();
+            in.close();
+            fileIn.close();
+        } catch(IOException i) {
+            i.printStackTrace();
+            return null;
+        } catch(ClassNotFoundException c) {
+            System.out.println("Employee class not found");
+            c.printStackTrace();
+            return null;
+        }
+        return obj;
     }
 }
