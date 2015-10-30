@@ -24,6 +24,7 @@ public class MULEStore {
 
     private MULEStore() {
         gameStartStore = new GameStartStore();
+        configRepository = new ConfigRepository();
     }
 
     public void load() {}
