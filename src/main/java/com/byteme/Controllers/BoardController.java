@@ -1,6 +1,7 @@
 package com.byteme.Controllers;
 
 import com.byteme.Models.ConfigRepository;
+import com.byteme.Models.MULEStore;
 import com.byteme.Models.MapBoard;
 import com.byteme.Schema.MapControllerStates;
 import com.byteme.Schema.PlayerConfigParams;
@@ -22,7 +23,7 @@ import static com.byteme.Schema.MapControllerStates.*;
 
 
 public class BoardController implements Initializable, CanTick {
-    private final static ConfigRepository configRepository = ConfigRepository.getInstance();
+    private final static ConfigRepository configRepository = MULEStore.getInstance().getConfigRepository();
     private final static GlobalTimer timer = GlobalTimer.getInstance();
     private final static int cost = 300;
 

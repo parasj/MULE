@@ -14,7 +14,7 @@ import java.util.Locale;
  */
 public class ConfigurationController {
 
-    private final ConfigRepository configRepository = ConfigRepository.getInstance();
+    private final ConfigRepository configRepository = MULEStore.getInstance().getConfigRepository();
     private static int numPlayers = -1;
     private int currentPlayer = 1;
 
@@ -162,7 +162,7 @@ public class ConfigurationController {
                 // Go to Map screen.
                 MasterController.getInstance().createMap();
                 MasterController.getInstance().map();
-                MapStateStore.getInstance().refresh();
+                MULEStore.getInstance().getMapStateStore().refresh();
             } else {
                 // Update the player label
                 currentPlayer++;

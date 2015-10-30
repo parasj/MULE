@@ -35,7 +35,7 @@ public class MapStateStore implements Serializable{
     private int purchaseOpportunities; // Used to determine duration of full property selection
     private int numPlayers;
     private ArrayList<PlayerConfigParams> players;
-    private final ConfigRepository r = ConfigRepository.getInstance();
+    private final ConfigRepository r = MULEStore.getInstance().getConfigRepository();
 
     public MapStateStore() {
     }

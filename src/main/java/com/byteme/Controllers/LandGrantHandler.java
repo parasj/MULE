@@ -2,6 +2,7 @@ package com.byteme.Controllers;
 
 import com.byteme.Models.ConfigRepository;
 import com.byteme.Models.LandGrantStore;
+import com.byteme.Models.MULEStore;
 import com.byteme.Models.MapStateStore;
 import com.byteme.Schema.MapControllerStates;
 import javafx.scene.input.MouseEvent;
@@ -14,8 +15,8 @@ import java.util.ResourceBundle;
  * MULE
  */
 public class LandGrantHandler extends MapStateHandler {
-    private final LandGrantStore s = LandGrantStore.getInstance();
-    private final static MapStateStore m = MapStateStore.getInstance();
+    private final LandGrantStore s = MULEStore.getInstance().getLandGrantStore();
+    private final static MapStateStore m = MULEStore.getInstance().getMapStateStore();
 
     private static final int MAX_PROPERTIES = 2;
 

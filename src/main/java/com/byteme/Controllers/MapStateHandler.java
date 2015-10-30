@@ -1,5 +1,6 @@
 package com.byteme.Controllers;
 
+import com.byteme.Models.MULEStore;
 import com.byteme.Models.MapStateStore;
 import com.byteme.Util.CanTick;
 import javafx.fxml.Initializable;
@@ -11,7 +12,7 @@ import javafx.scene.input.MouseEvent;
 public abstract class MapStateHandler implements CanTick, Initializable {
 
     private BoardController boardController;
-    private MapStateStore s = MapStateStore.getInstance();
+    private MapStateStore s = MULEStore.getInstance().getMapStateStore();
 
     public MapStateHandler(BoardController boardController) {
         this.boardController = boardController;

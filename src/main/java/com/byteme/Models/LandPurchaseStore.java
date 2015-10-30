@@ -10,7 +10,7 @@ import java.util.List;
  * MULE
  */
 public class LandPurchaseStore implements Serializable {
-    private final static ConfigRepository configRepository = ConfigRepository.getInstance();
+    private ConfigRepository configRepository = MULEStore.getInstance().getConfigRepository();
 
     private List<PlayerConfigParams> players;
     private int currentPlayer;

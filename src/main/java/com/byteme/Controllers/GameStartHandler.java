@@ -1,9 +1,6 @@
 package com.byteme.Controllers;
 
-import com.byteme.Models.ConfigRepository;
-import com.byteme.Models.GameStartStore;
-import com.byteme.Models.MapStateStore;
-import com.byteme.Models.RandomEventGenerator;
+import com.byteme.Models.*;
 import com.byteme.Schema.*;
 import javafx.scene.control.Alert;
 import javafx.scene.input.MouseEvent;
@@ -17,8 +14,8 @@ import java.util.ResourceBundle;
  */
 public class GameStartHandler extends MapStateHandler {
     private final static GameStartStore st = GameStartStore.getInstance();
-    private final static MapStateStore m = MapStateStore.getInstance();
-    private final static ConfigRepository r = ConfigRepository.getInstance();
+    private final static MapStateStore m = MULEStore.getInstance().getMapStateStore();
+    private final static ConfigRepository r = MULEStore.getInstance().getConfigRepository();
     private final static RandomEventGenerator evtGen = new RandomEventGenerator();
 
     public GameStartHandler(BoardController boardController) {
