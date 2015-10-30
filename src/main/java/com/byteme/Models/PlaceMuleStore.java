@@ -2,15 +2,12 @@ package com.byteme.Models;
 
 import com.byteme.Schema.Mule;
 
-/**
- * Created by rishavbose365 on 10/7/2015.
- */
-public class PlaceMuleStore {
-    private static final PlaceMuleStore ourInstance = new PlaceMuleStore();
+import java.io.Serializable;
 
-    public static PlaceMuleStore getInstance() {
-        return ourInstance;
-    }
+/**
+ * MULE
+ */
+public class PlaceMuleStore implements Serializable{
 
     private Mule mule;
 

@@ -2,20 +2,15 @@ package com.byteme.Models;
 
 import com.byteme.Schema.PlayerConfigParams;
 
+import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
 
 /**
  * MULE
  */
-public class LandGrantStore {
+public class LandGrantStore implements Serializable {
     private final static ConfigRepository configRepository = ConfigRepository.getInstance();
-
-    private static final LandGrantStore ourInstance = new LandGrantStore();
-    public static LandGrantStore getInstance() {
-        return ourInstance;
-    }
-
     private LandGrantStore() {
         players = new ArrayList<>(configRepository.getPlayers());
         currentPlayer = 0;

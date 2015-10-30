@@ -3,18 +3,14 @@ package com.byteme.Models;
 import com.byteme.Schema.MapControllerStates;
 import com.byteme.Schema.PlayerConfigParams;
 
+import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.Collections;
 
 /**
  * MULE
  */
-public class MapStateStore {
-    private static final MapStateStore ourInstance = new MapStateStore();
-
-    public static MapStateStore getInstance() {
-        return ourInstance;
-    }
+public class MapStateStore implements Serializable{
 
     public MapControllerStates getCurrentState() {
         return currentState;

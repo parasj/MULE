@@ -1,14 +1,11 @@
 package com.byteme.Models;
 
-/**
- * Created by rishavbose365 on 10/7/2015.
- */
-public class StoreStateStore {
-    private static final StoreStateStore ourInstance = new StoreStateStore();
+import java.io.Serializable;
 
-    public static StoreStateStore getInstance() {
-        return ourInstance;
-    }
+/**
+ * MULE
+ */
+public class StoreStateStore implements Serializable {
 
     private boolean state = true; //true = buy false = sell
     //TODO get quantities based on difficulty

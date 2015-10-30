@@ -2,23 +2,19 @@ package com.byteme.Models;
 
 import com.byteme.Schema.PlayerConfigParams;
 
+import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
 
 /**
  * MULE
  */
-public class LandPurchaseStore {
+public class LandPurchaseStore implements Serializable {
     private final static ConfigRepository configRepository = ConfigRepository.getInstance();
-    private static final LandPurchaseStore ourInstance = new LandPurchaseStore();
 
     private List<PlayerConfigParams> players;
     private int currentPlayer;
     private int currentPropertyCount;
-
-    public static LandPurchaseStore getInstance() {
-        return ourInstance;
-    }
 
     private LandPurchaseStore() {
         players = new ArrayList<>(configRepository.getPlayers());
