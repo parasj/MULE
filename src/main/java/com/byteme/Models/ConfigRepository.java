@@ -2,15 +2,13 @@ package com.byteme.Models;
 
 import com.byteme.Schema.*;
 import java.util.*;
+import java.util.logging.Logger;
 
 /**
  * MULE
  */
 
 public class ConfigRepository {
-    // private final static Logger log = Logger.getLogger(ConfigRepository.class.getName());
-
-    // Singleton
     private static ConfigRepository instance;
     public static ConfigRepository getInstance() {
         if(instance == null) {
@@ -19,46 +17,32 @@ public class ConfigRepository {
         return instance;
     }
 
-    private final ConfigStore configStore;
     private GameConfigParams gameConfigParams;
     private Map<Integer, PlayerConfigParams> playerConfigList;
 
-    private ConfigRepository() {
-        this(new InMemoryConfigStore());
-    }
-
-    private ConfigRepository(ConfigStore store) {
-        configStore = store;
-        //Why 3????
+    public ConfigRepository() {
         playerConfigList = new HashMap<>(3);
     }
 
-    public void setGameConfig(GameConfigParams config) {
-        // log.info("Saving game config, " + config);
-        gameConfigParams = config;
-        configStore.save(this);
-    }
-
+    // Getters and Setters
     public GameConfigParams getGameConfig() {
         return gameConfigParams;
     }
-
-    public void setPlayerConfig(PlayerConfigParams player, int id) {
-        // log.info("Saving player " + id + " config, " + player);
-        playerConfigList.put(id, player);
-        configStore.save(this);
-    }
-
-    public PlayerConfigParams getPlayerConfig(int id) {
-        return playerConfigList.get(id);
+    public void setGameConfig(GameConfigParams config) {
+        gameConfigParams = config;
     }
     public int getTotalPlayers() {
         return gameConfigParams.getNumPlayers();
     }
+    public PlayerConfigParams getPlayerConfig(int id) {
+        return playerConfigList.get(id);
+    }
+    public void setPlayerConfig(PlayerConfigParams player, int id) {
+        playerConfigList.put(id, player);
+    }
     public Collection<PlayerConfigParams> getPlayers() {
         return playerConfigList.values();
     }
-
     public PlayerConfigParams getFirstPlayerConfig() {
         return playerConfigList.get(1);
     }

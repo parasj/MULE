@@ -1,21 +1,12 @@
 package com.byteme.Models;
 
+import java.io.Serializable;
+
 /**
  * MULE
  */
-public class GameStartStore {
-    private static final GameStartStore ourInstance = new GameStartStore();
-
+public class GameStartStore implements Serializable {
     private int currentPlayer;
-
-    public static GameStartStore getInstance() {
-        return ourInstance;
-    }
-
-
-    private GameStartStore() {
-
-    }
 
     public int getCurrentPlayer() {
         return currentPlayer;
