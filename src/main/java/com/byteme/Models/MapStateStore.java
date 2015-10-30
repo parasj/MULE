@@ -37,7 +37,7 @@ public class MapStateStore implements Serializable{
     private ArrayList<PlayerConfigParams> players;
     private final ConfigRepository r = ConfigRepository.getInstance();
 
-    private MapStateStore() {
+    public MapStateStore() {
     }
 
     public int getCurrentPlayer() {

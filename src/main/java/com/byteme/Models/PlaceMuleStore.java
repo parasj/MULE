@@ -11,7 +11,7 @@ public class PlaceMuleStore implements Serializable{
 
     private Mule mule;
 
-    private PlaceMuleStore() {}
+    public PlaceMuleStore() {}
 
     public Mule getMule() {
         return mule;

@@ -26,6 +26,6 @@ public class GameStartStore implements Serializable {
     }
 
     public void incCurrentPlayer() {
-        setCurrentPlayer((getCurrentPlayer() + 1) % ConfigRepository.getInstance().getTotalPlayers());
+        setCurrentPlayer((getCurrentPlayer() + 1) % MULEStore.getInstance().getConfigRepository().getTotalPlayers());
     }
 }

@@ -25,7 +25,7 @@ public class StoreStateStore implements Serializable {
     private static final int smithoreMuleCost = 75;
     private static final int crystiteMuleCost = 25;
 
-    private StoreStateStore() {}
+    public StoreStateStore() {}
 
     public boolean getState() {
         return state;

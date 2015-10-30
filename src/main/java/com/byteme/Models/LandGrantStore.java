@@ -11,7 +11,7 @@ import java.util.List;
  */
 public class LandGrantStore implements Serializable {
     private final static ConfigRepository configRepository = ConfigRepository.getInstance();
-    private LandGrantStore() {
+    public LandGrantStore() {
         players = new ArrayList<>(configRepository.getPlayers());
         currentPlayer = 0;
         currentPropertyCount = 0;

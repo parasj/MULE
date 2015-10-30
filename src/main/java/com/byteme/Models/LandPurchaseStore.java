@@ -16,7 +16,7 @@ public class LandPurchaseStore implements Serializable {
     private int currentPlayer;
     private int currentPropertyCount;
 
-    private LandPurchaseStore() {
+    public LandPurchaseStore() {
         players = new ArrayList<>(configRepository.getPlayers());
         currentPlayer = 0;
         currentPropertyCount = 0;
