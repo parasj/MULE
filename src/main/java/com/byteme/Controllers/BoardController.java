@@ -171,6 +171,10 @@ public class BoardController implements Initializable, CanTick {
         childController.handleTownButtonClicked();
     }
 
+    public void saveButtonClicked() {
+        System.out.println("Save Button clicked!");
+    }
+
 
     /****
      * UI Elements
