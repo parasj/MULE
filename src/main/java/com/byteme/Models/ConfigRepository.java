@@ -1,6 +1,8 @@
 package com.byteme.Models;
 
 import com.byteme.Schema.*;
+
+import java.io.Serializable;
 import java.util.*;
 import java.util.logging.Logger;
 
@@ -8,14 +10,7 @@ import java.util.logging.Logger;
  * MULE
  */
 
-public class ConfigRepository {
-    private static ConfigRepository instance;
-    public static ConfigRepository getInstance() {
-        if(instance == null) {
-            instance = new ConfigRepository();
-        }
-        return instance;
-    }
+public class ConfigRepository implements Serializable {
 
     private GameConfigParams gameConfigParams;
     private Map<Integer, PlayerConfigParams> playerConfigList;

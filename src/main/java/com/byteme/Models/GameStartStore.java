@@ -8,6 +8,10 @@ import java.io.Serializable;
 public class GameStartStore implements Serializable {
     private int currentPlayer;
 
+    public GameStartStore() {
+
+    }
+
     public int getCurrentPlayer() {
         return currentPlayer;
     }

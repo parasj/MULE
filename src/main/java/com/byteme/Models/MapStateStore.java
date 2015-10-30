@@ -37,6 +37,9 @@ public class MapStateStore implements Serializable{
     private ArrayList<PlayerConfigParams> players;
     private final ConfigRepository r = ConfigRepository.getInstance();
 
+    private MapStateStore() {
+    }
+
     public int getCurrentPlayer() {
         return currentPlayer;
     }
@@ -85,9 +88,6 @@ public class MapStateStore implements Serializable{
                 ", passCounter=" + passCounter +
                 ", purchaseOpportunities=" + purchaseOpportunities +
                 ", numPlayers=" + numPlayers + '}';
-    }
-
-    private MapStateStore() {
     }
 
     public void sortPlayers() {
