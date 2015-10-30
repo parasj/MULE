@@ -11,7 +11,7 @@ import java.util.List;
  */
 public class LandGrantStore implements Serializable {
     public LandGrantStore() {
-        players = new ArrayList<>(configRepository.getPlayers());
+        players = new ArrayList<>(MULEStore.getInstance().getConfigRepository().getPlayers());
         currentPlayer = 0;
         currentPropertyCount = 0;
     }
@@ -21,6 +21,10 @@ public class LandGrantStore implements Serializable {
     private List<PlayerConfigParams> players;
     private int currentPlayer;
     private int currentPropertyCount;
+
+    public void reinit() {
+        players = new ArrayList<>(MULEStore.getInstance().getConfigRepository().getPlayers());
+    }
 
     public void incrPlayer() {
         if (currentPlayer == players.size() - 1)

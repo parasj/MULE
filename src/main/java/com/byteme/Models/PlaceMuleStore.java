@@ -20,4 +20,6 @@ public class PlaceMuleStore implements Serializable{
     public void setMule(Mule mule) {
         this.mule = mule;
     }
+
+    public void reinit() {}
 }

@@ -20,12 +20,15 @@ import java.util.ResourceBundle;
  * MULE
  */
 public class PlaceMuleHandler extends MapStateHandler {
-    private final static GameStartStore st = GameStartStore.getInstance();
-    private final static PlaceMuleStore pm = MULEStore.getInstance().getPlaceMuleStore();
-    private final static MapStateStore m = MULEStore.getInstance().getMapStateStore();
+    private final GameStartStore st;
+    private final PlaceMuleStore pm;
+    private final MapStateStore m;
 
     public PlaceMuleHandler(BoardController boardController) {
         super(boardController);
+        st = GameStartStore.getInstance();
+        pm = MULEStore.getInstance().getPlaceMuleStore();
+        m = MULEStore.getInstance().getMapStateStore();
     }
 
     @Override

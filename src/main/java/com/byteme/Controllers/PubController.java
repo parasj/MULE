@@ -14,9 +14,9 @@ import java.util.Random;
  * MULE
  */
 public class PubController {
-    private static final GameStartStore g = GameStartStore.getInstance();
-    private static final MapStateStore s = MULEStore.getInstance().getMapStateStore();
-    public static final ConfigRepository r = MULEStore.getInstance().getConfigRepository();
+    private final GameStartStore g;
+    private final MapStateStore s;
+    public final ConfigRepository r;
     private static final int[] roundBonusArr = {50, 50, 50, 100, 100, 100, 100, 150, 150, 150, 150, 200};
 
     private BoardController boardController;
@@ -25,6 +25,12 @@ public class PubController {
     private Label playerLabel;
     @FXML
     private Label moneyLabel;
+
+    public PubController() {
+        g = GameStartStore.getInstance();
+        s = MULEStore.getInstance().getMapStateStore();
+        r = MULEStore.getInstance().getConfigRepository();
+    }
 
 
     public void goToMap() {

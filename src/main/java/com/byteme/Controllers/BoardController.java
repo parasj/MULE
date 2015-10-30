@@ -23,7 +23,6 @@ import static com.byteme.Schema.MapControllerStates.*;
 
 
 public class BoardController implements Initializable, CanTick {
-    private final static ConfigRepository configRepository = MULEStore.getInstance().getConfigRepository();
     private final static GlobalTimer timer = GlobalTimer.getInstance();
     private final static int cost = 300;
 
@@ -71,7 +70,7 @@ public class BoardController implements Initializable, CanTick {
     @Override
     public void initialize(URL location, ResourceBundle resources) {
         log("Initializing");
-        setPlayer(configRepository.getFirstPlayerConfig());
+        setPlayer(getConfigRepository().getFirstPlayerConfig());
         initBoard();
         initRiver();
         initBoardCleanup();
@@ -96,7 +95,7 @@ public class BoardController implements Initializable, CanTick {
 
     public void reCalcPlayerProperties() {
         // Keep track of which tiles have a player's color on them
-        configRepository.getPlayers().forEach((player) ->
+        getConfigRepository().getPlayers().forEach((player) ->
                 player.getProperties().forEach((z) ->
                         mapSpots[z.getRow()][z.getColumn()] = true));
     }
@@ -298,5 +297,9 @@ public class BoardController implements Initializable, CanTick {
 
     public MapBoard getPossibleMaps() {
         return possibleMaps;
+    }
+
+    public ConfigRepository getConfigRepository() {
+        return MULEStore.getInstance().getConfigRepository();
     }
 }

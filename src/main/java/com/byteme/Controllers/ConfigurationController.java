@@ -13,8 +13,6 @@ import java.util.Locale;
  * MULE
  */
 public class ConfigurationController {
-
-    private final ConfigRepository configRepository = MULEStore.getInstance().getConfigRepository();
     private static int numPlayers = -1;
     private int currentPlayer = 1;
 
@@ -66,13 +64,15 @@ public class ConfigurationController {
         MapType map = selectedMapType();
         int numPlayers = (int) numPlayersSlider.getValue();
 
+        MULEStore.getInstance().reinit();
+
         System.out.println("========================================================================================================");
         System.out.println("SAVING GAME CONFIGURATION INFORMATION");
         System.out.println("========================================================================================================");
         System.out.println("DIFFICULTY        : " + difficulty);
         System.out.println("NUMBER OF PLAYERS : " + numPlayers);
         System.out.println("MAP               : " + map + "\t" + mapType.getValue());
-        configRepository.setGameConfig(new GameConfigParams(difficulty, map, numPlayers));
+        getConfigRepository().setGameConfig(new GameConfigParams(difficulty, map, numPlayers));
         ConfigurationController.numPlayers = numPlayers;
         MasterController.getInstance().playerConfig();
     }
@@ -155,7 +155,7 @@ public class ConfigurationController {
             System.out.println("NAME       : " + name);
             System.out.println("RACE       : " + race);
             System.out.println("COLOR      : " + color);
-            configRepository.setPlayerConfig(playerConfigParser(name, race, color, money, currentPlayer), currentPlayer);
+            getConfigRepository().setPlayerConfig(playerConfigParser(name, race, color, money, currentPlayer), currentPlayer);
 
             if (currentPlayer >= numPlayers) {
                 // TODO: Create save dialog box for the player to save configuration options
@@ -206,5 +206,11 @@ public class ConfigurationController {
     private PlayerConfigParams playerConfigParser(String name, String race, String color, int money, int order) {
         Race parsedRace = Race.valueOf(race.toUpperCase(Locale.ENGLISH));
         return new PlayerConfigParams(name, parsedRace, color, money, new ArrayList<>(), order);
+    }
+
+    public ConfigRepository getConfigRepository() {
+        ConfigRepository cf = MULEStore.getInstance().getConfigRepository();
+        if (cf == null) throw new IllegalStateException("ConfigRepository is not initialized!");
+        return cf;
     }
 }

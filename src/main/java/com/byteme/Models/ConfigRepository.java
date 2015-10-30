@@ -41,4 +41,6 @@ public class ConfigRepository implements Serializable {
     public PlayerConfigParams getFirstPlayerConfig() {
         return playerConfigList.get(1);
     }
+
+    public void reinit() {}
 }

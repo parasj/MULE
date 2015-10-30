@@ -10,14 +10,12 @@ import java.util.List;
  * MULE
  */
 public class LandPurchaseStore implements Serializable {
-    private ConfigRepository configRepository = MULEStore.getInstance().getConfigRepository();
-
     private List<PlayerConfigParams> players;
     private int currentPlayer;
     private int currentPropertyCount;
 
     public LandPurchaseStore() {
-        players = new ArrayList<>(configRepository.getPlayers());
+        players = new ArrayList<>(MULEStore.getInstance().getConfigRepository().getPlayers());
         currentPlayer = 0;
         currentPropertyCount = 0;
     }
@@ -55,5 +53,9 @@ public class LandPurchaseStore implements Serializable {
 
     public void setCurrentPlayerId(int currentPlayer) {
         this.currentPlayer = currentPlayer;
+    }
+
+    public void reinit() {
+        players = new ArrayList<>(MULEStore.getInstance().getConfigRepository().getPlayers());
     }
 }

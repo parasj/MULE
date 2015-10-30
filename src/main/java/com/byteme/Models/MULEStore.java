@@ -8,7 +8,12 @@ import java.io.*;
  * MULE
  */
 public class MULEStore {
-    private static MULEStore ourInstance = new MULEStore();
+    private static final MULEStore instance = new MULEStore();
+
+    public static MULEStore getInstance() {
+        return instance;
+    }
+
     private ConfigRepository configRepository;
     private GameStartStore gameStartStore;
     private LandGrantStore landGrantStore;
@@ -17,20 +22,12 @@ public class MULEStore {
     private PlaceMuleStore placeMuleStore;
     private StoreStateStore storeStateStore;
 
-    public static MULEStore getInstance() {
-        return ourInstance;
-    }
-
     public ConfigRepository getConfigRepository() {
         return configRepository;
     }
 
     public GameStartStore getGameStartStore() {
         return gameStartStore;
-    }
-
-    public LandGrantStore getLandGrntStore() {
-        return landGrantStore;
     }
 
     public LandGrantStore getLandGrantStore() {
@@ -54,13 +51,17 @@ public class MULEStore {
     }
 
     private MULEStore() {
-        configRepository = new ConfigRepository();
-        gameStartStore = new GameStartStore();
-        landGrantStore = new LandGrantStore();
-        landPurchaseStore = new LandPurchaseStore();
-        mapStateStore = new MapStateStore();
-        placeMuleStore = new PlaceMuleStore();
-        storeStateStore = new StoreStateStore();
+    }
+
+    public void bootstrap() {
+        load();
+        if (configRepository == null) configRepository = new ConfigRepository();
+        if (gameStartStore == null) gameStartStore = new GameStartStore();
+        if (landGrantStore == null) landGrantStore = new LandGrantStore();
+        if (landPurchaseStore == null) landPurchaseStore = new LandPurchaseStore();
+        if (mapStateStore == null) mapStateStore = new MapStateStore();
+        if (placeMuleStore == null) placeMuleStore = new PlaceMuleStore();
+        if (storeStateStore == null) storeStateStore = new StoreStateStore();
     }
 
     public void load() {
@@ -101,19 +102,29 @@ public class MULEStore {
     private Object loadFromDisk(String s) {
         Object obj = null;
         try {
-            FileInputStream fileIn = new FileInputStream("/tmp/employee.ser");
+            FileInputStream fileIn = new FileInputStream(s);
             ObjectInputStream in = new ObjectInputStream(fileIn);
             obj = in.readObject();
             in.close();
             fileIn.close();
         } catch(IOException i) {
-            i.printStackTrace();
+            System.out.println("No save found for " + s);
             return null;
         } catch(ClassNotFoundException c) {
-            System.out.println("Employee class not found");
+            System.out.println("Class not found");
             c.printStackTrace();
             return null;
         }
         return obj;
+    }
+
+    public void reinit() {
+        configRepository.reinit();
+        gameStartStore.reinit();
+        landGrantStore.reinit();
+        landPurchaseStore.reinit();
+        mapStateStore.reinit();
+        placeMuleStore.reinit();
+        storeStateStore.reinit();
     }
 }

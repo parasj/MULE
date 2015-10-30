@@ -143,4 +143,6 @@ public class StoreStateStore implements Serializable {
             return 0;
         }
     }
+
+    public void reinit() {}
 }

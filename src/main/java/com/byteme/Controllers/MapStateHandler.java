@@ -12,10 +12,11 @@ import javafx.scene.input.MouseEvent;
 public abstract class MapStateHandler implements CanTick, Initializable {
 
     private BoardController boardController;
-    private MapStateStore s = MULEStore.getInstance().getMapStateStore();
+    private MapStateStore s;
 
     public MapStateHandler(BoardController boardController) {
         this.boardController = boardController;
+        s = MULEStore.getInstance().getMapStateStore();
     }
 
     public BoardController getBoardController() {

@@ -14,11 +14,13 @@ import java.util.ResourceBundle;
  * MULE
  */
 public class LandPurchaseHandler extends MapStateHandler {
-    private final LandPurchaseStore s = MULEStore.getInstance().getLandPurchaseStore();
-    private final MapStateStore m = MULEStore.getInstance().getMapStateStore();
+    private final LandPurchaseStore s;
+    private final MapStateStore m;
 
     public LandPurchaseHandler(BoardController boardController) {
         super(boardController);
+        s = MULEStore.getInstance().getLandPurchaseStore();
+        m = MULEStore.getInstance().getMapStateStore();
     }
 
     @Override

@@ -15,9 +15,6 @@ import java.util.ResourceBundle;
  * MULE
  */
 public class LandGrantHandler extends MapStateHandler {
-    private final LandGrantStore s = MULEStore.getInstance().getLandGrantStore();
-    private final static MapStateStore m = MULEStore.getInstance().getMapStateStore();
-
     private static final int MAX_PROPERTIES = 2;
 
     public LandGrantHandler(BoardController boardController) {
@@ -41,19 +38,19 @@ public class LandGrantHandler extends MapStateHandler {
         if (getBoardController().owned(tile)) getBoardController().ownedMessage(); // Property is owned, just display warning
         else {
             // Change tile background color to player color
-            getBoardController().setColorTile(tile, s.getCurrentPlayer());
+            getBoardController().setColorTile(tile, getS().getCurrentPlayer());
             checkIfDone();
         }
     }
 
     private void checkIfDone() {
         // Land Grant is only 2 turns per player
-        s.incrPlayer();
-        if (s.getCurrentPropertyCount() < MAX_PROPERTIES) {
-            getBoardController().setPlayer(s.getCurrentPlayer());
+        getS().incrPlayer();
+        if (getS().getCurrentPropertyCount() < MAX_PROPERTIES) {
+            getBoardController().setPlayer(getS().getCurrentPlayer());
         } else {
             getBoardController().setPlayer(MULEStore.getInstance().getConfigRepository().getFirstPlayerConfig());
-            m.setCurrentPlayer(1);
+            getM().setCurrentPlayer(1);
             getBoardController().updateState(MapControllerStates.LAND_PURCHASE);
         }
     }
@@ -61,7 +58,7 @@ public class LandGrantHandler extends MapStateHandler {
     @Override
     public void stateChanged() {
         getBoardController().getPhaseLabel().setText("Land Grant");
-        getBoardController().setPlayer(s.getCurrentPlayer());
+        getBoardController().setPlayer(getS().getCurrentPlayer());
         getBoardController().getMoneyLabel().setText("");
         getBoardController().getRoundLabel().setText("");
         getBoardController().getTimerLabel().setText("");
@@ -72,4 +69,12 @@ public class LandGrantHandler extends MapStateHandler {
 
     @Override
     public void tick() {}
+
+    public MapStateStore getM() {
+        return MULEStore.getInstance().getMapStateStore();
+    }
+
+    public LandGrantStore getS() {
+        return MULEStore.getInstance().getLandGrantStore();
+    }
 }

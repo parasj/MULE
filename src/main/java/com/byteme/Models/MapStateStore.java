@@ -35,7 +35,6 @@ public class MapStateStore implements Serializable{
     private int purchaseOpportunities; // Used to determine duration of full property selection
     private int numPlayers;
     private ArrayList<PlayerConfigParams> players;
-    private final ConfigRepository r = MULEStore.getInstance().getConfigRepository();
 
     public MapStateStore() {
     }
@@ -45,7 +44,7 @@ public class MapStateStore implements Serializable{
     }
 
     public void setCurrentPlayer(int currentPlayer) {
-        this.currentPlayer = currentPlayer % r.getTotalPlayers();
+        this.currentPlayer = currentPlayer % MULEStore.getInstance().getConfigRepository().getTotalPlayers();
     }
 
     public int getCurrentRound() {
@@ -102,10 +101,14 @@ public class MapStateStore implements Serializable{
     }
 
     public void refresh() {
-        this.players = new ArrayList<>(r.getPlayers());
+//        this.players = new ArrayList<>(MULEStore.getInstance().getConfigRepository().getPlayers());
     }
 
     public ArrayList<PlayerConfigParams> getPlayers() {
         return players;
+    }
+
+    public void reinit() {
+        refresh();
     }
 }

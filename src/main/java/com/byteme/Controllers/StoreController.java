@@ -15,10 +15,10 @@ import javafx.scene.control.Label;
  */
 public class StoreController {
 
-    private final static GameStartStore st = GameStartStore.getInstance();
-    private final static MapStateStore m = MULEStore.getInstance().getMapStateStore();
-    private final static StoreStateStore s = MULEStore.getInstance().getStoreStateStore();
-    private final static PlaceMuleStore pm = MULEStore.getInstance().getPlaceMuleStore();
+    private final GameStartStore st;
+    private final MapStateStore m;
+    private final StoreStateStore s;
+    private final PlaceMuleStore pm;
     private static BoardController boardController;
 
     @FXML
@@ -59,6 +59,13 @@ public class StoreController {
 
     @FXML
     private ChoiceBox muleType;
+
+    public StoreController() {
+        st = GameStartStore.getInstance();
+        m = MULEStore.getInstance().getMapStateStore();
+        s = MULEStore.getInstance().getStoreStateStore();
+        pm = MULEStore.getInstance().getPlaceMuleStore();
+    }
 
 
     public void goToMap() {
