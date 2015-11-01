@@ -99,7 +99,7 @@ public class MapStateStore implements Serializable {
     }
 
     public void refresh() {
-//        this.players = new ArrayList<>(configRepository.getPlayers());
+        this.players = new ArrayList<>(configRepository.getPlayers());
     }
 
     public ArrayList<PlayerConfigParams> getPlayers() {

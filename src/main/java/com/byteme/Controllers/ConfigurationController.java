@@ -160,6 +160,7 @@ public class ConfigurationController {
             if (currentPlayer >= numPlayers) {
                 // TODO: Create save dialog box for the player to save configuration options
                 // Go to Map screen.
+                MULEStore.getInstance().reinit();
                 MasterController.getInstance().createMap();
                 MasterController.getInstance().map();
                 MULEStore.getInstance().getMapStateStore().refresh();
