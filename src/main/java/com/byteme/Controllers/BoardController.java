@@ -16,6 +16,7 @@ import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.GridPane;
 
+import javax.swing.border.Border;
 import java.net.URL;
 import java.util.ResourceBundle;
 
@@ -59,7 +60,7 @@ public class BoardController implements Initializable, CanTick {
     private final MapStateHandler placeMuleHandler = new PlaceMuleHandler(this);
 
     public BoardController() {
-        updateState(START);
+        updateState1(START);
         timer.setTickHandler(this);
     }
 
@@ -74,7 +75,7 @@ public class BoardController implements Initializable, CanTick {
         initBoard();
         initRiver();
         initBoardCleanup();
-        updateState(LAND_GRANT);
+        updateState1(LAND_GRANT);
     }
 
     private void initBoard() {
@@ -135,6 +136,29 @@ public class BoardController implements Initializable, CanTick {
         log("State updated to: " + newState);
         state = newState;
 
+        MULEStore.getInstance().getMapStateStore().setCurrentState(newState);
+        if (state == LAND_GRANT)
+            childController = landGrantHandler;
+        else if (state == LAND_PURCHASE)
+            childController = landPurchaseHandler;
+        else if (state == GAME_START)
+            childController = gameStartHandler;
+        else if (state == TURN_OVER)
+            childController = turnOverHandler;
+        else if (state == PLACE_MULE)
+            childController = placeMuleHandler;
+        else
+            childController = emptyHandler;
+
+        childController.stateChanged();
+    }
+
+    /****
+     * Data Binding
+     ****/
+    public void updateState1(MapControllerStates newState) {
+        log("State updated to: " + newState);
+        state = newState;
 
         if (state == LAND_GRANT)
             childController = landGrantHandler;
@@ -174,6 +198,17 @@ public class BoardController implements Initializable, CanTick {
     public void saveButtonClicked() {
         System.out.println("Save Button clicked!");
         MULEStore.getInstance().save();
+    }
+
+    public void reinitialize() {
+        for (PlayerConfigParams player : getConfigRepository().getPlayers()) {
+            for (Property property : player.getProperties()) {
+                if (true) {
+                    String color = player.getColor();
+                    //tile.setStyle("-fx-border-color: " + color.toLowerCase() + ";" + "-fx-border-width: 6px;");
+                }
+            }
+        }
     }
 
 
@@ -301,5 +336,9 @@ public class BoardController implements Initializable, CanTick {
 
     public ConfigRepository getConfigRepository() {
         return MULEStore.getInstance().getConfigRepository();
+    }
+
+    public void render() {
+        System.out.println(state);
     }
 }

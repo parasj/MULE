@@ -77,6 +77,10 @@ public class MapStateStore implements Serializable {
         this.numPlayers = numPlayers;
     }
 
+    public void setCurrentState(MapControllerStates currentState) {
+        this.currentState = currentState;
+    }
+
     @Override
     public String toString() {
         return "MapStateStore{" +

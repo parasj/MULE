@@ -117,7 +117,7 @@ public class MasterController {
         return currStage;
     }
 
-    private void setBoardController(BoardController mc) {
+    public void setBoardController(BoardController mc) {
         boardController = mc;
     }
 

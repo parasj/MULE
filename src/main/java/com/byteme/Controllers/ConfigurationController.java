@@ -31,8 +31,13 @@ public class ConfigurationController {
     public void loadGameConfiguration() {
         // TODO: Open a previously existing game configuration
         System.out.println("Loading Game!");
-        MULEStore.getInstance().load();
-        MasterController.getInstance().createMap();
+        MULEStore m = MULEStore.getInstance();
+        m.load();
+        MasterController b = MasterController.getInstance();
+        b.createMap(); // The initializable function here changes it all
+        b.getBoardController().updateState(m.getMapStateStore().getCurrentState());
+        b.getBoardController().render();
+        b.getBoardController().reinitialize();
         MasterController.getInstance().map();
     }
 
