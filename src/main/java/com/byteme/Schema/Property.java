@@ -1,9 +1,11 @@
 package com.byteme.Schema;
 
+import java.io.Serializable;
+
 /**
  * MULE
  */
-public class Property {
+public class Property implements Serializable {
     private int column;
     private int row;
     private PlayerConfigParams owner;

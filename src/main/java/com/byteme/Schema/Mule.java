@@ -1,9 +1,11 @@
 package com.byteme.Schema;
 
+import java.io.Serializable;
+
 /**
  * Mule
  */
-public class Mule {
+public class Mule implements Serializable {
     private MuleType type;
     public Mule(MuleType type) {
         this.type = type;

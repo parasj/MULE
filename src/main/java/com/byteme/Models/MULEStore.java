@@ -54,7 +54,7 @@ public class MULEStore {
     }
 
     public void bootstrap() {
-        load();
+        //load();
         if (configRepository == null) configRepository = new ConfigRepository();
         if (gameStartStore == null) gameStartStore = new GameStartStore(configRepository);
         if (landGrantStore == null) landGrantStore = new LandGrantStore(configRepository);
@@ -65,7 +65,7 @@ public class MULEStore {
     }
 
     public void load() {
-        System.out.println("LOADING GAME TO DISK!");
+        System.out.println("LOADING GAME FROM DISK!");
         configRepository = (ConfigRepository) loadFromDisk("ConfigRepository.mule");
         gameStartStore = (GameStartStore) loadFromDisk("GameStartStore.mule");
         landGrantStore = (LandGrantStore) loadFromDisk("LandGrantStore.mule");
@@ -100,6 +100,7 @@ public class MULEStore {
     }
 
     private Object loadFromDisk(String s) {
+        long timeStart = System.nanoTime();
         Object obj = null;
         try {
             FileInputStream fileIn = new FileInputStream(s);
@@ -115,6 +116,7 @@ public class MULEStore {
             c.printStackTrace();
             return null;
         }
+        System.out.printf("Loading %s took %4d milliseconds%n", s, (System.nanoTime() - timeStart) / 1000000L);
         return obj;
     }
 
