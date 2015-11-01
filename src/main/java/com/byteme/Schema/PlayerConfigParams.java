@@ -1,11 +1,12 @@
 package com.byteme.Schema;
 
+import java.io.Serializable;
 import java.util.ArrayList;
 
 /**
  * MULE
  */
-public class PlayerConfigParams implements Comparable<PlayerConfigParams> {
+public class PlayerConfigParams implements Comparable<PlayerConfigParams>, Serializable {
     private final String name;
     private final Race race;
     private final String color;

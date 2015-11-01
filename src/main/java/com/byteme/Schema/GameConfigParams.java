@@ -1,10 +1,15 @@
 package com.byteme.Schema;
 
+import javafx.fxml.Initializable;
+
+import javax.naming.spi.InitialContextFactory;
+import java.io.Serializable;
+
 /**
  * MULE
  */
 
-public class GameConfigParams {
+public class GameConfigParams implements Serializable{
     private final Difficulty difficulty;
     private final MapType maptype;
     private final int numplayers;
