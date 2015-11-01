@@ -56,10 +56,10 @@ public class MULEStore {
     public void bootstrap() {
         load();
         if (configRepository == null) configRepository = new ConfigRepository();
-        if (gameStartStore == null) gameStartStore = new GameStartStore();
-        if (landGrantStore == null) landGrantStore = new LandGrantStore();
-        if (landPurchaseStore == null) landPurchaseStore = new LandPurchaseStore();
-        if (mapStateStore == null) mapStateStore = new MapStateStore();
+        if (gameStartStore == null) gameStartStore = new GameStartStore(configRepository);
+        if (landGrantStore == null) landGrantStore = new LandGrantStore(configRepository);
+        if (landPurchaseStore == null) landPurchaseStore = new LandPurchaseStore(configRepository);
+        if (mapStateStore == null) mapStateStore = new MapStateStore(configRepository);
         if (placeMuleStore == null) placeMuleStore = new PlaceMuleStore();
         if (storeStateStore == null) storeStateStore = new StoreStateStore();
     }

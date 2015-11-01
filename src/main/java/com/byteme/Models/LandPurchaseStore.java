@@ -13,9 +13,11 @@ public class LandPurchaseStore implements Serializable {
     private List<PlayerConfigParams> players;
     private int currentPlayer;
     private int currentPropertyCount;
+    private ConfigRepository configRepository;
 
-    public LandPurchaseStore() {
-        players = new ArrayList<>(MULEStore.getInstance().getConfigRepository().getPlayers());
+    public LandPurchaseStore(ConfigRepository configRepository) {
+        this.configRepository = configRepository;
+        players = new ArrayList<>(configRepository.getPlayers());
         currentPlayer = 0;
         currentPropertyCount = 0;
     }
@@ -56,6 +58,6 @@ public class LandPurchaseStore implements Serializable {
     }
 
     public void reinit() {
-        players = new ArrayList<>(MULEStore.getInstance().getConfigRepository().getPlayers());
+        players = new ArrayList<>(configRepository.getPlayers());
     }
 }

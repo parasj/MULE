@@ -9,10 +9,13 @@ public class GameStartStore implements Serializable {
     public static GameStartStore getInstance() {
         return MULEStore.getInstance().getGameStartStore();
     }
-
+    private ConfigRepository configRepository;
     private int currentPlayer;
 
-    public GameStartStore() {}
+    public GameStartStore(ConfigRepository configRepository) {
+        this.configRepository = configRepository;
+    }
+
 
     public int getCurrentPlayer() {
         return currentPlayer;
@@ -23,7 +26,7 @@ public class GameStartStore implements Serializable {
     }
 
     public void incCurrentPlayer() {
-        setCurrentPlayer((getCurrentPlayer() + 1) % MULEStore.getInstance().getConfigRepository().getTotalPlayers());
+        setCurrentPlayer((getCurrentPlayer() + 1) % configRepository.getTotalPlayers());
     }
 
     public void reinit() {}

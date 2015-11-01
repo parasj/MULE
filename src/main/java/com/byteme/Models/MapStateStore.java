@@ -10,13 +10,24 @@ import java.util.Collections;
 /**
  * MULE
  */
-public class MapStateStore implements Serializable{
+public class MapStateStore implements Serializable {
+    private ConfigRepository configRepository;
+    private MapControllerStates currentState;
+    private boolean fromTownGoToPub;
+    private int currentPlayer;
+    private int currentRound = 1;
+    private int passCounter; // Used to determine when to stop property selection immediately
+    private int purchaseOpportunities; // Used to determine duration of full property selection
+    private int numPlayers;
+    private ArrayList<PlayerConfigParams> players;
+
+    public MapStateStore(ConfigRepository configRepository) {
+        this.configRepository = configRepository;
+    }
 
     public MapControllerStates getCurrentState() {
         return currentState;
     }
-
-    private MapControllerStates currentState;
 
     public boolean isFromTownGoToPub() {
         return fromTownGoToPub;
@@ -26,25 +37,12 @@ public class MapStateStore implements Serializable{
         this.fromTownGoToPub = fromTownGoToPub;
     }
 
-    private boolean fromTownGoToPub;
-
-    private int currentPlayer;
-    private int currentRound = 1;
-
-    private int passCounter; // Used to determine when to stop property selection immediately
-    private int purchaseOpportunities; // Used to determine duration of full property selection
-    private int numPlayers;
-    private ArrayList<PlayerConfigParams> players;
-
-    public MapStateStore() {
-    }
-
     public int getCurrentPlayer() {
         return currentPlayer;
     }
 
     public void setCurrentPlayer(int currentPlayer) {
-        this.currentPlayer = currentPlayer % MULEStore.getInstance().getConfigRepository().getTotalPlayers();
+        this.currentPlayer = currentPlayer % configRepository.getTotalPlayers();
     }
 
     public int getCurrentRound() {
@@ -101,7 +99,7 @@ public class MapStateStore implements Serializable{
     }
 
     public void refresh() {
-//        this.players = new ArrayList<>(MULEStore.getInstance().getConfigRepository().getPlayers());
+//        this.players = new ArrayList<>(configRepository.getPlayers());
     }
 
     public ArrayList<PlayerConfigParams> getPlayers() {

@@ -10,20 +10,21 @@ import java.util.List;
  * MULE
  */
 public class LandGrantStore implements Serializable {
-    public LandGrantStore() {
-        players = new ArrayList<>(MULEStore.getInstance().getConfigRepository().getPlayers());
+    private ConfigRepository configRepository;
+
+    public LandGrantStore(ConfigRepository configRepository) {
+        this.configRepository = configRepository;
+        players = new ArrayList<>(configRepository.getPlayers());
         currentPlayer = 0;
         currentPropertyCount = 0;
     }
-
-    private ConfigRepository configRepository = MULEStore.getInstance().getConfigRepository();
 
     private List<PlayerConfigParams> players;
     private int currentPlayer;
     private int currentPropertyCount;
 
     public void reinit() {
-        players = new ArrayList<>(MULEStore.getInstance().getConfigRepository().getPlayers());
+        players = new ArrayList<>(configRepository.getPlayers());
     }
 
     public void incrPlayer() {
