@@ -4,11 +4,8 @@ import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.stage.Stage;
-//import javafx.scene.text.Text;
 
 import java.io.IOException;
-//import java.util.Timer;
-//import java.util.TimerTask;
 /**
  * MULE
  */
@@ -31,7 +28,7 @@ public class MasterController {
     private PubController pubController;
     private StoreController storeController;
 
-
+    ///Creates scenes
     public MasterController() {
         Parent root;
         try {
@@ -62,53 +59,54 @@ public class MasterController {
 
     public static MasterController getInstance() { return instance;}
 
+    //Sets stages
     public void setStage(Stage stage) {
         theStage = stage;
     }
 
     public void startGame() {
-        currStage = "Start Game";
+//        currStage = "Start Game";
         theStage.setScene(startGame);
     }
 
     public void loadGame() {
-        currStage = "Load Game";
+//        currStage = "Load Game";
         theStage.setScene(loadGame);
     }
 
     public void gameConfig() {
-        currStage = "Game Config";
+//        currStage = "Game Config";
         theStage.setScene(gameConfig);
     }
 
     public void playerConfig() {
-        currStage = "Player Config";
+//        currStage = "Player Config";
         theStage.setScene(playerConfig);
     }
 
     public void map() {
-        currStage = "Map";
+//        currStage = "Map";
         theStage.setScene(map);
     }
 
     public void town() {
-        currStage = "Town";
+//        currStage = "Town";
         theStage.setScene(town);
     }
 
     public void temp() {
-        currStage = "Temp";
+//        currStage = "Temp";
         theStage.setScene(temp);
     }
 
     public void pubScene() {
-        currStage = "Pub";
+//        currStage = "Pub";
         theStage.setScene(pubScene);
         pubController.rerender();
     }
 
     public void store() {
-        currStage = "Store";
+//        currStage = "Store";
         theStage.setScene(storeScene);
         storeController.reRender();
     }
@@ -121,6 +119,11 @@ public class MasterController {
         boardController = mc;
     }
 
+    public BoardController getBoardController() {
+        return boardController;
+    }
+
+    //Creates map from template
     public void createMap() {
         try {
             FXMLLoader loader = new FXMLLoader(getClass().getResource("/fxml/Map.fxml"));
@@ -132,23 +135,4 @@ public class MasterController {
             e.printStackTrace();
         }
     }
-
-    public BoardController getBoardController() {
-        return boardController;
-    }
-
-
-   /* public void countDownTimer() {
-        Timer timer = new Timer();
-        timer.schedule(new TimerTask() {
-            public void run() {
-                Platform.runLater(new Runnable() {
-                    public void run() {
-                        label.update();
-                        javafxcomponent.doSomething();
-                    }
-                });
-            }
-        }, 5000, 1000);
-    }*/
 }
