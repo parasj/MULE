@@ -130,14 +130,14 @@ public class StoreStateStore implements Serializable {
         this.mulePrice = mulePrice;
     }
 
-    public int getMuleTypeCost(String s) {
-        if (s.equals("Food")) {
+    public int getMuleTypeCost(String string) {
+        if (string.equals("Food")) {
             return foodMuleCost;
-        } else if (s.equals("Energy")) {
+        } else if (string.equals("Energy")) {
             return energyMuleCost;
-        } else if (s.equals("Smithore")) {
+        } else if (string.equals("Smithore")) {
             return smithoreMuleCost;
-        } else if (s.equals("Crystite")) {
+        } else if (string.equals("Crystite")) {
             return crystiteMuleCost;
         } else {
             return 0;

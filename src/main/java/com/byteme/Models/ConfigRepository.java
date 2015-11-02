@@ -4,7 +4,6 @@ import com.byteme.Schema.*;
 
 import java.io.Serializable;
 import java.util.*;
-import java.util.logging.Logger;
 
 /**
  * MULE

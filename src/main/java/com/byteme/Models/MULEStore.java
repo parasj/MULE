@@ -1,7 +1,5 @@
 package com.byteme.Models;
 
-import com.byteme.Schema.Mule;
-
 import java.io.*;
 
 /**
@@ -86,37 +84,37 @@ public class MULEStore {
         saveToDisk("StoreStateStore.mule", storeStateStore);
     }
 
-    private void saveToDisk(String s, Serializable inst) {
+    private void saveToDisk(String string, Serializable instance) {
         try {
-            FileOutputStream fileOut = new FileOutputStream(s);
+            FileOutputStream fileOut = new FileOutputStream(string);
             ObjectOutputStream out = new ObjectOutputStream(fileOut);
-            out.writeObject(inst);
+            out.writeObject(instance);
             out.close();
             fileOut.close();
-            System.out.printf("Serialized data to %s", s);
-        } catch(IOException i) {
-            i.printStackTrace();
+            System.out.printf("Serialized data to %s", string);
+        } catch(IOException exception) {
+            exception.printStackTrace();
         }
     }
 
-    private Object loadFromDisk(String s) {
+    private Object loadFromDisk(String string) {
         long timeStart = System.nanoTime();
         Object obj = null;
         try {
-            FileInputStream fileIn = new FileInputStream(s);
+            FileInputStream fileIn = new FileInputStream(string);
             ObjectInputStream in = new ObjectInputStream(fileIn);
             obj = in.readObject();
             in.close();
             fileIn.close();
         } catch(IOException i) {
-            System.out.println("No save found for " + s);
+            System.out.println("No save found for " + string);
             return null;
         } catch(ClassNotFoundException c) {
             System.out.println("Class not found");
             c.printStackTrace();
             return null;
         }
-        System.out.printf("Loading %s took %4d milliseconds%n", s, (System.nanoTime() - timeStart) / 1000000L);
+        System.out.printf("Loading %s took %4d milliseconds%n", string, (System.nanoTime() - timeStart) / 1000000L);
         return obj;
     }
 
