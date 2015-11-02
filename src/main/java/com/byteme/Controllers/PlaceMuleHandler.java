@@ -20,15 +20,15 @@ import java.util.ResourceBundle;
  * MULE
  */
 public class PlaceMuleHandler extends MapStateHandler {
-    private final GameStartStore st;
-    private final PlaceMuleStore pm;
-    private final MapStateStore m;
+    private final GameStartStore gameStartStore;
+    private final PlaceMuleStore placeMuleStore;
+    private final MapStateStore mapStateStore;
 
     public PlaceMuleHandler(BoardController boardController) {
         super(boardController);
-        st = GameStartStore.getInstance();
-        pm = MULEStore.getInstance().getPlaceMuleStore();
-        m = MULEStore.getInstance().getMapStateStore();
+        gameStartStore = GameStartStore.getInstance();
+        placeMuleStore = MULEStore.getInstance().getPlaceMuleStore();
+        mapStateStore = MULEStore.getInstance().getMapStateStore();
     }
 
     @Override
@@ -40,17 +40,18 @@ public class PlaceMuleHandler extends MapStateHandler {
     public void handleTownButtonClicked() {
     }
 
+    //Places mule on tile if owned
     @Override
     public void tileChosen(MouseEvent event) {
         BorderPane tile = (BorderPane) event.getSource();
-        PlayerConfigParams p = m.getPlayerAt(st.getCurrentPlayer());
+        PlayerConfigParams p = mapStateStore.getPlayerAt(gameStartStore.getCurrentPlayer());
         int row = GridPane.getRowIndex(tile);
         int column = GridPane.getColumnIndex(tile);
         boolean found = false;
         for (int i = 0; i < p.getProperties().size(); i++) {
             Property a = p.getProperties().get(i);
             if (a.getRow() == row && a.getColumn() == column  ) {
-                a.addMule(pm.getMule());
+                a.addMule(placeMuleStore.getMule());
                 tile.setCenter(new ImageView(new Image(getBoardController().getPossibleMaps().getTile(row, column).imagePath(true))));
                 found = true;
                 break;
@@ -64,13 +65,14 @@ public class PlaceMuleHandler extends MapStateHandler {
         goToStore();
     }
 
+    //Updates labels
     @Override
     public void stateChanged() {
         getBoardController().getPhaseLabel().setText("Place Mule");
-        getBoardController().setPlayer(m.getPlayerAt(st.getCurrentPlayer()));
-        getBoardController().renderMoney(m.getPlayerAt(st.getCurrentPlayer()).getMoney());
-        getBoardController().renderRound(m.getCurrentRound());
-        getBoardController().renderTimer(m.getPlayerAt(st.getCurrentPlayer()).getTimeLeft());
+        getBoardController().setPlayer(mapStateStore.getPlayerAt(gameStartStore.getCurrentPlayer()));
+        getBoardController().renderMoney(mapStateStore.getPlayerAt(gameStartStore.getCurrentPlayer()).getMoney());
+        getBoardController().renderRound(mapStateStore.getCurrentRound());
+        getBoardController().renderTimer(mapStateStore.getPlayerAt(gameStartStore.getCurrentPlayer()).getTimeLeft());
     }
 
     private void setMoney(int m) {
@@ -85,9 +87,10 @@ public class PlaceMuleHandler extends MapStateHandler {
         getBoardController().renderTimer(t);
     }
 
+    //Coutns down
     @Override
     public void tick() {
-        PlayerConfigParams p = m.getPlayerAt(st.getCurrentPlayer());
+        PlayerConfigParams p = mapStateStore.getPlayerAt(gameStartStore.getCurrentPlayer());
         if (p.getTimeLeft() > 0) {
             getBoardController().renderTimer(p.getTimeLeft());
             p.setTimeLeft(p.getTimeLeft() - 1);
@@ -102,6 +105,7 @@ public class PlaceMuleHandler extends MapStateHandler {
 
     }
 
+    //Changes state and goes to store
     private void goToStore() {
         MasterController.getInstance().store();
         getBoardController().updateState(MapControllerStates.GAME_START, true);

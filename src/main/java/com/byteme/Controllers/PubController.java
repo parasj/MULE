@@ -14,9 +14,9 @@ import java.util.Random;
  * MULE
  */
 public class PubController {
-    private GameStartStore g;
-    private MapStateStore s;
-    public ConfigRepository r;
+    private GameStartStore gameStartStore;
+    private MapStateStore mapStateStore;
+    public ConfigRepository configRepository;
     private static final int[] roundBonusArr = {50, 50, 50, 100, 100, 100, 100, 150, 150, 150, 150, 200};
 
     private BoardController boardController;
@@ -26,6 +26,7 @@ public class PubController {
     @FXML
     private Label moneyLabel;
 
+    //Loads stores
     public PubController() {
         reinit();
     }
@@ -46,10 +47,11 @@ public class PubController {
         else return 0;
     }
 
+    //Gets how much money to pay player
     private void getMoney() {
-        PlayerConfigParams currentPlayer = s.getPlayerAt(g.getCurrentPlayer());
+        PlayerConfigParams currentPlayer = mapStateStore.getPlayerAt(gameStartStore.getCurrentPlayer());
         int timeLeft = currentPlayer.getTimeLeft();
-        int roundBonus = roundBonusArr[s.getCurrentRound() - 1];
+        int roundBonus = roundBonusArr[mapStateStore.getCurrentRound() - 1];
         Random rand = new Random();
         int timeBonus = rand.nextInt(getTimeBonus(timeLeft) + 1);
         int moneyBonus = roundBonus * timeBonus;
@@ -60,14 +62,15 @@ public class PubController {
         currentPlayer.payMoney(-1 * moneyBonus);
     }
 
+    //Recreates labels
     public void rerender() {
         reinit();
         getMoney();
         if (playerLabel != null) {
-            playerLabel.setText(String.format("Player %d %s", g.getCurrentPlayer() + 1, s.getPlayerAt(g.getCurrentPlayer()).getName()));
+            playerLabel.setText(String.format("Player %d %s", gameStartStore.getCurrentPlayer() + 1, mapStateStore.getPlayerAt(gameStartStore.getCurrentPlayer()).getName()));
         }
         if (moneyLabel != null) {
-            moneyLabel.setText("MONEY: " + s.getPlayerAt(g.getCurrentPlayer()).getMoney());
+            moneyLabel.setText("MONEY: " + mapStateStore.getPlayerAt(gameStartStore.getCurrentPlayer()).getMoney());
         }
     }
 
@@ -75,9 +78,10 @@ public class PubController {
         this.boardController = boardController;
     }
 
+    //Loads stores
     public void reinit() {
-        g = GameStartStore.getInstance();
-        s = MULEStore.getInstance().getMapStateStore();
-        r = MULEStore.getInstance().getConfigRepository();
+        gameStartStore = GameStartStore.getInstance();
+        mapStateStore = MULEStore.getInstance().getMapStateStore();
+        configRepository = MULEStore.getInstance().getConfigRepository();
     }
 }
