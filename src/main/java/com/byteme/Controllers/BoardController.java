@@ -8,16 +8,19 @@ import com.byteme.Schema.PlayerConfigParams;
 import com.byteme.Schema.Property;
 import com.byteme.Util.CanTick;
 import com.byteme.Util.GlobalTimer;
+import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
+import javafx.scene.Node;
 import javafx.scene.control.Label;
+import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.GridPane;
 
-import javax.swing.border.Border;
 import java.net.URL;
+import java.util.Observable;
 import java.util.ResourceBundle;
 
 import static com.byteme.Schema.MapControllerStates.*;
@@ -29,6 +32,7 @@ public class BoardController implements Initializable, CanTick {
 
     private MapBoard possibleMaps;
     private boolean[][] mapSpots;
+    private BorderPane[][] bps;
 
     private MapControllerStates state;
     private MapStateHandler childController;
@@ -81,6 +85,7 @@ public class BoardController implements Initializable, CanTick {
     private void initBoard() {
         possibleMaps = new MapBoard();
         mapSpots = new boolean[possibleMaps.getHeight()][possibleMaps.getWidth()];
+        this.bps = new BorderPane[possibleMaps.getHeight()][possibleMaps.getWidth()];
 
         // inject images
         for (int i = 0; i < possibleMaps.getHeight(); i++) {
@@ -90,6 +95,7 @@ public class BoardController implements Initializable, CanTick {
                 bp.setCenter(img);
                 bp.setOnMouseClicked(this::tileChosen);
                 map.add(bp, j, i); // Place the image on the grid
+                bps[i][j] = bp;
             }
         }
     }
@@ -202,10 +208,12 @@ public class BoardController implements Initializable, CanTick {
 
     public void reinitialize() {
         for (PlayerConfigParams player : getConfigRepository().getPlayers()) {
-            for (Property property : player.getProperties()) {
-                if (true) {
-                    String color = player.getColor();
-                    //tile.setStyle("-fx-border-color: " + color.toLowerCase() + ";" + "-fx-border-width: 6px;");
+            for (Property property: player.getProperties()) {
+                String color = player.getColor();
+                BorderPane tile = bps[property.getRow()][property.getColumn()];
+                tile.setStyle("-fx-border-color: " + color.toLowerCase() + ";" + "-fx-border-width: 6px;");
+                if (property.hasMule()) {
+                    tile.setCenter(new ImageView(new Image(getPossibleMaps().getTile(property.getRow(), property.getColumn()).imagePath(true))));
                 }
             }
         }
