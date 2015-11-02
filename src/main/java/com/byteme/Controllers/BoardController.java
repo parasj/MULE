@@ -8,10 +8,8 @@ import com.byteme.Schema.PlayerConfigParams;
 import com.byteme.Schema.Property;
 import com.byteme.Util.CanTick;
 import com.byteme.Util.GlobalTimer;
-import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
-import javafx.scene.Node;
 import javafx.scene.control.Label;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
@@ -20,7 +18,6 @@ import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.GridPane;
 
 import java.net.URL;
-import java.util.Observable;
 import java.util.ResourceBundle;
 
 import static com.byteme.Schema.MapControllerStates.*;

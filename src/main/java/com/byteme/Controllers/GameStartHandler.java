@@ -135,7 +135,7 @@ public class GameStartHandler extends MapStateHandler {
         return pScore <= minPScore;
     }
 
-    //Cacls how much mules make
+    //Calcs how much mules make
     private void calculateProduction() {
         Random rand = new Random();
         for (PlayerConfigParams player: m.getPlayers()) {

@@ -7,7 +7,7 @@ import javafx.scene.input.MouseEvent;
 /**
  * MULE
  */
-//Every handler inherits this
+//Every handler inherits this, the template for all handlers
 public abstract class MapStateHandler implements CanTick, Initializable {
 
     private BoardController boardController;
