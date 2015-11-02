@@ -13,6 +13,7 @@ import java.util.ResourceBundle;
  * MULE
  */
 public class GameStartHandler extends MapStateHandler {
+    //Stores for variables
     private final static GameStartStore st = GameStartStore.getInstance();
     private final static MapStateStore m = MULEStore.getInstance().getMapStateStore();
     private final static ConfigRepository r = MULEStore.getInstance().getConfigRepository();
@@ -22,22 +23,26 @@ public class GameStartHandler extends MapStateHandler {
         super(boardController);
     }
 
+    //When pass is failed, go to pub
     @Override
     public void handlePass() {
         MasterController.getInstance().getBoardController().updateState(MapControllerStates.TURN_OVER, true);
         MasterController.getInstance().pubScene();
     }
 
+    //Go to town
     @Override
     public void handleTownButtonClicked() {
         MasterController.getInstance().town();
     }
 
+    //Does nothing, just there because it is inherited
     @Override
     public void tileChosen(MouseEvent event) {
 
     }
 
+    //Renders all text labels
     @Override
     public void stateChanged() {
         getBoardController().getPhaseLabel().setText("Game Start");
@@ -60,6 +65,7 @@ public class GameStartHandler extends MapStateHandler {
         getBoardController().renderTimer(t);
     }
 
+    //Every second, counts down
     @Override
     public void tick() {
         PlayerConfigParams p = m.getPlayerAt(st.getCurrentPlayer());
@@ -77,6 +83,7 @@ public class GameStartHandler extends MapStateHandler {
 
     }
 
+    //Increments player
     public void nextPlayer() {
         if (st.getCurrentPlayer() == r.getTotalPlayers() - 1) {
             m.setCurrentRound(m.getCurrentRound() + 1);
@@ -90,6 +97,7 @@ public class GameStartHandler extends MapStateHandler {
         calculateRandomEvents();
     }
 
+    //Checks random events at beginning of turn
     public void calculateRandomEvents() {
         PlayerConfigParams p = m.getPlayerAt(st.getCurrentPlayer());
         RandomEvent evt = evtGen.getEvent(lastPlace(p));
@@ -118,6 +126,7 @@ public class GameStartHandler extends MapStateHandler {
         }
     }
 
+    //Returns whoever is in last place, used for random events
     private boolean lastPlace(PlayerConfigParams p) {
         int pScore = p.calcScore();
         int minPScore = Integer.MIN_VALUE;
@@ -126,6 +135,7 @@ public class GameStartHandler extends MapStateHandler {
         return pScore <= minPScore;
     }
 
+    //Cacls how much mules make
     private void calculateProduction() {
         Random rand = new Random();
         for (PlayerConfigParams player: m.getPlayers()) {
