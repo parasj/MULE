@@ -8,6 +8,7 @@ import java.util.ResourceBundle;
 /**
  * MULE
  */
+//Empty, becuase we do nothing when turn is over, everything done when game starts, is just a placeholder
 public class TurnOverHandler extends MapStateHandler{
     public TurnOverHandler(BoardController boardController) {
         super(boardController);
