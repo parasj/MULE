@@ -8,6 +8,7 @@ import java.util.ResourceBundle;
 /**
  * MULE
  */
+//Placeholder for now
 public class SelectionOverHandler extends MapStateHandler {
     public SelectionOverHandler(BoardController boardController) {
         super(boardController);
