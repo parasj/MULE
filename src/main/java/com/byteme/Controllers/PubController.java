@@ -35,7 +35,7 @@ public class PubController {
         MasterController.getInstance().map();
         GameStartHandler gameStartHandler = (GameStartHandler) boardController.getGameStartHandler();
         gameStartHandler.nextPlayer();
-        boardController.updateState(MapControllerStates.GAME_START);
+        boardController.updateState(MapControllerStates.GAME_START, true);
     }
 
     private int getTimeBonus(int timeLeft) {

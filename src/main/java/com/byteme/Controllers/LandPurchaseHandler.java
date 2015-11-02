@@ -69,7 +69,7 @@ public class LandPurchaseHandler extends MapStateHandler {
             m.getPlayerAt(0).calcTimeLeft();
             GameStartHandler gameStartHandler = (GameStartHandler) getBoardController().getGameStartHandler();
             gameStartHandler.calculateRandomEvents();
-            getBoardController().updateState(MapControllerStates.GAME_START);
+            getBoardController().updateState(MapControllerStates.GAME_START, true);
         }
     }
 

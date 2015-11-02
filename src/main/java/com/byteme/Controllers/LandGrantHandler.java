@@ -51,7 +51,7 @@ public class LandGrantHandler extends MapStateHandler {
         } else {
             getBoardController().setPlayer(MULEStore.getInstance().getConfigRepository().getFirstPlayerConfig());
             getM().setCurrentPlayer(1);
-            getBoardController().updateState(MapControllerStates.LAND_PURCHASE);
+            getBoardController().updateState(MapControllerStates.LAND_PURCHASE, true);
         }
     }
 

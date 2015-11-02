@@ -218,7 +218,7 @@ public class StoreController {
         if (s.getState()) {
             if (p.getMoney() >= muleCost && s.getMuleQuantity() > 0) {
                 pm.setMule(new Mule(getType((String) muleType.getValue())));
-                boardController.updateState(MapControllerStates.PLACE_MULE);
+                boardController.updateState(MapControllerStates.PLACE_MULE, true);
                 goToMap();
                 p.payMoney(muleCost);
                 s.setMuleQuantity(s.getMuleQuantity() - 1);

@@ -29,14 +29,13 @@ public class ConfigurationController {
      * Load a pre-configured game and player settings file
      */
     public void loadGameConfiguration() {
-        // TODO: Open a previously existing game configuration
         System.out.println("Loading Game!");
         MULEStore m = MULEStore.getInstance();
         try {
             m.load();
             MasterController b = MasterController.getInstance();
             b.createMap(); // The initializable function here changes it all
-            b.getBoardController().updateState(m.getMapStateStore().getCurrentState());
+            b.getBoardController().updateState(m.getMapStateStore().getCurrentState(), true);
             b.getBoardController().render();
             b.getBoardController().reinitialize();
             MasterController.getInstance().map();

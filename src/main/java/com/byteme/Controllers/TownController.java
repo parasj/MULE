@@ -12,7 +12,7 @@ public class TownController {
     }
 
     public void goToPub() {
-        MasterController.getInstance().getBoardController().updateState(MapControllerStates.TURN_OVER);
+        MasterController.getInstance().getBoardController().updateState(MapControllerStates.TURN_OVER, true);
         MasterController.getInstance().pubScene();
     }
 

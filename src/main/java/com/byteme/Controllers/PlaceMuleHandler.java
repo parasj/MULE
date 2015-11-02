@@ -92,7 +92,7 @@ public class PlaceMuleHandler extends MapStateHandler {
             getBoardController().renderTimer(p.getTimeLeft());
             p.setTimeLeft(p.getTimeLeft() - 1);
         } else {
-            getBoardController().updateState(MapControllerStates.TURN_OVER);
+            getBoardController().updateState(MapControllerStates.TURN_OVER, true);
             MasterController.getInstance().pubScene();
         }
     }
@@ -104,7 +104,7 @@ public class PlaceMuleHandler extends MapStateHandler {
 
     private void goToStore() {
         MasterController.getInstance().store();
-        getBoardController().updateState(MapControllerStates.GAME_START);
+        getBoardController().updateState(MapControllerStates.GAME_START, true);
     }
 
 }

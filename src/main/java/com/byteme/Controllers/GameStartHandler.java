@@ -24,7 +24,7 @@ public class GameStartHandler extends MapStateHandler {
 
     @Override
     public void handlePass() {
-        MasterController.getInstance().getBoardController().updateState(MapControllerStates.TURN_OVER);
+        MasterController.getInstance().getBoardController().updateState(MapControllerStates.TURN_OVER, true);
         MasterController.getInstance().pubScene();
     }
 
@@ -67,7 +67,7 @@ public class GameStartHandler extends MapStateHandler {
             getBoardController().renderTimer(p.getTimeLeft());
             p.setTimeLeft(p.getTimeLeft() - 1);
         } else {
-            getBoardController().updateState(MapControllerStates.TURN_OVER);
+            getBoardController().updateState(MapControllerStates.TURN_OVER, true);
             MasterController.getInstance().pubScene();
         }
     }
