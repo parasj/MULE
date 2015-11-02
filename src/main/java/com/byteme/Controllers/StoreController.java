@@ -15,10 +15,10 @@ import javafx.scene.control.Label;
  */
 public class StoreController {
 
-    private final GameStartStore st;
-    private final MapStateStore m;
-    private final StoreStateStore s;
-    private final PlaceMuleStore pm;
+    private GameStartStore st;
+    private MapStateStore m;
+    private StoreStateStore s;
+    private PlaceMuleStore pm;
     private static BoardController boardController;
 
     @FXML
@@ -61,10 +61,7 @@ public class StoreController {
     private ChoiceBox muleType;
 
     public StoreController() {
-        st = GameStartStore.getInstance();
-        m = MULEStore.getInstance().getMapStateStore();
-        s = MULEStore.getInstance().getStoreStateStore();
-        pm = MULEStore.getInstance().getPlaceMuleStore();
+        reinit();
     }
 
 
@@ -77,6 +74,7 @@ public class StoreController {
     }
 
     public void changeState() {
+        reinit();
         if (s.getState()) {
             foodButton.setText("Sell Food");
             energyButton.setText("Sell Energy");
@@ -99,6 +97,7 @@ public class StoreController {
     }
 
     public void reRender() {
+        reinit();
         PlayerConfigParams p = m.getPlayerAt(st.getCurrentPlayer());
         foodQuantity.setText("Quantity: " + s.getFoodQuantity());
         foodPrice.setText("Price: " + s.getFoodPrice());
@@ -116,6 +115,7 @@ public class StoreController {
     }
 
     public void tradeFood() {
+        reinit();
         PlayerConfigParams p = m.getPlayerAt(st.getCurrentPlayer());
         if (s.getState()) {
             if (p.getMoney() >= s.getFoodPrice() && s.getFoodQuantity() > 0) {
@@ -139,6 +139,7 @@ public class StoreController {
     }
 
     public void tradeEnergy() {
+        reinit();
         PlayerConfigParams p = m.getPlayerAt(st.getCurrentPlayer());
         if (s.getState()) {
             if (p.getMoney() >= s.getEnergyPrice() && s.getEnergyQuantity() > 0) {
@@ -162,6 +163,7 @@ public class StoreController {
     }
 
     public void tradeSmithore() {
+        reinit();
         PlayerConfigParams p = m.getPlayerAt(st.getCurrentPlayer());
         if (s.getState()) {
             if (p.getMoney() >= s.getSmithorePrice() && s.getSmithoreQuantity() > 0) {
@@ -185,6 +187,7 @@ public class StoreController {
     }
 
     public void tradeCrystite() {
+        reinit();
         PlayerConfigParams p = m.getPlayerAt(st.getCurrentPlayer());
         if (s.getState()) {
             if (p.getMoney() >= s.getCrystitePrice() && s.getCrystiteQuantity() > 0) {
@@ -208,6 +211,7 @@ public class StoreController {
     }
 
     public void tradeMule() {
+        reinit();
         PlayerConfigParams p = m.getPlayerAt(st.getCurrentPlayer());
         int muleCost = s.getMulePrice() + s.getMuleTypeCost((String) muleType.getValue());
         //log("" + muleCost);
@@ -253,6 +257,13 @@ public class StoreController {
         } else {
             return null;
         }
+    }
+
+    public void reinit() {
+        st = GameStartStore.getInstance();
+        m = MULEStore.getInstance().getMapStateStore();
+        s = MULEStore.getInstance().getStoreStateStore();
+        pm = MULEStore.getInstance().getPlaceMuleStore();
     }
 
 }

@@ -32,13 +32,17 @@ public class ConfigurationController {
         // TODO: Open a previously existing game configuration
         System.out.println("Loading Game!");
         MULEStore m = MULEStore.getInstance();
-        m.load();
-        MasterController b = MasterController.getInstance();
-        b.createMap(); // The initializable function here changes it all
-        b.getBoardController().updateState(m.getMapStateStore().getCurrentState());
-        b.getBoardController().render();
-        b.getBoardController().reinitialize();
-        MasterController.getInstance().map();
+        try {
+            m.load();
+            MasterController b = MasterController.getInstance();
+            b.createMap(); // The initializable function here changes it all
+            b.getBoardController().updateState(m.getMapStateStore().getCurrentState());
+            b.getBoardController().render();
+            b.getBoardController().reinitialize();
+            MasterController.getInstance().map();
+        } catch (Exception e) {
+            System.out.print(e);
+        }
     }
 
     public void newGameConfigureScreen() {
@@ -164,7 +168,6 @@ public class ConfigurationController {
             getConfigRepository().setPlayerConfig(playerConfigParser(name, race, color, money, currentPlayer), currentPlayer);
 
             if (currentPlayer >= numPlayers) {
-                // TODO: Create save dialog box for the player to save configuration options
                 // Go to Map screen.
                 MULEStore.getInstance().reinit();
                 MasterController.getInstance().createMap();
