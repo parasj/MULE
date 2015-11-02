@@ -23,7 +23,7 @@ public class Main extends Application {
         MasterController controller = MasterController.getInstance();
         controller.setStage(stage);
         controller.startGame();
-        URL resource = getClass().getResource("/music/stupidblues01.mp3");
+        URL resource = getClass().getResource("/music/bensound-scifi.mp3");
         Media media = new Media(resource.toString());
         MediaPlayer mediaPlayer = new MediaPlayer(media);
         mediaPlayer.setOnEndOfMedia(() -> mediaPlayer.seek(Duration.ZERO));
