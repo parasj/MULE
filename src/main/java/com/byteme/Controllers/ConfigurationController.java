@@ -45,6 +45,10 @@ public class ConfigurationController {
     }
 
     //Goes to configuration screen
+
+    /**
+     *
+     */
     public void newGameConfigureScreen() {
         MasterController.getInstance().gameConfig();
     }
@@ -219,6 +223,11 @@ public class ConfigurationController {
     }
 
     //Returns config repository where everything is stored
+
+    /**
+     *
+     * @return
+     */
     public ConfigRepository getConfigRepository() {
         ConfigRepository cf = MULEStore.getInstance().getConfigRepository();
         if (cf == null) throw new IllegalStateException("ConfigRepository is not initialized!");
