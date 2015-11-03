@@ -28,6 +28,9 @@ public class MasterController {
     private PubController pubController;
     private StoreController storeController;
 
+    /**
+     *
+     */
     ///Creates scenes
     public MasterController() {
         Parent root;
@@ -57,72 +60,125 @@ public class MasterController {
         }
     }
 
+    /**
+     *
+     * @return
+     */
     public static MasterController getInstance() { return instance;}
 
+    /**
+     *
+     * @param stage
+     */
     //Sets stages
     public void setStage(Stage stage) {
         theStage = stage;
     }
 
+    /**
+     *
+     */
     public void startGame() {
 //        currStage = "Start Game";
         theStage.setScene(startGame);
     }
 
+    /**
+     *
+     */
     public void loadGame() {
 //        currStage = "Load Game";
         theStage.setScene(loadGame);
     }
 
+    /**
+     *
+     */
     public void gameConfig() {
 //        currStage = "Game Config";
         theStage.setScene(gameConfig);
     }
 
+    /**
+     *
+     */
     public void playerConfig() {
 //        currStage = "Player Config";
         theStage.setScene(playerConfig);
     }
 
+    /**
+     *
+     */
     public void map() {
 //        currStage = "Map";
         theStage.setScene(map);
     }
 
+    /**
+     *
+     */
     public void town() {
 //        currStage = "Town";
         theStage.setScene(town);
     }
 
+    /**
+     *
+     */
     public void temp() {
 //        currStage = "Temp";
         theStage.setScene(temp);
     }
 
+    /**
+     *
+     */
     public void pubScene() {
 //        currStage = "Pub";
         theStage.setScene(pubScene);
         pubController.rerender();
     }
 
+    /**
+     *
+     */
     public void store() {
 //        currStage = "Store";
         theStage.setScene(storeScene);
         storeController.reRender();
     }
 
+    /**
+     *
+     * @return
+     */
     public String getCurrStage() {
         return currStage;
     }
 
-    public void setBoardController(BoardController mc) {
-        boardController = mc;
+    /**
+     *
+     * @param boardController
+     */
+    public void setBoardController(BoardController boardController) {
+        if (boardController == null) {
+            throw new IllegalArgumentException("Board Controller is null!");
+        }
+        this.boardController = boardController;
     }
 
+    /**
+     *
+     * @return
+     */
     public BoardController getBoardController() {
         return boardController;
     }
 
+    /**
+     *
+     */
     //Creates map from template
     public void createMap() {
         try {
