@@ -330,7 +330,11 @@ public class BoardController implements Initializable, CanTick {
      * @param player
      */
     public void setPlayer(PlayerConfigParams player) {
-        playerLabel.setText(String.format("Player %d %s", player.getOrder(), player.getName()));
+        if (player != null) {
+            playerLabel.setText(String.format("Player %d %s", player.getOrder(), player.getName()));
+        } else {
+            throw new IllegalArgumentException("Player is null!");
+        }
     }
 
     /**
@@ -338,7 +342,11 @@ public class BoardController implements Initializable, CanTick {
      * @param player
      */
     public void setMoney(PlayerConfigParams player) {
-        renderMoney(player.getMoney());
+        if (player != null) {
+            renderMoney(player.getMoney());
+        } else {
+            throw new IllegalArgumentException("Player is null!");
+        }
     }
 
     /**
@@ -380,12 +388,16 @@ public class BoardController implements Initializable, CanTick {
      * @param tile The tile whose color must be set.
      */
     public void setColorTile(BorderPane tile, PlayerConfigParams player) {
-        int row = GridPane.getRowIndex(tile);
-        int column = GridPane.getColumnIndex(tile);
-        String color = player.getColor();
-        tile.setStyle("-fx-border-color: " + color.toLowerCase() + ";" + "-fx-border-width: 6px;");
-        player.addProperty(new Property(column, row, player, possibleMaps.getTile(row, column)));
-        mapSpots[row][column] = true;
+        if (tile != null && player != null) {
+            int row = GridPane.getRowIndex(tile);
+            int column = GridPane.getColumnIndex(tile);
+            String color = player.getColor();
+            tile.setStyle("-fx-border-color: " + color.toLowerCase() + ";" + "-fx-border-width: 6px;");
+            player.addProperty(new Property(column, row, player, possibleMaps.getTile(row, column)));
+            mapSpots[row][column] = true;
+        } else {
+            throw new IllegalArgumentException("Tile/player is null!");
+        }
     }
 
     //Checks if tile is owned
@@ -499,7 +511,7 @@ public class BoardController implements Initializable, CanTick {
     }
 
     /**
-     * 
+     *
      */
     public void render() {
         System.out.println(state);
