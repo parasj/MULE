@@ -36,7 +36,7 @@ public class ConfigRepository implements Serializable {
      * @param config
      */
     public void setGameConfig(GameConfigParams config) {
-        if (gameConfigParams != null) {
+        if (config != null) {
             gameConfigParams = config;
         }
     }

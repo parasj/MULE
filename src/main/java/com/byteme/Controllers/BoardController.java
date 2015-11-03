@@ -408,6 +408,9 @@ public class BoardController implements Initializable, CanTick {
      * @return
      */
     public boolean owned(BorderPane tile) {
+        if (tile == null) {
+            throw new IllegalArgumentException("Tile is null!");
+        }
         int row = GridPane.getRowIndex(tile);
         int column = GridPane.getColumnIndex(tile);
         return mapSpots[row][column];

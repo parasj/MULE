@@ -18,18 +18,35 @@ public class MapBoard {
              {MapTile.P,    MapTile.M2, MapTile.P,  MapTile.P,  MapTile.R,      MapTile.P,  MapTile.M2, MapTile.P,  MapTile.P},
              {MapTile.P,    MapTile.P,  MapTile.M2, MapTile.P,  MapTile.R,      MapTile.P,  MapTile.P,  MapTile.P,  MapTile.M2}};
 
+    /**
+     *
+     */
     public MapBoard() {
         this(5, 9, MapType.STANDARD);
     }
 
+    /**
+     *
+     * @return
+     */
     public int getWidth() {
         return width;
     }
 
+    /**
+     *
+     * @return
+     */
     public int getHeight() {
         return height;
     }
 
+    /**
+     *
+     * @param height
+     * @param width
+     * @param type
+     */
     public MapBoard(int height, int width, MapType type) {
         this.height = height;
         this.width = width;
@@ -42,15 +59,31 @@ public class MapBoard {
         }
     }
 
+    /**
+     *
+     * @return
+     */
     public MapTile[][] getBoard() {
         return board;
     }
 
-    public MapTile getTile(int h, int r) {
-        return board[h][r];
+    /**
+     *
+     * @param height
+     * @param width
+     * @return
+     */
+    public MapTile getTile(int height, int width) {
+        return board[height][width];
     }
 
-    public void setTile(int h, int r, MapTile newTile) {
-        this.board[h][r] = newTile;
+    /**
+     *
+     * @param height
+     * @param width
+     * @param newTile
+     */
+    public void setTile(int height, int width, MapTile newTile) {
+        this.board[height][width] = newTile;
     }
 }
