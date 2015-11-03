@@ -56,7 +56,7 @@ public class EmptyHandler extends MapStateHandler {
     }
 
     /**
-     * 
+     *
      * @param location
      * @param resources
      */
