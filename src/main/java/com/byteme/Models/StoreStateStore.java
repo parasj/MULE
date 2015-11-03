@@ -282,7 +282,7 @@ public class StoreStateStore implements Serializable {
     }
 
     /**
-     * 
+     *
      */
     public void reinit() {}
 }

@@ -12,10 +12,19 @@ import java.io.IOException;
 import java.net.URL;
 
 public class Main extends Application {
+    /**
+     *
+     * @param args
+     */
     public static void main(String[] args) {
         launch(args);
     }
 
+    /**
+     *
+     * @param stage
+     * @throws IOException
+     */
     @Override
     public void start(Stage stage) throws IOException {
         // Launches the welcome screen
@@ -23,6 +32,7 @@ public class Main extends Application {
         MasterController controller = MasterController.getInstance();
         controller.setStage(stage);
         controller.startGame();
+        //Music
         URL resource = getClass().getResource("/music/bensound-scifi.mp3");
         Media media = new Media(resource.toString());
         MediaPlayer mediaPlayer = new MediaPlayer(media);

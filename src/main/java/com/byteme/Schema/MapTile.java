@@ -12,6 +12,9 @@ public enum MapTile {
     private final Map<String, String> imagePath;
     private final Map<String, String> imagePathWithMule;
 
+    /**
+     *
+     */
     MapTile() {
         imagePathWithMule = new HashMap<>();
         imagePath = new HashMap<>();
@@ -30,17 +33,33 @@ public enum MapTile {
         imagePathWithMule.put("R", "/images/River_mule.png");
     }
 
+    /**
+     *
+     * @return
+     */
     public String imagePath() {
         return imagePath(false);
     }
 
+    /**
+     *
+     * @return
+     */
     @Override
     public String toString() {
         return EnumHumanizer.humanizeEnum(super.toString());
     }
 
+    /**
+     * Adds a picture with a mule if necessary
+     * @param mule
+     * @return
+     */
     public String imagePath(boolean mule) {
-        if (mule) return imagePathWithMule.getOrDefault(this.name(), imagePathWithMule.get("P"));
-        else return imagePath.getOrDefault(this.name(), imagePath.get("P"));
+        if (mule) {
+            return imagePathWithMule.getOrDefault(this.name(), imagePathWithMule.get("P"));
+        } else {
+            return imagePath.getOrDefault(this.name(), imagePath.get("P"));
+        }
     }
 }
