@@ -143,7 +143,7 @@ public class PlaceMuleHandler extends MapStateHandler {
     }
 
     /**
-     * 
+     *
      */
     //Changes state and goes to store
     private void goToStore() {

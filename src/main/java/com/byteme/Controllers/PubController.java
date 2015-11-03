@@ -26,12 +26,17 @@ public class PubController {
     @FXML
     private Label moneyLabel;
 
+    /**
+     *
+     */
     //Loads stores
     public PubController() {
         reinit();
     }
 
-
+    /**
+     *
+     */
     public void goToMap() {
         MasterController.getInstance().map();
         GameStartHandler gameStartHandler = (GameStartHandler) boardController.getGameStartHandler();
@@ -39,6 +44,11 @@ public class PubController {
         boardController.updateState(MapControllerStates.GAME_START, true);
     }
 
+    /**
+     *
+     * @param timeLeft
+     * @return
+     */
     private int getTimeBonus(int timeLeft) {
         if (timeLeft >= 37) return 200;
         else if (timeLeft >= 25) return 150;
@@ -47,6 +57,9 @@ public class PubController {
         else return 0;
     }
 
+    /**
+     *
+     */
     //Gets how much money to pay player
     private void getMoney() {
         PlayerConfigParams currentPlayer = mapStateStore.getPlayerAt(gameStartStore.getCurrentPlayer());
@@ -62,6 +75,9 @@ public class PubController {
         currentPlayer.payMoney(-1 * moneyBonus);
     }
 
+    /**
+     *
+     */
     //Recreates labels
     public void rerender() {
         reinit();
@@ -74,10 +90,17 @@ public class PubController {
         }
     }
 
+    /**
+     *
+     * @param boardController
+     */
     public void setBoardController(BoardController boardController) {
         this.boardController = boardController;
     }
 
+    /**
+     *
+     */
     //Loads stores
     public void reinit() {
         gameStartStore = GameStartStore.getInstance();
