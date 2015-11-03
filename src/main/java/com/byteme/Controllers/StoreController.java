@@ -329,7 +329,7 @@ public class StoreController {
     }
 
     /**
-     * 
+     *
      */
     //Loads the stores
     public void reinit() {
