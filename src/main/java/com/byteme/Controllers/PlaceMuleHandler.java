@@ -24,6 +24,10 @@ public class PlaceMuleHandler extends MapStateHandler {
     private final PlaceMuleStore placeMuleStore;
     private final MapStateStore mapStateStore;
 
+    /**
+     *
+     * @param boardController
+     */
     public PlaceMuleHandler(BoardController boardController) {
         super(boardController);
         gameStartStore = GameStartStore.getInstance();
@@ -31,15 +35,25 @@ public class PlaceMuleHandler extends MapStateHandler {
         mapStateStore = MULEStore.getInstance().getMapStateStore();
     }
 
+    /**
+     *
+     */
     @Override
     public void handlePass() {
         log("Cannot pass now!");
     }
 
+    /**
+     *
+     */
     @Override
     public void handleTownButtonClicked() {
     }
 
+    /**
+     *
+     * @param event
+     */
     //Places mule on tile if owned
     @Override
     public void tileChosen(MouseEvent event) {
@@ -65,6 +79,9 @@ public class PlaceMuleHandler extends MapStateHandler {
         goToStore();
     }
 
+    /**
+     *
+     */
     //Updates labels
     @Override
     public void stateChanged() {
@@ -75,19 +92,34 @@ public class PlaceMuleHandler extends MapStateHandler {
         getBoardController().renderTimer(mapStateStore.getPlayerAt(gameStartStore.getCurrentPlayer()).getTimeLeft());
     }
 
-    private void setMoney(int m) {
-        getBoardController().renderMoney(m);
+    /**
+     *
+     * @param money
+     */
+    private void setMoney(int money) {
+        getBoardController().renderMoney(money);
     }
 
-    private void setRound(int r) {
-        getBoardController().renderRound(r);
+    /**
+     *
+     * @param round
+     */
+    private void setRound(int round) {
+        getBoardController().renderRound(round);
     }
 
-    private void setTimer(int t) {
-        getBoardController().renderTimer(t);
+    /**
+     *
+     * @param timer
+     */
+    private void setTimer(int timer) {
+        getBoardController().renderTimer(timer);
     }
 
-    //Coutns down
+    /**
+     *
+     */
+    //Counts down
     @Override
     public void tick() {
         PlayerConfigParams p = mapStateStore.getPlayerAt(gameStartStore.getCurrentPlayer());
@@ -100,11 +132,19 @@ public class PlaceMuleHandler extends MapStateHandler {
         }
     }
 
+    /**
+     *
+     * @param location
+     * @param resources
+     */
     @Override
     public void initialize(URL location, ResourceBundle resources) {
 
     }
 
+    /**
+     * 
+     */
     //Changes state and goes to store
     private void goToStore() {
         MasterController.getInstance().store();
