@@ -8,10 +8,6 @@ import java.io.*;
 public class MULEStore {
     private static final MULEStore instance = new MULEStore();
 
-    public static MULEStore getInstance() {
-        return instance;
-    }
-
     private ConfigRepository configRepository;
     private GameStartStore gameStartStore;
     private LandGrantStore landGrantStore;
@@ -20,48 +16,106 @@ public class MULEStore {
     private PlaceMuleStore placeMuleStore;
     private StoreStateStore storeStateStore;
 
+    /**
+     *
+     * @return
+     */
+    public static MULEStore getInstance() {
+        return instance;
+    }
+
+    /**
+     *
+     * @return
+     */
     public ConfigRepository getConfigRepository() {
         return configRepository;
     }
 
+    /**
+     *
+     * @return
+     */
     public GameStartStore getGameStartStore() {
         return gameStartStore;
     }
 
+    /**
+     *
+     * @return
+     */
     public LandGrantStore getLandGrantStore() {
         return landGrantStore;
     }
 
+    /**
+     *
+     * @return
+     */
     public LandPurchaseStore getLandPurchaseStore() {
         return landPurchaseStore;
     }
 
+    /**
+     *
+     * @return
+     */
     public MapStateStore getMapStateStore() {
         return mapStateStore;
     }
 
+    /**
+     *
+     * @return
+     */
     public PlaceMuleStore getPlaceMuleStore() {
         return placeMuleStore;
     }
 
+    /**
+     *
+     * @return
+     */
     public StoreStateStore getStoreStateStore() {
         return storeStateStore;
     }
 
+    /**
+     *
+     */
     private MULEStore() {
     }
 
+    /**
+     * Creates new repositories if not found.
+     */
     public void bootstrap() {
-        //load();
-        if (configRepository == null) configRepository = new ConfigRepository();
-        if (gameStartStore == null) gameStartStore = new GameStartStore(configRepository);
-        if (landGrantStore == null) landGrantStore = new LandGrantStore(configRepository);
-        if (landPurchaseStore == null) landPurchaseStore = new LandPurchaseStore(configRepository);
-        if (mapStateStore == null) mapStateStore = new MapStateStore(configRepository);
-        if (placeMuleStore == null) placeMuleStore = new PlaceMuleStore();
-        if (storeStateStore == null) storeStateStore = new StoreStateStore();
+        if (configRepository == null) {
+            configRepository = new ConfigRepository();
+        }
+        if (gameStartStore == null) {
+            gameStartStore = new GameStartStore(configRepository);
+        }
+        if (landGrantStore == null) {
+            landGrantStore = new LandGrantStore(configRepository);
+        }
+        if (landPurchaseStore == null) {
+            landPurchaseStore = new LandPurchaseStore(configRepository);
+        }
+        if (mapStateStore == null) {
+            mapStateStore = new MapStateStore(configRepository);
+        }
+        if (placeMuleStore == null) {
+            placeMuleStore = new PlaceMuleStore();
+        }
+        if (storeStateStore == null) {
+            storeStateStore = new StoreStateStore();
+        }
     }
 
+    /**
+     *
+     */
     public void load() {
         System.out.println("LOADING GAME FROM DISK!");
         configRepository = (ConfigRepository) loadFromDisk("ConfigRepository.mule");
@@ -73,6 +127,9 @@ public class MULEStore {
         storeStateStore = (StoreStateStore) loadFromDisk("StoreStateStore.mule");
     }
 
+    /**
+     *
+     */
     public void save() {
         System.out.println("SAVING GAME TO DISK!");
         saveToDisk("ConfigRepository.mule", configRepository);
@@ -84,6 +141,11 @@ public class MULEStore {
         saveToDisk("StoreStateStore.mule", storeStateStore);
     }
 
+    /**
+     *
+     * @param string
+     * @param instance
+     */
     private void saveToDisk(String string, Serializable instance) {
         try {
             FileOutputStream fileOut = new FileOutputStream(string);
@@ -97,6 +159,11 @@ public class MULEStore {
         }
     }
 
+    /**
+     *
+     * @param string
+     * @return
+     */
     private Object loadFromDisk(String string) {
         long timeStart = System.nanoTime();
         Object obj = null;
@@ -118,6 +185,9 @@ public class MULEStore {
         return obj;
     }
 
+    /**
+     *
+     */
     public void reinit() {
         configRepository.reinit();
         gameStartStore.reinit();

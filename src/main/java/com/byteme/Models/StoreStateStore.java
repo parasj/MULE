@@ -25,92 +25,212 @@ public class StoreStateStore implements Serializable {
     private static final int smithoreMuleCost = 75;
     private static final int crystiteMuleCost = 25;
 
+    /**
+     *
+     */
     public StoreStateStore() {}
 
+    /**
+     *
+     * @return
+     */
     public boolean getState() {
         return state;
     }
 
+    /**
+     *
+     * @param state
+     */
     public void setState(boolean state) {
         this.state = state;
     }
 
+    /**
+     *
+     * @return
+     */
     public boolean isState() {
         return state;
     }
 
+    /**
+     *
+     * @return
+     */
     public int getFoodQuantity() {
         return foodQuantity;
     }
 
+    /**
+     *
+     * @param foodQuantity
+     */
     public void setFoodQuantity(int foodQuantity) {
         this.foodQuantity = foodQuantity;
     }
 
+    /**
+     *
+     * @return
+     */
     public int getFoodPrice() {
         return foodPrice;
     }
 
+    /**
+     *
+     * @param foodPrice
+     */
     public void setFoodPrice(int foodPrice) {
-        this.foodPrice = foodPrice;
+        if (foodPrice < 0) {
+            this.foodPrice = 0;
+        } else {
+            this.foodPrice = foodPrice;
+        }
     }
 
+    /**
+     *
+     * @return
+     */
     public int getEnergyQuantity() {
         return energyQuantity;
     }
 
+    /**
+     *
+     * @param energyQuantity
+     */
     public void setEnergyQuantity(int energyQuantity) {
-        this.energyQuantity = energyQuantity;
+        if (energyQuantity < 0) {
+            this.energyQuantity = 0;
+        } else {
+            this.energyQuantity = energyQuantity;
+        }
     }
 
+    /**
+     *
+     * @return
+     */
     public int getEnergyPrice() {
         return energyPrice;
     }
 
+    /**
+     *
+     * @param energyPrice
+     */
     public void setEnergyPrice(int energyPrice) {
-        this.energyPrice = energyPrice;
+        if (energyPrice < 0) {
+            this.energyPrice = 0;
+        } else {
+            this.energyPrice = energyPrice;
+        }
     }
 
+    /**
+     *
+     * @return
+     */
     public int getSmithoreQuantity() {
         return smithoreQuantity;
     }
 
+    /**
+     *
+     * @param smithoreQuantity
+     */
     public void setSmithoreQuantity(int smithoreQuantity) {
-        this.smithoreQuantity = smithoreQuantity;
+        if (smithoreQuantity < 0) {
+            this.smithoreQuantity = 0;
+        } else {
+            this.smithoreQuantity = smithoreQuantity;
+        }
     }
 
+    /**
+     *
+     * @return
+     */
     public int getSmithorePrice() {
         return smithorePrice;
     }
 
     public void setSmithorePrice(int smithorePrice) {
-        this.smithorePrice = smithorePrice;
+        if (smithorePrice < 0) {
+            smithorePrice = 0;
+        } else {
+            this.smithorePrice = smithorePrice;
+        }
     }
 
+    /**
+     *
+     * @return
+     */
     public int getCrystiteQuantity() {
         return crystiteQuantity;
     }
 
+    /**
+     *
+     * @param crystiteQuantity
+     */
     public void setCrystiteQuantity(int crystiteQuantity) {
-        this.crystiteQuantity = crystiteQuantity;
+        if (crystiteQuantity < 0) {
+            this.crystiteQuantity = 0;
+        } else {
+            this.crystiteQuantity = crystiteQuantity;
+        }
     }
 
+    /**
+     *
+     * @return
+     */
     public int getCrystitePrice() {
         return crystitePrice;
     }
 
+    /**
+     *
+     * @param crystitePrice
+     */
     public void setCrystitePrice(int crystitePrice) {
-        this.crystitePrice = crystitePrice;
+        if (crystitePrice < 0) {
+            this.crystitePrice = 0;
+        } else {
+            this.crystitePrice = crystitePrice;
+        }
     }
 
+    /**
+     *
+     * @return
+     */
     public int getMuleQuantity() {
         return muleQuantity;
     }
 
+    /**
+     *
+     * @param muleQuantity
+     */
     public void setMuleQuantity(int muleQuantity) {
-        this.muleQuantity = muleQuantity;
+        if (muleQuantity < 0) {
+            this.muleQuantity = 0;
+        } else {
+            this.muleQuantity = muleQuantity;
+        }
     }
 
+    /**
+     *
+     * @param type
+     * @return
+     */
     public int getMuleTypePrice(String type) {
         if (type.equals("Food")) return mulePrice + foodMuleCost;
         else if (type.equals("Energy")) return mulePrice + energyMuleCost;
@@ -122,14 +242,31 @@ public class StoreStateStore implements Serializable {
         }
     }
 
+    /**
+     *
+     * @return
+     */
     public int getMulePrice() {
         return this.mulePrice;
     }
 
+    /**
+     *
+     * @param mulePrice
+     */
     public void setMulePrice(int mulePrice) {
-        this.mulePrice = mulePrice;
+        if (mulePrice < 0) {
+            this.mulePrice = 0;
+        } else {
+            this.mulePrice = mulePrice;
+        }
     }
 
+    /**
+     *
+     * @param string
+     * @return
+     */
     public int getMuleTypeCost(String string) {
         if (string.equals("Food")) {
             return foodMuleCost;
@@ -144,5 +281,8 @@ public class StoreStateStore implements Serializable {
         }
     }
 
+    /**
+     * 
+     */
     public void reinit() {}
 }
