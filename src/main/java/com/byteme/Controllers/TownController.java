@@ -25,7 +25,7 @@ public class TownController {
     }
 
     /**
-     * 
+     *
      */
     //Similar
     public void goToStore() {
