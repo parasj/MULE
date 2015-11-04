@@ -1,15 +1,23 @@
 package com.byteme.Models;
 
 import com.byteme.Schema.RandomEvent;
-
-import java.security.SecureRandom;
+import com.byteme.Util.RandomWrapper;
+import com.byteme.Util.TestableRandomWrapper;
 
 /**
  * MULE
  */
 public class RandomEventGenerator {
-    private static final SecureRandom random = new SecureRandom();
+    private TestableRandomWrapper random;
     private static final int PROB = 27;
+
+    public RandomEventGenerator() {
+        random = new RandomWrapper();
+    }
+
+    public RandomEventGenerator(TestableRandomWrapper random) {
+        this.random = random;
+    }
 
     /**
      *
@@ -35,7 +43,7 @@ public class RandomEventGenerator {
      * @param includeBad
      * @return
      */
-    private RandomEvent getRandomEvent(boolean includeBad) {
+    public RandomEvent getRandomEvent(boolean includeBad) {
         RandomEvent randomEvent = RandomEvent.getRandomEvent();
         while ((!includeBad && !randomEvent.isGood()) || randomEvent.equals(RandomEvent.NOTHING))
             randomEvent = RandomEvent.getRandomEvent();
@@ -47,7 +55,7 @@ public class RandomEventGenerator {
      * @return
      */
     private boolean flipCoin() {
-        int flip = random.nextInt(100);
+        int flip = random.getInt(100);
         System.out.println("Probability flipped: " + flip);
         return flip <= PROB;
     }
