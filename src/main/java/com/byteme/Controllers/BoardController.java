@@ -509,14 +509,14 @@ public class BoardController implements Initializable, CanTick {
      *
      * @return
      */
-    public ConfigRepository getConfigRepository() {
+    public final ConfigRepository getConfigRepository() {
         return MULEStore.getInstance().getConfigRepository();
     }
 
     /**
      *
      */
-    public void render() {
+    public final void render() {
         System.out.println(state);
     }
 }
