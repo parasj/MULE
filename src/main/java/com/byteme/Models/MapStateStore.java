@@ -21,66 +21,130 @@ public class MapStateStore implements Serializable {
     private int numPlayers;
     private ArrayList<PlayerConfigParams> players;
 
+    /**
+     *
+     * @param configRepository
+     */
     public MapStateStore(ConfigRepository configRepository) {
         this.configRepository = configRepository;
     }
 
+    /**
+     *
+     * @return
+     */
     public MapControllerStates getCurrentState() {
         return currentState;
     }
 
+    /**
+     *
+     * @return
+     */
     public boolean isFromTownGoToPub() {
         return fromTownGoToPub;
     }
 
+    /**
+     *
+     * @param fromTownGoToPub
+     */
     public void setFromTownGoToPub(boolean fromTownGoToPub) {
         this.fromTownGoToPub = fromTownGoToPub;
     }
 
+    /**
+     *
+     * @return
+     */
     public int getCurrentPlayer() {
         return currentPlayer;
     }
 
+    /**
+     *
+     * @param currentPlayer
+     */
     public void setCurrentPlayer(int currentPlayer) {
         this.currentPlayer = currentPlayer % configRepository.getTotalPlayers();
     }
 
+    /**
+     *
+     * @return
+     */
     public int getCurrentRound() {
         return currentRound;
     }
 
+    /**
+     *
+     * @param currentRound
+     */
     public void setCurrentRound(int currentRound) {
         this.currentRound = currentRound;
     }
 
+    /**
+     *
+     * @return
+     */
     public int getPassCounter() {
         return passCounter;
     }
 
+    /**
+     *
+     * @param passCounter
+     */
     public void setPassCounter(int passCounter) {
         this.passCounter = passCounter;
     }
 
+    /**
+     *
+     * @return
+     */
     public int getPurchaseOpportunities() {
         return purchaseOpportunities;
     }
 
+    /**
+     *
+     * @param purchaseOpportunities
+     */
     public void setPurchaseOpportunities(int purchaseOpportunities) {
         this.purchaseOpportunities = purchaseOpportunities;
     }
 
+    /**
+     *
+     * @return
+     */
     public int getNumPlayers() {
         return numPlayers;
     }
 
+    /**
+     *
+     * @param numPlayers
+     */
     public void setNumPlayers(int numPlayers) {
         this.numPlayers = numPlayers;
     }
 
+    /**
+     *
+     * @param currentState
+     */
     public void setCurrentState(MapControllerStates currentState) {
         this.currentState = currentState;
     }
 
+    /**
+     *
+     * @return
+     */
     @Override
     public String toString() {
         return "MapStateStore{" +
@@ -91,6 +155,9 @@ public class MapStateStore implements Serializable {
                 ", numPlayers=" + numPlayers + '}';
     }
 
+    /**
+     *
+     */
     public void sortPlayers() {
         Collections.sort(players);
         for (int index = 0; index < players.size(); index++) {
@@ -98,18 +165,33 @@ public class MapStateStore implements Serializable {
         }
     }
 
+    /**
+     *
+     * @param index
+     * @return
+     */
     public PlayerConfigParams getPlayerAt(int index) {
         return players.get(index);
     }
 
+    /**
+     *
+     */
     public void refresh() {
         this.players = new ArrayList<>(configRepository.getPlayers());
     }
 
+    /**
+     *
+     * @return
+     */
     public ArrayList<PlayerConfigParams> getPlayers() {
         return players;
     }
 
+    /**
+     *
+     */
     public void reinit() {
         refresh();
     }

@@ -26,7 +26,7 @@ public class MasterController {
 
     private BoardController boardController;
     private PubController pubController;
-    private StoreController storeController;
+    private StoreController storeController ;
 
     ///Creates scenes
     public MasterController() {
