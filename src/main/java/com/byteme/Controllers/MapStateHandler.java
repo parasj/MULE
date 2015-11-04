@@ -5,34 +5,36 @@ import javafx.fxml.Initializable;
 import javafx.scene.input.MouseEvent;
 
 /**
- * MULE
+ * MULE.
  */
 //Every handler inherits this, the template for all handlers
 public abstract class MapStateHandler implements CanTick, Initializable {
-
+    /**
+     * boardController of type BoardControl.
+     */
     private BoardController boardController;
 
     /**
      *
      * @param boardController
      */
-    public MapStateHandler(BoardController boardController) {
+    public MapStateHandler(final BoardController boardController) {
         this.boardController = boardController;
     }
 
     /**
      *
-     * @return
+     * @return boardController of type BoardController.
      */
-    public BoardController getBoardController() {
+    public final BoardController getBoardController() {
         return boardController;
     }
 
     /**
      *
-     * @param boardController
+     * @param boardController of type BoardController.
      */
-    public void setBoardController(BoardController boardController) {
+    public final void setBoardController(final BoardController boardController) {
         this.boardController = boardController;
     }
 
@@ -50,7 +52,7 @@ public abstract class MapStateHandler implements CanTick, Initializable {
      *
      * @param event
      */
-    public abstract void tileChosen(MouseEvent event);
+    public abstract void tileChosen(final MouseEvent event);
 
     /**
      *
@@ -59,9 +61,9 @@ public abstract class MapStateHandler implements CanTick, Initializable {
 
     /**
      *
-     * @param log
+     * @param log of type String.
      */
-    protected void log(String log) {
+    protected final void log(final String log) {
         System.out.println(log);
     }
 }
