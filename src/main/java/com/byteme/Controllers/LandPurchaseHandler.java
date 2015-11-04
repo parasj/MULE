@@ -17,12 +17,19 @@ public class LandPurchaseHandler extends MapStateHandler {
     private final LandPurchaseStore landPurchaseStore;
     private final MapStateStore mapStateStore;
 
+    /**
+     *
+     * @param boardController
+     */
     public LandPurchaseHandler(BoardController boardController) {
         super(boardController);
         landPurchaseStore = MULEStore.getInstance().getLandPurchaseStore();
         mapStateStore = MULEStore.getInstance().getMapStateStore();
     }
 
+    /**
+     *
+     */
     //Pass goes to next player
     @Override
     public void handlePass() {
@@ -30,11 +37,18 @@ public class LandPurchaseHandler extends MapStateHandler {
         checkIfDone();
     }
 
+    /**
+     *
+     */
     @Override
     public void handleTownButtonClicked() {
         log("Cannot go to town during land purchase phase!");
     }
 
+    /**
+     *
+     * @param event
+     */
     //Highlights tile and increments player till done
     @Override
     public void tileChosen(MouseEvent event) {
@@ -56,6 +70,9 @@ public class LandPurchaseHandler extends MapStateHandler {
         }
     }
 
+    /**
+     *
+     */
     //Checks if done
     private void checkIfDone() {
         // Land Purchase is only 2 turns per player
@@ -76,6 +93,9 @@ public class LandPurchaseHandler extends MapStateHandler {
         }
     }
 
+    /**
+     *
+     */
     @Override
     public void stateChanged() {
         getBoardController().getPhaseLabel().setText("Purchase Selection");
@@ -86,11 +106,19 @@ public class LandPurchaseHandler extends MapStateHandler {
         getBoardController().setMoney(landPurchaseStore.getCurrentPlayer());
     }
 
+    /**
+     *
+     */
     @Override
     public void tick() {
 
     }
 
+    /**
+     *
+     * @param location
+     * @param resources
+     */
     @Override
     public void initialize(URL location, ResourceBundle resources) {
 

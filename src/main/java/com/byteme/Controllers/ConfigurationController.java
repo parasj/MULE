@@ -30,21 +30,25 @@ public class ConfigurationController {
      */
     public void loadGameConfiguration() {
         System.out.println("Loading Game!");
-        MULEStore m = MULEStore.getInstance();
+        MULEStore muleStore = MULEStore.getInstance();
         try {
-            m.load();
-            MasterController b = MasterController.getInstance();
-            b.createMap(); // The initializable function here changes it all
-            b.getBoardController().updateState(m.getMapStateStore().getCurrentState(), true);
-            b.getBoardController().render();
-            b.getBoardController().reinitialize();
+            muleStore.load();
+            MasterController masterController = MasterController.getInstance();
+            masterController.createMap(); // The initializable function here changes it all
+            masterController.getBoardController().updateState(muleStore.getMapStateStore().getCurrentState(), true);
+            masterController.getBoardController().render();
+            masterController.getBoardController().reinitialize();
             MasterController.getInstance().map();
-        } catch (Exception e) {
-            System.out.print(e);
+        } catch (Exception exception) {
+            System.out.print(exception);
         }
     }
 
     //Goes to configuration screen
+
+    /**
+     *
+     */
     public void newGameConfigureScreen() {
         MasterController.getInstance().gameConfig();
     }
@@ -219,9 +223,16 @@ public class ConfigurationController {
     }
 
     //Returns config repository where everything is stored
+
+    /**
+     *
+     * @return
+     */
     public ConfigRepository getConfigRepository() {
-        ConfigRepository cf = MULEStore.getInstance().getConfigRepository();
-        if (cf == null) throw new IllegalStateException("ConfigRepository is not initialized!");
-        return cf;
+        ConfigRepository configRepository = MULEStore.getInstance().getConfigRepository();
+        if (configRepository == null) {
+            throw new IllegalStateException("ConfigRepository is not initialized!");
+        }
+        return configRepository;
     }
 }

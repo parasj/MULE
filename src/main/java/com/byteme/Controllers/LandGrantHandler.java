@@ -17,20 +17,34 @@ public class LandGrantHandler extends MapStateHandler {
     //Players can only buy 2 properties during land grant stage
     private static final int MAX_PROPERTIES = 2;
 
+    /**
+     *
+     * @param boardController
+     */
     public LandGrantHandler(BoardController boardController) {
         super(boardController);
     }
 
+    /**
+     *
+     */
     @Override
     public void handlePass() {
         checkIfDone();
     }
 
+    /**
+     *
+     */
     @Override
     public void handleTownButtonClicked() {
         log("Cannot go to town during land grant phase!");
     }
 
+    /**
+     *
+     * @param event
+     */
     //Checks if owned, else colors in box
     @Override
     public void tileChosen(MouseEvent event) {
@@ -44,6 +58,9 @@ public class LandGrantHandler extends MapStateHandler {
         }
     }
 
+    /**
+     *
+     */
     //Sees if phase is over
     private void checkIfDone() {
         // Land Grant is only 2 turns per player
@@ -57,6 +74,9 @@ public class LandGrantHandler extends MapStateHandler {
         }
     }
 
+    /**
+     *
+     */
     //Changes state to next phase and resets labels
     @Override
     public void stateChanged() {
@@ -67,17 +87,33 @@ public class LandGrantHandler extends MapStateHandler {
         getBoardController().getTimerLabel().setText("");
     }
 
+    /**
+     *
+     * @param location
+     * @param resources
+     */
     @Override
     public void initialize(URL location, ResourceBundle resources) {}
 
+    /**
+     *
+     */
     @Override
     public void tick() {}
 
+    /**
+     *
+     * @return
+     */
     //Gets stores
     public MapStateStore getMapStateStore() {
         return MULEStore.getInstance().getMapStateStore();
     }
 
+    /**
+     *
+     * @return
+     */
     public LandGrantStore getLandGrantStore() {
         return MULEStore.getInstance().getLandGrantStore();
     }

@@ -138,7 +138,9 @@ public class MapStateStore implements Serializable {
      * @param currentState
      */
     public void setCurrentState(MapControllerStates currentState) {
-        this.currentState = currentState;
+        if (currentState != null) {
+            this.currentState = currentState;
+        }
     }
 
     /**
@@ -171,7 +173,11 @@ public class MapStateStore implements Serializable {
      * @return
      */
     public PlayerConfigParams getPlayerAt(int index) {
-        return players.get(index);
+        if (index < players.size()) {
+            return players.get(index);
+        } else {
+            throw new ArrayIndexOutOfBoundsException(index + " is less than size: " + players.size());
+        }
     }
 
     /**

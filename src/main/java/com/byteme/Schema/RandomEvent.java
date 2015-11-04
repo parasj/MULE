@@ -79,39 +79,77 @@ public enum RandomEvent {
         SPACE_INLAWS.moneyEffect = -6;
     }
 
+    /**
+     *
+     * @return
+     */
     public boolean isGood() {
         return isGood;
     }
 
+    /**
+     *
+     * @param oldFood
+     * @return
+     */
     public int calcFood(int oldFood) {
         if (this.equals(RandomEvent.UGA_STUDENTS)) return oldFood / 2;
         return oldFood + foodEffect;
     }
 
+    /**
+     *
+     * @param oldOre
+     * @return
+     */
     public int calcOre(int oldOre) {
         return oldOre + oreEffect;
     }
 
+    /**
+     *
+     * @param oldEnergy
+     * @return
+     */
     public int calcEnergy(int oldEnergy) {
         return oldEnergy + energyEffect;
     }
 
+    /**
+     *
+     * @param oldMoney
+     * @param round
+     * @return
+     */
     public int calcMoney(int oldMoney, int round) {
         int roundMultiple = roundMultiple(round);
         str = str.replaceAll("###", "" + Math.abs(moneyEffect * roundMultiple));
         return oldMoney + moneyEffect * roundMultiple;
     }
 
+    /**
+     *
+     * @return
+     */
     public static RandomEvent getRandomEvent() {
         int x = random.nextInt(RandomEvent.class.getEnumConstants().length);
         return RandomEvent.class.getEnumConstants()[x];
     }
 
+    /**
+     *
+     * @return
+     */
     @Override
     public String toString() {
         return str;
     }
 
+    /**
+     *
+     * @param round
+     * @return
+     */
     private int roundMultiple(int round) {
         if (round > 0 && round < 4) return 25;
         else if (round < 8) return 50;

@@ -6,6 +6,10 @@ package com.byteme.Schema;
 public enum Race {
     FLAPPER, HUMAN, BONZOID, UGAITE, BUZZITE;
 
+    /**
+     *
+     * @return
+     */
     @Override
     public String toString() {
         return EnumHumanizer.humanizeEnum(super.toString());

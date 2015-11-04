@@ -3,24 +3,34 @@ package com.byteme.Controllers;
 import com.byteme.Schema.MapControllerStates;
 
 /**
- * MULE
+ * This is the MULE game's TownController.
  */
 public class TownController {
 
+    /**
+     *
+     */
     //goes to map when map square clicked
-    public void goToMap() {
+    public final void goToMap() {
         MasterController.getInstance().map();
     }
 
+    /**
+     *
+     */
     //Similar
-    public void goToPub() {
-        MasterController.getInstance().getBoardController().updateState(MapControllerStates.TURN_OVER, true);
+    public final void goToPub() {
+        MasterController.getInstance()
+                        .getBoardController()
+                        .updateState(MapControllerStates.TURN_OVER, true);
         MasterController.getInstance().pubScene();
     }
 
+    /**
+     *
+     */
     //Similar
-    public void goToStore() {
+    public final void goToStore() {
         MasterController.getInstance().store();
     }
-
 }
