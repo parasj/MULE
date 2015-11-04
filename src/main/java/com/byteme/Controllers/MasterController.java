@@ -191,13 +191,4 @@ public class MasterController {
             e.printStackTrace();
         }
     }
-<<<<<<< Updated upstream
-=======
-
-    public BoardController getBoardController() {
-        return boardController;
-    }
-
-
->>>>>>> Stashed changes
 }
