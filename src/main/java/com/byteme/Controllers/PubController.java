@@ -11,45 +11,87 @@ import javafx.scene.control.Label;
 import java.util.Random;
 
 /**
- * MULE
+ * MULE.
  */
 public class PubController {
-    private GameStartStore g;
-    private MapStateStore s;
-    public ConfigRepository r;
-    private static final int[] roundBonusArr = {50, 50, 50, 100, 100, 100, 100, 150, 150, 150, 150, 200};
-
+    /**
+     * gameStartStore of type GameStartStore.
+     */
+    private GameStartStore gameStartStore;
+    /**
+     * mapStateStore of type MapStateStore.
+     */
+    private MapStateStore mapStateStore;
+    /**
+     * configRepository of type ConfigRepository.
+     */
+    private ConfigRepository configRepository;
+    /**
+     * roundBonusArr of type int[].
+     */
+    private static final int[] roundBonusArr =
+        {50, 50, 50, 100, 100, 100, 100, 150, 150, 150, 150, 200};
+    /**
+     * boardController instance of BoardController.
+     */
     private BoardController boardController;
-
+    /**
+     * playerLabel instance of Label.
+     */
     @FXML
     private Label playerLabel;
+    /**
+     * moneyLabel instance of Label.
+     */
     @FXML
     private Label moneyLabel;
 
+    /**
+     *
+     */
+    //Loads stores
     public PubController() {
         reinit();
     }
 
-
-    public void goToMap() {
+    /**
+     *
+     */
+    public final void goToMap() {
         MasterController.getInstance().map();
-        GameStartHandler gameStartHandler = (GameStartHandler) boardController.getGameStartHandler();
+        GameStartHandler gameStartHandler = (GameStartHandler) boardController
+        .getGameStartHandler();
         gameStartHandler.nextPlayer();
-        boardController.updateState(MapControllerStates.GAME_START);
+        boardController.updateState(MapControllerStates.GAME_START, true);
     }
 
-    private int getTimeBonus(int timeLeft) {
-        if (timeLeft >= 37) return 200;
-        else if (timeLeft >= 25) return 150;
-        else if (timeLeft >= 12) return 100;
-        else if (timeLeft > 0) return 50;
-        else return 0;
+    /**
+     * @param timeLeft of type int.
+     * @return int. the time bonus given.
+     */
+    private int getTimeBonus(final int timeLeft) {
+        if (timeLeft >= 37) {
+            return 200;
+        } else if (timeLeft >= 25) {
+            return 150;
+        } else if (timeLeft >= 12) {
+            return 100;
+        } else if (timeLeft > 0) {
+            return 50;
+        } else {
+            return 0;
+        }
     }
 
+    /**
+     *
+     */
+    //Gets how much money to pay player
     private void getMoney() {
-        PlayerConfigParams currentPlayer = s.getPlayerAt(g.getCurrentPlayer());
+        PlayerConfigParams currentPlayer = mapStateStore
+            .getPlayerAt(gameStartStore.getCurrentPlayer());
         int timeLeft = currentPlayer.getTimeLeft();
-        int roundBonus = roundBonusArr[s.getCurrentRound() - 1];
+        int roundBonus = roundBonusArr[mapStateStore.getCurrentRound() - 1];
         Random rand = new Random();
         int timeBonus = rand.nextInt(getTimeBonus(timeLeft) + 1);
         int moneyBonus = roundBonus * timeBonus;
@@ -60,24 +102,41 @@ public class PubController {
         currentPlayer.payMoney(-1 * moneyBonus);
     }
 
-    public void rerender() {
+    /**
+     *
+     */
+    //Recreates labels
+    public final void rerender() {
         reinit();
         getMoney();
         if (playerLabel != null) {
-            playerLabel.setText(String.format("Player %d %s", g.getCurrentPlayer() + 1, s.getPlayerAt(g.getCurrentPlayer()).getName()));
+            playerLabel.setText(String.format("Player %d %s", gameStartStore
+                .getCurrentPlayer() + 1, mapStateStore
+                .getPlayerAt(gameStartStore
+                    .getCurrentPlayer()).getName()));
         }
         if (moneyLabel != null) {
-            moneyLabel.setText("MONEY: " + s.getPlayerAt(g.getCurrentPlayer()).getMoney());
+            moneyLabel.setText("MONEY: " + mapStateStore
+                .getPlayerAt(gameStartStore.getCurrentPlayer()).getMoney());
         }
     }
 
-    public void setBoardController(BoardController boardController) {
+    /**
+     *
+     * @param boardController of type BoardController.
+     */
+    public final void setBoardController(
+            final BoardController boardController) {
         this.boardController = boardController;
     }
 
-    public void reinit() {
-        g = GameStartStore.getInstance();
-        s = MULEStore.getInstance().getMapStateStore();
-        r = MULEStore.getInstance().getConfigRepository();
+    /**
+     *
+     */
+    //Loads stores
+    public final void reinit() {
+        gameStartStore = GameStartStore.getInstance();
+        mapStateStore = MULEStore.getInstance().getMapStateStore();
+        configRepository = MULEStore.getInstance().getConfigRepository();
     }
 }

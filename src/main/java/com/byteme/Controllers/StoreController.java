@@ -11,78 +11,159 @@ import javafx.scene.control.ChoiceBox;
 import javafx.scene.control.Label;
 
 /**
- * Mule
+ * Mule.
  */
 public class StoreController {
-
-    private GameStartStore st;
-    private MapStateStore m;
-    private StoreStateStore s;
-    private PlaceMuleStore pm;
+    /**
+     * gameStartStore of type GameStartStore.
+     */
+    private GameStartStore gameStartStore;
+    /**
+     * mapStateStore of type MapStateStore.
+     */
+    private MapStateStore mapStateStore;
+    /**
+     * storeStateStore of type StoreStateStore.
+     */
+    private StoreStateStore storeStateStore;
+    /**
+     * placeMuleStore of type PlaceMuleStore.
+     */
+    private PlaceMuleStore placeMuleStore;
+    /**
+     * boardController of type BoardController.
+     */
     private static BoardController boardController;
 
+    /**
+     * foodQuantity instance of Label.
+     */
     @FXML
     private Label foodQuantity;
+    /**
+     * foodPrice instance of Label.
+     */
     @FXML
     private Label foodPrice;
+    /**
+     * energyQuantity instance of Label.
+     */
     @FXML
     private Label energyQuantity;
+    /**
+     * energyPrice instance of Label.
+     */
     @FXML
     private Label energyPrice;
+    /**
+     * smithoreQuantity instance of Label.
+     */
     @FXML
     private Label smithoreQuantity;
+    /**
+     * smithorePrice instance of Label.
+     */
     @FXML
     private Label smithorePrice;
+    /**
+     * crystiteQuantity instance of Label.
+     */
     @FXML
     private Label crystiteQuantity;
+    /**
+     * crystitePrice instance of Label.
+     */
     @FXML
     private Label crystitePrice;
+    /**
+     * muleQuantity instance of Label.
+     */
     @FXML
     private Label muleQuantity;
+    /**
+     * mulePrice instance of Label.
+     */
     @FXML
     private Label mulePrice;
+    /**
+     * money instance of Label.
+     */
     @FXML
     private Label money;
-
+    /**
+     * foodButton instance of Button.
+     */
     @FXML
     private Button foodButton;
+    /**
+     * foodButton instance of Button.
+     */
     @FXML
     private Button energyButton;
+    /**
+     * smithoreButton instance of Button.
+     */
     @FXML
     private Button smithoreButton;
+    /**
+     * crystiteButton instance of Button.
+     */
     @FXML
     private Button crystiteButton;
+    /**
+     * muleButton instance of Button.
+     */
     @FXML
     private Button muleButton;
+    /**
+     * changeState instance of Button.
+     */
     @FXML
     private Button changeState;
-
+    /**
+     * muleType instance of ChoiceBox.
+     */
     @FXML
     private ChoiceBox muleType;
 
+    /**
+     *
+     */
+    //Reloads stores
     public StoreController() {
         reinit();
     }
 
-
-    public void goToMap() {
+    /**
+     *
+     */
+    public final void goToMap() {
         MasterController.getInstance().map();
     }
 
-    public static void setBoardController(BoardController boardController1) {
+    /**
+     *
+     * @param boardController1 sets the boardController.
+     */
+    public static void setBoardController(final
+            BoardController boardController1) {
         boardController = boardController1;
     }
 
-    public void changeState() {
+    /**
+     *
+     */
+    //Changes between buy and selling items
+    public final void changeState() {
         reinit();
-        if (s.getState()) {
+        if (storeStateStore.getState()) {
             foodButton.setText("Sell Food");
             energyButton.setText("Sell Energy");
             smithoreButton.setText("Sell Smith Ore");
             crystiteButton.setText("Sell Crystite");
             muleButton.setDisable(true);
             changeState.setText("Change to Buy");
-            s.setState(false);
+            storeStateStore.setState(false);
 
         } else {
             foodButton.setText("Buy Food");
@@ -91,46 +172,68 @@ public class StoreController {
             crystiteButton.setText("Buy Crystite");
             muleButton.setDisable(false);
             changeState.setText("Change to Sell");
-            s.setState(true);
+            storeStateStore.setState(true);
         }
         log("State changed!");
     }
 
-    public void reRender() {
+    /**
+     *
+     */
+    //Changes all the labels
+    public final void reRender() {
         reinit();
-        PlayerConfigParams p = m.getPlayerAt(st.getCurrentPlayer());
-        foodQuantity.setText("Quantity: " + s.getFoodQuantity());
-        foodPrice.setText("Price: " + s.getFoodPrice());
-        energyQuantity.setText("Quantity: " + s.getEnergyQuantity());
-        energyPrice.setText("Price: " + s.getEnergyPrice());
-        smithoreQuantity.setText("Quantity: " + s.getSmithoreQuantity());
-        smithorePrice.setText("Price: " + s.getSmithorePrice());
-        crystiteQuantity.setText("Quantity: " + s.getCrystiteQuantity());
-        crystitePrice.setText("Price: " + s.getCrystitePrice());
-        muleQuantity.setText("Quantity: " + s.getMuleQuantity());
-        mulePrice.setText("Price: " + s.getMulePrice());
-        money.setText("" + p.getMoney());
+        PlayerConfigParams player = mapStateStore.getPlayerAt(gameStartStore
+            .getCurrentPlayer());
+        if (player == null) {
+            throw new IllegalArgumentException("Player is null!");
+        }
+        foodQuantity.setText("Quantity: " + storeStateStore.getFoodQuantity());
+        foodPrice.setText("Price: " + storeStateStore.getFoodPrice());
+        energyQuantity.setText("Quantity: " + storeStateStore
+            .getEnergyQuantity());
+        energyPrice.setText("Price: " + storeStateStore.getEnergyPrice());
+        smithoreQuantity.setText("Quantity: " + storeStateStore
+            .getSmithoreQuantity());
+        smithorePrice.setText("Price: " + storeStateStore.getSmithorePrice());
+        crystiteQuantity.setText("Quantity: " + storeStateStore
+            .getCrystiteQuantity());
+        crystitePrice.setText("Price: " + storeStateStore.getCrystitePrice());
+        muleQuantity.setText("Quantity: " + storeStateStore.getMuleQuantity());
+        mulePrice.setText("Price: " + storeStateStore.getMulePrice());
+        money.setText("" + player.getMoney());
         logPlayer();
         muleType.getSelectionModel().selectFirst();
     }
 
-    public void tradeFood() {
+    /**
+     *
+     */
+    //Buys/ sells food
+    public final void tradeFood() {
         reinit();
-        PlayerConfigParams p = m.getPlayerAt(st.getCurrentPlayer());
-        if (s.getState()) {
-            if (p.getMoney() >= s.getFoodPrice() && s.getFoodQuantity() > 0) {
-                p.payMoney(s.getFoodPrice());
-                s.setFoodQuantity(s.getFoodQuantity() - 1);
-                p.addFood();
+        PlayerConfigParams player = mapStateStore.getPlayerAt(gameStartStore
+            .getCurrentPlayer());
+        if (player == null) {
+            throw new IllegalArgumentException("Player is null!");
+        }
+        if (storeStateStore.getState()) {
+            if (player.getMoney() >= storeStateStore.getFoodPrice()
+                    && storeStateStore.getFoodQuantity() > 0) {
+                player.payMoney(storeStateStore.getFoodPrice());
+                storeStateStore.setFoodQuantity(storeStateStore
+                    .getFoodQuantity() - 1);
+                player.addFood();
                 reRender();
             } else {
                 log("Cannot buy food");
             }
         } else {
-            if (p.getFood() > 0) {
-                p.payMoney(-1 * s.getFoodPrice());
-                s.setFoodQuantity(s.getFoodQuantity() + 1);
-                p.subFood();
+            if (player.getFood() > 0) {
+                player.payMoney(-1 * storeStateStore.getFoodPrice());
+                storeStateStore.setFoodQuantity(storeStateStore
+                    .getFoodQuantity() + 1);
+                player.subFood();
                 reRender();
             } else {
                 log("Cannot sell food");
@@ -138,23 +241,33 @@ public class StoreController {
         }
     }
 
-    public void tradeEnergy() {
+    /**
+     *
+     */
+    public final void tradeEnergy() {
         reinit();
-        PlayerConfigParams p = m.getPlayerAt(st.getCurrentPlayer());
-        if (s.getState()) {
-            if (p.getMoney() >= s.getEnergyPrice() && s.getEnergyQuantity() > 0) {
-                p.payMoney(s.getEnergyPrice());
-                s.setEnergyQuantity(s.getEnergyQuantity() - 1);
-                p.addEnergy();
+        PlayerConfigParams player = mapStateStore.getPlayerAt(gameStartStore
+            .getCurrentPlayer());
+        if (player == null) {
+            throw new IllegalArgumentException("Player is null!");
+        }
+        if (storeStateStore.getState()) {
+            if (player.getMoney() >= storeStateStore.getEnergyPrice()
+                    && storeStateStore.getEnergyQuantity() > 0) {
+                player.payMoney(storeStateStore.getEnergyPrice());
+                storeStateStore.setEnergyQuantity(storeStateStore
+                    .getEnergyQuantity() - 1);
+                player.addEnergy();
                 reRender();
             } else {
                 log("Cannot buy energy");
             }
         } else {
-            if (p.getEnergy() > 0) {
-                p.payMoney(-1 * s.getEnergyPrice());
-                s.setEnergyQuantity(s.getEnergyQuantity() + 1);
-                p.subEnergy();
+            if (player.getEnergy() > 0) {
+                player.payMoney(-1 * storeStateStore.getEnergyPrice());
+                storeStateStore.setEnergyQuantity(storeStateStore
+                    .getEnergyQuantity() + 1);
+                player.subEnergy();
                 reRender();
             } else {
                 log("Cannot sell energy");
@@ -162,23 +275,33 @@ public class StoreController {
         }
     }
 
-    public void tradeSmithore() {
+    /**
+     *
+     */
+    public final void tradeSmithore() {
         reinit();
-        PlayerConfigParams p = m.getPlayerAt(st.getCurrentPlayer());
-        if (s.getState()) {
-            if (p.getMoney() >= s.getSmithorePrice() && s.getSmithoreQuantity() > 0) {
-                p.payMoney(s.getSmithorePrice());
-                s.setSmithoreQuantity(s.getSmithoreQuantity() - 1);
-                p.addSmithore();
+        PlayerConfigParams player = mapStateStore.getPlayerAt(gameStartStore
+            .getCurrentPlayer());
+        if (player == null) {
+            throw new IllegalArgumentException("Player is null!");
+        }
+        if (storeStateStore.getState()) {
+            if (player.getMoney() >= storeStateStore.getSmithorePrice()
+                    && storeStateStore.getSmithoreQuantity() > 0) {
+                player.payMoney(storeStateStore.getSmithorePrice());
+                storeStateStore.setSmithoreQuantity(storeStateStore
+                    .getSmithoreQuantity() - 1);
+                player.addSmithore();
                 reRender();
             } else {
                 log("Cannot buy smithore");
             }
         } else {
-            if (p.getSmithore() > 0) {
-                p.payMoney(-1 * s.getSmithorePrice());
-                s.setSmithoreQuantity(s.getSmithoreQuantity() + 1);
-                p.subSmithore();
+            if (player.getSmithore() > 0) {
+                player.payMoney(-1 * storeStateStore.getSmithorePrice());
+                storeStateStore.setSmithoreQuantity(storeStateStore
+                    .getSmithoreQuantity() + 1);
+                player.subSmithore();
                 reRender();
             } else {
                 log("Cannot sell smithore");
@@ -186,23 +309,33 @@ public class StoreController {
         }
     }
 
-    public void tradeCrystite() {
+    /**
+     *
+     */
+    public final void tradeCrystite() {
         reinit();
-        PlayerConfigParams p = m.getPlayerAt(st.getCurrentPlayer());
-        if (s.getState()) {
-            if (p.getMoney() >= s.getCrystitePrice() && s.getCrystiteQuantity() > 0) {
-                p.payMoney(s.getCrystitePrice());
-                s.setCrystiteQuantity(s.getCrystiteQuantity() - 1);
-                p.addCrystite();
+        PlayerConfigParams player = mapStateStore
+            .getPlayerAt(gameStartStore.getCurrentPlayer());
+        if (player == null) {
+            throw new IllegalArgumentException("Player is null!");
+        }
+        if (storeStateStore.getState()) {
+            if (player.getMoney() >= storeStateStore.getCrystitePrice()
+                && storeStateStore.getCrystiteQuantity() > 0) {
+                player.payMoney(storeStateStore.getCrystitePrice());
+                storeStateStore
+                .setCrystiteQuantity(storeStateStore.getCrystiteQuantity() - 1);
+                player.addCrystite();
                 reRender();
             } else {
                 log("Cannot buy crystite");
             }
         } else {
-            if (p.getCrystite() > 0) {
-                p.payMoney(-1 * s.getCrystitePrice());
-                s.setCrystiteQuantity(s.getCrystiteQuantity() + 1);
-                p.subCrystite();
+            if (player.getCrystite() > 0) {
+                player.payMoney(-1 * storeStateStore.getCrystitePrice());
+                storeStateStore.
+                setCrystiteQuantity(storeStateStore.getCrystiteQuantity() + 1);
+                player.subCrystite();
                 reRender();
             } else {
                 log("Cannot sell crystite");
@@ -210,18 +343,33 @@ public class StoreController {
         }
     }
 
-    public void tradeMule() {
+    /**
+     *
+     */
+    //Buys mule and places it, does not sell
+    public final void tradeMule() {
         reinit();
-        PlayerConfigParams p = m.getPlayerAt(st.getCurrentPlayer());
-        int muleCost = s.getMulePrice() + s.getMuleTypeCost((String) muleType.getValue());
+        PlayerConfigParams player = mapStateStore.
+                                    getPlayerAt(
+                                    gameStartStore.getCurrentPlayer());
+        if (player == null) {
+            throw new IllegalArgumentException("Player is null!");
+        }
+        int muleCost = storeStateStore.getMulePrice()
+                                       + storeStateStore.getMuleTypeCost(
+                                       (String) muleType.getValue());
         //log("" + muleCost);
-        if (s.getState()) {
-            if (p.getMoney() >= muleCost && s.getMuleQuantity() > 0) {
-                pm.setMule(new Mule(getType((String) muleType.getValue())));
-                boardController.updateState(MapControllerStates.PLACE_MULE);
+        if (storeStateStore.getState()) {
+            if (player.getMoney() >= muleCost
+                && storeStateStore.getMuleQuantity() > 0) {
+                placeMuleStore.
+                setMule(new Mule(getType((String) muleType.getValue())));
+                boardController.updateState(
+                                MapControllerStates.PLACE_MULE, true);
                 goToMap();
-                p.payMoney(muleCost);
-                s.setMuleQuantity(s.getMuleQuantity() - 1);
+                player.payMoney(muleCost);
+                storeStateStore
+                .setMuleQuantity(storeStateStore.getMuleQuantity() - 1);
                 reRender();
             } else {
                 log("Cannot buy Mule");
@@ -231,39 +379,61 @@ public class StoreController {
         }
     }
 
-    public void log(String string) {
+    /**
+     *
+     * @param string The string to be logged.
+     */
+    public final void log(final String string) {
         System.out.println(string);
     }
 
-    public void logPlayer() {
-        PlayerConfigParams p = m.getPlayerAt(st.getCurrentPlayer());
-        log("Player: " + p.getName());
-        log("Food: " + p.getFood());
-        log("Energy: " + p.getEnergy());
-        log("Smithore: " + p.getSmithore());
-        log("Crystite: " + p.getCrystite());
+    /**
+     *
+     */
+    public final void logPlayer() {
+        PlayerConfigParams player = mapStateStore
+                                    .getPlayerAt(
+                                    gameStartStore.getCurrentPlayer());
+        if (player == null) {
+            throw new IllegalArgumentException("Player is null");
+        }
+        log("Player: " + player.getName());
+        log("Food: " + player.getFood());
+        log("Energy: " + player.getEnergy());
+        log("Smithore: " + player.getSmithore());
+        log("Crystite: " + player.getCrystite());
         log("==================================================");
     }
 
-    public MuleType getType(String s) {
-        if (s.equals("Food")) {
+    /**
+     *
+     * @param string The type of MULE
+     * @return The corresponding MuleType for the String
+     */
+    //Changes string to MuleType
+    public final MuleType getType(final String string) {
+        if (string.equals("Food")) {
             return MuleType.FOOD;
-        } else if (s.equals("Energy")) {
+        } else if (string.equals("Energy")) {
             return MuleType.ENERGY;
-        } else if (s.equals("Smithore")) {
+        } else if (string.equals("Smithore")) {
             return MuleType.SMITHORE;
-        } else if (s.equals("Crystite")) {
+        } else if (string.equals("Crystite")) {
             return MuleType.CRYSTITE;
         } else {
-            return null;
+            throw new IllegalStateException("Mule must have state!");
         }
     }
 
-    public void reinit() {
-        st = GameStartStore.getInstance();
-        m = MULEStore.getInstance().getMapStateStore();
-        s = MULEStore.getInstance().getStoreStateStore();
-        pm = MULEStore.getInstance().getPlaceMuleStore();
+    /**
+     *
+     */
+    //Loads the stores
+    public final void reinit() {
+        gameStartStore = GameStartStore.getInstance();
+        mapStateStore = MULEStore.getInstance().getMapStateStore();
+        storeStateStore = MULEStore.getInstance().getStoreStateStore();
+        placeMuleStore = MULEStore.getInstance().getPlaceMuleStore();
     }
 
 }

@@ -15,6 +15,10 @@ public class LandPurchaseStore implements Serializable {
     private int currentPropertyCount;
     private ConfigRepository configRepository;
 
+    /**
+     *
+     * @param configRepository
+     */
     public LandPurchaseStore(ConfigRepository configRepository) {
         this.configRepository = configRepository;
         players = new ArrayList<>(configRepository.getPlayers());
@@ -22,6 +26,9 @@ public class LandPurchaseStore implements Serializable {
         currentPropertyCount = 0;
     }
 
+    /**
+     *
+     */
     public void incrPlayer() {
         if (currentPlayer == players.size() - 1) {
             incrPropertyCount();
@@ -29,34 +36,64 @@ public class LandPurchaseStore implements Serializable {
         currentPlayer = (currentPlayer + 1) % players.size();
     }
 
+    /**
+     *
+     * @return
+     */
     public PlayerConfigParams getCurrentPlayer() {
         return players.get(currentPlayer);
     }
 
+    /**
+     *
+     */
     public void incrPropertyCount() {
         currentPropertyCount++;
     }
 
+    /**
+     *
+     * @return
+     */
     public int getCurrentPropertyCount() {
         return currentPropertyCount;
     }
 
+    /**
+     *
+     * @return
+     */
     public int getCurrentPlayerId() {
         return currentPlayer;
     }
 
+    /**
+     *
+     * @return
+     */
     public List<PlayerConfigParams> getPlayers() {
         return players;
     }
 
+    /**
+     *
+     * @param currentPropertyCount
+     */
     public void setCurrentPropertyCount(int currentPropertyCount) {
         this.currentPropertyCount = currentPropertyCount;
     }
 
+    /**
+     *
+     * @param currentPlayer
+     */
     public void setCurrentPlayerId(int currentPlayer) {
         this.currentPlayer = currentPlayer;
     }
 
+    /**
+     *
+     */
     public void reinit() {
         players = new ArrayList<>(configRepository.getPlayers());
     }

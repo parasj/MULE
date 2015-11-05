@@ -11,7 +11,14 @@ import java.util.List;
  */
 public class LandGrantStore implements Serializable {
     private ConfigRepository configRepository;
+    private List<PlayerConfigParams> players;
+    private int currentPlayer;
+    private int currentPropertyCount;
 
+    /**
+     *
+     * @param configRepository
+     */
     public LandGrantStore(ConfigRepository configRepository) {
         this.configRepository = configRepository;
         players = new ArrayList<>(configRepository.getPlayers());
@@ -19,32 +26,49 @@ public class LandGrantStore implements Serializable {
         currentPropertyCount = 0;
     }
 
-    private List<PlayerConfigParams> players;
-    private int currentPlayer;
-    private int currentPropertyCount;
-
+    /**
+     *
+     */
     public void reinit() {
         players = new ArrayList<>(configRepository.getPlayers());
     }
 
+    /**
+     *
+     */
     public void incrPlayer() {
         if (currentPlayer == players.size() - 1)
             incrPropertyCount();
         currentPlayer = (currentPlayer + 1) % players.size();
     }
 
+    /**
+     *
+     * @return
+     */
     public PlayerConfigParams getCurrentPlayer() {
         return players.get(currentPlayer);
     }
 
+    /**
+     *
+     */
     private void incrPropertyCount() {
         currentPropertyCount++;
     }
 
+    /**
+     *
+     * @return
+     */
     public int getCurrentPropertyCount() {
         return currentPropertyCount;
     }
 
+    /**
+     *
+     * @return
+     */
     public int getCurrentPlayerId() {
         return currentPlayer;
     }

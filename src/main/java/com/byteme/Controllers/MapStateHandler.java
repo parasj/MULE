@@ -1,66 +1,69 @@
 package com.byteme.Controllers;
 
-import com.byteme.Models.MULEStore;
-import com.byteme.Models.MapStateStore;
 import com.byteme.Util.CanTick;
 import javafx.fxml.Initializable;
 import javafx.scene.input.MouseEvent;
 
 /**
- * MULE
+ * MULE.
  */
+//Every handler inherits this, the template for all handlers
 public abstract class MapStateHandler implements CanTick, Initializable {
-
+    /**
+     * boardController of type BoardControl.
+     */
     private BoardController boardController;
-    private MapStateStore s;
 
-    public MapStateHandler(BoardController boardController) {
+    /**
+     *
+     * @param boardController
+     */
+    public MapStateHandler(final BoardController boardController) {
         this.boardController = boardController;
-        s = MULEStore.getInstance().getMapStateStore();
     }
 
-    public BoardController getBoardController() {
+    /**
+     *
+     * @return boardController of type BoardController.
+     */
+    public final BoardController getBoardController() {
         return boardController;
     }
 
-    public void setBoardController(BoardController boardController) {
+    /**
+     *
+     * @param boardController of type BoardController.
+     */
+    public final void setBoardController(final BoardController boardController) {
         this.boardController = boardController;
     }
 
+    /**
+     *
+     */
     public abstract void handlePass();
 
+    /**
+     *
+     */
     public abstract void handleTownButtonClicked();
 
-    public abstract void tileChosen(MouseEvent event);
+    /**
+     *
+     * @param event
+     */
+    public abstract void tileChosen(final MouseEvent event);
 
+    /**
+     *
+     */
     public abstract void stateChanged();
 
-    protected void log(String log) {
+    /**
+     *
+     * @param log of type String.
+     */
+    protected final void log(final String log) {
         System.out.println(log);
     }
-
-
-//    Implement in each state store
-//    /**
-//     * Updates the player label to next player's name.
-//     * Increments currentPlayer.
-//     */
-//    public void changePlayer() {
-//        if (s.getCurrentPlayer() + 1 == s.getNumPlayers()) {
-//            changePlayer(s.getNumPlayers());
-//        } else {
-//            changePlayer((s.getCurrentPlayer() + 1) % s.getNumPlayers());
-//        }
-//    }
-//
-//    /**
-//     * Updates the player label to next player's name.
-//     * Increments currentPlayer.
-//     * @param playerNumber The number of the player to be set
-//     */
-//    public void changePlayer(int playerNumber) {
-//        s.setCurrentPlayer(playerNumber);
-//        //rerenderPlayerText();
-//    }
-
 }

@@ -13,89 +13,145 @@ import java.util.ResourceBundle;
  * MULE
  */
 public class GameStartHandler extends MapStateHandler {
-    private final static GameStartStore st = GameStartStore.getInstance();
-    private final static MapStateStore m = MULEStore.getInstance().getMapStateStore();
-    private final static ConfigRepository r = MULEStore.getInstance().getConfigRepository();
+    //Stores for variables
+    private final static GameStartStore gameStartStore = GameStartStore.getInstance();
+    private final static MapStateStore mapStateStore = MULEStore.getInstance().getMapStateStore();
+    private final static ConfigRepository configRepository = MULEStore.getInstance().getConfigRepository();
     private final static RandomEventGenerator evtGen = new RandomEventGenerator();
 
+    /**
+     *
+     * @param boardController
+     */
     public GameStartHandler(BoardController boardController) {
         super(boardController);
     }
 
+    //When pass is failed, go to pub
+
+    /**
+     *
+     */
     @Override
     public void handlePass() {
-        MasterController.getInstance().getBoardController().updateState(MapControllerStates.TURN_OVER);
+        MasterController.getInstance().getBoardController().updateState(MapControllerStates.TURN_OVER, true);
         MasterController.getInstance().pubScene();
     }
 
+    //Go to town
+
+    /**
+     *
+     */
     @Override
     public void handleTownButtonClicked() {
         MasterController.getInstance().town();
     }
 
+    //Does nothing, just there because it is inherited
+
+    /**
+     *
+     * @param event
+     */
     @Override
     public void tileChosen(MouseEvent event) {
 
     }
 
+    //Renders all text labels
+
+    /**
+     *
+     */
     @Override
     public void stateChanged() {
         getBoardController().getPhaseLabel().setText("Game Start");
-        getBoardController().setPlayer(m.getPlayerAt(st.getCurrentPlayer()));
-        getBoardController().renderMoney(m.getPlayerAt(st.getCurrentPlayer()).getMoney());
-        getBoardController().renderRound(m.getCurrentRound());
-        getBoardController().renderTimer(m.getPlayerAt(st.getCurrentPlayer()).getTimeLeft());
-        log("Score: " + m.getPlayerAt(st.getCurrentPlayer()).calcScore());
+        getBoardController().setPlayer(mapStateStore.getPlayerAt(gameStartStore.getCurrentPlayer()));
+        getBoardController().renderMoney(mapStateStore.getPlayerAt(gameStartStore.getCurrentPlayer()).getMoney());
+        getBoardController().renderRound(mapStateStore.getCurrentRound());
+        getBoardController().renderTimer(mapStateStore.getPlayerAt(gameStartStore.getCurrentPlayer()).getTimeLeft());
+        log("Score: " + mapStateStore.getPlayerAt(gameStartStore.getCurrentPlayer()).calcScore());
     }
 
-    private void setMoney(int m) {
-        getBoardController().renderMoney(m);
+    /**
+     *
+     * @param money
+     */
+    private void setMoney(int money) {
+        getBoardController().renderMoney(money);
     }
 
-    private void setRound(int r) {
-        getBoardController().renderRound(r);
+    /**
+     *
+     * @param round
+     */
+    private void setRound(int round) {
+        getBoardController().renderRound(round);
     }
 
-    private void setTimer(int t) {
-        getBoardController().renderTimer(t);
+    /**
+     *
+     * @param timer
+     */
+    private void setTimer(int timer) {
+        getBoardController().renderTimer(timer);
     }
 
+    //Every second, counts down
+
+    /**
+     *
+     */
     @Override
     public void tick() {
-        PlayerConfigParams p = m.getPlayerAt(st.getCurrentPlayer());
+        PlayerConfigParams p = mapStateStore.getPlayerAt(gameStartStore.getCurrentPlayer());
         if (p.getTimeLeft() > 0) {
             getBoardController().renderTimer(p.getTimeLeft());
             p.setTimeLeft(p.getTimeLeft() - 1);
         } else {
-            getBoardController().updateState(MapControllerStates.TURN_OVER);
+            getBoardController().updateState(MapControllerStates.TURN_OVER, true);
             MasterController.getInstance().pubScene();
         }
     }
 
+    /**
+     *
+     * @param location
+     * @param resources
+     */
     @Override
     public void initialize(URL location, ResourceBundle resources) {
 
     }
 
+    /**
+     *
+     */
+    //Increments player
     public void nextPlayer() {
-        if (st.getCurrentPlayer() == r.getTotalPlayers() - 1) {
-            m.setCurrentRound(m.getCurrentRound() + 1);
+        if (gameStartStore.getCurrentPlayer() == configRepository.getTotalPlayers() - 1) {
+            mapStateStore.setCurrentRound(mapStateStore.getCurrentRound() + 1);
             calculateProduction();
-            st.setCurrentPlayer(1);
-            m.sortPlayers();
+            gameStartStore.setCurrentPlayer(1);
+            mapStateStore.sortPlayers();
         }
-        st.incCurrentPlayer();
-        m.getPlayerAt(st.getCurrentPlayer()).calcTimeLeft();
-        log("Player changed to " + st.getCurrentPlayer());
+        gameStartStore.incCurrentPlayer();
+        mapStateStore.getPlayerAt(gameStartStore.getCurrentPlayer()).calcTimeLeft();
+        log("Player changed to " + gameStartStore.getCurrentPlayer());
         calculateRandomEvents();
     }
 
+    /**
+     *
+     */
+    //Checks random events at beginning of turn
     public void calculateRandomEvents() {
-        PlayerConfigParams p = m.getPlayerAt(st.getCurrentPlayer());
+        PlayerConfigParams p = mapStateStore.getPlayerAt(gameStartStore.getCurrentPlayer());
         RandomEvent evt = evtGen.getEvent(lastPlace(p));
         p.setFood(evt.calcFood(p.getFood()));
         p.setEnergy(evt.calcEnergy(p.getEnergy()));
-        p.setMoney(evt.calcMoney(p.getMoney(), m.getCurrentRound()));
+        p.setMoney(evt.calcMoney(p.getMoney(), mapStateStore.getCurrentRound()));
         p.setSmithore(evt.calcOre(p.getSmithore()));
 
         String evtName = evt.toString();
@@ -103,10 +159,10 @@ public class GameStartHandler extends MapStateHandler {
 
         if (!evt.equals(RandomEvent.NOTHING)) {
             Alert.AlertType alertType = Alert.AlertType.INFORMATION;
-            String header = "Good fortune, " + m.getPlayerAt(st.getCurrentPlayer()).getName() + "!";
+            String header = "Good fortune, " + mapStateStore.getPlayerAt(gameStartStore.getCurrentPlayer()).getName() + "!";
             if (!evt.isGood()) {
                 alertType = Alert.AlertType.WARNING;
-                header = "Better luck next time, " + m.getPlayerAt(st.getCurrentPlayer()).getName() + "!";
+                header = "Better luck next time, " + mapStateStore.getPlayerAt(gameStartStore.getCurrentPlayer()).getName() + "!";
             }
 
             Alert alert = new Alert(alertType);
@@ -118,17 +174,27 @@ public class GameStartHandler extends MapStateHandler {
         }
     }
 
+    /**
+     *
+     * @param p
+     * @return
+     */
+    //Returns whoever is in last place, used for random events
     private boolean lastPlace(PlayerConfigParams p) {
         int pScore = p.calcScore();
         int minPScore = Integer.MIN_VALUE;
-        for (PlayerConfigParams pl : m.getPlayers())
+        for (PlayerConfigParams pl : mapStateStore.getPlayers())
             minPScore = Math.min(minPScore, pl.calcScore());
         return pScore <= minPScore;
     }
 
+    /**
+     *
+     */
+    //Calcs how much mules make
     private void calculateProduction() {
         Random rand = new Random();
-        for (PlayerConfigParams player: m.getPlayers()) {
+        for (PlayerConfigParams player: mapStateStore.getPlayers()) {
             for (Property prop : player.getProperties()) {
                 Mule mule = prop.getMule();
                 if (mule != null && player.getEnergy() > 0) {
