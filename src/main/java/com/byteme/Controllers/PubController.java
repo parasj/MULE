@@ -15,6 +15,39 @@ import java.util.Random;
  */
 public class PubController {
     /**
+     * FIRSTNUM of type int.
+     * Made these variables this way because of checkstyle.
+     */
+    public static final int FIRSTNUM = 37;
+    /**
+     * SECONDNUM of type int.
+     */
+    public static final int SECONDNUM = 200;
+    /**
+     * THIRDNUM of type int.
+     */
+    public static final int THIRDNUM = 25;
+    /**
+     * FOURTHNUM of type int.
+     */
+    public static final int FOURTHNUM = 150;
+    /**
+     * FIFTHNUM of type int.
+     */
+    public static final int FIFTHNUM = 12;
+    /**
+     * SIXTHNUM of type int.
+     */
+    public static final int SIXTHNUM = 100;
+    /**
+     * SEVENTHNUM of type int.
+     */
+    public static final int SEVENTHNUM = 50;
+    /**
+     * MONEYCOMP of type int.
+     */
+    public static final int MONEYCOMP = 250;
+    /**
      * gameStartStore of type GameStartStore.
      */
     private GameStartStore gameStartStore;
@@ -27,9 +60,9 @@ public class PubController {
      */
     private ConfigRepository configRepository;
     /**
-     * roundBonusArr of type int[].
+     * ROUNDBONUSARR of type int[].
      */
-    private static final int[] roundBonusArr =
+    private static final int[] ROUNDBONUSARR =
         {50, 50, 50, 100, 100, 100, 100, 150, 150, 150, 150, 200};
     /**
      * boardController instance of BoardController.
@@ -70,14 +103,15 @@ public class PubController {
      * @return int. the time bonus given.
      */
     private int getTimeBonus(final int timeLeft) {
-        if (timeLeft >= 37) {
-            return 200;
-        } else if (timeLeft >= 25) {
-            return 150;
-        } else if (timeLeft >= 12) {
-            return 100;
+
+        if (timeLeft >= FIRSTNUM) {
+            return SECONDNUM;
+        } else if (timeLeft >= THIRDNUM) {
+            return FOURTHNUM;
+        } else if (timeLeft >= FIFTHNUM) {
+            return SIXTHNUM;
         } else if (timeLeft > 0) {
-            return 50;
+            return SEVENTHNUM;
         } else {
             return 0;
         }
@@ -91,12 +125,12 @@ public class PubController {
         PlayerConfigParams currentPlayer = mapStateStore
             .getPlayerAt(gameStartStore.getCurrentPlayer());
         int timeLeft = currentPlayer.getTimeLeft();
-        int roundBonus = roundBonusArr[mapStateStore.getCurrentRound() - 1];
+        int roundBonus = ROUNDBONUSARR[mapStateStore.getCurrentRound() - 1];
         Random rand = new Random();
         int timeBonus = rand.nextInt(getTimeBonus(timeLeft) + 1);
         int moneyBonus = roundBonus * timeBonus;
-        if (moneyBonus > 250) {
-            moneyBonus = 250;
+        if (moneyBonus > MONEYCOMP) {
+            moneyBonus = MONEYCOMP;
         }
         System.out.println("You Earned: " + moneyBonus);
         currentPlayer.payMoney(-1 * moneyBonus);
@@ -122,12 +156,12 @@ public class PubController {
     }
 
     /**
-     *
-     * @param boardController of type BoardController.
+     * Also I changed parameter names because of checkstyle.
+     * @param boardController1 of type BoardController.
      */
     public final void setBoardController(
-            final BoardController boardController) {
-        this.boardController = boardController;
+            final BoardController boardController1) {
+        this.boardController = boardController1;
     }
 
     /**

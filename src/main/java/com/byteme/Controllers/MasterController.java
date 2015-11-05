@@ -14,7 +14,7 @@ public class MasterController {
     /**
      * gameStartStore of type GameStartStore.
      */
-    private static final MasterController instance = new MasterController();
+    private static final MasterController INSTANCE = new MasterController();
     /**
      * startGame of type Scene.
      */
@@ -116,7 +116,7 @@ public class MasterController {
      * @return instance of MasterController.
      */
     public static MasterController getInstance() {
-        return instance;
+        return INSTANCE;
     }
 
     /**
@@ -211,15 +211,15 @@ public class MasterController {
     }
 
     /**
-     *
-     * @param boardController of type BoardController.
+     *  Changed Param name because of checkstyle.
+     * @param boardController1 of type BoardController.
      */
     public final void
-        setBoardController(final BoardController boardController) {
+        setBoardController(final BoardController boardController1) {
         if (boardController == null) {
             throw new IllegalArgumentException("Board Controller is null!");
         }
-        this.boardController = boardController;
+        this.boardController = boardController1;
     }
 
     /**
