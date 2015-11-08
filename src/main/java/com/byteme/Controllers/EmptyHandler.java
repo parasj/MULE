@@ -4,15 +4,13 @@ import javafx.scene.input.MouseEvent;
 
 import java.net.URL;
 import java.util.ResourceBundle;
-/**
- * MULE.
- */
+
 public class EmptyHandler extends MapStateHandler {
     /**
      *
-     * @param boardController of type BoardController.
+     * @param boardController
      */
-    public EmptyHandler(final BoardController boardController) {
+    public EmptyHandler(BoardController boardController) {
         super(boardController);
     }
 
@@ -34,10 +32,10 @@ public class EmptyHandler extends MapStateHandler {
 
     /**
      *
-     * @param event of type MouseEvent.
+     * @param event
      */
     @Override
-    public void tileChosen(final MouseEvent event) {
+    public void tileChosen(MouseEvent event) {
 
     }
 
@@ -63,7 +61,7 @@ public class EmptyHandler extends MapStateHandler {
      * @param resources
      */
     @Override
-    public void initialize(final URL location, final ResourceBundle resources) {
+    public void initialize(URL location, ResourceBundle resources) {
 
     }
 }
