@@ -54,7 +54,8 @@ public class PubController {
         else if (timeLeft >= 25) return 150;
         else if (timeLeft >= 12) return 100;
         else if (timeLeft > 0) return 50;
-        else return 0;
+        else if (timeLeft == 0) return 0;
+        else throw new IllegalArgumentException("Time cannot be negative!");
     }
 
     /**
