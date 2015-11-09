@@ -6,15 +6,17 @@ import java.net.URL;
 import java.util.ResourceBundle;
 
 /**
- * MULE
+ * The Mule Game's TurnOverHandler class.
  */
-//Empty, because we do nothing when turn is over, everything done when game starts, is just a placeholder
-public class TurnOverHandler extends MapStateHandler{
+
+// Empty, because we do nothing when turn is over,
+// everything done when game starts, is just a placeholder
+public class TurnOverHandler extends MapStateHandler {
     /**
      *
-     * @param boardController
+     * @param boardController The BoardController
      */
-    public TurnOverHandler(BoardController boardController) {
+    public TurnOverHandler(final BoardController boardController) {
         super(boardController);
     }
 
@@ -36,10 +38,10 @@ public class TurnOverHandler extends MapStateHandler{
 
     /**
      *
-     * @param event
+     * @param event of type MouseEvent.
      */
     @Override
-    public void tileChosen(MouseEvent event) {
+    public void tileChosen(final MouseEvent event) {
 
     }
 
@@ -61,10 +63,10 @@ public class TurnOverHandler extends MapStateHandler{
 
     /**
      *
-     * @param location
-     * @param resources
+     * @param location of type URL.
+     * @param resources of type ResourceBundle.
      */
     @Override
-    public void initialize(URL location, ResourceBundle resources) {
+    public void initialize(final URL location, final ResourceBundle resources) {
     }
 }

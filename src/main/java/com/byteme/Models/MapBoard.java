@@ -18,9 +18,12 @@ public class MapBoard {
              {MapTile.P,    MapTile.M2, MapTile.P,  MapTile.P,  MapTile.R,      MapTile.P,  MapTile.M2, MapTile.P,  MapTile.P},
              {MapTile.P,    MapTile.P,  MapTile.M2, MapTile.P,  MapTile.R,      MapTile.P,  MapTile.P,  MapTile.P,  MapTile.M2}};
 
-//    public MapBoard() {
-//        this(5, 9, MapType.STANDARD);
-//    }
+    /**
+     *
+     */
+    public MapBoard() {
+        this(5, 9, MapType.STANDARD);
+    }
 
     /**
      *
