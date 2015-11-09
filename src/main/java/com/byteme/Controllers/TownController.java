@@ -3,7 +3,7 @@ package com.byteme.Controllers;
 import com.byteme.Schema.MapControllerStates;
 
 /**
- * This is the MULE game's TownController.
+ * MULE
  */
 public class TownController {
 
@@ -11,7 +11,7 @@ public class TownController {
      *
      */
     //goes to map when map square clicked
-    public final void goToMap() {
+    public void goToMap() {
         MasterController.getInstance().map();
     }
 
@@ -19,10 +19,8 @@ public class TownController {
      *
      */
     //Similar
-    public final void goToPub() {
-        MasterController.getInstance()
-                        .getBoardController()
-                        .updateState(MapControllerStates.TURN_OVER, true);
+    public void goToPub() {
+        MasterController.getInstance().getBoardController().updateState(MapControllerStates.TURN_OVER, true);
         MasterController.getInstance().pubScene();
     }
 
@@ -30,7 +28,8 @@ public class TownController {
      *
      */
     //Similar
-    public final void goToStore() {
+    public void goToStore() {
         MasterController.getInstance().store();
     }
+
 }
