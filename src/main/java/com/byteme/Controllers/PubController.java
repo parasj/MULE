@@ -5,6 +5,7 @@ import com.byteme.Models.MapStateStore;
 import com.byteme.Models.ConfigRepository;
 import com.byteme.Schema.MapControllerStates;
 import com.byteme.Schema.PlayerConfigParams;
+import com.byteme.Util.RandomWrapper;
 import com.byteme.Util.TestableRandomWrapper;
 import javafx.fxml.FXML;
 import javafx.scene.control.Label;
@@ -12,11 +13,10 @@ import javafx.scene.control.Label;
 import java.util.Random;
 
 /**
- * MULE.
+ * MULE
  */
 public class PubController {
 
-    private TestableRandomWrapper random;
     /**
      * FIRSTNUM of type int.
      * Made these variables this way because of checkstyle.
@@ -58,13 +58,9 @@ public class PubController {
      * mapStateStore of type MapStateStore.
      */
     private MapStateStore mapStateStore;
-<<<<<<< HEAD
-    public ConfigRepository configRepository;
-    private static final int[] roundBonusArr = {50, 50, 50, 100, 100, 100, 100,
-        150, 150, 150, 150, 200};
-    private TestableRandomWrapper random;
+    private static final int[] roundBonusArr = {50, 50, 50, 100, 100, 100, 100, 150, 150, 150, 150, 200};
+    private TestableRandomWrapper random = new RandomWrapper();
 
-=======
     /**
      * configRepository of type ConfigRepository.
      */
@@ -77,7 +73,6 @@ public class PubController {
     /**
      * boardController instance of BoardController.
      */
->>>>>>> origin/master
     private BoardController boardController;
     /**
      * playerLabel instance of Label.
@@ -90,9 +85,7 @@ public class PubController {
     @FXML
     private Label moneyLabel;
 
-    public PubController(TestableRandomWrapper random,
-        GameStartStore gameStartStore, MapStateStore mapStateStore,
-            ConfigRepository configRepository) {
+    public PubController(TestableRandomWrapper random, GameStartStore gameStartStore, MapStateStore mapStateStore, ConfigRepository configRepository) {
         this.random = random;
         this.gameStartStore = gameStartStore;
         this.mapStateStore = mapStateStore;
@@ -114,13 +107,8 @@ public class PubController {
      */
     public final void goToMap() {
         MasterController.getInstance().map();
-<<<<<<< HEAD
-        GameStartHandler gameStartHandler =
-            (GameStartHandler) boardController.getGameStartHandler();
-=======
         GameStartHandler gameStartHandler = (GameStartHandler) boardController
         .getGameStartHandler();
->>>>>>> origin/master
         gameStartHandler.nextPlayer();
         boardController.updateState(MapControllerStates.GAME_START, true);
     }
@@ -150,11 +138,7 @@ public class PubController {
      *
      */
     //Gets how much money to pay player
-<<<<<<< HEAD
-    protected void getMoney() {
-=======
     private void getMoney() {
->>>>>>> origin/master
         PlayerConfigParams currentPlayer = mapStateStore
             .getPlayerAt(gameStartStore.getCurrentPlayer());
         int timeLeft = currentPlayer.getTimeLeft();
@@ -176,33 +160,22 @@ public class PubController {
         reinit();
         getMoney();
         if (playerLabel != null) {
-<<<<<<< HEAD
             playerLabel.setText(String
                 .format("Player %d %s", gameStartStore
                     .getCurrentPlayer() + 1, mapStateStore
                         .getPlayerAt(gameStartStore.getCurrentPlayer())
                             .getName()));
-=======
-            playerLabel.setText(String.format("Player %d %s", gameStartStore
-                .getCurrentPlayer() + 1, mapStateStore
-                .getPlayerAt(gameStartStore
-                    .getCurrentPlayer()).getName()));
->>>>>>> origin/master
+            playerLabel.setText(String.format("Player %d %s", gameStartStore.getCurrentPlayer() + 1, mapStateStore.getPlayerAt(gameStartStore.getCurrentPlayer()).getName()));
         }
         if (moneyLabel != null) {
-            moneyLabel.setText("MONEY: " + mapStateStore
-                .getPlayerAt(gameStartStore.getCurrentPlayer()).getMoney());
+            moneyLabel.setText("MONEY: " + mapStateStore.getPlayerAt(gameStartStore.getCurrentPlayer()).getMoney());
         }
     }
 
     /**
-<<<<<<< HEAD
      *
-     * @param boardController of type BoardController.
-=======
      * Also I changed parameter names because of checkstyle.
      * @param boardController1 of type BoardController.
->>>>>>> origin/master
      */
     public final void setBoardController(
             final BoardController boardController1) {
@@ -210,22 +183,15 @@ public class PubController {
     }
 
     /**
-     * reinititialize method.
+     *
      */
-<<<<<<< HEAD
-=======
-    //Loads stores
->>>>>>> origin/master
     public final void reinit() {
         gameStartStore = GameStartStore.getInstance();
         mapStateStore = MULEStore.getInstance().getMapStateStore();
         configRepository = MULEStore.getInstance().getConfigRepository();
     }
 
-    /**
-     * getPLayer method.
-     */
-    public final PlayerConfigParams getPlayer() {
+    public PlayerConfigParams getPlayer() {
         return mapStateStore.getPlayerAt(gameStartStore.getCurrentPlayer());
     }
 }
