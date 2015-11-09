@@ -26,7 +26,6 @@ import static com.byteme.Schema.MapControllerStates.*;
 
 public class BoardController implements Initializable, CanTick {
     //Variables stored here, will be used and saved/loaded later
-<<<<<<< HEAD
     /**
      * timer of type GlobalTimer.
      */
@@ -40,10 +39,6 @@ public class BoardController implements Initializable, CanTick {
      * A static value added to the map.
      */
     private static final int MAPTAKEINNUM = 4;
-=======
-    private final static GlobalTimer timer = GlobalTimer.getInstance();
-    private final static int cost = 300;
->>>>>>> origin/master
 
     private MapBoard possibleMaps;
     private boolean[][] mapSpots;
@@ -80,7 +75,6 @@ public class BoardController implements Initializable, CanTick {
 
     /**
      *
-    /**
      * Sets up game state and clock
      */
     public BoardController() {
@@ -151,13 +145,8 @@ public class BoardController implements Initializable, CanTick {
     private void initRiver() {
         ImageView townImage = new ImageView("/images/Town.png");
         townImage.setOnMouseClicked((MouseEvent e) -> townButtonClicked());
-<<<<<<< HEAD
         map.add(townImage, MAPTAKEINNUM, 2);
         // Todo: hardcode the river
-=======
-        map.add(townImage, 4, 2);
-        // TODO: hardcode the river
->>>>>>> origin/master
     }
 
     //Changes values of labels to off

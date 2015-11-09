@@ -7,25 +7,70 @@ import javafx.stage.Stage;
 
 import java.io.IOException;
 /**
- * MULE
+ * MULE.
  */
 public class MasterController {
 
-    private static final MasterController instance = new MasterController();
+    /**
+     * gameStartStore of type GameStartStore.
+     */
+    private static final MasterController INSTANCE = new MasterController();//Change this back.
+    /**
+     * startGame of type Scene.
+     */
     private Scene startGame;
+    /**
+     * loadGame of type Scene.
+     */
     private Scene loadGame;
+    /**
+     * gameConfig of type Scene.
+     */
     private Scene gameConfig;
+    /**
+     * playerConfig of type Scene.
+     */
     private Scene playerConfig;
+    /**
+     * map of type Scene.
+     */
     private Scene map;
+    /**
+     * town of type Scene.
+     */
     private Scene town;
+    /**
+     * temp of type Scene.
+     */
     private Scene temp;
+    /**
+     * pubScene of type Scene.
+     */
     private Scene pubScene;
+    /**
+     * storeScene of type Scene.
+     */
     private Scene storeScene;
+    /**
+     * theStage of type Stage.
+     */
     private Stage theStage;
+    /**
+     * currStage of type String.
+     */
     private String currStage;
 
+    /**
+     * boardController of type BoardController.
+     */
     private BoardController boardController;
+    /**
+     * pubController of type PubController.
+     */
     private PubController pubController;
+    /**
+     * storeController of type StoreController.
+     */
     private StoreController storeController;
 
     /**
@@ -35,20 +80,26 @@ public class MasterController {
     public MasterController() {
         Parent root;
         try {
-            root = FXMLLoader.load(getClass().getResource("/fxml/StartGame.fxml"));
+            root = FXMLLoader.load(getClass()
+                .getResource("/fxml/StartGame.fxml"));
             startGame = new Scene(root);
-            root = FXMLLoader.load(getClass().getResource("/fxml/LoadGame.fxml"));
+            root = FXMLLoader.load(getClass()
+                .getResource("/fxml/LoadGame.fxml"));
             loadGame = new Scene(root);
-            root = FXMLLoader.load(getClass().getResource("/fxml/GameConfig.fxml"));
+            root = FXMLLoader.load(getClass()
+                .getResource("/fxml/GameConfig.fxml"));
             gameConfig = new Scene(root);
-            root = FXMLLoader.load(getClass().getResource("/fxml/PlayerConfig.fxml"));
+            root = FXMLLoader.load(getClass()
+                .getResource("/fxml/PlayerConfig.fxml"));
             playerConfig = new Scene(root);
             root = FXMLLoader.load(getClass().getResource("/fxml/Town.fxml"));
             town = new Scene(root);
-            root = FXMLLoader.load(getClass().getResource("/fxml/placeholder.fxml"));
+            root = FXMLLoader.load(getClass()
+                .getResource("/fxml/placeholder.fxml"));
             temp = new Scene(root);
 
-            FXMLLoader loader = new FXMLLoader(getClass().getResource("/fxml/Pub.fxml"));
+            FXMLLoader loader = new FXMLLoader(getClass()
+                .getResource("/fxml/Pub.fxml"));
             pubScene = new Scene(loader.load());
             pubController = loader.getController();
 
@@ -62,23 +113,25 @@ public class MasterController {
 
     /**
      *
-     * @return
+     * @return instance of MasterController.
      */
-    public static MasterController getInstance() { return instance;}
+    public static MasterController getInstance() {
+        return INSTANCE;
+    }
 
     /**
      *
-     * @param stage
+     * @param stage of type Stage.
      */
     //Sets stages
-    public void setStage(Stage stage) {
+    public final void setStage(final Stage stage) {
         theStage = stage;
     }
 
     /**
      *
      */
-    public void startGame() {
+    public final void startGame() {
 //        currStage = "Start Game";
         theStage.setScene(startGame);
     }
@@ -86,7 +139,7 @@ public class MasterController {
     /**
      *
      */
-    public void loadGame() {
+    public final void loadGame() {
 //        currStage = "Load Game";
         theStage.setScene(loadGame);
     }
@@ -94,7 +147,7 @@ public class MasterController {
     /**
      *
      */
-    public void gameConfig() {
+    public final void gameConfig() {
 //        currStage = "Game Config";
         theStage.setScene(gameConfig);
     }
@@ -102,7 +155,7 @@ public class MasterController {
     /**
      *
      */
-    public void playerConfig() {
+    public final void playerConfig() {
 //        currStage = "Player Config";
         theStage.setScene(playerConfig);
     }
@@ -110,7 +163,7 @@ public class MasterController {
     /**
      *
      */
-    public void map() {
+    public final void map() {
 //        currStage = "Map";
         theStage.setScene(map);
     }
@@ -118,7 +171,7 @@ public class MasterController {
     /**
      *
      */
-    public void town() {
+    public final void town() {
 //        currStage = "Town";
         theStage.setScene(town);
     }
@@ -126,7 +179,7 @@ public class MasterController {
     /**
      *
      */
-    public void temp() {
+    public final void temp() {
 //        currStage = "Temp";
         theStage.setScene(temp);
     }
@@ -134,7 +187,7 @@ public class MasterController {
     /**
      *
      */
-    public void pubScene() {
+    public final void pubScene() {
 //        currStage = "Pub";
         theStage.setScene(pubScene);
         pubController.rerender();
@@ -143,7 +196,7 @@ public class MasterController {
     /**
      *
      */
-    public void store() {
+    public final void store() {
 //        currStage = "Store";
         theStage.setScene(storeScene);
         storeController.reRender();
@@ -151,34 +204,29 @@ public class MasterController {
 
     /**
      *
-     * @return
+     * @return currStage of type String.
      */
-    public String getCurrStage() {
+    public final String getCurrStage() {
         return currStage;
     }
 
     /**
-     *
-     * @param boardController
+     *  Changed Param name because of checkstyle.
+     * @param boardController1 of type BoardController.
      */
-<<<<<<< HEAD
     public final void
         setBoardController(final BoardController boardController1) {
         if (boardController1 == null) {
-=======
-    public void setBoardController(BoardController boardController) {
-        if (boardController == null) {
->>>>>>> origin/master
             throw new IllegalArgumentException("Board Controller is null!");
         }
-        this.boardController = boardController;
+        this.boardController = boardController1;
     }
 
     /**
      *
-     * @return
+     * @return instance of BoardController.
      */
-    public BoardController getBoardController() {
+    public final BoardController getBoardController() {
         return boardController;
     }
 
@@ -186,9 +234,10 @@ public class MasterController {
      *
      */
     //Creates map from template
-    public void createMap() {
+    public final void createMap() {
         try {
-            FXMLLoader loader = new FXMLLoader(getClass().getResource("/fxml/Map.fxml"));
+            FXMLLoader loader = new FXMLLoader(getClass()
+                .getResource("/fxml/Map.fxml"));
             map = new Scene(loader.load());
             setBoardController(loader.getController());
             pubController.setBoardController(boardController);
