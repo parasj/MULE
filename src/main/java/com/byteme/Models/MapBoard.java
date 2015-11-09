@@ -57,11 +57,11 @@ public class MapBoard {
     }
 
     /**
-     *
-     * @return
+     * Gets the map board
+     * @return board
      */
     public MapTile[][] getBoard() {
-        return board;
+        return board.clone();
     }
 
     /**
