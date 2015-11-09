@@ -1,4 +1,3 @@
-
 import com.byteme.Controllers.PlaceMuleHandler;
 import com.byteme.Controllers.PubController;
 import com.byteme.Schema.*;
@@ -121,7 +120,9 @@ public class PubControllerTest {
         mapStateStore.getPlayerAt(gameStartStore.getCurrentPlayer()).setTimeLeft(1);
         mapStateStore.incRound();
         pubController = new PubController(mockRandom1, gameStartStore, mapStateStore, configRepository);
+        System.out.println("TEST: " + pubController.getPlayer().getMoney());
         assertTrue(pubController.getPlayer().getMoney() == 1700);
+        System.out.println(pubController.getPlayer().getMoney());
 
         //t = 1 Rand = 1 Round = 9
         mapStateStore.getPlayerAt(gameStartStore.getCurrentPlayer()).setTimeLeft(1);
