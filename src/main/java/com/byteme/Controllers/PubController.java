@@ -5,95 +5,80 @@ import com.byteme.Models.MapStateStore;
 import com.byteme.Models.ConfigRepository;
 import com.byteme.Schema.MapControllerStates;
 import com.byteme.Schema.PlayerConfigParams;
+import com.byteme.Util.RandomWrapper;
+import com.byteme.Util.TestableRandomWrapper;
 import javafx.fxml.FXML;
 import javafx.scene.control.Label;
 
 import java.util.Random;
 
 /**
- * MULE.
+ * MULE
  */
 public class PubController {
-    /**
-     * gameStartStore of type GameStartStore.
-     */
     private GameStartStore gameStartStore;
-    /**
-     * mapStateStore of type MapStateStore.
-     */
     private MapStateStore mapStateStore;
-    /**
-     * configRepository of type ConfigRepository.
-     */
-    private ConfigRepository configRepository;
-    /**
-     * roundBonusArr of type int[].
-     */
-    private static final int[] roundBonusArr =
-        {50, 50, 50, 100, 100, 100, 100, 150, 150, 150, 150, 200};
-    /**
-     * boardController instance of BoardController.
-     */
+    public ConfigRepository configRepository;
+    private static final int[] roundBonusArr = {50, 50, 50, 100, 100, 100, 100, 150, 150, 150, 150, 200};
+    private TestableRandomWrapper random;
+
     private BoardController boardController;
-    /**
-     * playerLabel instance of Label.
-     */
+
     @FXML
     private Label playerLabel;
-    /**
-     * moneyLabel instance of Label.
-     */
     @FXML
     private Label moneyLabel;
+
+    public PubController(TestableRandomWrapper random, GameStartStore gameStartStore, MapStateStore mapStateStore, ConfigRepository configRepository) {
+        this.random = random;
+        this.gameStartStore = gameStartStore;
+        this.mapStateStore = mapStateStore;
+        this.configRepository = configRepository;
+        getMoney();
+    }
 
     /**
      *
      */
     //Loads stores
     public PubController() {
+        random = new RandomWrapper();
         reinit();
     }
 
     /**
      *
      */
-    public final void goToMap() {
+    public void goToMap() {
         MasterController.getInstance().map();
-        GameStartHandler gameStartHandler = (GameStartHandler) boardController
-        .getGameStartHandler();
+        GameStartHandler gameStartHandler = (GameStartHandler) boardController.getGameStartHandler();
         gameStartHandler.nextPlayer();
         boardController.updateState(MapControllerStates.GAME_START, true);
     }
 
     /**
-     * @param timeLeft of type int.
-     * @return int. the time bonus given.
+     *
+     * @param timeLeft
+     * @return
      */
-    private int getTimeBonus(final int timeLeft) {
-        if (timeLeft >= 37) {
-            return 200;
-        } else if (timeLeft >= 25) {
-            return 150;
-        } else if (timeLeft >= 12) {
-            return 100;
-        } else if (timeLeft > 0) {
-            return 50;
-        } else {
-            return 0;
-        }
+    private int getTimeBonus(int timeLeft) {
+        if (timeLeft >= 37) return 200;
+        else if (timeLeft >= 25) return 150;
+        else if (timeLeft >= 12) return 100;
+        else if (timeLeft > 0) return 50;
+        else if (timeLeft == 0) return 0;
+        else throw new IllegalArgumentException("Time cannot be negative!");
     }
 
     /**
      *
      */
     //Gets how much money to pay player
-    private void getMoney() {
-        PlayerConfigParams currentPlayer = mapStateStore
-            .getPlayerAt(gameStartStore.getCurrentPlayer());
+    protected void getMoney() {
+        PlayerConfigParams currentPlayer = mapStateStore.getPlayerAt(gameStartStore.getCurrentPlayer());
         int timeLeft = currentPlayer.getTimeLeft();
         int roundBonus = roundBonusArr[mapStateStore.getCurrentRound() - 1];
-        Random rand = new Random();
-        int timeBonus = rand.nextInt(getTimeBonus(timeLeft) + 1);
+        int timeBonus = random.getInt(getTimeBonus(timeLeft) + 1);
         int moneyBonus = roundBonus * timeBonus;
         if (moneyBonus > 250) {
             moneyBonus = 250;
@@ -106,27 +91,22 @@ public class PubController {
      *
      */
     //Recreates labels
-    public final void rerender() {
+    public void rerender() {
         reinit();
         getMoney();
         if (playerLabel != null) {
-            playerLabel.setText(String.format("Player %d %s", gameStartStore
-                .getCurrentPlayer() + 1, mapStateStore
-                .getPlayerAt(gameStartStore
-                    .getCurrentPlayer()).getName()));
+            playerLabel.setText(String.format("Player %d %s", gameStartStore.getCurrentPlayer() + 1, mapStateStore.getPlayerAt(gameStartStore.getCurrentPlayer()).getName()));
         }
         if (moneyLabel != null) {
-            moneyLabel.setText("MONEY: " + mapStateStore
-                .getPlayerAt(gameStartStore.getCurrentPlayer()).getMoney());
+            moneyLabel.setText("MONEY: " + mapStateStore.getPlayerAt(gameStartStore.getCurrentPlayer()).getMoney());
         }
     }
 
     /**
      *
-     * @param boardController of type BoardController.
+     * @param boardController
      */
-    public final void setBoardController(
-            final BoardController boardController) {
+    public void setBoardController(BoardController boardController) {
         this.boardController = boardController;
     }
 
@@ -134,9 +114,14 @@ public class PubController {
      *
      */
     //Loads stores
-    public final void reinit() {
+    public void reinit() {
         gameStartStore = GameStartStore.getInstance();
         mapStateStore = MULEStore.getInstance().getMapStateStore();
         configRepository = MULEStore.getInstance().getConfigRepository();
     }
+
+    public PlayerConfigParams getPlayer() {
+        return mapStateStore.getPlayerAt(gameStartStore.getCurrentPlayer());
+    }
+
 }

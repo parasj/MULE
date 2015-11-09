@@ -4,6 +4,7 @@ import com.byteme.Models.ConfigRepository;
 import com.byteme.Models.MULEStore;
 import com.byteme.Models.MapBoard;
 import com.byteme.Schema.MapControllerStates;
+import com.byteme.Schema.MapType;
 import com.byteme.Schema.PlayerConfigParams;
 import com.byteme.Schema.Property;
 import com.byteme.Util.CanTick;
@@ -62,6 +63,8 @@ public class BoardController implements Initializable, CanTick {
     private final MapStateHandler placeMuleHandler = new PlaceMuleHandler(this);
 
     /**
+     *
+    /**
      * Sets up game state and clock
      */
     public BoardController() {
@@ -96,7 +99,7 @@ public class BoardController implements Initializable, CanTick {
      *
      */
     private void initBoard() {
-        possibleMaps = new MapBoard();
+        possibleMaps = new MapBoard(5, 9, MapType.STANDARD);
         mapSpots = new boolean[possibleMaps.getHeight()][possibleMaps.getWidth()];
         this.bps = new BorderPane[possibleMaps.getHeight()][possibleMaps.getWidth()];
 
@@ -509,14 +512,14 @@ public class BoardController implements Initializable, CanTick {
      *
      * @return
      */
-    public final ConfigRepository getConfigRepository() {
+    public ConfigRepository getConfigRepository() {
         return MULEStore.getInstance().getConfigRepository();
     }
 
     /**
      *
      */
-    public final void render() {
+    public void render() {
         System.out.println(state);
     }
 }
