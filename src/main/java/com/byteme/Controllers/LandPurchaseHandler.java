@@ -11,17 +11,23 @@ import java.net.URL;
 import java.util.ResourceBundle;
 
 /**
- * MULE
+ * MULE.
  */
 public class LandPurchaseHandler extends MapStateHandler {
+    /**
+     * landPurchaseStore of type LandPurchaseStore.
+     */
     private final LandPurchaseStore landPurchaseStore;
+    /**
+     * mapStateStore of type MapStateStore.
+     */
     private final MapStateStore mapStateStore;
 
     /**
      *
-     * @param boardController
+     * @param boardController of type BoardController.
      */
-    public LandPurchaseHandler(BoardController boardController) {
+    public LandPurchaseHandler(final BoardController boardController) {
         super(boardController);
         landPurchaseStore = MULEStore.getInstance().getLandPurchaseStore();
         mapStateStore = MULEStore.getInstance().getMapStateStore();
@@ -32,7 +38,7 @@ public class LandPurchaseHandler extends MapStateHandler {
      */
     //Pass goes to next player
     @Override
-    public void handlePass() {
+    public final void handlePass() {
         landPurchaseStore.incrPropertyCount();
         checkIfDone();
     }
@@ -41,7 +47,7 @@ public class LandPurchaseHandler extends MapStateHandler {
      *
      */
     @Override
-    public void handleTownButtonClicked() {
+    public final void handleTownButtonClicked() {
         log("Cannot go to town during land purchase phase!");
     }
 
@@ -51,17 +57,20 @@ public class LandPurchaseHandler extends MapStateHandler {
      */
     //Highlights tile and increments player till done
     @Override
-    public void tileChosen(MouseEvent event) {
+    public final void tileChosen(final MouseEvent event) {
         getBoardController().clearOwnedMessage();
         BorderPane tile = (BorderPane) event.getSource();
-        if (getBoardController().owned(tile))
-            getBoardController().ownedMessage(); // Property is owned, just display warning
-        else {
+        if (getBoardController().owned(tile)) {
+            getBoardController().ownedMessage();
+        } else {
             // Change tile background color to player color
-            if (landPurchaseStore.getCurrentPlayer().getMoney() >= BoardController.getCost()) {
+            if (landPurchaseStore.getCurrentPlayer()
+                    .getMoney() >= BoardController.getCost()) {
                 landPurchaseStore.incrPropertyCount();
-                getBoardController().setColorTile(tile, landPurchaseStore.getCurrentPlayer());
-                landPurchaseStore.getCurrentPlayer().payMoney(BoardController.getCost());
+                getBoardController().setColorTile(tile, landPurchaseStore
+                        .getCurrentPlayer());
+                landPurchaseStore.getCurrentPlayer()
+                    .payMoney(BoardController.getCost());
                 checkIfDone();
             } else {
                 log("You do not have enough money!");
@@ -76,10 +85,13 @@ public class LandPurchaseHandler extends MapStateHandler {
     //Checks if done
     private void checkIfDone() {
         // Land Purchase is only 2 turns per player
-        if (landPurchaseStore.getCurrentPropertyCount() <= 2 * landPurchaseStore.getPlayers().size()) {
-            mapStateStore.setCurrentPlayer(mapStateStore.getCurrentPlayer() + 1);
+        if (landPurchaseStore.getCurrentPropertyCount() <= 2
+            * landPurchaseStore.getPlayers().size()) {
+            mapStateStore
+                .setCurrentPlayer(mapStateStore.getCurrentPlayer() + 1);
             landPurchaseStore.incrPlayer();
-            getBoardController().setPlayer(landPurchaseStore.getCurrentPlayer());
+            getBoardController().setPlayer(landPurchaseStore
+                .getCurrentPlayer());
             getBoardController().setMoney(landPurchaseStore.getCurrentPlayer());
         } else {
             MULEStore.getInstance().getMapStateStore().sortPlayers();
@@ -87,9 +99,11 @@ public class LandPurchaseHandler extends MapStateHandler {
             getBoardController().setPlayer(mapStateStore.getPlayerAt(0));
             getBoardController().setMoney(mapStateStore.getPlayerAt(0));
             mapStateStore.getPlayerAt(0).calcTimeLeft();
-            GameStartHandler gameStartHandler = (GameStartHandler) getBoardController().getGameStartHandler();
+            GameStartHandler gameStartHandler
+                = (GameStartHandler) getBoardController().getGameStartHandler();
             gameStartHandler.calculateRandomEvents();
-            getBoardController().updateState(MapControllerStates.GAME_START, true);
+            getBoardController()
+                .updateState(MapControllerStates.GAME_START, true);
         }
     }
 
@@ -97,7 +111,7 @@ public class LandPurchaseHandler extends MapStateHandler {
      *
      */
     @Override
-    public void stateChanged() {
+    public final void stateChanged() {
         getBoardController().getPhaseLabel().setText("Purchase Selection");
         getBoardController().getMoneyLabel().setText("");
         getBoardController().getRoundLabel().setText("");
@@ -120,7 +134,7 @@ public class LandPurchaseHandler extends MapStateHandler {
      * @param resources
      */
     @Override
-    public void initialize(URL location, ResourceBundle resources) {
-
+    public final void
+        initialize(final URL location, final ResourceBundle resources) {
     }
 }

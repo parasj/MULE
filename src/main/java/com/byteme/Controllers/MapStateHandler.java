@@ -5,35 +5,38 @@ import javafx.fxml.Initializable;
 import javafx.scene.input.MouseEvent;
 
 /**
- * MULE
+ * MULE.
  */
 //Every handler inherits this, the template for all handlers
 public abstract class MapStateHandler implements CanTick, Initializable {
-
+    /**
+     * boardController of type BoardController.
+     */
     private BoardController boardController;
 
     /**
-     *
-     * @param boardController
+     * Changed Parameter names because of checkstyle.
+     * @param boardController1 of type BoardController.
      */
-    public MapStateHandler(BoardController boardController) {
-        this.boardController = boardController;
+    public MapStateHandler(final BoardController boardController1) {
+        this.boardController = boardController1;
     }
 
     /**
      *
-     * @return
+     * @return boardController of type BoardController.
      */
-    public BoardController getBoardController() {
+    public final BoardController getBoardController() {
         return boardController;
     }
 
     /**
      *
-     * @param boardController
+     * @param boardController2 of type BoardController.
      */
-    public void setBoardController(BoardController boardController) {
-        this.boardController = boardController;
+    public final void
+            setBoardController(final BoardController boardController2) {
+        this.boardController = boardController2;
     }
 
     /**
@@ -48,9 +51,9 @@ public abstract class MapStateHandler implements CanTick, Initializable {
 
     /**
      *
-     * @param event
+     * @param event of type MouseEvent.
      */
-    public abstract void tileChosen(MouseEvent event);
+    public abstract void tileChosen(final MouseEvent event);
 
     /**
      *
@@ -59,9 +62,9 @@ public abstract class MapStateHandler implements CanTick, Initializable {
 
     /**
      *
-     * @param log
+     * @param log of type String.
      */
-    protected void log(String log) {
+    protected final void log(final String log) {
         System.out.println(log);
     }
 }

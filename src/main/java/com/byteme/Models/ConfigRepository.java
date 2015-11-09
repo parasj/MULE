@@ -14,11 +14,6 @@ public class ConfigRepository implements Serializable {
     private GameConfigParams gameConfigParams;
     private Map<Integer, PlayerConfigParams> playerConfigList;
 
-
-    public ConfigRepository(GameConfigParams gameConfigParams, Map<Integer, PlayerConfigParams> playerConfigList) {
-        this.gameConfigParams = gameConfigParams;
-        this.playerConfigList = playerConfigList;
-    }
     /**
      *
      */

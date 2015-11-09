@@ -4,7 +4,6 @@ import com.byteme.Models.ConfigRepository;
 import com.byteme.Models.MULEStore;
 import com.byteme.Models.MapBoard;
 import com.byteme.Schema.MapControllerStates;
-import com.byteme.Schema.MapType;
 import com.byteme.Schema.PlayerConfigParams;
 import com.byteme.Schema.Property;
 import com.byteme.Util.CanTick;
@@ -23,7 +22,9 @@ import java.util.ResourceBundle;
 
 import static com.byteme.Schema.MapControllerStates.*;
 
-
+/**
+ * MULE.
+ */
 public class BoardController implements Initializable, CanTick {
     //Variables stored here, will be used and saved/loaded later
     /**
@@ -40,37 +41,92 @@ public class BoardController implements Initializable, CanTick {
      */
     private static final int MAPTAKEINNUM = 4;
 
+    /**
+     * possibleMaps of type MapBoard.
+     */
     private MapBoard possibleMaps;
+    /**
+     * mapSpots of type boolean[][].
+     */
     private boolean[][] mapSpots;
+    /**
+     * bps of type BorderPane[][].
+     */
     private BorderPane[][] bps;
 
+    /**
+     * state of type MapControllerStates.
+     */
     private MapControllerStates state;
+    /**
+     * childController of type MapStateHandler.
+     */
     private MapStateHandler childController;
 
     /***
      * FXML UI items
      ***/
+    /**
+     * playerLabel of type Label.
+     */
     @FXML
     private Label playerLabel;
+    /**
+     * moneyLabel of type Label.
+     */
     @FXML
     private Label moneyLabel;
+    /**
+     * phaseLabel of type Label.
+     */
     @FXML
     private Label phaseLabel;
+    /**
+     * alertsLabel of type Label.
+     */
     @FXML
     private Label alertsLabel;
+    /**
+     * roundLabel of type Label.
+     */
     @FXML
     private Label roundLabel;
+    /**
+     * map of type GridPane.
+     */
     @FXML
     private GridPane map;
+    /**
+     * timerLabel of type Label.
+     */
     @FXML
     private Label timerLabel;
 
     // implementations of MapStateHandler, handles each phase of the game
-    private final MapStateHandler landPurchaseHandler = new LandPurchaseHandler(this);
+    /**
+     * landPurchaseHandler of type MapStateHandler.
+     */
+    private final MapStateHandler landPurchaseHandler
+        = new LandPurchaseHandler(this);
+    /**
+     * gameStartHandler of type MapStateHandler.
+     */
     private final MapStateHandler gameStartHandler = new GameStartHandler(this);
+    /**
+     * landGrantHandler of type MapStateHandler.
+     */
     private final MapStateHandler landGrantHandler = new LandGrantHandler(this);
+    /**
+     * emptyHandler of type MapStateHandler.
+     */
     private final MapStateHandler emptyHandler = new EmptyHandler(this);
+    /**
+     * turnOverHandler of type MapStateHandler.
+     */
     private final MapStateHandler turnOverHandler = new TurnOverHandler(this);
+    /**
+     * placeMuleHandler of type MapStateHandler.
+     */
     private final MapStateHandler placeMuleHandler = new PlaceMuleHandler(this);
 
     /**
@@ -90,11 +146,12 @@ public class BoardController implements Initializable, CanTick {
     //Initializes everything when the controller is initialized
     /**
      *
-     * @param location
-     * @param resources
+     * @param location of type URL.
+     * @param resources of type ResourceBundle.
      */
     @Override
-    public void initialize(URL location, ResourceBundle resources) {
+    public final void initialize(final URL location,
+        final ResourceBundle resources) {
         log("Initializing");
         setPlayer(getConfigRepository().getFirstPlayerConfig());
         initBoard();
@@ -109,14 +166,17 @@ public class BoardController implements Initializable, CanTick {
      *
      */
     private void initBoard() {
-        possibleMaps = new MapBoard(5, 9, MapType.STANDARD);
-        mapSpots = new boolean[possibleMaps.getHeight()][possibleMaps.getWidth()];
-        this.bps = new BorderPane[possibleMaps.getHeight()][possibleMaps.getWidth()];
+        possibleMaps = new MapBoard();
+        mapSpots = new boolean[possibleMaps.getHeight()][possibleMaps
+            .getWidth()];
+        this.bps = new BorderPane[possibleMaps.getHeight()][possibleMaps
+            .getWidth()];
 
         // inject images
         for (int i = 0; i < possibleMaps.getHeight(); i++) {
             for (int j = 0; j < possibleMaps.getWidth(); j++) {
-                ImageView img = new ImageView(possibleMaps.getTile(i, j).imagePath());
+                ImageView img = new ImageView(possibleMaps.getTile(i, j)
+                    .imagePath());
                 BorderPane bp = new BorderPane();
                 bp.setCenter(img);
                 bp.setOnMouseClicked(this::tileChosen);
@@ -131,7 +191,7 @@ public class BoardController implements Initializable, CanTick {
     /**
      *
      */
-    public void reCalcPlayerProperties() {
+    public final void reCalcPlayerProperties() {
         getConfigRepository().getPlayers().forEach((player) ->
                 player.getProperties().forEach((z) ->
                         mapSpots[z.getRow()][z.getColumn()] = true));
@@ -169,7 +229,7 @@ public class BoardController implements Initializable, CanTick {
      *
      */
     @Override
-    public void tick() {
+    public final void tick() {
         childController.tick();
     }
 
@@ -178,9 +238,9 @@ public class BoardController implements Initializable, CanTick {
 
     /**
      *
-     * @return
+     * @return state, instance of MapControllerStates.
      */
-    public MapControllerStates getState() {
+    public final MapControllerStates getState() {
         return state;
     }
 
@@ -188,33 +248,35 @@ public class BoardController implements Initializable, CanTick {
      * Data Binding
      ****/
 
-    //Changes current state of game outside of class, true when loading from save file
+    //Changes state of game outside of class, true when loading from save file
 
     /**
      *
-     * @param newState
-     * @param setState
+     * @param newState of type MapControllerStates.
+     * @param setState of type Boolean.
      */
-    public void updateState(MapControllerStates newState, boolean setState) {
+    public final void updateState(final MapControllerStates newState,
+        final boolean setState) {
         log("State updated to: " + newState);
         state = newState;
 
         if (setState) {
-            MULEStore.getInstance().getMapStateStore().setCurrentState(newState);
+            MULEStore.getInstance().getMapStateStore()
+                .setCurrentState(newState);
         }
-        if (state == LAND_GRANT)
+        if (state == LAND_GRANT) {
             childController = landGrantHandler;
-        else if (state == LAND_PURCHASE)
+        } else if (state == LAND_PURCHASE) {
             childController = landPurchaseHandler;
-        else if (state == GAME_START)
+        } else if (state == GAME_START) {
             childController = gameStartHandler;
-        else if (state == TURN_OVER)
+        } else if (state == TURN_OVER) {
             childController = turnOverHandler;
-        else if (state == PLACE_MULE)
+        } else if (state == PLACE_MULE) {
             childController = placeMuleHandler;
-        else
+        } else {
             childController = emptyHandler;
-
+        }
         childController.stateChanged();
     }
 
@@ -227,7 +289,7 @@ public class BoardController implements Initializable, CanTick {
     /**
      *
      */
-    public void passButtonClicked() {
+    public final void passButtonClicked() {
         childController.handlePass();
     }
 
@@ -235,9 +297,9 @@ public class BoardController implements Initializable, CanTick {
 
     /**
      *
-     * @param event
+     * @param event of type MouseEvent.
      */
-    public void tileChosen(MouseEvent event) {
+    public final void tileChosen(final MouseEvent event) {
         childController.tileChosen(event);
     }
 
@@ -252,7 +314,7 @@ public class BoardController implements Initializable, CanTick {
     /**
      *
      */
-    public void saveButtonClicked() {
+    public final void saveButtonClicked() {
         System.out.println("Save Button clicked!");
         MULEStore.getInstance().save();
     }
@@ -262,14 +324,17 @@ public class BoardController implements Initializable, CanTick {
     /**
      *
      */
-    public void reinitialize() {
+    public final void reinitialize() {
         for (PlayerConfigParams player : getConfigRepository().getPlayers()) {
             for (Property property: player.getProperties()) {
                 String color = player.getColor();
                 BorderPane tile = bps[property.getRow()][property.getColumn()];
-                tile.setStyle("-fx-border-color: " + color.toLowerCase() + ";" + "-fx-border-width: 6px;");
+                tile.setStyle("-fx-border-color: " + color.toLowerCase() + ";"
+                    + "-fx-border-width: 6px;");
                 if (property.hasMule()) {
-                    tile.setCenter(new ImageView(new Image(getPossibleMaps().getTile(property.getRow(), property.getColumn()).imagePath(true))));
+                    tile.setCenter(new ImageView(new Image(getPossibleMaps()
+                        .getTile(property.getRow(),
+                            property.getColumn()).imagePath(true))));
                 }
             }
         }
@@ -284,67 +349,68 @@ public class BoardController implements Initializable, CanTick {
 
     /**
      *
-     * @return
+     * @return playerLabel, instance of Label.
      */
-    public Label getPlayerLabel() {
+    public final Label getPlayerLabel() {
         return playerLabel;
     }
 
     /**
      *
-     * @return
+     * @return moneyLabel, instance of Label.
      */
-    public Label getMoneyLabel() {
+    public final Label getMoneyLabel() {
         return moneyLabel;
     }
 
     /**
      *
-     * @return
+     * @return phaseLabel, instance of Label.
      */
-    public Label getPhaseLabel() {
+    public final Label getPhaseLabel() {
         return phaseLabel;
     }
 
     /**
      *
-     * @return
+     * @return alertsLabel, instance of Label.
      */
-    public Label getAlertsLabel() {
+    public final Label getAlertsLabel() {
         return alertsLabel;
     }
 
     /**
      *
-     * @return
+     * @return roundLabel, instance of Label.
      */
-    public Label getRoundLabel() {
+    public final Label getRoundLabel() {
         return roundLabel;
     }
 
     /**
      *
-     * @return
+     * @return mpa of type GridPane.
      */
-    public GridPane getMap() {
+    public final GridPane getMap() {
         return map;
     }
 
     /**
      *
-     * @return
+     * @return timerLabel, instance of Label.
      */
-    public Label getTimerLabel() {
+    public final Label getTimerLabel() {
         return timerLabel;
     }
 
     /**
      *
-     * @param player
+     * @param player of type PlayerConfigParams.
      */
-    public void setPlayer(PlayerConfigParams player) {
+    public final void setPlayer(final PlayerConfigParams player) {
         if (player != null) {
-            playerLabel.setText(String.format("Player %d %s", player.getOrder(), player.getName()));
+            playerLabel.setText(String.format("Player %d %s", player.getOrder(),
+                player.getName()));
         } else {
             throw new IllegalArgumentException("Player is null!");
         }
@@ -352,9 +418,9 @@ public class BoardController implements Initializable, CanTick {
 
     /**
      *
-     * @param player
+     * @param player of type PlayerConfigParams.
      */
-    public void setMoney(PlayerConfigParams player) {
+    public final void setMoney(final PlayerConfigParams player) {
         if (player != null) {
             renderMoney(player.getMoney());
         } else {
@@ -364,31 +430,31 @@ public class BoardController implements Initializable, CanTick {
 
     /**
      *
-     * @param money
+     * @param money of type int.
      */
-    public void renderMoney(int money) {
+    public final void renderMoney(final int money) {
         getMoneyLabel().setText(String.format("Money: %6d", money));
     }
 
     /**
      *
-     * @param round
+     * @param round of type int.
      */
-    public void renderRound(int round) {
+    public final void renderRound(final int round) {
         getRoundLabel().setText(String.format("Round: %6d", round));
     }
 
     /**
      *
-     * @param timer
+     * @param timer of type int.
      */
-    public void renderTimer(int timer) {
+    public final void renderTimer(final int timer) {
         getTimerLabel().setText(String.format("Timer: %6d", timer));
     }
 
     /**
      *
-     * @return
+     * @return cost of buying Resources.
      */
     public static int getCost() {
         return cost;
@@ -399,14 +465,18 @@ public class BoardController implements Initializable, CanTick {
      * Only does so if tile is not already owned.
      *
      * @param tile The tile whose color must be set.
+     * @param player Choosing the tile.
      */
-    public void setColorTile(BorderPane tile, PlayerConfigParams player) {
+    public final void setColorTile(final BorderPane tile,
+        final PlayerConfigParams player) {
         if (tile != null && player != null) {
             int row = GridPane.getRowIndex(tile);
             int column = GridPane.getColumnIndex(tile);
             String color = player.getColor();
-            tile.setStyle("-fx-border-color: " + color.toLowerCase() + ";" + "-fx-border-width: 6px;");
-            player.addProperty(new Property(column, row, player, possibleMaps.getTile(row, column)));
+            tile.setStyle("-fx-border-color: " + color.toLowerCase() + ";"
+                + "-fx-border-width: 6px;");
+            player.addProperty(new Property(column, row, player,
+                possibleMaps.getTile(row, column)));
             mapSpots[row][column] = true;
         } else {
             throw new IllegalArgumentException("Tile/player is null!");
@@ -417,10 +487,10 @@ public class BoardController implements Initializable, CanTick {
 
     /**
      *
-     * @param tile
-     * @return
+     * @param tile of type BoardPane.
+     * @return True or False.
      */
-    public boolean owned(BorderPane tile) {
+    public final boolean owned(final BorderPane tile) {
         if (tile == null) {
             throw new IllegalArgumentException("Tile is null!");
         }
@@ -434,7 +504,7 @@ public class BoardController implements Initializable, CanTick {
     /**
      *
      */
-    public void ownedMessage() {
+    public final void ownedMessage() {
         alertsLabel.setText("This property is already owned!");
         alertsLabel.setVisible(true);
     }
@@ -444,7 +514,7 @@ public class BoardController implements Initializable, CanTick {
     /**
      *
      */
-    public void clearOwnedMessage() {
+    public final void clearOwnedMessage() {
         alertsLabel.setText("");
         alertsLabel.setVisible(false);
     }
@@ -456,80 +526,80 @@ public class BoardController implements Initializable, CanTick {
 
     /**
      *
-     * @param string
+     * @param string of type String.
      */
-    private void log(String string) {
+    private void log(final String string) {
         System.out.println(string);
     }
 
     /**
      *
-     * @return
+     * @return instance of MapStateHandler.
      */
-    public MapStateHandler getChildController() {
+    public final MapStateHandler getChildController() {
         return childController;
     }
 
     /**
      *
-     * @return
+     * @return instance of MapStateHandler.
      */
-    public MapStateHandler getLandPurchaseHandler() {
+    public final MapStateHandler getLandPurchaseHandler() {
         return landPurchaseHandler;
     }
 
     /**
      *
-     * @return
+     * @return instance of MapStateHandler.
      */
-    public MapStateHandler getGameStartHandler() {
+    public final MapStateHandler getGameStartHandler() {
         return gameStartHandler;
     }
 
     /**
      *
-     * @return
+     * @return instance of MapStateHandler.
      */
-    public MapStateHandler getLandGrantHandler() {
+    public final MapStateHandler getLandGrantHandler() {
         return landGrantHandler;
     }
 
     /**
      *
-     * @return
+     * @return instance of MapStateHandler.
      */
-    public MapStateHandler getEmptyHandler() {
+    public final MapStateHandler getEmptyHandler() {
         return emptyHandler;
     }
 
     /**
      *
-     * @return
+     * @return instance of MapStateHandler.
      */
-    public MapStateHandler getTurnOverHandler() {
+    public final MapStateHandler getTurnOverHandler() {
         return turnOverHandler;
     }
 
     /**
      *
-     * @return
+     * @return instance of MapBoard.
      */
-    public MapBoard getPossibleMaps() {
+    public final MapBoard getPossibleMaps() {
         return possibleMaps;
     }
 
     /**
      *
-     * @return
+     * @return instance of ConfigRepository.
      */
-    public ConfigRepository getConfigRepository() {
+    public final ConfigRepository getConfigRepository() {
         return MULEStore.getInstance().getConfigRepository();
     }
 
     /**
      *
      */
-    public void render() {
+    public final void render() {
         System.out.println(state);
     }
 }
