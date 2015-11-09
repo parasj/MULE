@@ -2,6 +2,13 @@ package com.byteme.Controllers;
 
 import com.byteme.Models.*;
 import com.byteme.Schema.*;
+//import com.byteme.Models.GameStartStore;
+//import com.byteme.Models.MULEStore;
+//import com.byteme.Models.MapStateStore;
+//import com.byteme.Schema.PlayerConfigParams;
+////import com.byteme.Models.ConfigRepository;
+//import com.byteme.Schema.Mule;
+
 import javafx.scene.control.Alert;
 import javafx.scene.input.MouseEvent;
 
@@ -15,34 +22,61 @@ import java.util.ResourceBundle;
 public class GameStartHandler extends MapStateHandler {
     //Stores for variables
     /**
-     * THREE of type int.
+     * PENERGY, Energy value for P of type int.
      */
-    private static final int THREE = 3;
+    private static final int PENERGY = 3;
+
     /**
-     * FOUR of type int.
+     * RFOOD, Food value for R of type int.
      */
-    private static final  int FOUR = 4;
+    private static final int RFOOD = 4;
+
     /**
-     * FIVE of type int.
+     * PCRYSTITE, Crystite value for P of type int.
      */
-    private static final int FIVE = 5;
+    private static final int PCRYSTITE = 5;
+
+    /**
+     * M1CRYSTITE, Crystite value for M1 of type int.
+     */
+    private static final int M1CRYSTITE = 5;
+
+    /**
+     * M2SMITHORE, Smithore value for M2 of type int.
+     */
+    private static final int M2SMITHORE = 3;
+
+    /**
+     * M3SMITHORE, Smithore value for M3 of type int.
+     */
+    private static final int M3SMITHORE = 4;
+
+    /**
+     * M2CRYSTITE, Crystite value for M2 of type int.
+     */
+    private static final int M2CRYSTITE = 5;
+
+    /**
+     * M3CRYSTITE, Crystite value for M3 of type int.
+     */
+    private static final int M3CRYSTITE = 5;
 
     /**
      * instance of GameStartStore.
      * Swapped static and final positions.
      */
-    private static final GameStartStore gameStartStore = GameStartStore
+    private GameStartStore gameStartStore = GameStartStore
         .getInstance();
     /**
      * instance of MapStateStore.
      */
-    private static final MapStateStore mapStateStore = MULEStore
+    private MapStateStore mapStateStore = MULEStore
         .getInstance().getMapStateStore();
     /**
-     * instance of CONFIGREPOSITORY.
+     * instance of configRepository.
      * Swapped final and static for checkstyle.
      */
-    private static final ConfigRepository CONFIGREPOSITORY
+    private ConfigRepository configRepository
         = MULEStore.getInstance().getConfigRepository();
     /**
      * instance of RandomEventGenerator.
@@ -168,7 +202,7 @@ public class GameStartHandler extends MapStateHandler {
      */
     //Increments player
     public final void nextPlayer() {
-        if (gameStartStore.getCurrentPlayer() == CONFIGREPOSITORY
+        if (gameStartStore.getCurrentPlayer() == configRepository
                 .getTotalPlayers() - 1) {
             mapStateStore.setCurrentRound(mapStateStore.getCurrentRound() + 1);
             calculateProduction();
@@ -248,7 +282,7 @@ public class GameStartHandler extends MapStateHandler {
                         case R:
                             switch (mule.getType()) {
                                 case FOOD:
-                                    player.setFood(player.getFood() + FOUR);
+                                    player.setFood(player.getFood() + RFOOD);
                                     break;
                                 case ENERGY:
                                     player.setEnergy(player.getEnergy() + 2);
@@ -257,6 +291,9 @@ public class GameStartHandler extends MapStateHandler {
                                     break;
                                 case CRYSTITE:
                                     break;
+                                    default:
+                                    throw new IllegalArgumentException("Type "
+                                        + "must be specified");
                             }
                             break;
                         case P:
@@ -266,7 +303,7 @@ public class GameStartHandler extends MapStateHandler {
                                     break;
                                 case ENERGY:
                                     player.setEnergy(player.getEnergy()
-                                        + THREE);
+                                        + PENERGY);
                                     break;
                                 case SMITHORE:
                                     player.setSmithore(player.getSmithore()
@@ -274,10 +311,13 @@ public class GameStartHandler extends MapStateHandler {
                                     break;
                                 case CRYSTITE:
                                     player.setCrystite(player.getCrystite()
-                                        + rand.nextInt(FIVE));
+                                        + rand.nextInt(PCRYSTITE));
                                     break;
                             }
                             break;
+                            default:
+                                    throw new IllegalArgumentException("Type "
+                                        + "must be specified");
                         case M1:
                             switch (mule.getType()) {
                                 case FOOD:
@@ -292,8 +332,11 @@ public class GameStartHandler extends MapStateHandler {
                                     break;
                                 case CRYSTITE:
                                     player.setCrystite(player.getCrystite()
-                                        + rand.nextInt(FIVE));
+                                        + rand.nextInt(M1CRYSTITE));
                                     break;
+                                default:
+                                    throw new IllegalArgumentException("Type "
+                                        + "must be specified");
                             }
                             break;
                         case M2:
@@ -306,12 +349,15 @@ public class GameStartHandler extends MapStateHandler {
                                     break;
                                 case SMITHORE:
                                     player.setSmithore(player.getSmithore()
-                                        + THREE);
+                                        + M2SMITHORE);
                                     break;
                                 case CRYSTITE:
                                     player.setCrystite(player.getCrystite()
-                                        + rand.nextInt(FIVE));
+                                        + rand.nextInt(M2CRYSTITE));
                                     break;
+                                default:
+                                    throw new IllegalArgumentException("Type "
+                                        + "must be specified");
                             }
                             break;
                         case M3:
@@ -324,15 +370,17 @@ public class GameStartHandler extends MapStateHandler {
                                     break;
                                 case SMITHORE:
                                     player.setSmithore(player.getSmithore()
-                                        + FOUR);
+                                        + M3SMITHORE);
                                     break;
                                 case CRYSTITE:
                                     player.setCrystite(player.getCrystite()
-                                        + rand.nextInt(FIVE));
+                                        + rand.nextInt(M3CRYSTITE));
                                     break;
+                                default:
+                                    throw new IllegalArgumentException("Type "
+                                        + "must be specified");
                             }
                             break;
-
                     }
                     player.subEnergy();
                 }

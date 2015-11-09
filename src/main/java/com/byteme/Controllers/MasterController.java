@@ -216,7 +216,7 @@ public class MasterController {
      */
     public final void
         setBoardController(final BoardController boardController1) {
-        if (boardController == null) {
+        if (boardController1 == null) {
             throw new IllegalArgumentException("Board Controller is null!");
         }
         this.boardController = boardController1;

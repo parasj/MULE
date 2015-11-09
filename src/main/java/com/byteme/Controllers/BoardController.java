@@ -30,11 +30,16 @@ public class BoardController implements Initializable, CanTick {
     /**
      * timer of type GlobalTimer.
      */
-    private final static GlobalTimer timer = GlobalTimer.getInstance();
+    private static final GlobalTimer timer = GlobalTimer.getInstance();
     /**
      * cost of type int.
      */
-    private final static int cost = 300;
+    private static final int cost = 300;
+
+    /**
+     * A static value added to the map.
+     */
+    private static final int MAPTAKEINNUM = 4;
 
     /**
      * possibleMaps of type MapBoard.
@@ -199,7 +204,7 @@ public class BoardController implements Initializable, CanTick {
     private void initRiver() {
         ImageView townImage = new ImageView("/images/Town.png");
         townImage.setOnMouseClicked((MouseEvent e) -> townButtonClicked());
-        map.add(townImage, 4, 2);
+        map.add(townImage, MAPTAKEINNUM, 2);
         // Todo: hardcode the river
     }
 

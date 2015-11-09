@@ -1,6 +1,11 @@
 package com.byteme.Controllers;
 
-import com.byteme.Models.*;
+//import com.byteme.Models.*;
+import com.byteme.Models.MULEStore;
+import com.byteme.Models.GameStartStore;
+import com.byteme.Models.MapStateStore;
+import com.byteme.Models.StoreStateStore;
+import com.byteme.Models.PlaceMuleStore;
 import com.byteme.Schema.MapControllerStates;
 import com.byteme.Schema.Mule;
 import com.byteme.Schema.MuleType;

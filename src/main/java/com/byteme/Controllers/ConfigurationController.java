@@ -14,6 +14,18 @@ import java.util.Locale;
  */
 public class ConfigurationController {
     /**
+     * FLAPPERNUM of type int.
+     */
+    private static final int FLAPPERNUM = 1600;
+    /**
+     * HUMANNUM of type int.
+     */
+    private static final int HUMANNUM = 600;
+    /**
+     * DEFAULTNUM of type int.
+     */
+    private static final int DEFAULTNUM = 1000;
+    /**
      * numPlayers of type int.
      */
     private static int numPlayers = -1;
@@ -228,16 +240,16 @@ public class ConfigurationController {
      * @param race The race of the player as parsed by the ChoiceBox
      * @return The starting money for the player
      */
-    public int chooseMoneyAmount(String race) {
+    public final int chooseMoneyAmount(String race) {
         race = race.toLowerCase();
 
         switch (race) {
             case "flapper":
-                return 1600;
+                return FLAPPERNUM;
             case "human":
-                return 600;
+                return HUMANNUM;
             default:
-                return 1000;
+                return DEFAULTNUM;
         }
     }
 
