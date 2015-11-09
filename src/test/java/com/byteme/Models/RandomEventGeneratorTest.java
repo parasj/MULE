@@ -30,5 +30,9 @@ public class RandomEventGeneratorTest {
         randomEventGen = new RandomEventGenerator(mockRandom0);
         assertEquals(true, randomEventGen.getEvent(true).isGood());
         assertNotEquals(RandomEvent.NOTHING, randomEventGen.getEvent(true));
+
+        // testing last conditional
+        randomEventGen = new RandomEventGenerator(mockRandom100);
+        assertEquals(RandomEvent.NOTHING, randomEventGen.getEvent(false));
     }
 }
