@@ -96,7 +96,7 @@ public class ConfigurationController {
     private ChoiceBox mapType;
 
     /**
-<<<<<<< HEAD
+     * @param num the num of players
      * Sets number of players. Avoids FindBugs Problem
      */
     public static void setNumPlayers(int num) {
@@ -105,9 +105,6 @@ public class ConfigurationController {
 
     /**
      * Runs when player clicks "OK" button on the Game Configuration settings screen.
-=======
-     * Runs when player clicks "OK" button on the Game Config settings screen.
->>>>>>> ebcbc862371d104eb3db523b18f0e90653cb55d7
      * Saves the configuration settings.
      * Opens Player 1 settings configuration screen.
      */
@@ -124,18 +121,11 @@ public class ConfigurationController {
         System.out.println("=================================================");
         System.out.println("DIFFICULTY        : " + difficulty);
         System.out.println("NUMBER OF PLAYERS : " + numPlayers);
-<<<<<<< HEAD
-        System.out.println("MAP               : " + map + "\t" + mapType.getValue());
-        getConfigRepository().setGameConfig(new GameConfigParams(difficulty, map, numPlayers));
-//        ConfigurationController.numPlayers = numPlayers;
-        setNumPlayers(numPlayers);
-=======
         System.out.println("MAP               : " + map + "\t"
-            + mapType.getValue());
+                + mapType.getValue());
         getConfigRepository().setGameConfig(new GameConfigParams(difficulty,
-            map, numPlayers));
-        ConfigurationController.numPlayers = numPlayers;
->>>>>>> ebcbc862371d104eb3db523b18f0e90653cb55d7
+                map, numPlayers));
+        setNumPlayers(numPlayers);
         MasterController.getInstance().playerConfig();
     }
 
@@ -144,18 +134,11 @@ public class ConfigurationController {
      * @return The selected MapType.
      */
     private MapType selectedMapType() {
-<<<<<<< HEAD
         // TODO: Give different maps based on player input
         //switch ((String) mapType.getValue()) {
             //default: return MapType.STANDARD;
         //}
         return MapType.STANDARD;
-=======
-        // Todo: Give different maps based on player input
-        switch ((String) mapType.getValue()) {
-            default: return MapType.STANDARD;
-        }
->>>>>>> ebcbc862371d104eb3db523b18f0e90653cb55d7
     }
 
     /**
