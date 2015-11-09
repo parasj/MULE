@@ -10,9 +10,10 @@ import java.util.ArrayList;
 import java.util.Locale;
 
 /**
- * MULE.
+ * MULE
  */
 public class ConfigurationController {
+<<<<<<< HEAD
     /**
      * FLAPPERNUM of type int.
      */
@@ -28,10 +29,9 @@ public class ConfigurationController {
     /**
      * numPlayers of type int.
      */
+=======
+>>>>>>> origin/master
     private static int numPlayers = -1;
-    /**
-     * currentPlayer of type int.
-     */
     private int currentPlayer = 1;
 
     /**
@@ -39,22 +39,21 @@ public class ConfigurationController {
      * Opens the screen asking player whether they want to
      * open an old game file or create a new one.
      */
-    public final void startGame() {
+    public void startGame() {
         MasterController.getInstance().loadGame();
     }
 
     /**
-     * Load a pre-configured game and player settings file.
+     * Load a pre-configured game and player settings file
      */
-    public final void loadGameConfiguration() {
+    public void loadGameConfiguration() {
         System.out.println("Loading Game!");
         MULEStore muleStore = MULEStore.getInstance();
         try {
             muleStore.load();
             MasterController masterController = MasterController.getInstance();
-            masterController.createMap(); // The init function here changes all
-            masterController.getBoardController().updateState(muleStore
-                .getMapStateStore().getCurrentState(), true);
+            masterController.createMap(); // The initializable function here changes it all
+            masterController.getBoardController().updateState(muleStore.getMapStateStore().getCurrentState(), true);
             masterController.getBoardController().render();
             masterController.getBoardController().reinitialize();
             MasterController.getInstance().map();
@@ -68,7 +67,7 @@ public class ConfigurationController {
     /**
      *
      */
-    public final void newGameConfigureScreen() {
+    public void newGameConfigureScreen() {
         MasterController.getInstance().gameConfig();
     }
 
@@ -79,54 +78,43 @@ public class ConfigurationController {
         * This includes Difficulty, Number of Players, and the Map Type
      */
 
-    /**
-     * difficultyEasy, difficultyNormal, difficultyHard of type RadioButton.
-     */
     @FXML
     private RadioButton difficultyEasy, difficultyNormal, difficultyHard;
-    /**
-     * numPlayersSlider of type Slider.
-     */
     @FXML
     private Slider numPlayersSlider;
-    /**
-     * mapType of type ChoiceBox.
-     */
     @FXML
     private ChoiceBox mapType;
 
     /**
-     * Runs when player clicks "OK" button on the Game Config settings screen.
+     * Runs when player clicks "OK" button on the Game Configuration settings screen.
      * Saves the configuration settings.
      * Opens Player 1 settings configuration screen.
      */
-    public final void saveGameConfig() {
+    public void saveGameConfig() {
         Difficulty difficulty = selectedDifficultyButton();
-        // Todo: parse map info
+        // TODO: parse map info
         MapType map = selectedMapType();
         int numPlayers = (int) numPlayersSlider.getValue();
 
         MULEStore.getInstance().reinit();
 
-        System.out.println("=================================================");
+        System.out.println("========================================================================================================");
         System.out.println("SAVING GAME CONFIGURATION INFORMATION");
-        System.out.println("=================================================");
+        System.out.println("========================================================================================================");
         System.out.println("DIFFICULTY        : " + difficulty);
         System.out.println("NUMBER OF PLAYERS : " + numPlayers);
-        System.out.println("MAP               : " + map + "\t"
-            + mapType.getValue());
-        getConfigRepository().setGameConfig(new GameConfigParams(difficulty,
-            map, numPlayers));
+        System.out.println("MAP               : " + map + "\t" + mapType.getValue());
+        getConfigRepository().setGameConfig(new GameConfigParams(difficulty, map, numPlayers));
         ConfigurationController.numPlayers = numPlayers;
         MasterController.getInstance().playerConfig();
     }
 
     /**
-     * Parse MapType.
-     * @return The selected MapType.
+     * Parse MapType
+     * @return The selected MapType
      */
     private MapType selectedMapType() {
-        // Todo: Give different maps based on player input
+        // TODO: Give different maps based on player input
         switch ((String) mapType.getValue()) {
             default: return MapType.STANDARD;
         }
@@ -157,24 +145,12 @@ public class ConfigurationController {
         * This includes player name, race, color, and starting money.
     */
 
-    /**
-     * playerName of type TextField.
-     */
     @FXML
     private TextField playerName;
-    /**
-     * playerRace of type ChoiceBox.
-     */
     @FXML
     private ChoiceBox<String> playerRace;
-    /**
-     * playerColor of type ChoiceBox.
-     */
     @FXML
     private ChoiceBox<String> playerColor;
-    /**
-     * playerNumber of type Label.
-     */
     @FXML
     private Label playerNumber;
 
@@ -184,9 +160,9 @@ public class ConfigurationController {
      * If more players, resets values.
      * After all players done, opens map.
      */
-    public final void savePlayerConfig() {
-        // Todo: Fix Default player name for testing
-        // Doesn't work, changes config repository despite input
+    public void savePlayerConfig() {
+        // TODO: Fix Default player name for testing
+        // Doesn't work, changes config repository despite input and doesn't show up on screen
         // playerName.setText("Bob " + currentPlayer);
         if (!playerName.getText().isEmpty()) {
             String name;
@@ -205,15 +181,13 @@ public class ConfigurationController {
             remainingChoices.remove(color);
             playerColor.setItems(remainingChoices);
 
-            System.out.println("=============================================");
+            System.out.println("========================================================================================================");
             System.out.println("SAVING PLAYER CONFIGURATION INFORMATION");
-            System.out.println("=============================================");
+            System.out.println("========================================================================================================");
             System.out.println("NAME       : " + name);
             System.out.println("RACE       : " + race);
             System.out.println("COLOR      : " + color);
-            getConfigRepository()
-            .setPlayerConfig(playerConfigParser(name,
-                race, color, money, currentPlayer), currentPlayer);
+            getConfigRepository().setPlayerConfig(playerConfigParser(name, race, color, money, currentPlayer), currentPlayer);
 
             if (currentPlayer >= numPlayers) {
                 // Go to Map screen.
@@ -240,7 +214,11 @@ public class ConfigurationController {
      * @param race The race of the player as parsed by the ChoiceBox
      * @return The starting money for the player
      */
+<<<<<<< HEAD
     public final int chooseMoneyAmount(String race) {
+=======
+    private int chooseMoneyAmount(String race) {
+>>>>>>> origin/master
         race = race.toLowerCase();
 
         switch (race) {
@@ -254,33 +232,28 @@ public class ConfigurationController {
     }
 
     /**
-     * Creates a player configuration based on the player's options.
+     * Creates a player configuration based on the player's options
      * @param name The name of the player
      * @param race The race of the player
      * @param color The color of the player
      * @param money The starting money of the player
-     * @param order of type int.
      * @return A PlayerConfigParams object containing this player's information
      */
-    private PlayerConfigParams playerConfigParser(final String name,
-         final String race, final String color,
-            final int money, final int order) {
+    private PlayerConfigParams playerConfigParser(String name, String race, String color, int money, int order) {
         Race parsedRace = Race.valueOf(race.toUpperCase(Locale.ENGLISH));
-        return new PlayerConfigParams(name, parsedRace, color, money,
-            new ArrayList<>(), order);
+        return new PlayerConfigParams(name, parsedRace, color, money, new ArrayList<>(), order);
     }
 
     //Returns config repository where everything is stored
 
     /**
      *
-     * @return instance of ConfigRepository.
+     * @return
      */
-    public final ConfigRepository getConfigRepository() {
-        ConfigRepository configRepository = MULEStore.getInstance()
-            .getConfigRepository();
+    public ConfigRepository getConfigRepository() {
+        ConfigRepository configRepository = MULEStore.getInstance().getConfigRepository();
         if (configRepository == null) {
-            throw new IllegalStateException("ConfigRepository not initialized");
+            throw new IllegalStateException("ConfigRepository is not initialized!");
         }
         return configRepository;
     }

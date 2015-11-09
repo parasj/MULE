@@ -21,6 +21,17 @@ public class MapStateStore implements Serializable {
     private int numPlayers;
     private ArrayList<PlayerConfigParams> players;
 
+
+    /**
+     *
+     * @param configRepository
+     */
+    public MapStateStore(ConfigRepository configRepository, int currentRound, ArrayList<PlayerConfigParams> players) {
+        this.currentRound = currentRound;
+        this.configRepository = configRepository;
+        this.players = players;
+    }
+
     /**
      *
      * @param configRepository
@@ -200,5 +211,9 @@ public class MapStateStore implements Serializable {
      */
     public void reinit() {
         refresh();
+    }
+
+    public void incRound() {
+        currentRound++;
     }
 }

@@ -17,10 +17,11 @@ import java.util.Random;
 import java.util.ResourceBundle;
 
 /**
- * MULE.
+ * MULE
  */
 public class GameStartHandler extends MapStateHandler {
     //Stores for variables
+<<<<<<< HEAD
     /**
      * PENERGY, Energy value for P of type int.
      */
@@ -83,12 +84,18 @@ public class GameStartHandler extends MapStateHandler {
      */
     private static final RandomEventGenerator EVTGEN
         = new RandomEventGenerator();
+=======
+    private final static GameStartStore gameStartStore = GameStartStore.getInstance();
+    private final static MapStateStore mapStateStore = MULEStore.getInstance().getMapStateStore();
+    private final static ConfigRepository configRepository = MULEStore.getInstance().getConfigRepository();
+    private final static RandomEventGenerator evtGen = new RandomEventGenerator();
+>>>>>>> origin/master
 
     /**
      *
-     * @param boardController of type BoardController.
+     * @param boardController
      */
-    public GameStartHandler(final BoardController boardController) {
+    public GameStartHandler(BoardController boardController) {
         super(boardController);
     }
 
@@ -98,9 +105,8 @@ public class GameStartHandler extends MapStateHandler {
      *
      */
     @Override
-    public final void handlePass() {
-        MasterController.getInstance().getBoardController()
-            .updateState(MapControllerStates.TURN_OVER, true);
+    public void handlePass() {
+        MasterController.getInstance().getBoardController().updateState(MapControllerStates.TURN_OVER, true);
         MasterController.getInstance().pubScene();
     }
 
@@ -110,7 +116,7 @@ public class GameStartHandler extends MapStateHandler {
      *
      */
     @Override
-    public final void handleTownButtonClicked() {
+    public void handleTownButtonClicked() {
         MasterController.getInstance().town();
     }
 
@@ -118,10 +124,10 @@ public class GameStartHandler extends MapStateHandler {
 
     /**
      *
-     * @param event of type MouseEvent.
+     * @param event
      */
     @Override
-    public void tileChosen(final MouseEvent event) {
+    public void tileChosen(MouseEvent event) {
 
     }
 
@@ -131,40 +137,36 @@ public class GameStartHandler extends MapStateHandler {
      *
      */
     @Override
-    public final void stateChanged() {
+    public void stateChanged() {
         getBoardController().getPhaseLabel().setText("Game Start");
-        getBoardController().setPlayer(mapStateStore.getPlayerAt(gameStartStore
-            .getCurrentPlayer()));
-        getBoardController().renderMoney(mapStateStore
-            .getPlayerAt(gameStartStore.getCurrentPlayer()).getMoney());
+        getBoardController().setPlayer(mapStateStore.getPlayerAt(gameStartStore.getCurrentPlayer()));
+        getBoardController().renderMoney(mapStateStore.getPlayerAt(gameStartStore.getCurrentPlayer()).getMoney());
         getBoardController().renderRound(mapStateStore.getCurrentRound());
-        getBoardController().renderTimer(mapStateStore
-            .getPlayerAt(gameStartStore.getCurrentPlayer()).getTimeLeft());
-        log("Score: " + mapStateStore.getPlayerAt(gameStartStore
-            .getCurrentPlayer()).calcScore());
+        getBoardController().renderTimer(mapStateStore.getPlayerAt(gameStartStore.getCurrentPlayer()).getTimeLeft());
+        log("Score: " + mapStateStore.getPlayerAt(gameStartStore.getCurrentPlayer()).calcScore());
     }
 
     /**
      *
-     * @param money of type int.
+     * @param money
      */
-    private void setMoney(final int money) {
+    private void setMoney(int money) {
         getBoardController().renderMoney(money);
     }
 
     /**
      *
-     * @param round of type int.
+     * @param round
      */
-    private void setRound(final int round) {
+    private void setRound(int round) {
         getBoardController().renderRound(round);
     }
 
     /**
      *
-     * @param timer of type int.
+     * @param timer
      */
-    private void setTimer(final int timer) {
+    private void setTimer(int timer) {
         getBoardController().renderTimer(timer);
     }
 
@@ -174,26 +176,24 @@ public class GameStartHandler extends MapStateHandler {
      *
      */
     @Override
-    public final void tick() {
-        PlayerConfigParams p = mapStateStore.getPlayerAt(gameStartStore
-            .getCurrentPlayer());
+    public void tick() {
+        PlayerConfigParams p = mapStateStore.getPlayerAt(gameStartStore.getCurrentPlayer());
         if (p.getTimeLeft() > 0) {
             getBoardController().renderTimer(p.getTimeLeft());
             p.setTimeLeft(p.getTimeLeft() - 1);
         } else {
-            getBoardController()
-                .updateState(MapControllerStates.TURN_OVER, true);
+            getBoardController().updateState(MapControllerStates.TURN_OVER, true);
             MasterController.getInstance().pubScene();
         }
     }
 
     /**
      *
-     * @param location of type URL.
-     * @param resources of type ResourceBundle.
+     * @param location
+     * @param resources
      */
     @Override
-    public void initialize(final URL location, final ResourceBundle resources) {
+    public void initialize(URL location, ResourceBundle resources) {
 
     }
 
@@ -201,17 +201,21 @@ public class GameStartHandler extends MapStateHandler {
      *
      */
     //Increments player
+<<<<<<< HEAD
     public final void nextPlayer() {
         if (gameStartStore.getCurrentPlayer() == configRepository
                 .getTotalPlayers() - 1) {
+=======
+    public void nextPlayer() {
+        if (gameStartStore.getCurrentPlayer() == configRepository.getTotalPlayers() - 1) {
+>>>>>>> origin/master
             mapStateStore.setCurrentRound(mapStateStore.getCurrentRound() + 1);
             calculateProduction();
             gameStartStore.setCurrentPlayer(1);
             mapStateStore.sortPlayers();
         }
         gameStartStore.incCurrentPlayer();
-        mapStateStore.getPlayerAt(gameStartStore.getCurrentPlayer())
-            .calcTimeLeft();
+        mapStateStore.getPlayerAt(gameStartStore.getCurrentPlayer()).calcTimeLeft();
         log("Player changed to " + gameStartStore.getCurrentPlayer());
         calculateRandomEvents();
     }
@@ -220,14 +224,12 @@ public class GameStartHandler extends MapStateHandler {
      *
      */
     //Checks random events at beginning of turn
-    public final void calculateRandomEvents() {
-        PlayerConfigParams p = mapStateStore.getPlayerAt(gameStartStore
-            .getCurrentPlayer());
-        RandomEvent evt = EVTGEN.getEvent(lastPlace(p));
+    public void calculateRandomEvents() {
+        PlayerConfigParams p = mapStateStore.getPlayerAt(gameStartStore.getCurrentPlayer());
+        RandomEvent evt = evtGen.getEvent(lastPlace(p));
         p.setFood(evt.calcFood(p.getFood()));
         p.setEnergy(evt.calcEnergy(p.getEnergy()));
-        p.setMoney(evt.calcMoney(p.getMoney(), mapStateStore
-            .getCurrentRound()));
+        p.setMoney(evt.calcMoney(p.getMoney(), mapStateStore.getCurrentRound()));
         p.setSmithore(evt.calcOre(p.getSmithore()));
 
         String evtName = evt.toString();
@@ -235,12 +237,10 @@ public class GameStartHandler extends MapStateHandler {
 
         if (!evt.equals(RandomEvent.NOTHING)) {
             Alert.AlertType alertType = Alert.AlertType.INFORMATION;
-            String header = "Good fortune, " + mapStateStore
-                .getPlayerAt(gameStartStore.getCurrentPlayer()).getName() + "!";
+            String header = "Good fortune, " + mapStateStore.getPlayerAt(gameStartStore.getCurrentPlayer()).getName() + "!";
             if (!evt.isGood()) {
                 alertType = Alert.AlertType.WARNING;
-                header = "Better luck next time, " + mapStateStore
-                .getPlayerAt(gameStartStore.getCurrentPlayer()).getName() + "!";
+                header = "Better luck next time, " + mapStateStore.getPlayerAt(gameStartStore.getCurrentPlayer()).getName() + "!";
             }
 
             Alert alert = new Alert(alertType);
@@ -254,16 +254,15 @@ public class GameStartHandler extends MapStateHandler {
 
     /**
      *
-     * @param p of type PlayerConfigParams.
-     * @return true or false.
+     * @param p
+     * @return
      */
     //Returns whoever is in last place, used for random events
-    private boolean lastPlace(final PlayerConfigParams p) {
+    private boolean lastPlace(PlayerConfigParams p) {
         int pScore = p.calcScore();
         int minPScore = Integer.MIN_VALUE;
-        for (PlayerConfigParams pl : mapStateStore.getPlayers()) {
+        for (PlayerConfigParams pl : mapStateStore.getPlayers())
             minPScore = Math.min(minPScore, pl.calcScore());
-        }
         return pScore <= minPScore;
     }
 
@@ -282,7 +281,11 @@ public class GameStartHandler extends MapStateHandler {
                         case R:
                             switch (mule.getType()) {
                                 case FOOD:
+<<<<<<< HEAD
                                     player.setFood(player.getFood() + RFOOD);
+=======
+                                    player.setFood(player.getFood() + 4);
+>>>>>>> origin/master
                                     break;
                                 case ENERGY:
                                     player.setEnergy(player.getEnergy() + 2);
@@ -302,16 +305,23 @@ public class GameStartHandler extends MapStateHandler {
                                     player.setFood(player.getFood() + 2);
                                     break;
                                 case ENERGY:
+<<<<<<< HEAD
                                     player.setEnergy(player.getEnergy()
                                         + PENERGY);
+=======
+                                    player.setEnergy(player.getEnergy() + 3);
+>>>>>>> origin/master
                                     break;
                                 case SMITHORE:
-                                    player.setSmithore(player.getSmithore()
-                                        + 1);
+                                    player.setSmithore(player.getSmithore() + 1);
                                     break;
                                 case CRYSTITE:
+<<<<<<< HEAD
                                     player.setCrystite(player.getCrystite()
                                         + rand.nextInt(PCRYSTITE));
+=======
+                                    player.setCrystite(player.getCrystite() + rand.nextInt(5));
+>>>>>>> origin/master
                                     break;
                             }
                             break;
@@ -327,12 +337,15 @@ public class GameStartHandler extends MapStateHandler {
                                     player.setEnergy(player.getEnergy() + 1);
                                     break;
                                 case SMITHORE:
-                                    player.setSmithore(player.getSmithore()
-                                        + 2);
+                                    player.setSmithore(player.getSmithore() + 2);
                                     break;
                                 case CRYSTITE:
+<<<<<<< HEAD
                                     player.setCrystite(player.getCrystite()
                                         + rand.nextInt(M1CRYSTITE));
+=======
+                                    player.setCrystite(player.getCrystite() + rand.nextInt(5));
+>>>>>>> origin/master
                                     break;
                                 default:
                                     throw new IllegalArgumentException("Type "
@@ -348,12 +361,19 @@ public class GameStartHandler extends MapStateHandler {
                                     player.setEnergy(player.getEnergy() + 1);
                                     break;
                                 case SMITHORE:
+<<<<<<< HEAD
                                     player.setSmithore(player.getSmithore()
                                         + M2SMITHORE);
                                     break;
                                 case CRYSTITE:
                                     player.setCrystite(player.getCrystite()
                                         + rand.nextInt(M2CRYSTITE));
+=======
+                                    player.setSmithore(player.getSmithore() + 3);
+                                    break;
+                                case CRYSTITE:
+                                    player.setCrystite(player.getCrystite() + rand.nextInt(5));
+>>>>>>> origin/master
                                     break;
                                 default:
                                     throw new IllegalArgumentException("Type "
@@ -369,12 +389,19 @@ public class GameStartHandler extends MapStateHandler {
                                     player.setEnergy(player.getEnergy() + 1);
                                     break;
                                 case SMITHORE:
+<<<<<<< HEAD
                                     player.setSmithore(player.getSmithore()
                                         + M3SMITHORE);
                                     break;
                                 case CRYSTITE:
                                     player.setCrystite(player.getCrystite()
                                         + rand.nextInt(M3CRYSTITE));
+=======
+                                    player.setSmithore(player.getSmithore() + 4);
+                                    break;
+                                case CRYSTITE:
+                                    player.setCrystite(player.getCrystite() + rand.nextInt(5));
+>>>>>>> origin/master
                                     break;
                                 default:
                                     throw new IllegalArgumentException("Type "

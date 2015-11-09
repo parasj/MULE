@@ -11,20 +11,17 @@ import java.net.URL;
 import java.util.ResourceBundle;
 
 /**
- * MULE.
+ * MULE
  */
 public class LandGrantHandler extends MapStateHandler {
     //Players can only buy 2 properties during land grant stage
-    /**
-     * Maximum number of properties.
-     */
     private static final int MAX_PROPERTIES = 2;
 
     /**
      *
-     * @param boardController of type BoardController.
+     * @param boardController
      */
-    public LandGrantHandler(final BoardController boardController) {
+    public LandGrantHandler(BoardController boardController) {
         super(boardController);
     }
 
@@ -32,7 +29,7 @@ public class LandGrantHandler extends MapStateHandler {
      *
      */
     @Override
-    public final void handlePass() {
+    public void handlePass() {
         checkIfDone();
     }
 
@@ -40,26 +37,23 @@ public class LandGrantHandler extends MapStateHandler {
      *
      */
     @Override
-    public final void handleTownButtonClicked() {
+    public void handleTownButtonClicked() {
         log("Cannot go to town during land grant phase!");
     }
 
     /**
      *
-     * @param event of type MouseEvent.
+     * @param event
      */
     //Checks if owned, else colors in box
     @Override
-    public final void tileChosen(final MouseEvent event) {
+    public void tileChosen(MouseEvent event) {
         getBoardController().clearOwnedMessage();
         BorderPane tile = (BorderPane) event.getSource();
-        if (getBoardController().owned(tile)) {
-            getBoardController().ownedMessage();
-            // Property is owned, just display warning
-        } else {
+        if (getBoardController().owned(tile)) getBoardController().ownedMessage(); // Property is owned, just display warning
+        else {
             // Change tile background color to player color
-            getBoardController().setColorTile(tile, getLandGrantStore()
-                .getCurrentPlayer());
+            getBoardController().setColorTile(tile, getLandGrantStore().getCurrentPlayer());
             checkIfDone();
         }
     }
@@ -72,14 +66,11 @@ public class LandGrantHandler extends MapStateHandler {
         // Land Grant is only 2 turns per player
         getLandGrantStore().incrPlayer();
         if (getLandGrantStore().getCurrentPropertyCount() < MAX_PROPERTIES) {
-            getBoardController().setPlayer(getLandGrantStore()
-                .getCurrentPlayer());
+            getBoardController().setPlayer(getLandGrantStore().getCurrentPlayer());
         } else {
-            getBoardController().setPlayer(MULEStore.getInstance()
-                .getConfigRepository().getFirstPlayerConfig());
+            getBoardController().setPlayer(MULEStore.getInstance().getConfigRepository().getFirstPlayerConfig());
             getMapStateStore().setCurrentPlayer(1);
-            getBoardController().updateState(MapControllerStates
-                .LAND_PURCHASE, true);
+            getBoardController().updateState(MapControllerStates.LAND_PURCHASE, true);
         }
     }
 
@@ -88,7 +79,7 @@ public class LandGrantHandler extends MapStateHandler {
      */
     //Changes state to next phase and resets labels
     @Override
-    public final void stateChanged() {
+    public void stateChanged() {
         getBoardController().getPhaseLabel().setText("Land Grant");
         getBoardController().setPlayer(getLandGrantStore().getCurrentPlayer());
         getBoardController().getMoneyLabel().setText("");
@@ -102,30 +93,28 @@ public class LandGrantHandler extends MapStateHandler {
      * @param resources
      */
     @Override
-    public void initialize(final URL location, final ResourceBundle resources) {
-    }
+    public void initialize(URL location, ResourceBundle resources) {}
 
     /**
      *
      */
     @Override
-    public void tick() {
-    }
+    public void tick() {}
 
     /**
      *
-     * @return instance of MapStateStore.
+     * @return
      */
     //Gets stores
-    public final MapStateStore getMapStateStore() {
+    public MapStateStore getMapStateStore() {
         return MULEStore.getInstance().getMapStateStore();
     }
 
     /**
      *
-     * @return instance of LandGrantStore.
+     * @return
      */
-    public final LandGrantStore getLandGrantStore() {
+    public LandGrantStore getLandGrantStore() {
         return MULEStore.getInstance().getLandGrantStore();
     }
 }
