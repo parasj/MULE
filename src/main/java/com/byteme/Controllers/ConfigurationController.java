@@ -196,7 +196,7 @@ public class ConfigurationController {
      * @param race The race of the player as parsed by the ChoiceBox
      * @return The starting money for the player
      */
-    public int chooseMoneyAmount(String race) {
+    private int chooseMoneyAmount(String race) {
         race = race.toLowerCase();
 
         switch (race) {

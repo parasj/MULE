@@ -17,27 +17,18 @@ import java.net.URL;
 import java.util.ResourceBundle;
 
 /**
- * MULE.
+ * MULE
  */
 public class PlaceMuleHandler extends MapStateHandler {
-    /**
-     * gameStartStore of type GameStartStore.
-     */
     private final GameStartStore gameStartStore;
-    /**
-     * placeMuleStore of type PlaceMuleStore.
-     */
     private final PlaceMuleStore placeMuleStore;
-    /**
-     * mapStateStore of type MapStateStore.
-     */
     private final MapStateStore mapStateStore;
 
     /**
      *
-     * @param boardController of type BoardController.
+     * @param boardController
      */
-    public PlaceMuleHandler(final BoardController boardController) {
+    public PlaceMuleHandler(BoardController boardController) {
         super(boardController);
         gameStartStore = GameStartStore.getInstance();
         placeMuleStore = MULEStore.getInstance().getPlaceMuleStore();
@@ -48,7 +39,7 @@ public class PlaceMuleHandler extends MapStateHandler {
      *
      */
     @Override
-    public final void handlePass() {
+    public void handlePass() {
         log("Cannot pass now!");
     }
 
@@ -65,19 +56,17 @@ public class PlaceMuleHandler extends MapStateHandler {
      */
     //Places mule on tile if owned
     @Override
-    public final void tileChosen(final MouseEvent event) {
+    public void tileChosen(MouseEvent event) {
         BorderPane tile = (BorderPane) event.getSource();
-        PlayerConfigParams p = mapStateStore
-            .getPlayerAt(gameStartStore.getCurrentPlayer());
+        PlayerConfigParams p = mapStateStore.getPlayerAt(gameStartStore.getCurrentPlayer());
         int row = GridPane.getRowIndex(tile);
         int column = GridPane.getColumnIndex(tile);
         boolean found = false;
         for (int i = 0; i < p.getProperties().size(); i++) {
             Property a = p.getProperties().get(i);
-            if (a.getRow() == row && a.getColumn() == column) {
+            if (a.getRow() == row && a.getColumn() == column  ) {
                 a.addMule(placeMuleStore.getMule());
-                tile.setCenter(new ImageView(new Image(getBoardController()
-                    .getPossibleMaps().getTile(row, column).imagePath(true))));
+                tile.setCenter(new ImageView(new Image(getBoardController().getPossibleMaps().getTile(row, column).imagePath(true))));
                 found = true;
                 break;
             }
@@ -95,38 +84,35 @@ public class PlaceMuleHandler extends MapStateHandler {
      */
     //Updates labels
     @Override
-    public final void stateChanged() {
+    public void stateChanged() {
         getBoardController().getPhaseLabel().setText("Place Mule");
-        getBoardController().setPlayer(mapStateStore
-            .getPlayerAt(gameStartStore.getCurrentPlayer()));
-        getBoardController().renderMoney(mapStateStore
-            .getPlayerAt(gameStartStore.getCurrentPlayer()).getMoney());
+        getBoardController().setPlayer(mapStateStore.getPlayerAt(gameStartStore.getCurrentPlayer()));
+        getBoardController().renderMoney(mapStateStore.getPlayerAt(gameStartStore.getCurrentPlayer()).getMoney());
         getBoardController().renderRound(mapStateStore.getCurrentRound());
-        getBoardController().renderTimer(mapStateStore
-            .getPlayerAt(gameStartStore.getCurrentPlayer()).getTimeLeft());
+        getBoardController().renderTimer(mapStateStore.getPlayerAt(gameStartStore.getCurrentPlayer()).getTimeLeft());
     }
 
     /**
      *
-     * @param money of type int.
+     * @param money
      */
-    private void setMoney(final int money) {
+    private void setMoney(int money) {
         getBoardController().renderMoney(money);
     }
 
     /**
      *
-     * @param round of type int.
+     * @param round
      */
-    private void setRound(final int round) {
+    private void setRound(int round) {
         getBoardController().renderRound(round);
     }
 
     /**
      *
-     * @param timer of type int.
+     * @param timer
      */
-    private void setTimer(final int timer) {
+    private void setTimer(int timer) {
         getBoardController().renderTimer(timer);
     }
 
@@ -135,15 +121,13 @@ public class PlaceMuleHandler extends MapStateHandler {
      */
     //Counts down
     @Override
-    public final void tick() {
-        PlayerConfigParams p = mapStateStore
-            .getPlayerAt(gameStartStore.getCurrentPlayer());
+    public void tick() {
+        PlayerConfigParams p = mapStateStore.getPlayerAt(gameStartStore.getCurrentPlayer());
         if (p.getTimeLeft() > 0) {
             getBoardController().renderTimer(p.getTimeLeft());
             p.setTimeLeft(p.getTimeLeft() - 1);
         } else {
-            getBoardController()
-                .updateState(MapControllerStates.TURN_OVER, true);
+            getBoardController().updateState(MapControllerStates.TURN_OVER, true);
             MasterController.getInstance().pubScene();
         }
     }
@@ -154,7 +138,7 @@ public class PlaceMuleHandler extends MapStateHandler {
      * @param resources
      */
     @Override
-    public void initialize(final URL location, final ResourceBundle resources) {
+    public void initialize(URL location, ResourceBundle resources) {
 
     }
 
