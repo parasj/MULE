@@ -12,7 +12,11 @@ import java.util.ResourceBundle;
 public class SelectionOverHandler extends MapStateHandler {
     /**
      *
+<<<<<<< HEAD
      * @param boardController of type BoardController.
+=======
+     * @param boardController of the type BoardController.
+>>>>>>> parent of 1e1d84f... Merge remote-tracking branch 'origin/master'
      */
     public SelectionOverHandler(final BoardController boardController) {
         super(boardController);
@@ -65,6 +69,7 @@ public class SelectionOverHandler extends MapStateHandler {
      * @param resources of type ResourceBundle.
      */
     @Override
-    public void initialize(final URL location, final ResourceBundle resources) {
+    public final void initialize(final URL location,
+        final ResourceBundle resources) {
     }
 }

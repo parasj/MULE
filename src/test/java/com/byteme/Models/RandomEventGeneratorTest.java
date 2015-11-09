@@ -4,8 +4,8 @@ import com.byteme.Schema.RandomEvent;
 import com.byteme.Util.MockedRandomWrapper;
 import org.junit.Test;
 
-import static org.junit.Assert.assertEquals;
-import static org.junit.Assert.assertNotEquals;
+import static org.junit.Assert.*;
+import static org.mockito.Mockito.*;
 
 /**
  * MULE
@@ -16,6 +16,8 @@ public class RandomEventGeneratorTest {
 
     @Test
     public void testGetEvent() throws Exception {
+        // mockito used to mock out randomness
+
         // should be nothing
         RandomEventGenerator rng = new RandomEventGenerator(mockRandom100);
         assertEquals(RandomEvent.NOTHING, rng.getEvent(false));
@@ -28,9 +30,5 @@ public class RandomEventGeneratorTest {
         randomEventGen = new RandomEventGenerator(mockRandom0);
         assertEquals(true, randomEventGen.getEvent(true).isGood());
         assertNotEquals(RandomEvent.NOTHING, randomEventGen.getEvent(true));
-
-        // testing last conditional
-        randomEventGen = new RandomEventGenerator(mockRandom100);
-        assertEquals(RandomEvent.NOTHING, randomEventGen.getEvent(false));
     }
 }

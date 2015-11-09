@@ -3,7 +3,11 @@ package com.byteme.Controllers;
 import com.byteme.Schema.MapControllerStates;
 
 /**
+<<<<<<< HEAD
  * MULE.
+=======
+ * This is the MULE game's TownController.
+>>>>>>> parent of 1e1d84f... Merge remote-tracking branch 'origin/master'
  */
 public class TownController {
 
@@ -20,8 +24,9 @@ public class TownController {
      */
     //Similar
     public final void goToPub() {
-        MasterController.getInstance().getBoardController()
-            .updateState(MapControllerStates.TURN_OVER, true);
+        MasterController.getInstance()
+                        .getBoardController()
+                        .updateState(MapControllerStates.TURN_OVER, true);
         MasterController.getInstance().pubScene();
     }
 
