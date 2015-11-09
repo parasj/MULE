@@ -6,15 +6,15 @@ import java.net.URL;
 import java.util.ResourceBundle;
 
 /**
- * MULE
+ * MULE.
  */
 //Placeholder for now
 public class SelectionOverHandler extends MapStateHandler {
     /**
      *
-     * @param boardController
+     * @param boardController of type BoardController.
      */
-    public SelectionOverHandler(BoardController boardController) {
+    public SelectionOverHandler(final BoardController boardController) {
         super(boardController);
     }
 
@@ -36,10 +36,10 @@ public class SelectionOverHandler extends MapStateHandler {
 
     /**
      *
-     * @param event
+     * @param event of type MouseEvent.
      */
     @Override
-    public void tileChosen(MouseEvent event) {
+    public void tileChosen(final MouseEvent event) {
 
     }
 
@@ -61,10 +61,10 @@ public class SelectionOverHandler extends MapStateHandler {
 
     /**
      *
-     * @param location
-     * @param resources
+     * @param location of type URL.
+     * @param resources of type ResourceBundle.
      */
     @Override
-    public void initialize(URL location, ResourceBundle resources) {
+    public void initialize(final URL location, final ResourceBundle resources) {
     }
 }
