@@ -5,6 +5,7 @@ import com.byteme.Models.MapStateStore;
 import com.byteme.Models.ConfigRepository;
 import com.byteme.Schema.MapControllerStates;
 import com.byteme.Schema.PlayerConfigParams;
+import com.byteme.Util.TestableRandomWrapper;
 import javafx.fxml.FXML;
 import javafx.scene.control.Label;
 
@@ -14,6 +15,8 @@ import java.util.Random;
  * MULE.
  */
 public class PubController {
+
+    private TestableRandomWrapper random;
     /**
      * FIRSTNUM of type int.
      * Made these variables this way because of checkstyle.
@@ -79,6 +82,15 @@ public class PubController {
     @FXML
     private Label moneyLabel;
 
+    public PubController(TestableRandomWrapper random, GameStartStore gameStartStore, MapStateStore mapStateStore, ConfigRepository configRepository) {
+        this.random = random;
+        this.gameStartStore = gameStartStore;
+        this.mapStateStore = mapStateStore;
+        this.configRepository = configRepository;
+        getMoney();
+    }
+
+
     /**
      *
      */
@@ -112,8 +124,10 @@ public class PubController {
             return SIXTHNUM;
         } else if (timeLeft > 0) {
             return SEVENTHNUM;
-        } else {
+        } else if (timeLeft == 0) {
             return 0;
+        } else {
+            throw new IllegalArgumentException("Time cannot be negative!");
         }
     }
 
@@ -126,8 +140,7 @@ public class PubController {
             .getPlayerAt(gameStartStore.getCurrentPlayer());
         int timeLeft = currentPlayer.getTimeLeft();
         int roundBonus = ROUNDBONUSARR[mapStateStore.getCurrentRound() - 1];
-        Random rand = new Random();
-        int timeBonus = rand.nextInt(getTimeBonus(timeLeft) + 1);
+        int timeBonus = random.getInt(getTimeBonus(timeLeft) + 1);
         int moneyBonus = roundBonus * timeBonus;
         if (moneyBonus > MONEYCOMP) {
             moneyBonus = MONEYCOMP;
@@ -172,5 +185,9 @@ public class PubController {
         gameStartStore = GameStartStore.getInstance();
         mapStateStore = MULEStore.getInstance().getMapStateStore();
         configRepository = MULEStore.getInstance().getConfigRepository();
+    }
+
+    public PlayerConfigParams getPlayer() {
+        return mapStateStore.getPlayerAt(gameStartStore.getCurrentPlayer());
     }
 }
