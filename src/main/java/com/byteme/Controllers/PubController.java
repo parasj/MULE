@@ -49,7 +49,7 @@ public class PubController {
      * @param timeLeft
      * @return
      */
-    private int getTimeBonus(int timeLeft) {
+    public int getTimeBonus(int timeLeft) {
         if (timeLeft >= 37) return 200;
         else if (timeLeft >= 25) return 150;
         else if (timeLeft >= 12) return 100;
