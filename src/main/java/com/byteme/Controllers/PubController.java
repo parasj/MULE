@@ -5,6 +5,8 @@ import com.byteme.Models.MapStateStore;
 import com.byteme.Models.ConfigRepository;
 import com.byteme.Schema.MapControllerStates;
 import com.byteme.Schema.PlayerConfigParams;
+import com.byteme.Util.RandomWrapper;
+import com.byteme.Util.TestableRandomWrapper;
 import javafx.fxml.FXML;
 import javafx.scene.control.Label;
 
@@ -18,6 +20,7 @@ public class PubController {
     private MapStateStore mapStateStore;
     public ConfigRepository configRepository;
     private static final int[] roundBonusArr = {50, 50, 50, 100, 100, 100, 100, 150, 150, 150, 150, 200};
+    private TestableRandomWrapper random;
 
     private BoardController boardController;
 
@@ -26,11 +29,20 @@ public class PubController {
     @FXML
     private Label moneyLabel;
 
+    public PubController(TestableRandomWrapper random, GameStartStore gameStartStore, MapStateStore mapStateStore, ConfigRepository configRepository) {
+        this.random = random;
+        this.gameStartStore = gameStartStore;
+        this.mapStateStore = mapStateStore;
+        this.configRepository = configRepository;
+        getMoney();
+    }
+
     /**
      *
      */
     //Loads stores
     public PubController() {
+        random = new RandomWrapper();
         reinit();
     }
 
@@ -49,7 +61,7 @@ public class PubController {
      * @param timeLeft
      * @return
      */
-    public int getTimeBonus(int timeLeft) {
+    private int getTimeBonus(int timeLeft) {
         if (timeLeft >= 37) return 200;
         else if (timeLeft >= 25) return 150;
         else if (timeLeft >= 12) return 100;
@@ -62,12 +74,11 @@ public class PubController {
      *
      */
     //Gets how much money to pay player
-    private void getMoney() {
+    protected void getMoney() {
         PlayerConfigParams currentPlayer = mapStateStore.getPlayerAt(gameStartStore.getCurrentPlayer());
         int timeLeft = currentPlayer.getTimeLeft();
         int roundBonus = roundBonusArr[mapStateStore.getCurrentRound() - 1];
-        Random rand = new Random();
-        int timeBonus = rand.nextInt(getTimeBonus(timeLeft) + 1);
+        int timeBonus = random.getInt(getTimeBonus(timeLeft) + 1);
         int moneyBonus = roundBonus * timeBonus;
         if (moneyBonus > 250) {
             moneyBonus = 250;
@@ -108,4 +119,9 @@ public class PubController {
         mapStateStore = MULEStore.getInstance().getMapStateStore();
         configRepository = MULEStore.getInstance().getConfigRepository();
     }
+
+    public PlayerConfigParams getPlayer() {
+        return mapStateStore.getPlayerAt(gameStartStore.getCurrentPlayer());
+    }
+
 }
