@@ -15,7 +15,6 @@ import java.util.Random;
  * MULE.
  */
 public class PubController {
-
     private TestableRandomWrapper random;
     /**
      * FIRSTNUM of type int.
@@ -58,26 +57,9 @@ public class PubController {
      * mapStateStore of type MapStateStore.
      */
     private MapStateStore mapStateStore;
-<<<<<<< HEAD
     public ConfigRepository configRepository;
     private static final int[] roundBonusArr = {50, 50, 50, 100, 100, 100, 100,
         150, 150, 150, 150, 200};
-    private TestableRandomWrapper random;
-
-=======
-    /**
-     * configRepository of type ConfigRepository.
-     */
-    private ConfigRepository configRepository;
-    /**
-     * ROUNDBONUSARR of type int[].
-     */
-    private static final int[] ROUNDBONUSARR =
-        {50, 50, 50, 100, 100, 100, 100, 150, 150, 150, 150, 200};
-    /**
-     * boardController instance of BoardController.
-     */
->>>>>>> origin/master
     private BoardController boardController;
     /**
      * playerLabel instance of Label.
@@ -114,13 +96,8 @@ public class PubController {
      */
     public final void goToMap() {
         MasterController.getInstance().map();
-<<<<<<< HEAD
         GameStartHandler gameStartHandler =
             (GameStartHandler) boardController.getGameStartHandler();
-=======
-        GameStartHandler gameStartHandler = (GameStartHandler) boardController
-        .getGameStartHandler();
->>>>>>> origin/master
         gameStartHandler.nextPlayer();
         boardController.updateState(MapControllerStates.GAME_START, true);
     }
@@ -150,15 +127,11 @@ public class PubController {
      *
      */
     //Gets how much money to pay player
-<<<<<<< HEAD
     protected void getMoney() {
-=======
-    private void getMoney() {
->>>>>>> origin/master
         PlayerConfigParams currentPlayer = mapStateStore
             .getPlayerAt(gameStartStore.getCurrentPlayer());
         int timeLeft = currentPlayer.getTimeLeft();
-        int roundBonus = ROUNDBONUSARR[mapStateStore.getCurrentRound() - 1];
+        int roundBonus = roundBonusArr[mapStateStore.getCurrentRound() - 1];
         int timeBonus = random.getInt(getTimeBonus(timeLeft) + 1);
         int moneyBonus = roundBonus * timeBonus;
         if (moneyBonus > MONEYCOMP) {
@@ -176,18 +149,11 @@ public class PubController {
         reinit();
         getMoney();
         if (playerLabel != null) {
-<<<<<<< HEAD
             playerLabel.setText(String
                 .format("Player %d %s", gameStartStore
                     .getCurrentPlayer() + 1, mapStateStore
                         .getPlayerAt(gameStartStore.getCurrentPlayer())
                             .getName()));
-=======
-            playerLabel.setText(String.format("Player %d %s", gameStartStore
-                .getCurrentPlayer() + 1, mapStateStore
-                .getPlayerAt(gameStartStore
-                    .getCurrentPlayer()).getName()));
->>>>>>> origin/master
         }
         if (moneyLabel != null) {
             moneyLabel.setText("MONEY: " + mapStateStore
@@ -196,13 +162,8 @@ public class PubController {
     }
 
     /**
-<<<<<<< HEAD
      *
      * @param boardController of type BoardController.
-=======
-     * Also I changed parameter names because of checkstyle.
-     * @param boardController1 of type BoardController.
->>>>>>> origin/master
      */
     public final void setBoardController(
             final BoardController boardController1) {
@@ -212,10 +173,6 @@ public class PubController {
     /**
      * reinititialize method.
      */
-<<<<<<< HEAD
-=======
-    //Loads stores
->>>>>>> origin/master
     public final void reinit() {
         gameStartStore = GameStartStore.getInstance();
         mapStateStore = MULEStore.getInstance().getMapStateStore();
