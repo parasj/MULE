@@ -1,5 +1,7 @@
 package com.byteme.Schema;
 
+import com.sun.istack.internal.NotNull;
+
 import java.io.Serializable;
 import java.util.ArrayList;
 
@@ -345,7 +347,7 @@ public class PlayerConfigParams implements Comparable<PlayerConfigParams>, Seria
     }
 
     @Override
-    public int compareTo(PlayerConfigParams otherPlayer) {
+    public int compareTo(@NotNull PlayerConfigParams otherPlayer) {
         return (this.calcScore() - otherPlayer.calcScore());
     }
 
