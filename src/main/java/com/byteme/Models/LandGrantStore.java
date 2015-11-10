@@ -10,7 +10,7 @@ import java.util.List;
  * MULE
  */
 public class LandGrantStore implements Serializable {
-    private ConfigRepository configRepository;
+    private final ConfigRepository configRepository;
     private List<PlayerConfigParams> players;
     private int currentPlayer;
     private int currentPropertyCount;

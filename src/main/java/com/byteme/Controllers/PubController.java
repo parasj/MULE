@@ -10,16 +10,10 @@ import com.byteme.Util.TestableRandomWrapper;
 import javafx.fxml.FXML;
 import javafx.scene.control.Label;
 
-
 /**
  * MULE
  */
 public class PubController {
-<<<<<<< HEAD
-    private TestableRandomWrapper random;
-=======
-
->>>>>>> 245801b5ea65d4000aa1eb3f8548eb9a4637af64
     /**
      * FIRSTNUM of type int.
      * Made these variables this way because of checkstyle.
@@ -61,12 +55,6 @@ public class PubController {
      * mapStateStore of type MapStateStore.
      */
     private MapStateStore mapStateStore;
-<<<<<<< HEAD
-    public ConfigRepository configRepository;
-    private static final int[] roundBonusArr = {50, 50, 50, 100, 100, 100, 100,
-        150, 150, 150, 150, 200};
-=======
-    private static final int[] roundBonusArr = {50, 50, 50, 100, 100, 100, 100, 150, 150, 150, 150, 200};
     private TestableRandomWrapper random = new RandomWrapper();
 
     /**
@@ -81,7 +69,6 @@ public class PubController {
     /**
      * boardController instance of BoardController.
      */
->>>>>>> 245801b5ea65d4000aa1eb3f8548eb9a4637af64
     private BoardController boardController;
     /**
      * playerLabel instance of Label.
@@ -116,13 +103,8 @@ public class PubController {
      */
     public final void goToMap() {
         MasterController.getInstance().map();
-<<<<<<< HEAD
         GameStartHandler gameStartHandler =
             (GameStartHandler) boardController.getGameStartHandler();
-=======
-        GameStartHandler gameStartHandler = (GameStartHandler) boardController
-        .getGameStartHandler();
->>>>>>> 245801b5ea65d4000aa1eb3f8548eb9a4637af64
         gameStartHandler.nextPlayer();
         boardController.updateState(MapControllerStates.GAME_START, true);
     }
@@ -152,15 +134,11 @@ public class PubController {
      *
      */
     //Gets how much money to pay player
-<<<<<<< HEAD
     protected void getMoney() {
-=======
-    private void getMoney() {
->>>>>>> 245801b5ea65d4000aa1eb3f8548eb9a4637af64
         PlayerConfigParams currentPlayer = mapStateStore
             .getPlayerAt(gameStartStore.getCurrentPlayer());
         int timeLeft = currentPlayer.getTimeLeft();
-        int roundBonus = roundBonusArr[mapStateStore.getCurrentRound() - 1];
+        int roundBonus = ROUNDBONUSARR[mapStateStore.getCurrentRound() - 1];
         int timeBonus = random.getInt(getTimeBonus(timeLeft) + 1);
         int moneyBonus = roundBonus * timeBonus;
         if (moneyBonus > MONEYCOMP) {
@@ -183,10 +161,7 @@ public class PubController {
                     .getCurrentPlayer() + 1, mapStateStore
                         .getPlayerAt(gameStartStore.getCurrentPlayer())
                             .getName()));
-<<<<<<< HEAD
-=======
             playerLabel.setText(String.format("Player %d %s", gameStartStore.getCurrentPlayer() + 1, mapStateStore.getPlayerAt(gameStartStore.getCurrentPlayer()).getName()));
->>>>>>> 245801b5ea65d4000aa1eb3f8548eb9a4637af64
         }
         if (moneyLabel != null) {
             moneyLabel.setText("MONEY: " + mapStateStore.getPlayerAt(gameStartStore.getCurrentPlayer()).getMoney());
@@ -195,12 +170,8 @@ public class PubController {
 
     /**
      *
-<<<<<<< HEAD
-     * @param boardController of type BoardController.
-=======
      * Also I changed parameter names because of checkstyle.
      * @param boardController1 of type BoardController.
->>>>>>> 245801b5ea65d4000aa1eb3f8548eb9a4637af64
      */
     public final void setBoardController(
             final BoardController boardController1) {

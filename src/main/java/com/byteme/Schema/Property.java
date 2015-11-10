@@ -139,25 +139,6 @@ public class Property implements Serializable {
 
     /**
      *
-     * @param o
-     * @return
-     */
-    @Override
-    public boolean equals(Object o) {
-        if (this == o) return true;
-        if (o == null || getClass() != o.getClass()) return false;
-
-        Property property = (Property) o;
-
-        if (column != property.column) return false;
-        if (row != property.row) return false;
-        if (!owner.equals(property.owner)) return false;
-        return !(mule != null ? !mule.equals(property.mule) : property.mule != null);
-
-    }
-
-    /**
-     *
      * @return
      */
     @Override

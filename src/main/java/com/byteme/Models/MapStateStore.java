@@ -11,7 +11,7 @@ import java.util.Collections;
  * MULE
  */
 public class MapStateStore implements Serializable {
-    private ConfigRepository configRepository;
+    private final ConfigRepository configRepository;
     private MapControllerStates currentState;
     private boolean fromTownGoToPub;
     private int currentPlayer;

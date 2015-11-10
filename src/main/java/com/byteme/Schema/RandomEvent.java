@@ -80,11 +80,19 @@ public enum RandomEvent {
     }
 
     /**
-     *
-     * @return
+     * checks if event is good
+     * @return if event is good
      */
     public boolean isGood() {
         return !isGood;
+    }
+
+    /**
+     * checks if event is bad
+     * @return if event is bad
+     */
+    public boolean isBad() {
+        return !isGood();
     }
 
     /**

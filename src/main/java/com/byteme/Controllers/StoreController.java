@@ -356,7 +356,7 @@ public class StoreController {
         reinit();
         PlayerConfigParams player = mapStateStore.
                                     getPlayerAt(
-                                    gameStartStore.getCurrentPlayer());
+                                            gameStartStore.getCurrentPlayer());
         if (player == null) {
             throw new IllegalArgumentException("Player is null!");
         }
@@ -398,7 +398,7 @@ public class StoreController {
     public final void logPlayer() {
         PlayerConfigParams player = mapStateStore
                                     .getPlayerAt(
-                                    gameStartStore.getCurrentPlayer());
+                                            gameStartStore.getCurrentPlayer());
         if (player == null) {
             throw new IllegalArgumentException("Player is null");
         }
@@ -417,16 +417,17 @@ public class StoreController {
      */
     //Changes string to MuleType
     public final MuleType getType(final String string) {
-        if (string.equals("Food")) {
-            return MuleType.FOOD;
-        } else if (string.equals("Energy")) {
-            return MuleType.ENERGY;
-        } else if (string.equals("Smithore")) {
-            return MuleType.SMITHORE;
-        } else if (string.equals("Crystite")) {
-            return MuleType.CRYSTITE;
-        } else {
-            throw new IllegalStateException("Mule must have state!");
+        switch (string) {
+            case "Food":
+                return MuleType.FOOD;
+            case "Energy":
+                return MuleType.ENERGY;
+            case "Smithore":
+                return MuleType.SMITHORE;
+            case "Crystite":
+                return MuleType.CRYSTITE;
+            default:
+                throw new IllegalStateException("Mule must have state!");
         }
     }
 

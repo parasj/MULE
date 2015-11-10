@@ -188,14 +188,16 @@ public class BoardController implements Initializable, CanTick {
 
     // Keep track of which tiles have a player's color on them
 
-    /**
-     *
-     */
-    public final void reCalcPlayerProperties() {
-        getConfigRepository().getPlayers().forEach((player) ->
-                player.getProperties().forEach((z) ->
-                        mapSpots[z.getRow()][z.getColumn()] = true));
-    }
+// --Commented out by Inspection START (11/10/2015 12:00 AM):
+//    /**
+//     *
+//     */
+//    public final void reCalcPlayerProperties() {
+//        getConfigRepository().getPlayers().forEach((player) ->
+//                player.getProperties().forEach((z) ->
+//                        mapSpots[z.getRow()][z.getColumn()] = true));
+//    }
+// --Commented out by Inspection STOP (11/10/2015 12:00 AM)
 
     // Force center tile to be Town.png and center line to be river
     // Make the town tile run "goToTown()"
@@ -236,13 +238,15 @@ public class BoardController implements Initializable, CanTick {
 
     //Gets current state
 
-    /**
-     *
-     * @return state, instance of MapControllerStates.
-     */
-    public final MapControllerStates getState() {
-        return state;
-    }
+// --Commented out by Inspection START (11/10/2015 12:00 AM):
+//    /**
+//     *
+//     * @return state, instance of MapControllerStates.
+//     */
+//    public final MapControllerStates getState() {
+//        return state;
+//    }
+// --Commented out by Inspection STOP (11/10/2015 12:00 AM)
 
     /****
      * Data Binding

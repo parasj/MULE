@@ -8,7 +8,7 @@ import com.byteme.Util.TestableRandomWrapper;
  * MULE
  */
 public class RandomEventGenerator {
-    private TestableRandomWrapper random;
+    private final TestableRandomWrapper random;
     private static final int PROB = 27;
 
     public RandomEventGenerator() {

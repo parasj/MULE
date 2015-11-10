@@ -159,9 +159,7 @@ public class StoreStateStore implements Serializable {
     }
 
     public void setSmithorePrice(int smithorePrice) {
-        if (smithorePrice < 0) {
-            smithorePrice = 0;
-        } else {
+        if (smithorePrice >= 0) {
             this.smithorePrice = smithorePrice;
         }
     }
@@ -232,13 +230,18 @@ public class StoreStateStore implements Serializable {
      * @return
      */
     public int getMuleTypePrice(String type) {
-        if (type.equals("Food")) return mulePrice + foodMuleCost;
-        else if (type.equals("Energy")) return mulePrice + energyMuleCost;
-        else if (type.equals("Smithore")) return mulePrice + smithoreMuleCost;
-        else if (type.equals("Crystite")) return mulePrice + crystiteMuleCost;
-        else {
-            System.out.println("There was an error!");
-            return 0;
+        switch (type) {
+            case "Food":
+                return mulePrice + foodMuleCost;
+            case "Energy":
+                return mulePrice + energyMuleCost;
+            case "Smithore":
+                return mulePrice + smithoreMuleCost;
+            case "Crystite":
+                return mulePrice + crystiteMuleCost;
+            default:
+                System.out.println("There was an error!");
+                return 0;
         }
     }
 
@@ -268,21 +271,17 @@ public class StoreStateStore implements Serializable {
      * @return
      */
     public int getMuleTypeCost(String string) {
-        if (string.equals("Food")) {
-            return foodMuleCost;
-        } else if (string.equals("Energy")) {
-            return energyMuleCost;
-        } else if (string.equals("Smithore")) {
-            return smithoreMuleCost;
-        } else if (string.equals("Crystite")) {
-            return crystiteMuleCost;
-        } else {
-            return 0;
+        switch (string) {
+            case "Food":
+                return foodMuleCost;
+            case "Energy":
+                return energyMuleCost;
+            case "Smithore":
+                return smithoreMuleCost;
+            case "Crystite":
+                return crystiteMuleCost;
+            default:
+                return 0;
         }
     }
-
-    /**
-     *
-     */
-    public void reinit() {}
 }

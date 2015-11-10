@@ -135,9 +135,6 @@ public class ConfigurationController {
      */
     private MapType selectedMapType() {
         // TODO: Give different maps based on player input
-        //switch ((String) mapType.getValue()) {
-            //default: return MapType.STANDARD;
-        //}
         return MapType.STANDARD;
     }
 
