@@ -1,13 +1,15 @@
 package com.byteme.Controllers;
 
-import com.byteme.Models.*;
-import com.byteme.Schema.*;
-//import com.byteme.Models.GameStartStore;
-//import com.byteme.Models.MULEStore;
-//import com.byteme.Models.MapStateStore;
-//import com.byteme.Schema.PlayerConfigParams;
-////import com.byteme.Models.ConfigRepository;
-//import com.byteme.Schema.Mule;
+import com.byteme.Models.RandomEventGenerator;
+import com.byteme.Schema.RandomEvent;
+import com.byteme.Schema.Property;
+import com.byteme.Schema.MapControllerStates;
+import com.byteme.Models.GameStartStore;
+import com.byteme.Models.MULEStore;
+import com.byteme.Models.MapStateStore;
+import com.byteme.Schema.PlayerConfigParams;
+import com.byteme.Models.ConfigRepository;
+import com.byteme.Schema.Mule;
 
 import javafx.scene.control.Alert;
 import javafx.scene.input.MouseEvent;
@@ -279,111 +281,111 @@ public class GameStartHandler extends MapStateHandler {
                 if (mule != null && player.getEnergy() > 0) {
                     log("Property is: " + prop.getMapTile());
                     switch (prop.getMapTile()) {
-                        case R:
-                            switch (mule.getType()) {
-                                case FOOD:
-                                    player.setFood(player.getFood() + RFOOD);
-                                    break;
-                                case ENERGY:
-                                    player.setEnergy(player.getEnergy() + 2);
-                                    break;
-                                case SMITHORE:
-                                    break;
-                                case CRYSTITE:
-                                    break;
-                                    default:
-                                    throw new IllegalArgumentException("Type "
-                                        + "must be specified");
-                            }
+                    case R:
+                        switch (mule.getType()) {
+                        case FOOD:
+                            player.setFood(player.getFood() + RFOOD);
                             break;
-                        case P:
-                            switch (mule.getType()) {
-                                case FOOD:
-                                    player.setFood(player.getFood() + 2);
-                                    break;
-                                case ENERGY:
-                                    player.setEnergy(player.getEnergy()
-                                        + PENERGY);
-                                    break;
-                                case SMITHORE:
-                                    player.setSmithore(player.getSmithore()
-                                        + 1);
-                                    break;
-                                case CRYSTITE:
-                                    player.setCrystite(player.getCrystite()
-                                        + rand.nextInt(PCRYSTITE));
-                                    break;
-                                    default:
-                                    throw new IllegalArgumentException("Type "
-                                            + "must be specified");
-                            }
+                        case ENERGY:
+                            player.setEnergy(player.getEnergy() + 2);
                             break;
-                        case M1:
-                            switch (mule.getType()) {
-                                case FOOD:
-                                    player.setFood(player.getFood() + 1);
-                                    break;
-                                case ENERGY:
-                                    player.setEnergy(player.getEnergy() + 1);
-                                    break;
-                                case SMITHORE:
-                                    player.setSmithore(player.getSmithore()
-                                        + 2);
-                                    break;
-                                case CRYSTITE:
-                                    player.setCrystite(player.getCrystite()
-                                        + rand.nextInt(M1CRYSTITE));
-                                    break;
-                                default:
-                                    throw new IllegalArgumentException("Type "
-                                        + "must be specified");
-                            }
+                        case SMITHORE:
                             break;
-                        case M2:
-                            switch (mule.getType()) {
-                                case FOOD:
-                                    player.setFood(player.getFood() + 1);
-                                    break;
-                                case ENERGY:
-                                    player.setEnergy(player.getEnergy() + 1);
-                                    break;
-                                case SMITHORE:
-                                    player.setSmithore(player.getSmithore()
-                                        + M2SMITHORE);
-                                    break;
-                                case CRYSTITE:
-                                    player.setCrystite(player.getCrystite()
-                                        + rand.nextInt(M2CRYSTITE));
-                                    break;
-                                default:
-                                    throw new IllegalArgumentException("Type "
-                                        + "must be specified");
-                            }
+                        case CRYSTITE:
                             break;
-                        case M3:
-                            switch (mule.getType()) {
-                                case FOOD:
-                                    player.setFood(player.getFood() + 1);
-                                    break;
-                                case ENERGY:
-                                    player.setEnergy(player.getEnergy() + 1);
-                                    break;
-                                case SMITHORE:
-                                    player.setSmithore(player.getSmithore()
-                                        + M3SMITHORE);
-                                    break;
-                                case CRYSTITE:
-                                    player.setCrystite(player.getCrystite()
-                                        + rand.nextInt(M3CRYSTITE));
-                                    break;
-                                default:
-                                    throw new IllegalArgumentException("Type "
-                                        + "must be specified");
-                            }
+                        default:
+                            throw new IllegalArgumentException("Type "
+                                + "must be specified");
+                        }
+                        break;
+                    case P:
+                        switch (mule.getType()) {
+                        case FOOD:
+                            player.setFood(player.getFood() + 2);
+                            break;
+                        case ENERGY:
+                            player.setEnergy(player.getEnergy()
+                                + PENERGY);
+                            break;
+                        case SMITHORE:
+                            player.setSmithore(player.getSmithore()
+                                + 1);
+                            break;
+                        case CRYSTITE:
+                            player.setCrystite(player.getCrystite()
+                                + rand.nextInt(PCRYSTITE));
                             break;
                         default:
                             throw new IllegalArgumentException("Type "
                                     + "must be specified");
+                        }
+                        break;
+                    case M1:
+                        switch (mule.getType()) {
+                        case FOOD:
+                            player.setFood(player.getFood() + 1);
+                            break;
+                        case ENERGY:
+                            player.setEnergy(player.getEnergy() + 1);
+                            break;
+                        case SMITHORE:
+                            player.setSmithore(player.getSmithore()
+                                + 2);
+                            break;
+                        case CRYSTITE:
+                            player.setCrystite(player.getCrystite()
+                                + rand.nextInt(M1CRYSTITE));
+                            break;
+                        default:
+                            throw new IllegalArgumentException("Type "
+                                + "must be specified");
+                        }
+                        break;
+                    case M2:
+                        switch (mule.getType()) {
+                        case FOOD:
+                            player.setFood(player.getFood() + 1);
+                            break;
+                        case ENERGY:
+                            player.setEnergy(player.getEnergy() + 1);
+                            break;
+                        case SMITHORE:
+                            player.setSmithore(player.getSmithore()
+                                + M2SMITHORE);
+                            break;
+                        case CRYSTITE:
+                            player.setCrystite(player.getCrystite()
+                                + rand.nextInt(M2CRYSTITE));
+                            break;
+                        default:
+                            throw new IllegalArgumentException("Type "
+                                + "must be specified");
+                        }
+                        break;
+                    case M3:
+                        switch (mule.getType()) {
+                        case FOOD:
+                            player.setFood(player.getFood() + 1);
+                            break;
+                        case ENERGY:
+                            player.setEnergy(player.getEnergy() + 1);
+                            break;
+                        case SMITHORE:
+                            player.setSmithore(player.getSmithore()
+                                + M3SMITHORE);
+                            break;
+                        case CRYSTITE:
+                            player.setCrystite(player.getCrystite()
+                                + rand.nextInt(M3CRYSTITE));
+                            break;
+                        default:
+                            throw new IllegalArgumentException("Type "
+                                + "must be specified");
+                        }
+                        break;
+                    default:
+                        throw new IllegalArgumentException("Type "
+                                + "must be specified");
                     }
                     player.subEnergy();
                 }

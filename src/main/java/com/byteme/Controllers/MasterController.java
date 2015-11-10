@@ -15,7 +15,7 @@ public class MasterController {
      * gameStartStore of type GameStartStore.
      */
     private static final MasterController INSTANCE
-            = new MasterController();
+        = new MasterController();
     /**
      * startGame of type Scene.
      */
@@ -216,7 +216,7 @@ public class MasterController {
      * @param boardController1 of type BoardController.
      */
     private void
-        setBoardController(final BoardController boardController1) {
+    setBoardController(final BoardController boardController1) {
         if (boardController1 == null) {
             throw new IllegalArgumentException("Board Controller is null!");
         }

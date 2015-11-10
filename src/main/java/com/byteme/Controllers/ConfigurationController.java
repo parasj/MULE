@@ -1,10 +1,23 @@
 package com.byteme.Controllers;
 
-import com.byteme.Models.*;
-import com.byteme.Schema.*;
+//import com.byteme.Models.
+import com.byteme.Models.MULEStore;
+import com.byteme.Models.ConfigRepository;
+
+import com.byteme.Schema.Difficulty;
+import com.byteme.Schema.MapType;
+import com.byteme.Schema.GameConfigParams;
+import com.byteme.Schema.PlayerConfigParams;
+import com.byteme.Schema.Race;
+
+
 import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
-import javafx.scene.control.*;
+import javafx.scene.control.RadioButton;
+import javafx.scene.control.Slider;
+import javafx.scene.control.ChoiceBox;
+import javafx.scene.control.TextField;
+import javafx.scene.control.Label;
 
 import java.util.ArrayList;
 import java.util.Locale;
@@ -139,7 +152,7 @@ public class ConfigurationController {
      * @return The selected MapType.
      */
     private MapType selectedMapType() {
-        // TODO: Give different maps based on player input
+        // Todo: Give different maps based on player input
         return MapType.STANDARD;
     }
 
@@ -222,9 +235,8 @@ public class ConfigurationController {
             System.out.println("NAME       : " + name);
             System.out.println("RACE       : " + race);
             System.out.println("COLOR      : " + color);
-            getConfigRepository()
-            .setPlayerConfig(playerConfigParser(name,
-                race, color, money, currentPlayer), currentPlayer);
+            getConfigRepository().setPlayerConfig(playerConfigParser(name,
+                    race, color, money, currentPlayer), currentPlayer);
 
             if (currentPlayer >= numPlayers) {
                 // Go to Map screen.
@@ -255,12 +267,12 @@ public class ConfigurationController {
         race = race.toLowerCase();
 
         switch (race) {
-            case "flapper":
-                return FLAPPER_NUM;
-            case "human":
-                return HUMAN_NUM;
-            default:
-                return DEFAULT_NUM;
+        case "flapper":
+            return FLAPPER_NUM;
+        case "human":
+            return HUMAN_NUM;
+        default:
+            return DEFAULT_NUM;
         }
     }
 

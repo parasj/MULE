@@ -112,7 +112,7 @@ public class LandPurchaseHandler extends MapStateHandler {
     }
 
     @Override
-    public final void
-        initialize(final URL location, final ResourceBundle resources) {
+    public final void initialize(final URL location,
+        final ResourceBundle resources) {
     }
 }

@@ -34,8 +34,8 @@ public abstract class MapStateHandler implements CanTick, Initializable {
      *
      * @param boardController2 of type BoardController.
      */
-    public final void
-            setBoardController(final BoardController boardController2) {
+    public final void setBoardController(final
+        BoardController boardController2) {
         this.boardController = boardController2;
     }
 

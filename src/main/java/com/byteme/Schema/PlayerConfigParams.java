@@ -356,7 +356,7 @@ public class PlayerConfigParams
     }
 
     @Override
-    public int compareTo(@NotNull PlayerConfigParams otherPlayer) {
+    public int compareTo(PlayerConfigParams otherPlayer) {
         return (this.calcScore() - otherPlayer.calcScore());
     }
 

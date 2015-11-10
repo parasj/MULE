@@ -59,8 +59,8 @@ public class PubController {
     /**
      * ROUND_BONUS_ARR of type int[].
      */
-    private static final int[] ROUND_BONUS_ARR =
-        {50, 50, 50, 100, 100, 100, 100, 150, 150, 150, 150, 200};
+    private static final int[] ROUND_BONUS_ARR = {50,
+        50, 50, 100, 100, 100, 100, 150, 150, 150, 150, 200};
     /**
      * boardController instance of BoardController.
      */

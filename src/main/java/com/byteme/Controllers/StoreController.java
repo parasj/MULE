@@ -352,14 +352,14 @@ public class StoreController {
     public final void tradeMule() {
         reinitialize();
         PlayerConfigParams player = mapStateStore.
-                                    getPlayerAt(
-                                            gameStartStore.getCurrentPlayer());
+            getPlayerAt(
+            gameStartStore.getCurrentPlayer());
         if (player == null) {
             throw new IllegalArgumentException("Player is null!");
         }
         int muleCost = storeStateStore.getMulePrice()
-                                       + storeStateStore.getMuleTypeCost(
-                                       (String) muleType.getValue());
+            + storeStateStore.getMuleTypeCost(
+                (String) muleType.getValue());
         //log("" + muleCost);
         if (storeStateStore.getState()) {
             if (player.getMoney() >= muleCost
@@ -415,16 +415,16 @@ public class StoreController {
     //Changes string to MuleType
     private MuleType getType(final String string) {
         switch (string) {
-            case "Food":
-                return MuleType.FOOD;
-            case "Energy":
-                return MuleType.ENERGY;
-            case "Smithore":
-                return MuleType.SMITHORE;
-            case "Crystite":
-                return MuleType.CRYSTITE;
-            default:
-                throw new IllegalStateException("Mule must have state!");
+        case "Food":
+            return MuleType.FOOD;
+        case "Energy":
+            return MuleType.ENERGY;
+        case "Smithore":
+            return MuleType.SMITHORE;
+        case "Crystite":
+            return MuleType.CRYSTITE;
+        default:
+            throw new IllegalStateException("Mule must have state!");
         }
     }
 

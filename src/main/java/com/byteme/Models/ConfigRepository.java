@@ -1,9 +1,13 @@
 package com.byteme.Models;
 
-import com.byteme.Schema.*;
+import com.byteme.Schema.GameConfigParams;
+import com.byteme.Schema.PlayerConfigParams;
 
 import java.io.Serializable;
-import java.util.*;
+
+import java.util.Map;
+import java.util.HashMap;
+import java.util.Collection;
 
 /**
  * MULE
