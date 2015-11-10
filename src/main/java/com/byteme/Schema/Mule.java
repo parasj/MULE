@@ -38,8 +38,8 @@ public class Mule implements Serializable {
 
     @Override
     public String toString() {
-        return "Mule{" +
-                "type=" + type +
-                '}';
+        return "Mule{"
+                + "type=" + type
+                + '}';
     }
 }

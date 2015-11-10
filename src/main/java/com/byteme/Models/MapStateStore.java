@@ -22,6 +22,12 @@ public class MapStateStore
     private int numPlayers;
     private ArrayList<PlayerConfigParams> players;
 
+    /**
+     * The constructor.
+     * @param configRepository The repository.
+     * @param currentRound The current round.
+     * @param players The players.
+     */
     public MapStateStore(ConfigRepository configRepository,
                          int currentRound,
                          ArrayList<PlayerConfigParams> players) {
@@ -154,12 +160,12 @@ public class MapStateStore
 
     @Override
     public String toString() {
-        return "MapStateStore{" +
-                "currentPlayer=" + currentPlayer +
-                ", currentRound=" + currentRound +
-                ", passCounter=" + passCounter +
-                ", purchaseOpportunities=" + purchaseOpportunities +
-                ", numPlayers=" + numPlayers + '}';
+        return "MapStateStore{"
+                + "currentPlayer=" + currentPlayer
+                + ", currentRound=" + currentRound
+                + ", passCounter=" + passCounter
+                + ", purchaseOpportunities=" + purchaseOpportunities
+                + ", numPlayers=" + numPlayers + '}';
     }
 
     /**

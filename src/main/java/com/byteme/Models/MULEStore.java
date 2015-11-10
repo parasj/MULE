@@ -161,7 +161,7 @@ public class MULEStore {
             out.close();
             fileOut.close();
             System.out.printf("Serialized data to %s", string);
-        } catch(IOException exception) {
+        } catch (IOException exception) {
             exception.printStackTrace();
         }
     }
@@ -180,10 +180,10 @@ public class MULEStore {
             obj = in.readObject();
             in.close();
             fileIn.close();
-        } catch(IOException i) {
+        } catch (IOException i) {
             System.out.println("No save found for " + string);
             return null;
-        } catch(ClassNotFoundException c) {
+        } catch (ClassNotFoundException c) {
             System.out.println("Class not found");
             c.printStackTrace();
             return null;

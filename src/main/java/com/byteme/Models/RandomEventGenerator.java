@@ -11,10 +11,17 @@ public class RandomEventGenerator {
     private final TestableRandomWrapper random;
     private static final int PROB = 27;
 
+    /**
+     * The constructor.
+     */
     public RandomEventGenerator() {
         random = new RandomWrapper();
     }
 
+    /**
+     * The constructor.
+     * @param random The random.
+     */
     public RandomEventGenerator(TestableRandomWrapper random) {
         this.random = random;
     }
@@ -33,8 +40,12 @@ public class RandomEventGenerator {
      * @return The random event
      */
     public RandomEvent getEvent(boolean onlyGood) {
-        if (!flipCoin()) return RandomEvent.NOTHING;
-        if (onlyGood) return getRandomEvent(false);
+        if (!flipCoin()) {
+            return RandomEvent.NOTHING;
+        }
+        if (onlyGood) {
+            return getRandomEvent(false);
+        }
         return getRandomEvent(true);
     }
 
@@ -46,8 +57,9 @@ public class RandomEventGenerator {
     private RandomEvent getRandomEvent(boolean includeBad) {
         RandomEvent randomEvent = RandomEvent.getRandomEvent();
         while ((!includeBad && randomEvent.isGood())
-                || randomEvent.equals(RandomEvent.NOTHING))
+                || randomEvent.equals(RandomEvent.NOTHING)) {
             randomEvent = RandomEvent.getRandomEvent();
+        }
         return randomEvent;
     }
 

@@ -160,6 +160,11 @@ public class PlayerConfigParams
         return this.properties.remove(property);
     }
 
+    /**
+     * Turns to string.
+     * @return The string.
+     */
+
     public String toString() {
         return color + " " + race + " named " + name;
     }
@@ -357,25 +362,50 @@ public class PlayerConfigParams
 
     @Override
     public boolean equals(Object o) {
-        if (this == o) return true;
-        if (o == null || getClass() != o.getClass()) return false;
+        if (this == o) {
+            return true;
+        }
+        if (o == null || getClass() != o.getClass()) {
+            return false;
+        }
 
         PlayerConfigParams that = (PlayerConfigParams) o;
 
-        if (money != that.money) return false;
-        if (timeLeft != that.timeLeft) return false;
-        if (food != that.food) return false;
-        if (energy != that.energy) return false;
-        if (smithore != that.smithore) return false;
-        if (crystite != that.crystite) return false;
-        if (order != that.order) return false;
+        if (money != that.money) {
+            return false;
+        }
+        if (timeLeft != that.timeLeft) {
+            return false;
+        }
+        if (food != that.food) {
+            return false;
+        }
+        if (energy != that.energy) {
+            return false;
+        }
+        if (smithore != that.smithore) {
+            return false;
+        }
+        if (crystite != that.crystite) {
+            return false;
+        }
+        if (order != that.order) {
+            return false;
+        }
         if (name != null ? !name.equals(that.name)
-                : that.name != null) return false;
-        if (race != that.race) return false;
+                : that.name != null) {
+            return false;
+        }
+        if (race != that.race) {
+            return false;
+        }
         if (color != null ? !color.equals(that.color)
-                : that.color != null) return false;
-        return !(properties != null ?
-                !properties.equals(that.properties) : that.properties != null);
+                : that.color != null) {
+            return false;
+        }
+        return !(properties != null
+                ? !properties.equals(that.properties)
+                : that.properties != null);
 
     }
 

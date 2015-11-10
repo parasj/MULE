@@ -12,9 +12,13 @@ import java.util.*;
 public class ConfigRepository implements Serializable {
 
     private GameConfigParams gameConfigParams;
-    private final Map<Integer, PlayerConfigParams>
-            playerConfigList;
+    private final Map<Integer, PlayerConfigParams> playerConfigList;
 
+    /**
+     * Constructor.
+     * @param gameConfigParams The params.
+     * @param playerConfigList The list.
+     */
     public ConfigRepository(GameConfigParams gameConfigParams,
                             Map<Integer, PlayerConfigParams> playerConfigList) {
         this.gameConfigParams = gameConfigParams;

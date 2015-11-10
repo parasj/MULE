@@ -27,7 +27,10 @@ public enum RandomEvent {
     MUSEUM_COMPUTER, MOOSE_RAT, FLYING_CAT_BUGS, UGA_STUDENTS, SPACE_IN_LAWS;
 
     private boolean isGood;
-    private int foodEffect, energyEffect, oreEffect, moneyEffect;
+    private int foodEffect;
+    private int energyEffect;
+    private int oreEffect;
+    private int moneyEffect;
     private String str;
     private static final SecureRandom RANDOM = new SecureRandom();
 
@@ -119,7 +122,9 @@ public enum RandomEvent {
      * @return The current food.
      */
     public int calcFood(int oldFood) {
-        if (this.equals(RandomEvent.UGA_STUDENTS)) return oldFood / 2;
+        if (this.equals(RandomEvent.UGA_STUDENTS)) {
+            return oldFood / 2;
+        }
         return oldFood + foodEffect;
     }
 
@@ -173,10 +178,16 @@ public enum RandomEvent {
      * @return The round multiple
      */
     private int roundMultiple(int round) {
-        if (round > 0 && round < 4) return 25;
-        else if (round < 8) return 50;
-        else if (round < 12) return 75;
-        else if (round == 12) return 100;
-        else return 0;
+        if (round > 0 && round < 4) {
+            return 25;
+        } else if (round < 8) {
+            return 50;
+        } else if (round < 12) {
+            return 75;
+        } else if (round == 12) {
+            return 100;
+        } else {
+            return 0;
+        }
     }
 }

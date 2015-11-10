@@ -2,7 +2,6 @@ package com.byteme.Controllers;
 import com.byteme.Models.GameStartStore;
 import com.byteme.Models.MULEStore;
 import com.byteme.Models.MapStateStore;
-import com.byteme.Models.ConfigRepository;
 import com.byteme.Schema.MapControllerStates;
 import com.byteme.Schema.PlayerConfigParams;
 import com.byteme.Util.RandomWrapper;
@@ -77,6 +76,12 @@ public class PubController {
     @FXML
     private Label moneyLabel;
 
+    /**
+     * The Constructor.
+     * @param random The random.
+     * @param gameStartStore The gamestart.
+     * @param mapStateStore The mapstate.
+     */
     public PubController(TestableRandomWrapper random,
                          GameStartStore gameStartStore,
                          MapStateStore mapStateStore) {
@@ -188,6 +193,10 @@ public class PubController {
         mapStateStore = MULEStore.getInstance().getMapStateStore();
     }
 
+    /**
+     * Gets the player.
+     * @return The player.
+     */
     public PlayerConfigParams getPlayer() {
         return mapStateStore.getPlayerAt(gameStartStore.getCurrentPlayer());
     }

@@ -7,14 +7,14 @@ import java.io.Serializable;
 /**
  * MULE
  */
-public class PlaceMuleStore implements Serializable{
+public class PlaceMuleStore implements Serializable {
 
     private Mule mule;
 
     /**
      * Creates a PlaceMuleStore.
      */
-    public PlaceMuleStore() {}
+    public PlaceMuleStore() { }
 
     /**
      * Gets the mule.

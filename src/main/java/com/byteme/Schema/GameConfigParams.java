@@ -6,7 +6,7 @@ import java.io.Serializable;
  * MULE
  */
 
-public class GameConfigParams implements Serializable{
+public class GameConfigParams implements Serializable {
     private final Difficulty difficulty;
     private final MapType mapType;
     private final int numPlayers;
@@ -47,6 +47,10 @@ public class GameConfigParams implements Serializable{
         return numPlayers;
     }
 
+    /**
+     * Turns params to string.
+     * @return The string.
+     */
     public String toString() {
         return "Difficulty: " + difficulty
                 + "\tMap Type: " + mapType + "\tNumber of Players: "

@@ -37,8 +37,9 @@ public class LandGrantStore implements Serializable {
      * Increments the current player.
      */
     public void incrementPlayer() {
-        if (currentPlayer == players.size() - 1)
+        if (currentPlayer == players.size() - 1) {
             incrementPropertyCount();
+        }
         currentPlayer = (currentPlayer + 1) % players.size();
     }
 

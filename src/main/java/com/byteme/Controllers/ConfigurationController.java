@@ -83,7 +83,11 @@ public class ConfigurationController {
      * difficultyEasy, difficultyNormal, difficultyHard of type RadioButton.
      */
     @FXML
-    private RadioButton difficultyEasy, difficultyNormal, difficultyHard;
+    private RadioButton difficultyEasy;
+    @FXML
+    private RadioButton difficultyNormal;
+    @FXML
+    private RadioButton difficultyHard;
     /**
      * numPlayersSlider of type Slider.
      */

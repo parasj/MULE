@@ -28,7 +28,7 @@ public class StoreStateStore implements Serializable {
     /**
      * Creates a StoreStateStore.
      */
-    public StoreStateStore() {}
+    public StoreStateStore() { }
 
     /**
      * Gets the state.
@@ -235,17 +235,17 @@ public class StoreStateStore implements Serializable {
      */
     public int getMuleTypePrice(String type) {
         switch (type) {
-            case "Food":
-                return mulePrice + FOOD_MULE_COST;
-            case "Energy":
-                return mulePrice + ENERGY_MULE_COST;
-            case "Smithore":
-                return mulePrice + SMITHORE_MULE_COST;
-            case "Crystite":
-                return mulePrice + CRYSTITE_MULE_COST;
-            default:
-                System.out.println("There was an error!");
-                return 0;
+        case "Food":
+            return mulePrice + FOOD_MULE_COST;
+        case "Energy":
+            return mulePrice + ENERGY_MULE_COST;
+        case "Smithore":
+            return mulePrice + SMITHORE_MULE_COST;
+        case "Crystite":
+            return mulePrice + CRYSTITE_MULE_COST;
+        default:
+            System.out.println("There was an error!");
+            return 0;
         }
     }
 
@@ -276,16 +276,16 @@ public class StoreStateStore implements Serializable {
      */
     public int getMuleTypeCost(String string) {
         switch (string) {
-            case "Food":
-                return FOOD_MULE_COST;
-            case "Energy":
-                return ENERGY_MULE_COST;
-            case "Smithore":
-                return SMITHORE_MULE_COST;
-            case "Crystite":
-                return CRYSTITE_MULE_COST;
-            default:
-                return 0;
+        case "Food":
+            return FOOD_MULE_COST;
+        case "Energy":
+            return ENERGY_MULE_COST;
+        case "Smithore":
+            return SMITHORE_MULE_COST;
+        case "Crystite":
+            return CRYSTITE_MULE_COST;
+        default:
+            return 0;
         }
     }
 }
