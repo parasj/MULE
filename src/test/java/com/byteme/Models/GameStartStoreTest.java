@@ -17,7 +17,7 @@ import static org.junit.Assert.*;
 public class GameStartStoreTest extends Main{
     @Test
     public void testSetCurrentPlayer() throws Exception {
-        Main.launch();
+        // Main.launch();
         //ImageView horse = ("#horse");
         GameStartStore.getInstance().setCurrentPlayer(1);
         assertEquals(GameStartStore.getInstance().getCurrentPlayer(), 1);
