@@ -18,7 +18,7 @@ public abstract class MapStateHandler implements CanTick, Initializable {
      * Changed Parameter names because of checkstyle.
      * @param boardController1 of type BoardController.
      */
-    public MapStateHandler(final BoardController boardController1) {
+    MapStateHandler(final BoardController boardController1) {
         this.boardController = boardController1;
     }
 
@@ -26,7 +26,7 @@ public abstract class MapStateHandler implements CanTick, Initializable {
      *
      * @return boardController of type BoardController.
      */
-    public final BoardController getBoardController() {
+    final BoardController getBoardController() {
         return boardController;
     }
 
@@ -64,7 +64,7 @@ public abstract class MapStateHandler implements CanTick, Initializable {
      *
      * @param log of type String.
      */
-    protected final void log(final String log) {
+    final void log(final String log) {
         System.out.println(log);
     }
 }

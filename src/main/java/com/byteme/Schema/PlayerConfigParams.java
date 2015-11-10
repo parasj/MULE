@@ -349,9 +349,9 @@ public class PlayerConfigParams implements Comparable<PlayerConfigParams>, Seria
     }
 
     /**
-     *
+     * CompareTo override
      * @param otherPlayer
-     * @return
+     * @return compare to value
      */
     @Override
     public int compareTo(PlayerConfigParams otherPlayer) {
@@ -370,33 +370,6 @@ public class PlayerConfigParams implements Comparable<PlayerConfigParams>, Seria
             }
         }
         return muleCount;
-    }
-
-    /**
-     *
-     * @param o
-     * @return
-     */
-    @Override
-    public boolean equals(Object o) {
-        if (this == o) return true;
-        if (o == null || getClass() != o.getClass()) return false;
-
-        PlayerConfigParams that = (PlayerConfigParams) o;
-
-        if (money != that.money) return false;
-        if (timeLeft != that.timeLeft) return false;
-        if (food != that.food) return false;
-        if (energy != that.energy) return false;
-        if (smithore != that.smithore) return false;
-        if (crystite != that.crystite) return false;
-        if (order != that.order) return false;
-        if (!name.equals(that.name)) return false;
-        if (race != that.race) return false;
-        if (!color.equals(that.color)) return false;
-        return !(properties != null ?
-                !properties.equals(that.properties) : that.properties != null);
-
     }
 
     /**

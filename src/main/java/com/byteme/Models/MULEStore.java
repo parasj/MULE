@@ -166,7 +166,7 @@ public class MULEStore {
      */
     private Object loadFromDisk(String string) {
         long timeStart = System.nanoTime();
-        Object obj = null;
+        Object obj;
         try {
             FileInputStream fileIn = new FileInputStream(string);
             ObjectInputStream in = new ObjectInputStream(fileIn);
@@ -189,12 +189,8 @@ public class MULEStore {
      *
      */
     public void reinit() {
-        configRepository.reinit();
-        gameStartStore.reinit();
         landGrantStore.reinit();
         landPurchaseStore.reinit();
         mapStateStore.reinit();
-        placeMuleStore.reinit();
-        storeStateStore.reinit();
     }
 }

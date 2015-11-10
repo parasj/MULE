@@ -47,7 +47,7 @@ public class MapBoard {
      * @param width
      * @param type
      */
-    public MapBoard(int height, int width, MapType type) {
+    private MapBoard(int height, int width, MapType type) {
         this.height = height;
         this.width = width;
 

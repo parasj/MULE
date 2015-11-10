@@ -10,8 +10,6 @@ import com.byteme.Util.TestableRandomWrapper;
 import javafx.fxml.FXML;
 import javafx.scene.control.Label;
 
-import java.util.Random;
-
 /**
  * MULE
  */
@@ -58,7 +56,6 @@ public class PubController {
      * mapStateStore of type MapStateStore.
      */
     private MapStateStore mapStateStore;
-    private static final int[] roundBonusArr = {50, 50, 50, 100, 100, 100, 100, 150, 150, 150, 150, 200};
     private TestableRandomWrapper random = new RandomWrapper();
 
     /**

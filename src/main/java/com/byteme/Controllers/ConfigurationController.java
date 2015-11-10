@@ -59,7 +59,7 @@ public class ConfigurationController {
             masterController.getBoardController().reinitialize();
             MasterController.getInstance().map();
         } catch (Exception exception) {
-            System.out.print(exception);
+            System.out.print("Issue loading configuration");
         }
     }
 
@@ -135,9 +135,6 @@ public class ConfigurationController {
      */
     private MapType selectedMapType() {
         // TODO: Give different maps based on player input
-        //switch ((String) mapType.getValue()) {
-            //default: return MapType.STANDARD;
-        //}
         return MapType.STANDARD;
     }
 

@@ -7,7 +7,7 @@ import java.util.Random;
  * MULE
  */
 public class RandomWrapper implements TestableRandomWrapper {
-    private Random random;
+    private final Random random;
 
     public RandomWrapper() {
         random = new SecureRandom();

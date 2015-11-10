@@ -13,7 +13,7 @@ public class LandPurchaseStore implements Serializable {
     private List<PlayerConfigParams> players;
     private int currentPlayer;
     private int currentPropertyCount;
-    private ConfigRepository configRepository;
+    private final ConfigRepository configRepository;
 
     /**
      *

@@ -8,7 +8,7 @@ import com.byteme.Util.TestableRandomWrapper;
  * MULE
  */
 public class RandomEventGenerator {
-    private TestableRandomWrapper random;
+    private final TestableRandomWrapper random;
     private static final int PROB = 27;
 
     public RandomEventGenerator() {
@@ -45,7 +45,7 @@ public class RandomEventGenerator {
      */
     public RandomEvent getRandomEvent(boolean includeBad) {
         RandomEvent randomEvent = RandomEvent.getRandomEvent();
-        while ((!includeBad && !randomEvent.isGood()) || randomEvent.equals(RandomEvent.NOTHING))
+        while ((!includeBad && randomEvent.isBad()) || randomEvent.equals(RandomEvent.NOTHING))
             randomEvent = RandomEvent.getRandomEvent();
         return randomEvent;
     }

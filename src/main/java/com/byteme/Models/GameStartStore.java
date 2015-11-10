@@ -6,7 +6,7 @@ import java.io.Serializable;
  * MULE
  */
 public class GameStartStore implements Serializable {
-    private ConfigRepository configRepository;
+    private final ConfigRepository configRepository;
     private int currentPlayer;
 
     /**
@@ -47,9 +47,4 @@ public class GameStartStore implements Serializable {
     public void incCurrentPlayer() {
         setCurrentPlayer((getCurrentPlayer() + 1) % configRepository.getTotalPlayers());
     }
-
-    /**
-     * Place holder is we need to reload classes later
-     */
-    public void reinit() {}
 }

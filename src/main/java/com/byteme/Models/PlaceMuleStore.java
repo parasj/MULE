@@ -35,9 +35,4 @@ public class PlaceMuleStore implements Serializable{
             throw new IllegalArgumentException("Mule is null!");
         }
     }
-
-    /**
-     *
-     */
-    public void reinit() {}
 }

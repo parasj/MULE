@@ -12,7 +12,7 @@ import java.util.*;
 public class ConfigRepository implements Serializable {
 
     private GameConfigParams gameConfigParams;
-    private Map<Integer, PlayerConfigParams> playerConfigList;
+    private final Map<Integer, PlayerConfigParams> playerConfigList;
 
     public ConfigRepository(GameConfigParams gameConfigParams, Map<Integer, PlayerConfigParams> playerConfigList) {
         this.gameConfigParams = gameConfigParams;
@@ -89,9 +89,4 @@ public class ConfigRepository implements Serializable {
     public PlayerConfigParams getFirstPlayerConfig() {
         return playerConfigList.get(1);
     }
-
-    /**
-     *
-     */
-    public void reinit() {}
 }

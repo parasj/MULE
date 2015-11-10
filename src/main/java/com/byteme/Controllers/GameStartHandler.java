@@ -65,18 +65,18 @@ public class GameStartHandler extends MapStateHandler {
      * instance of GameStartStore.
      * Swapped static and final positions.
      */
-    private GameStartStore gameStartStore = GameStartStore
+    private final GameStartStore gameStartStore = GameStartStore
         .getInstance();
     /**
      * instance of MapStateStore.
      */
-    private MapStateStore mapStateStore = MULEStore
+    private final MapStateStore mapStateStore = MULEStore
         .getInstance().getMapStateStore();
     /**
      * instance of configRepository.
      * Swapped final and static for checkstyle.
      */
-    private ConfigRepository configRepository
+    private final ConfigRepository configRepository
         = MULEStore.getInstance().getConfigRepository();
     /**
      * instance of RandomEventGenerator.
@@ -237,7 +237,7 @@ public class GameStartHandler extends MapStateHandler {
             Alert.AlertType alertType = Alert.AlertType.INFORMATION;
             String header = "Good fortune, " + mapStateStore
                 .getPlayerAt(gameStartStore.getCurrentPlayer()).getName() + "!";
-            if (!evt.isGood()) {
+            if (evt.isBad()) {
                 alertType = Alert.AlertType.WARNING;
                 header = "Better luck next time, " + mapStateStore
                 .getPlayerAt(gameStartStore.getCurrentPlayer()).getName() + "!";
