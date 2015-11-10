@@ -59,7 +59,7 @@ public class ConfigurationController {
             masterController.getBoardController().reinitialize();
             MasterController.getInstance().map();
         } catch (Exception exception) {
-            System.out.print(exception);
+            System.out.print(exception.getMessage());
         }
     }
 

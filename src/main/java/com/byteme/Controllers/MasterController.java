@@ -241,7 +241,7 @@ public class MasterController {
             map = new Scene(loader.load());
             setBoardController(loader.getController());
             pubController.setBoardController(boardController);
-            storeController.setBoardController(boardController);
+            StoreController.setBoardController(boardController);
         } catch (IOException e) {
             e.printStackTrace();
         }

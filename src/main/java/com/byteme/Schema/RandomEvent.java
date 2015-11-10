@@ -84,7 +84,7 @@ public enum RandomEvent {
      * @return
      */
     public boolean isGood() {
-        return isGood;
+        return !isGood;
     }
 
     /**

@@ -10,7 +10,6 @@ import com.byteme.Util.TestableRandomWrapper;
 import javafx.fxml.FXML;
 import javafx.scene.control.Label;
 
-import java.util.Random;
 
 /**
  * MULE
