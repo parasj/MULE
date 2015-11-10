@@ -237,7 +237,7 @@ public class GameStartHandler extends MapStateHandler {
             Alert.AlertType alertType = Alert.AlertType.INFORMATION;
             String header = "Good fortune, " + mapStateStore
                 .getPlayerAt(gameStartStore.getCurrentPlayer()).getName() + "!";
-            if (!evt.isGood()) {
+            if (evt.isGood()) {
                 alertType = Alert.AlertType.WARNING;
                 header = "Better luck next time, " + mapStateStore
                 .getPlayerAt(gameStartStore.getCurrentPlayer()).getName() + "!";

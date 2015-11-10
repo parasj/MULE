@@ -1,8 +1,5 @@
 package com.byteme.Schema;
 
-import javafx.fxml.Initializable;
-
-import javax.naming.spi.InitialContextFactory;
 import java.io.Serializable;
 
 /**

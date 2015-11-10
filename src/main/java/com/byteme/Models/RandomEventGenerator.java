@@ -45,7 +45,7 @@ public class RandomEventGenerator {
      */
     public RandomEvent getRandomEvent(boolean includeBad) {
         RandomEvent randomEvent = RandomEvent.getRandomEvent();
-        while ((!includeBad && !randomEvent.isGood()) || randomEvent.equals(RandomEvent.NOTHING))
+        while ((!includeBad && randomEvent.isGood()) || randomEvent.equals(RandomEvent.NOTHING))
             randomEvent = RandomEvent.getRandomEvent();
         return randomEvent;
     }
