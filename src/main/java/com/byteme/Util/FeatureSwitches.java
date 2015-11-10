@@ -7,9 +7,9 @@ import java.util.Map;
  * MULE
  */
 public class FeatureSwitches {
-    private static final FeatureSwitches ourInstance = new FeatureSwitches();
+    private static final FeatureSwitches OUR_INSTANCE = new FeatureSwitches();
     public static FeatureSwitches getInstance() {
-        return ourInstance;
+        return OUR_INSTANCE;
     }
 
     private final Map<String, Boolean> switches;

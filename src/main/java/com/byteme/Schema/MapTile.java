@@ -59,9 +59,11 @@ public enum MapTile {
      */
     public String imagePath(boolean mule) {
         if (mule) {
-            return imagePathWithMule.getOrDefault(this.name(), imagePathWithMule.get("P"));
+            return imagePathWithMule.getOrDefault(
+                    this.name(), imagePathWithMule.get("P"));
         } else {
-            return imagePath.getOrDefault(this.name(), imagePath.get("P"));
+            return imagePath.getOrDefault(
+                    this.name(), imagePath.get("P"));
         }
     }
 }

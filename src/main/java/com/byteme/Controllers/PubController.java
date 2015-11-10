@@ -58,10 +58,6 @@ public class PubController {
     private TestableRandomWrapper random = new RandomWrapper();
 
     /**
-     * configRepository of type ConfigRepository.
-     */
-    private ConfigRepository configRepository;
-    /**
      * ROUND_BONUS_ARR of type int[].
      */
     private static final int[] ROUND_BONUS_ARR =
@@ -81,11 +77,12 @@ public class PubController {
     @FXML
     private Label moneyLabel;
 
-    public PubController(TestableRandomWrapper random, GameStartStore gameStartStore, MapStateStore mapStateStore, ConfigRepository configRepository) {
+    public PubController(TestableRandomWrapper random,
+                         GameStartStore gameStartStore,
+                         MapStateStore mapStateStore) {
         this.random = random;
         this.gameStartStore = gameStartStore;
         this.mapStateStore = mapStateStore;
-        this.configRepository = configRepository;
         getMoney();
     }
 
@@ -160,10 +157,15 @@ public class PubController {
                     .getCurrentPlayer() + 1, mapStateStore
                         .getPlayerAt(gameStartStore.getCurrentPlayer())
                             .getName()));
-            playerLabel.setText(String.format("Player %d %s", gameStartStore.getCurrentPlayer() + 1, mapStateStore.getPlayerAt(gameStartStore.getCurrentPlayer()).getName()));
+            playerLabel.setText(String.format("Player %d %s",
+                    gameStartStore.getCurrentPlayer() + 1,
+                    mapStateStore.getPlayerAt(
+                            gameStartStore.getCurrentPlayer()).getName()));
         }
         if (moneyLabel != null) {
-            moneyLabel.setText("MONEY: " + mapStateStore.getPlayerAt(gameStartStore.getCurrentPlayer()).getMoney());
+            moneyLabel.setText("MONEY: "
+                    + mapStateStore.getPlayerAt(
+                    gameStartStore.getCurrentPlayer()).getMoney());
         }
     }
 
@@ -184,7 +186,6 @@ public class PubController {
     private void reinitialize() {
         gameStartStore = GameStartStore.getInstance();
         mapStateStore = MULEStore.getInstance().getMapStateStore();
-        configRepository = MULEStore.getInstance().getConfigRepository();
     }
 
     public PlayerConfigParams getPlayer() {

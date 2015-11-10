@@ -19,7 +19,8 @@ public class Property implements Serializable {
      * @param owner The owner
      * @param mapTile The MapTile
      */
-    public Property(int column, int row, PlayerConfigParams owner, MapTile mapTile) {
+    public Property(int column, int row,
+                    PlayerConfigParams owner, MapTile mapTile) {
         this.row = row;
         this.column = column;
         this.owner = owner;

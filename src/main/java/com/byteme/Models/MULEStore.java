@@ -6,7 +6,7 @@ import java.io.*;
  * MULE
  */
 public class MULEStore {
-    private static final MULEStore instance = new MULEStore();
+    private static final MULEStore INSTANCE = new MULEStore();
 
     private ConfigRepository configRepository;
     private GameStartStore gameStartStore;
@@ -17,11 +17,11 @@ public class MULEStore {
     private StoreStateStore storeStateStore;
 
     /**
-     * Gets the instance of MULEStore.
-     * @return The instance of MULEStore
+     * Gets the INSTANCE of MULEStore.
+     * @return The INSTANCE of MULEStore
      */
     public static MULEStore getInstance() {
-        return instance;
+        return INSTANCE;
     }
 
     /**
@@ -118,13 +118,20 @@ public class MULEStore {
      */
     public void load() {
         System.out.println("LOADING GAME FROM DISK!");
-        configRepository = (ConfigRepository) loadFromDisk("ConfigRepository.mule");
-        gameStartStore = (GameStartStore) loadFromDisk("GameStartStore.mule");
-        landGrantStore = (LandGrantStore) loadFromDisk("LandGrantStore.mule");
-        landPurchaseStore = (LandPurchaseStore) loadFromDisk("LandPurchaseStore.mule");
-        mapStateStore = (MapStateStore) loadFromDisk("MapStateStore.mule");
-        placeMuleStore = (PlaceMuleStore) loadFromDisk("PlaceMuleStore.mule");
-        storeStateStore = (StoreStateStore) loadFromDisk("StoreStateStore.mule");
+        configRepository = (ConfigRepository)
+                loadFromDisk("ConfigRepository.mule");
+        gameStartStore = (GameStartStore)
+                loadFromDisk("GameStartStore.mule");
+        landGrantStore = (LandGrantStore)
+                loadFromDisk("LandGrantStore.mule");
+        landPurchaseStore = (LandPurchaseStore)
+                loadFromDisk("LandPurchaseStore.mule");
+        mapStateStore = (MapStateStore)
+                loadFromDisk("MapStateStore.mule");
+        placeMuleStore = (PlaceMuleStore)
+                loadFromDisk("PlaceMuleStore.mule");
+        storeStateStore = (StoreStateStore)
+                loadFromDisk("StoreStateStore.mule");
     }
 
     /**
@@ -144,7 +151,7 @@ public class MULEStore {
     /**
      * Saves the game.
      * @param string Output file name.
-     * @param instance instance of the game.
+     * @param instance INSTANCE of the game.
      */
     private void saveToDisk(String string, Serializable instance) {
         try {
@@ -181,7 +188,8 @@ public class MULEStore {
             c.printStackTrace();
             return null;
         }
-        System.out.printf("Loading %s took %4d milliseconds%n", string, (System.nanoTime() - timeStart) / 1000000L);
+        System.out.printf("Loading %s took %4d milliseconds%n",
+                string, (System.nanoTime() - timeStart) / 1000000L);
         return obj;
     }
 

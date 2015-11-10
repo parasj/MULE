@@ -20,10 +20,10 @@ public class StoreStateStore implements Serializable {
     private int muleQuantity = 25;
     private int mulePrice = 100;
 
-    private static final int foodMuleCost = 25;
-    private static final int energyMuleCost = 50;
-    private static final int smithoreMuleCost = 75;
-    private static final int crystiteMuleCost = 25;
+    private static final int FOOD_MULE_COST = 25;
+    private static final int ENERGY_MULE_COST = 50;
+    private static final int SMITHORE_MULE_COST = 75;
+    private static final int CRYSTITE_MULE_COST = 25;
 
     /**
      * Creates a StoreStateStore.
@@ -236,13 +236,13 @@ public class StoreStateStore implements Serializable {
     public int getMuleTypePrice(String type) {
         switch (type) {
             case "Food":
-                return mulePrice + foodMuleCost;
+                return mulePrice + FOOD_MULE_COST;
             case "Energy":
-                return mulePrice + energyMuleCost;
+                return mulePrice + ENERGY_MULE_COST;
             case "Smithore":
-                return mulePrice + smithoreMuleCost;
+                return mulePrice + SMITHORE_MULE_COST;
             case "Crystite":
-                return mulePrice + crystiteMuleCost;
+                return mulePrice + CRYSTITE_MULE_COST;
             default:
                 System.out.println("There was an error!");
                 return 0;
@@ -277,13 +277,13 @@ public class StoreStateStore implements Serializable {
     public int getMuleTypeCost(String string) {
         switch (string) {
             case "Food":
-                return foodMuleCost;
+                return FOOD_MULE_COST;
             case "Energy":
-                return energyMuleCost;
+                return ENERGY_MULE_COST;
             case "Smithore":
-                return smithoreMuleCost;
+                return SMITHORE_MULE_COST;
             case "Crystite":
-                return crystiteMuleCost;
+                return CRYSTITE_MULE_COST;
             default:
                 return 0;
         }

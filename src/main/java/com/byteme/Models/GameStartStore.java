@@ -45,6 +45,7 @@ public class GameStartStore implements Serializable {
      * Increments the current player.
      */
     public void incrementCurrentPlayer() {
-        setCurrentPlayer((getCurrentPlayer() + 1) % configRepository.getTotalPlayers());
+        setCurrentPlayer((getCurrentPlayer() + 1)
+                % configRepository.getTotalPlayers());
     }
 }

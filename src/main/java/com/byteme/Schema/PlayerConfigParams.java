@@ -8,7 +8,8 @@ import java.util.ArrayList;
 /**
  * MULE
  */
-public class PlayerConfigParams implements Comparable<PlayerConfigParams>, Serializable {
+public class PlayerConfigParams
+        implements Comparable<PlayerConfigParams>, Serializable {
     private final String name;
     private final Race race;
     private final String color;
@@ -31,7 +32,9 @@ public class PlayerConfigParams implements Comparable<PlayerConfigParams>, Seria
      * @param properties The properties of the player.
      * @param order The order of the player.
      */
-    public PlayerConfigParams(String name, Race race, String color, int money, ArrayList<Property> properties, int order) {
+    public PlayerConfigParams(String name,
+                              Race race, String color, int money,
+                              ArrayList<Property> properties, int order) {
         this.name = name;
         this.race = race;
         this.color = color;
@@ -166,7 +169,8 @@ public class PlayerConfigParams implements Comparable<PlayerConfigParams>, Seria
      * @return The score of the player.
      */
     public int calcScore() {
-        return (this.money + 500 * properties.size()) + this.crystite + this.energy + this.food + this.smithore;
+        return (this.money + 500 * properties.size())
+                + this.crystite + this.energy + this.food + this.smithore;
     }
 
     /**
@@ -349,6 +353,30 @@ public class PlayerConfigParams implements Comparable<PlayerConfigParams>, Seria
     @Override
     public int compareTo(@NotNull PlayerConfigParams otherPlayer) {
         return (this.calcScore() - otherPlayer.calcScore());
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+
+        PlayerConfigParams that = (PlayerConfigParams) o;
+
+        if (money != that.money) return false;
+        if (timeLeft != that.timeLeft) return false;
+        if (food != that.food) return false;
+        if (energy != that.energy) return false;
+        if (smithore != that.smithore) return false;
+        if (crystite != that.crystite) return false;
+        if (order != that.order) return false;
+        if (name != null ? !name.equals(that.name)
+                : that.name != null) return false;
+        if (race != that.race) return false;
+        if (color != null ? !color.equals(that.color)
+                : that.color != null) return false;
+        return !(properties != null ?
+                !properties.equals(that.properties) : that.properties != null);
+
     }
 
     /**

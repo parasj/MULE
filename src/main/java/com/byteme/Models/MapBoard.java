@@ -11,12 +11,17 @@ public class MapBoard {
     private final int width;
     private MapTile[][] board;
 
-    private static final MapTile[][] standardMap =
-            {{MapTile.P,    MapTile.P,  MapTile.M1, MapTile.P,  MapTile.R,      MapTile.P,  MapTile.M3, MapTile.P,  MapTile.P},
-             {MapTile.P,    MapTile.M1, MapTile.P,  MapTile.P,  MapTile.R,      MapTile.P,  MapTile.P,  MapTile.P,  MapTile.M3},
-             {MapTile.M3,   MapTile.P,  MapTile.P,  MapTile.P,  MapTile.Town,   MapTile.P,  MapTile.P,  MapTile.P,  MapTile.M1},
-             {MapTile.P,    MapTile.M2, MapTile.P,  MapTile.P,  MapTile.R,      MapTile.P,  MapTile.M2, MapTile.P,  MapTile.P},
-             {MapTile.P,    MapTile.P,  MapTile.M2, MapTile.P,  MapTile.R,      MapTile.P,  MapTile.P,  MapTile.P,  MapTile.M2}};
+    private static final MapTile[][] STANDARD_MAP =
+            {{MapTile.P,    MapTile.P,  MapTile.M1, MapTile.P,  MapTile.R,
+                    MapTile.P,  MapTile.M3, MapTile.P,  MapTile.P},
+             {MapTile.P,    MapTile.M1, MapTile.P,  MapTile.P,  MapTile.R,
+                     MapTile.P,  MapTile.P,  MapTile.P,  MapTile.M3},
+             {MapTile.M3,   MapTile.P,  MapTile.P,  MapTile.P,  MapTile.Town,
+                     MapTile.P,  MapTile.P,  MapTile.P,  MapTile.M1},
+             {MapTile.P,    MapTile.M2, MapTile.P,  MapTile.P,  MapTile.R,
+                     MapTile.P,  MapTile.M2, MapTile.P,  MapTile.P},
+             {MapTile.P,    MapTile.P,  MapTile.M2, MapTile.P,  MapTile.R,
+                     MapTile.P,  MapTile.P,  MapTile.P,  MapTile.M2}};
 
     /**
      * Creates a new MapBoard.
@@ -54,7 +59,7 @@ public class MapBoard {
         if (type == MapType.RANDOM) {
             board = new MapTile[height][9];
         } else if (type == MapType.STANDARD) {
-            board = standardMap;
+            board = STANDARD_MAP;
 
         }
     }

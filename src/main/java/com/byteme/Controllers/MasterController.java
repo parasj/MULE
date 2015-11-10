@@ -14,7 +14,8 @@ public class MasterController {
     /**
      * gameStartStore of type GameStartStore.
      */
-    private static final MasterController INSTANCE = new MasterController();//Change this back.
+    private static final MasterController INSTANCE
+            = new MasterController();
     /**
      * startGame of type Scene.
      */

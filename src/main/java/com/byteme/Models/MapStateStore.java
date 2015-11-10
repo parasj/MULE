@@ -10,18 +10,21 @@ import java.util.Collections;
 /**
  * MULE
  */
-public class MapStateStore implements Serializable {
+public class MapStateStore
+        implements Serializable {
     private final ConfigRepository configRepository;
     private MapControllerStates currentState;
     private boolean fromTownGoToPub;
     private int currentPlayer;
     private int currentRound = 1;
-    private int passCounter; // Used to determine when to stop property selection immediately
-    private int purchaseOpportunities; // Used to determine duration of full property selection
+    private int passCounter;
+    private int purchaseOpportunities;
     private int numPlayers;
     private ArrayList<PlayerConfigParams> players;
 
-    public MapStateStore(ConfigRepository configRepository, int currentRound, ArrayList<PlayerConfigParams> players) {
+    public MapStateStore(ConfigRepository configRepository,
+                         int currentRound,
+                         ArrayList<PlayerConfigParams> players) {
         this.currentRound = currentRound;
         this.configRepository = configRepository;
         this.players = players;
@@ -178,7 +181,8 @@ public class MapStateStore implements Serializable {
         if (index < players.size()) {
             return players.get(index);
         } else {
-            throw new ArrayIndexOutOfBoundsException(index + " is less than size: " + players.size());
+            throw new ArrayIndexOutOfBoundsException(index
+                    + " is less than size: " + players.size());
         }
     }
 

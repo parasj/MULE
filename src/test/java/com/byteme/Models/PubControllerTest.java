@@ -72,54 +72,54 @@ public class PubControllerTest {
     public void testGetMoney() {
         //t = MAX Rand = 200 Round = 1
         mapStateStore.getPlayerAt(gameStartStore.getCurrentPlayer()).setTimeLeft(Integer.MAX_VALUE);
-        pubController = new PubController(mockRandom200, gameStartStore, mapStateStore, configRepository);
+        pubController = new PubController(mockRandom200, gameStartStore, mapStateStore);
         assertTrue(pubController.getPlayer().getMoney() == 350);
 
         //t = 37 Rand = 200 Round = 1
         mapStateStore.getPlayerAt(gameStartStore.getCurrentPlayer()).setTimeLeft(37);
-        pubController = new PubController(mockRandom200, gameStartStore, mapStateStore, configRepository);
+        pubController = new PubController(mockRandom200, gameStartStore, mapStateStore);
         assertTrue(pubController.getPlayer().getMoney() == 600);
 
         //t = 25 Rand = 150 Round = 2
         mapStateStore.getPlayerAt(gameStartStore.getCurrentPlayer()).setTimeLeft(25);
         mapStateStore.incRound();
-        pubController = new PubController(mockRandom150, gameStartStore, mapStateStore, configRepository);
+        pubController = new PubController(mockRandom150, gameStartStore, mapStateStore);
         assertTrue(pubController.getPlayer().getMoney() == 850);
 
         //t = 12 Rand = 100 Round = 3
         mapStateStore.getPlayerAt(gameStartStore.getCurrentPlayer()).setTimeLeft(12);
         mapStateStore.incRound();
-        pubController = new PubController(mockRandom100, gameStartStore, mapStateStore, configRepository);
+        pubController = new PubController(mockRandom100, gameStartStore, mapStateStore);
         assertTrue(pubController.getPlayer().getMoney() == 1100);
 
         //t = 1 Rand = 50 Round = 4
         mapStateStore.getPlayerAt(gameStartStore.getCurrentPlayer()).setTimeLeft(1);
         mapStateStore.incRound();
-        pubController = new PubController(mockRandom50, gameStartStore, mapStateStore, configRepository);
+        pubController = new PubController(mockRandom50, gameStartStore, mapStateStore);
         assertTrue(pubController.getPlayer().getMoney() == 1350);
 
         //t = 0 Rand = 0 Round = 5
         mapStateStore.getPlayerAt(gameStartStore.getCurrentPlayer()).setTimeLeft(0);
         mapStateStore.incRound();
-        pubController = new PubController(mockRandom0, gameStartStore, mapStateStore, configRepository);
+        pubController = new PubController(mockRandom0, gameStartStore, mapStateStore);
         assertTrue(pubController.getPlayer().getMoney() == 1350);
 
         //t = 37 Rand = 1 Round = 6
         mapStateStore.getPlayerAt(gameStartStore.getCurrentPlayer()).setTimeLeft(37);
         mapStateStore.incRound();
-        pubController = new PubController(mockRandom1, gameStartStore, mapStateStore, configRepository);
+        pubController = new PubController(mockRandom1, gameStartStore, mapStateStore);
         assertTrue(pubController.getPlayer().getMoney() == 1450);
 
         //t = 1 Rand = 1 Round = 7
         mapStateStore.getPlayerAt(gameStartStore.getCurrentPlayer()).setTimeLeft(1);
         mapStateStore.incRound();
-        pubController = new PubController(mockRandom1, gameStartStore, mapStateStore, configRepository);
+        pubController = new PubController(mockRandom1, gameStartStore, mapStateStore);
         assertTrue(pubController.getPlayer().getMoney() == 1550);
 
         //t = 1 Rand = 1 Round = 8
         mapStateStore.getPlayerAt(gameStartStore.getCurrentPlayer()).setTimeLeft(1);
         mapStateStore.incRound();
-        pubController = new PubController(mockRandom1, gameStartStore, mapStateStore, configRepository);
+        pubController = new PubController(mockRandom1, gameStartStore, mapStateStore);
         System.out.println("TEST: " + pubController.getPlayer().getMoney());
         assertTrue(pubController.getPlayer().getMoney() == 1700);
         System.out.println(pubController.getPlayer().getMoney());
@@ -127,30 +127,30 @@ public class PubControllerTest {
         //t = 1 Rand = 1 Round = 9
         mapStateStore.getPlayerAt(gameStartStore.getCurrentPlayer()).setTimeLeft(1);
         mapStateStore.incRound();
-        pubController = new PubController(mockRandom1, gameStartStore, mapStateStore, configRepository);
+        pubController = new PubController(mockRandom1, gameStartStore, mapStateStore);
         assertTrue(pubController.getPlayer().getMoney() == 1850);
 
         //t = 1 Rand = 1 Round = 10
         mapStateStore.getPlayerAt(gameStartStore.getCurrentPlayer()).setTimeLeft(1);
         mapStateStore.incRound();
-        pubController = new PubController(mockRandom1, gameStartStore, mapStateStore, configRepository);
+        pubController = new PubController(mockRandom1, gameStartStore, mapStateStore);
         assertTrue(pubController.getPlayer().getMoney() == 2000);
 
         //t = 1 Rand = 1 Round = 11
         mapStateStore.getPlayerAt(gameStartStore.getCurrentPlayer()).setTimeLeft(1);
         mapStateStore.incRound();
-        pubController = new PubController(mockRandom1, gameStartStore, mapStateStore, configRepository);
+        pubController = new PubController(mockRandom1, gameStartStore, mapStateStore);
         assertTrue(pubController.getPlayer().getMoney() == 2150);
 
         //t = 1 Rand = 1 Round = 12
         mapStateStore.getPlayerAt(gameStartStore.getCurrentPlayer()).setTimeLeft(1);
         mapStateStore.incRound();
-        pubController = new PubController(mockRandom1, gameStartStore, mapStateStore, configRepository);
+        pubController = new PubController(mockRandom1, gameStartStore, mapStateStore);
         assertTrue(pubController.getPlayer().getMoney() == 2350);
 
         //t = minInt Rand = 1 Round = 12
         mapStateStore.getPlayerAt(gameStartStore.getCurrentPlayer()).setTimeLeft(Integer.MIN_VALUE);
-        pubController = new PubController(mockRandom1, gameStartStore, mapStateStore, configRepository);
+        pubController = new PubController(mockRandom1, gameStartStore, mapStateStore);
         try {
             pubController.getPlayer().getMoney();
         } catch (IllegalArgumentException e) {

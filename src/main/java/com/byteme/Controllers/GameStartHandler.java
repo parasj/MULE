@@ -313,11 +313,11 @@ public class GameStartHandler extends MapStateHandler {
                                     player.setCrystite(player.getCrystite()
                                         + rand.nextInt(PCRYSTITE));
                                     break;
+                                    default:
+                                    throw new IllegalArgumentException("Type "
+                                            + "must be specified");
                             }
                             break;
-                            default:
-                                    throw new IllegalArgumentException("Type "
-                                        + "must be specified");
                         case M1:
                             switch (mule.getType()) {
                                 case FOOD:
@@ -381,6 +381,9 @@ public class GameStartHandler extends MapStateHandler {
                                         + "must be specified");
                             }
                             break;
+                        default:
+                            throw new IllegalArgumentException("Type "
+                                    + "must be specified");
                     }
                     player.subEnergy();
                 }

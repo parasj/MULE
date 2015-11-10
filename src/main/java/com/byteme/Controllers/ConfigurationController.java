@@ -104,7 +104,8 @@ public class ConfigurationController {
     }
 
     /**
-     * Runs when player clicks "OK" button on the Game Configuration settings screen.
+     * Runs when player clicks "OK" button
+     * on the Game Configuration settings screen.
      * Saves the configuration settings.
      * Opens Player 1 settings configuration screen.
      */

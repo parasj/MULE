@@ -48,6 +48,8 @@ public class GameConfigParams implements Serializable{
     }
 
     public String toString() {
-        return "Difficulty: " + difficulty + "\tMap Type: " + mapType + "\tNumber of Players: " + numPlayers;
+        return "Difficulty: " + difficulty
+                + "\tMap Type: " + mapType + "\tNumber of Players: "
+                + numPlayers;
     }
 }
