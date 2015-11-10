@@ -1,34 +1,29 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
-<?import javafx.scene.shape.*?>
-<?import javafx.scene.canvas.*?>
 <?import javafx.scene.text.*?>
 <?import javafx.scene.control.*?>
-<?import java.lang.*?>
 <?import javafx.scene.image.*?>
 <?import javafx.scene.layout.*?>
 
 <Pane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="700.0" prefWidth="935.0" style="-fx-background-color: #2C3E50;" xmlns="http://javafx.com/javafx/8.0.40" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.byteme.Controllers.PubController">
-    <children>
         <Label fx:id="playerLabel" layoutX="70.0" layoutY="30.0" prefHeight="100.0" prefWidth="246.0" text="HI" textFill="WHITE">
             <font>
                 <Font size="30.0" />
             </font>
         </Label>
         <ImageView fitHeight="400.0" fitWidth="400.0" layoutX="300.0" layoutY="250.0" pickOnBounds="true" preserveRatio="true">
-                <image>
-                    <Image url="@../images/moneybag.png" />
-                </image>
+            <image>
+                <Image url="@../images/moneybag.png" />
+            </image>
         </ImageView>
         <Button layoutX="721.0" layoutY="628.0" mnemonicParsing="false" onAction="#goToMap" text="Back to Map">
             <font>
                 <Font size="24.0" />
             </font>
         </Button>
-    <Label fx:id="moneyLabel" layoutX="647.0" layoutY="30.0" prefHeight="100.0" prefWidth="246.0" text="HI" textFill="WHITE">
-        <font>
-            <Font size="30.0" />
-        </font>
-    </Label>
-    </children>
+        <Label fx:id="moneyLabel" layoutX="647.0" layoutY="30.0" prefHeight="100.0" prefWidth="246.0" text="HI" textFill="WHITE">
+            <font>
+                <Font size="30.0" />
+            </font>
+        </Label>
 </Pane>

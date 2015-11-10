@@ -70,7 +70,7 @@ public class LandGrantHandler extends MapStateHandler {
     //Sees if phase is over
     private void checkIfDone() {
         // Land Grant is only 2 turns per player
-        getLandGrantStore().incrPlayer();
+        getLandGrantStore().incrementPlayer();
         if (getLandGrantStore().getCurrentPropertyCount() < MAX_PROPERTIES) {
             getBoardController().setPlayer(getLandGrantStore()
                 .getCurrentPlayer());
@@ -96,36 +96,27 @@ public class LandGrantHandler extends MapStateHandler {
         getBoardController().getTimerLabel().setText("");
     }
 
-    /**
-     *
-     * @param location
-     * @param resources
-     */
     @Override
     public void initialize(final URL location, final ResourceBundle resources) {
     }
 
-    /**
-     *
-     */
     @Override
     public void tick() {
     }
 
     /**
-     *
+     * Gets stores.
      * @return instance of MapStateStore.
      */
-    //Gets stores
-    public final MapStateStore getMapStateStore() {
+    private MapStateStore getMapStateStore() {
         return MULEStore.getInstance().getMapStateStore();
     }
 
     /**
-     *
+     * Gets the instance of LandGrantStore.
      * @return instance of LandGrantStore.
      */
-    public final LandGrantStore getLandGrantStore() {
+    private LandGrantStore getLandGrantStore() {
         return MULEStore.getInstance().getLandGrantStore();
     }
 }

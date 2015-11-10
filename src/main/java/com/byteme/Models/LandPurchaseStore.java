@@ -16,8 +16,8 @@ public class LandPurchaseStore implements Serializable {
     private final ConfigRepository configRepository;
 
     /**
-     *
-     * @param configRepository
+     * Creates a LandPurchaseStore object.
+     * @param configRepository The config repository
      */
     public LandPurchaseStore(ConfigRepository configRepository) {
         this.configRepository = configRepository;
@@ -27,74 +27,74 @@ public class LandPurchaseStore implements Serializable {
     }
 
     /**
-     *
+     * Increments the player by one.
      */
-    public void incrPlayer() {
+    public void incrementPlayer() {
         if (currentPlayer == players.size() - 1) {
-            incrPropertyCount();
+            incrementPropertyCount();
         }
         currentPlayer = (currentPlayer + 1) % players.size();
     }
 
     /**
-     *
-     * @return
+     * Returns the current player.
+     * @return The current player
      */
     public PlayerConfigParams getCurrentPlayer() {
         return players.get(currentPlayer);
     }
 
     /**
-     *
+     * Increases the current property count by one.
      */
-    public void incrPropertyCount() {
+    public void incrementPropertyCount() {
         currentPropertyCount++;
     }
 
     /**
-     *
-     * @return
+     * Gets the current property count.
+     * @return The property count
      */
     public int getCurrentPropertyCount() {
         return currentPropertyCount;
     }
 
     /**
-     *
-     * @return
+     * Gets the current player's ID.
+     * @return The current player's ID
      */
     public int getCurrentPlayerId() {
         return currentPlayer;
     }
 
     /**
-     *
-     * @return
+     * Gets the list of players.
+     * @return List of players.
      */
     public List<PlayerConfigParams> getPlayers() {
         return players;
     }
 
     /**
-     *
-     * @param currentPropertyCount
+     * Sets the current property count.
+     * @param currentPropertyCount The current property count
      */
     public void setCurrentPropertyCount(int currentPropertyCount) {
         this.currentPropertyCount = currentPropertyCount;
     }
 
     /**
-     *
-     * @param currentPlayer
+     * Sets the ID of the current player.
+     * @param currentPlayer Which player is current player
      */
     public void setCurrentPlayerId(int currentPlayer) {
         this.currentPlayer = currentPlayer;
     }
 
     /**
-     *
+     * Resets the player list.
      */
-    public void reinit() {
+    public void reinitialize() {
         players = new ArrayList<>(configRepository.getPlayers());
     }
 }

@@ -9,59 +9,38 @@ import java.util.ResourceBundle;
  */
 public class EmptyHandler extends MapStateHandler {
     /**
-     *
+     * An empty handler object.
      * @param boardController of type BoardController.
      */
     public EmptyHandler(final BoardController boardController) {
         super(boardController);
     }
 
-    /**
-     *
-     */
     @Override
     public void handlePass() {
 
     }
 
-    /**
-     *
-     */
     @Override
     public void handleTownButtonClicked() {
 
     }
 
-    /**
-     *
-     * @param event of type MouseEvent.
-     */
     @Override
     public void tileChosen(final MouseEvent event) {
 
     }
 
-    /**
-     *
-     */
     @Override
     public void stateChanged() {
 
     }
 
-    /**
-     *
-     */
     @Override
     public void tick() {
 
     }
 
-    /**
-     *
-     * @param location
-     * @param resources
-     */
     @Override
     public void initialize(final URL location, final ResourceBundle resources) {
 

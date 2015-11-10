@@ -14,17 +14,17 @@ import java.util.Locale;
  */
 public class ConfigurationController {
     /**
-     * FLAPPERNUM of type int.
+     * FLAPPER_NUM of type int.
      */
-    private static final int FLAPPERNUM = 1600;
+    private static final int FLAPPER_NUM = 1600;
     /**
-     * HUMANNUM of type int.
+     * HUMAN_NUM of type int.
      */
-    private static final int HUMANNUM = 600;
+    private static final int HUMAN_NUM = 600;
     /**
-     * DEFAULTNUM of type int.
+     * DEFAULT_NUM of type int.
      */
-    private static final int DEFAULTNUM = 1000;
+    private static final int DEFAULT_NUM = 1000;
     /**
      * numPlayers of type int.
      */
@@ -99,7 +99,7 @@ public class ConfigurationController {
      * @param num the num of players
      * Sets number of players. Avoids FindBugs Problem
      */
-    public static void setNumPlayers(int num) {
+    private static void setNumPlayers(int num) {
         ConfigurationController.numPlayers = num;
     }
 
@@ -114,7 +114,7 @@ public class ConfigurationController {
         MapType map = selectedMapType();
         int numPlayers = (int) numPlayersSlider.getValue();
 
-        MULEStore.getInstance().reinit();
+        MULEStore.getInstance().reinitialize();
 
         System.out.println("=================================================");
         System.out.println("SAVING GAME CONFIGURATION INFORMATION");
@@ -223,7 +223,7 @@ public class ConfigurationController {
 
             if (currentPlayer >= numPlayers) {
                 // Go to Map screen.
-                MULEStore.getInstance().reinit();
+                MULEStore.getInstance().reinitialize();
                 MasterController.getInstance().createMap();
                 MasterController.getInstance().map();
                 MULEStore.getInstance().getMapStateStore().refresh();
@@ -246,16 +246,16 @@ public class ConfigurationController {
      * @param race The race of the player as parsed by the ChoiceBox
      * @return The starting money for the player
      */
-    public final int chooseMoneyAmount(String race) {
+    private int chooseMoneyAmount(String race) {
         race = race.toLowerCase();
 
         switch (race) {
             case "flapper":
-                return FLAPPERNUM;
+                return FLAPPER_NUM;
             case "human":
-                return HUMANNUM;
+                return HUMAN_NUM;
             default:
-                return DEFAULTNUM;
+                return DEFAULT_NUM;
         }
     }
 
@@ -282,7 +282,7 @@ public class ConfigurationController {
      *
      * @return instance of ConfigRepository.
      */
-    public final ConfigRepository getConfigRepository() {
+    private ConfigRepository getConfigRepository() {
         ConfigRepository configRepository = MULEStore.getInstance()
             .getConfigRepository();
         if (configRepository == null) {

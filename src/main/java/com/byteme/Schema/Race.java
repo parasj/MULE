@@ -1,15 +1,11 @@
 package com.byteme.Schema;
 
 /**
- * MULE
+ * MULE Race enum.
  */
 public enum Race {
     FLAPPER, HUMAN, BONZOID, UGAITE, BUZZITE;
 
-    /**
-     *
-     * @return
-     */
     @Override
     public String toString() {
         return EnumHumanizer.humanizeEnum(super.toString());

@@ -19,33 +19,33 @@ public class MapBoard {
              {MapTile.P,    MapTile.P,  MapTile.M2, MapTile.P,  MapTile.R,      MapTile.P,  MapTile.P,  MapTile.P,  MapTile.M2}};
 
     /**
-     *
+     * Creates a new MapBoard.
      */
     public MapBoard() {
         this(5, 9, MapType.STANDARD);
     }
 
     /**
-     *
-     * @return
+     * Gets the width.
+     * @return The width
      */
     public int getWidth() {
         return width;
     }
 
     /**
-     *
-     * @return
+     * Gets the height.
+     * @return The height
      */
     public int getHeight() {
         return height;
     }
 
     /**
-     *
-     * @param height
-     * @param width
-     * @param type
+     * Creates a MapBoard.
+     * @param height The height
+     * @param width The width
+     * @param type The MapType
      */
     private MapBoard(int height, int width, MapType type) {
         this.height = height;
@@ -60,28 +60,28 @@ public class MapBoard {
     }
 
     /**
-     * Gets the map board
-     * @return board
+     * Gets the map board.
+     * @return The board
      */
     public MapTile[][] getBoard() {
         return board.clone();
     }
 
     /**
-     *
-     * @param height
-     * @param width
-     * @return
+     * Gets the tile at board[height][width].
+     * @param height The height.
+     * @param width The width.
+     * @return The tile
      */
     public MapTile getTile(int height, int width) {
         return board[height][width];
     }
 
     /**
-     *
-     * @param height
-     * @param width
-     * @param newTile
+     * Sets the tile at height, width.
+     * @param height The height
+     * @param width The width
+     * @param newTile The new tile to be set
      */
     public void setTile(int height, int width, MapTile newTile) {
         this.board[height][width] = newTile;

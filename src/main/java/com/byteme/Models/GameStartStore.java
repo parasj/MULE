@@ -10,41 +10,41 @@ public class GameStartStore implements Serializable {
     private int currentPlayer;
 
     /**
-     *
-     * @param configRepository
+     * Creates a GameStartStore object with a given config.
+     * @param configRepository The config repository.
      */
     public GameStartStore(ConfigRepository configRepository) {
         this.configRepository = configRepository;
     }
 
     /**
-     *
-     * @return
+     * Gets the instance of GameStartStore.
+     * @return The instance of GameStartStore.
      */
     public static GameStartStore getInstance() {
         return MULEStore.getInstance().getGameStartStore();
     }
 
     /**
-     *
-     * @return
+     * Gets the current player number.
+     * @return The current player
      */
     public int getCurrentPlayer() {
         return currentPlayer;
     }
 
     /**
-     *
-     * @param currentPlayer
+     * Sets the current player number.
+     * @param currentPlayer The desired current player.
      */
     public void setCurrentPlayer(int currentPlayer) {
         this.currentPlayer = currentPlayer;
     }
 
     /**
-     *
+     * Increments the current player.
      */
-    public void incCurrentPlayer() {
+    public void incrementCurrentPlayer() {
         setCurrentPlayer((getCurrentPlayer() + 1) % configRepository.getTotalPlayers());
     }
 }

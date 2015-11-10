@@ -1,6 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
-<?import javafx.geometry.*?>
 <?import javafx.scene.text.*?>
 <?import javafx.scene.control.*?>
 <?import java.lang.*?>
@@ -8,7 +7,6 @@
 <?import javafx.collections.*?>
 
 <Pane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0" style="-fx-background-color: #2C3E50;" xmlns="http://javafx.com/javafx/8.0.40" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.byteme.Controllers.ConfigurationController">
-   <children>
       <Label layoutX="43.0" layoutY="115.0" text="Difficulty" textFill="WHITE">
          <font>
             <Font size="24.0" />
@@ -52,5 +50,4 @@
       <RadioButton fx:id="difficultyNormal" layoutX="43.0" layoutY="191.0" mnemonicParsing="false" text="Normal" textFill="WHITE" toggleGroup="$DifficultyGroup" />
       <RadioButton fx:id="difficultyHard" layoutX="43.0" layoutY="219.0" mnemonicParsing="false" text="Tournament" textFill="WHITE" toggleGroup="$DifficultyGroup" />
       <Label layoutX="43.0" layoutY="345.0" prefHeight="21.0" prefWidth="255.0" text="  2                           3                          4" textFill="WHITE" />
-   </children>
 </Pane>

@@ -9,24 +9,24 @@ public class Mule implements Serializable {
     private MuleType type;
 
     /**
-     *
-     * @param type
+     * Creates a Mule.
+     * @param type The type of mule.
      */
     public Mule(MuleType type) {
         this.type = type;
     }
 
     /**
-     *
-     * @return
+     * Gets the type of the Mule.
+     * @return The type of the Mule
      */
     public MuleType getType() {
         return type;
     }
 
     /**
-     *
-     * @param type
+     * Sets the type of the Mule.
+     * @param type The type of the Mule
      */
     public void setType(MuleType type) {
         if (type != null) {
@@ -36,10 +36,6 @@ public class Mule implements Serializable {
         }
     }
 
-    /**
-     *
-     * @return
-     */
     @Override
     public String toString() {
         return "Mule{" +

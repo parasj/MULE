@@ -81,7 +81,7 @@ public class GameStartHandler extends MapStateHandler {
     /**
      * instance of RandomEventGenerator.
      */
-    private static final RandomEventGenerator EVTGEN
+    private static final RandomEventGenerator EVENT_GENERATOR
         = new RandomEventGenerator();
 
     /**
@@ -209,7 +209,7 @@ public class GameStartHandler extends MapStateHandler {
             gameStartStore.setCurrentPlayer(1);
             mapStateStore.sortPlayers();
         }
-        gameStartStore.incCurrentPlayer();
+        gameStartStore.incrementCurrentPlayer();
         mapStateStore.getPlayerAt(gameStartStore.getCurrentPlayer())
             .calcTimeLeft();
         log("Player changed to " + gameStartStore.getCurrentPlayer());
@@ -223,7 +223,7 @@ public class GameStartHandler extends MapStateHandler {
     public final void calculateRandomEvents() {
         PlayerConfigParams p = mapStateStore.getPlayerAt(gameStartStore
             .getCurrentPlayer());
-        RandomEvent evt = EVTGEN.getEvent(lastPlace(p));
+        RandomEvent evt = EVENT_GENERATOR.getEvent(lastPlace(p));
         p.setFood(evt.calcFood(p.getFood()));
         p.setEnergy(evt.calcEnergy(p.getEnergy()));
         p.setMoney(evt.calcMoney(p.getMoney(), mapStateStore
@@ -270,15 +270,15 @@ public class GameStartHandler extends MapStateHandler {
     /**
      *
      */
-    //Calcs how much mules make
+    //Calculates how much mules make
     private void calculateProduction() {
         Random rand = new Random();
         for (PlayerConfigParams player: mapStateStore.getPlayers()) {
             for (Property prop : player.getProperties()) {
                 Mule mule = prop.getMule();
                 if (mule != null && player.getEnergy() > 0) {
-                    log("Property is: " + prop.getMaptile());
-                    switch (prop.getMaptile()) {
+                    log("Property is: " + prop.getMapTile());
+                    switch (prop.getMapTile()) {
                         case R:
                             switch (mule.getType()) {
                                 case FOOD:

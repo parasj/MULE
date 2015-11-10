@@ -20,17 +20,17 @@ public class RandomEventGenerator {
     }
 
     /**
-     *
-     * @return
+     * Gets a random event either good or bad.
+     * @return The random event.
      */
     public RandomEvent getEvent() {
         return getEvent(false);
     }
 
     /**
-     *
-     * @param onlyGood
-     * @return
+     * Gets a random event with choice of good or bad.
+     * @param onlyGood Only good events
+     * @return The random event
      */
     public RandomEvent getEvent(boolean onlyGood) {
         if (!flipCoin()) return RandomEvent.NOTHING;
@@ -39,11 +39,11 @@ public class RandomEventGenerator {
     }
 
     /**
-     *
-     * @param includeBad
-     * @return
+     * Get the random event.
+     * @param includeBad Should there be bad events as well
+     * @return The Random Event
      */
-    public RandomEvent getRandomEvent(boolean includeBad) {
+    private RandomEvent getRandomEvent(boolean includeBad) {
         RandomEvent randomEvent = RandomEvent.getRandomEvent();
         while ((!includeBad && randomEvent.isGood()) || randomEvent.equals(RandomEvent.NOTHING))
             randomEvent = RandomEvent.getRandomEvent();
@@ -51,8 +51,8 @@ public class RandomEventGenerator {
     }
 
     /**
-     *
-     * @return
+     * Flips a coin.
+     * @return The coin result
      */
     private boolean flipCoin() {
         int flip = random.getInt(100);

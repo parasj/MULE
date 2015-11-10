@@ -13,10 +13,10 @@ public enum RandomEvent {
     YOU FOUND A DEAD MOOSE RAT AND SOLD THE HIDE FOR $2*m.
     FLYING CAT-BUGS ATE THE ROOF OFF YOUR HOUSE. REPAIRS COST $4*m.
     MISCHIEVOUS UGA STUDENTS BROKE INTO YOUR STORAGE SHED AND STOLE HALF YOUR FOOD.
-    YOUR SPACE GYPSY INLAWS MADE A MESS OF THE TOWN. IT COST YOU $6*m TO CLEAN IT UP.
+    YOUR SPACE GYPSY IN-LAWS MADE A MESS OF THE TOWN. IT COST YOU $6*m TO CLEAN IT UP.
     */
 
-    NOTHING, GT_ALUMNI_PACKAGE, TECH_STUDENT_HOSPITALITY, MUSEUM_COMPUTER, MOOSE_RAT, FLYING_CAT_BUGS, UGA_STUDENTS, SPACE_INLAWS;
+    NOTHING, GT_ALUMNI_PACKAGE, TECH_STUDENT_HOSPITALITY, MUSEUM_COMPUTER, MOOSE_RAT, FLYING_CAT_BUGS, UGA_STUDENTS, SPACE_IN_LAWS;
 
     private boolean isGood;
     private int foodEffect, energyEffect, oreEffect, moneyEffect;
@@ -31,7 +31,7 @@ public enum RandomEvent {
         MOOSE_RAT.str = "You found a dead moose rat and sold the hide for $###.";
         FLYING_CAT_BUGS.str = "Flying cat-bugs are the roof off your house. Repairs cost $###.";
         UGA_STUDENTS.str = "Mischievous UGA students broke into your storage shed and stole half your food.";
-        SPACE_INLAWS.str = "Your space gypsy inlaws made a mess of the town. It cost you $### to clean it up.";
+        SPACE_IN_LAWS.str = "Your space gypsy in-laws made a mess of the town. It cost you $### to clean it up.";
 
         NOTHING.isGood = true;
         GT_ALUMNI_PACKAGE.isGood = true;
@@ -40,7 +40,7 @@ public enum RandomEvent {
         MOOSE_RAT.isGood = true;
         FLYING_CAT_BUGS.isGood = false;
         UGA_STUDENTS.isGood = false;
-        SPACE_INLAWS.isGood = false;
+        SPACE_IN_LAWS.isGood = false;
 
         NOTHING.foodEffect = 0;
         GT_ALUMNI_PACKAGE.foodEffect = 3;
@@ -49,7 +49,7 @@ public enum RandomEvent {
         MOOSE_RAT.foodEffect = 0;
         FLYING_CAT_BUGS.foodEffect = 0;
         UGA_STUDENTS.foodEffect = -10; // temp value
-        SPACE_INLAWS.foodEffect = 0;
+        SPACE_IN_LAWS.foodEffect = 0;
 
         NOTHING.oreEffect = 0;
         GT_ALUMNI_PACKAGE.oreEffect = 0;
@@ -58,7 +58,7 @@ public enum RandomEvent {
         MOOSE_RAT.oreEffect = 0;
         FLYING_CAT_BUGS.oreEffect = 0;
         UGA_STUDENTS.oreEffect = 0;
-        SPACE_INLAWS.oreEffect = 0;
+        SPACE_IN_LAWS.oreEffect = 0;
 
         NOTHING.energyEffect = 0;
         GT_ALUMNI_PACKAGE.energyEffect = 2;
@@ -67,7 +67,7 @@ public enum RandomEvent {
         MOOSE_RAT.energyEffect = 0;
         FLYING_CAT_BUGS.energyEffect = 0;
         UGA_STUDENTS.energyEffect = 0;
-        SPACE_INLAWS.energyEffect = 0;
+        SPACE_IN_LAWS.energyEffect = 0;
 
         NOTHING.moneyEffect = 0;
         GT_ALUMNI_PACKAGE.moneyEffect = 0;
@@ -76,11 +76,11 @@ public enum RandomEvent {
         MOOSE_RAT.moneyEffect = 2;
         FLYING_CAT_BUGS.moneyEffect = -4;
         UGA_STUDENTS.moneyEffect = 0;
-        SPACE_INLAWS.moneyEffect = -6;
+        SPACE_IN_LAWS.moneyEffect = -6;
     }
 
     /**
-     * checks if event is good
+     * Checks if event is good.
      * @return if event is good
      */
     public boolean isGood() {
@@ -88,7 +88,7 @@ public enum RandomEvent {
     }
 
     /**
-     * checks if event is bad
+     * Checks if event is bad.
      * @return if event is bad
      */
     public boolean isBad() {
@@ -96,9 +96,9 @@ public enum RandomEvent {
     }
 
     /**
-     *
-     * @param oldFood
-     * @return
+     * Calculates the food.
+     * @param oldFood The old amount of food.
+     * @return The current food.
      */
     public int calcFood(int oldFood) {
         if (this.equals(RandomEvent.UGA_STUDENTS)) return oldFood / 2;
@@ -106,28 +106,28 @@ public enum RandomEvent {
     }
 
     /**
-     *
-     * @param oldOre
-     * @return
+     * Calculates the amount of ore.
+     * @param oldOre The old amount of ore.
+     * @return The current amount of ore.
      */
     public int calcOre(int oldOre) {
         return oldOre + oreEffect;
     }
 
     /**
-     *
-     * @param oldEnergy
-     * @return
+     * Calculates the amount of energy.
+     * @param oldEnergy The old amount of energy.
+     * @return The current amount of energy.
      */
     public int calcEnergy(int oldEnergy) {
         return oldEnergy + energyEffect;
     }
 
     /**
-     *
-     * @param oldMoney
-     * @param round
-     * @return
+     * Calculates the amount of energy.
+     * @param oldMoney The old amount of money.
+     * @param round The round number.
+     * @return The new amount of money.
      */
     public int calcMoney(int oldMoney, int round) {
         int roundMultiple = roundMultiple(round);
@@ -136,27 +136,23 @@ public enum RandomEvent {
     }
 
     /**
-     *
-     * @return
+     * Gets a random event.
+     * @return The random event.
      */
     public static RandomEvent getRandomEvent() {
         int x = random.nextInt(RandomEvent.class.getEnumConstants().length);
         return RandomEvent.class.getEnumConstants()[x];
     }
 
-    /**
-     *
-     * @return
-     */
     @Override
     public String toString() {
         return str;
     }
 
     /**
-     *
-     * @param round
-     * @return
+     * Gets the round multiple.
+     * @param round The round number.
+     * @return The round multiple
      */
     private int roundMultiple(int round) {
         if (round > 0 && round < 4) return 25;

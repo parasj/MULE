@@ -15,38 +15,38 @@ import javafx.scene.control.Label;
  */
 public class PubController {
     /**
-     * FIRSTNUM of type int.
+     * FIRST_NUM of type int.
      * Made these variables this way because of checkstyle.
      */
-    public static final int FIRSTNUM = 37;
+    private static final int FIRST_NUM = 37;
     /**
-     * SECONDNUM of type int.
+     * SECOND_NUM of type int.
      */
-    public static final int SECONDNUM = 200;
+    private static final int SECOND_NUM = 200;
     /**
-     * THIRDNUM of type int.
+     * THIRD_NUM of type int.
      */
-    public static final int THIRDNUM = 25;
+    private static final int THIRD_NUM = 25;
     /**
-     * FOURTHNUM of type int.
+     * FOURTH_NUM of type int.
      */
-    public static final int FOURTHNUM = 150;
+    private static final int FOURTH_NUM = 150;
     /**
-     * FIFTHNUM of type int.
+     * FIFTH_NUM of type int.
      */
-    public static final int FIFTHNUM = 12;
+    private static final int FIFTH_NUM = 12;
     /**
-     * SIXTHNUM of type int.
+     * SIXTH_NUM of type int.
      */
-    public static final int SIXTHNUM = 100;
+    private static final int SIXTH_NUM = 100;
     /**
-     * SEVENTHNUM of type int.
+     * SEVENTH_NUM of type int.
      */
-    public static final int SEVENTHNUM = 50;
+    private static final int SEVENTH_NUM = 50;
     /**
-     * MONEYCOMP of type int.
+     * MONEY_COMP of type int.
      */
-    public static final int MONEYCOMP = 250;
+    private static final int MONEY_COMP = 250;
     /**
      * gameStartStore of type GameStartStore.
      */
@@ -62,9 +62,9 @@ public class PubController {
      */
     private ConfigRepository configRepository;
     /**
-     * ROUNDBONUSARR of type int[].
+     * ROUND_BONUS_ARR of type int[].
      */
-    private static final int[] ROUNDBONUSARR =
+    private static final int[] ROUND_BONUS_ARR =
         {50, 50, 50, 100, 100, 100, 100, 150, 150, 150, 150, 200};
     /**
      * boardController instance of BoardController.
@@ -91,15 +91,14 @@ public class PubController {
 
 
     /**
-     *
+     * Loads the stores.
      */
-    //Loads stores
     public PubController() {
-        reinit();
+        reinitialize();
     }
 
     /**
-     *
+     * Goes back to the map.
      */
     public final void goToMap() {
         MasterController.getInstance().map();
@@ -115,14 +114,14 @@ public class PubController {
      */
     private int getTimeBonus(final int timeLeft) {
 
-        if (timeLeft >= FIRSTNUM) {
-            return SECONDNUM;
-        } else if (timeLeft >= THIRDNUM) {
-            return FOURTHNUM;
-        } else if (timeLeft >= FIFTHNUM) {
-            return SIXTHNUM;
+        if (timeLeft >= FIRST_NUM) {
+            return SECOND_NUM;
+        } else if (timeLeft >= THIRD_NUM) {
+            return FOURTH_NUM;
+        } else if (timeLeft >= FIFTH_NUM) {
+            return SIXTH_NUM;
         } else if (timeLeft > 0) {
-            return SEVENTHNUM;
+            return SEVENTH_NUM;
         } else if (timeLeft == 0) {
             return 0;
         } else {
@@ -134,15 +133,15 @@ public class PubController {
      *
      */
     //Gets how much money to pay player
-    protected void getMoney() {
+    private void getMoney() {
         PlayerConfigParams currentPlayer = mapStateStore
             .getPlayerAt(gameStartStore.getCurrentPlayer());
         int timeLeft = currentPlayer.getTimeLeft();
-        int roundBonus = ROUNDBONUSARR[mapStateStore.getCurrentRound() - 1];
+        int roundBonus = ROUND_BONUS_ARR[mapStateStore.getCurrentRound() - 1];
         int timeBonus = random.getInt(getTimeBonus(timeLeft) + 1);
         int moneyBonus = roundBonus * timeBonus;
-        if (moneyBonus > MONEYCOMP) {
-            moneyBonus = MONEYCOMP;
+        if (moneyBonus > MONEY_COMP) {
+            moneyBonus = MONEY_COMP;
         }
         System.out.println("You Earned: " + moneyBonus);
         currentPlayer.payMoney(-1 * moneyBonus);
@@ -152,8 +151,8 @@ public class PubController {
      *
      */
     //Recreates labels
-    public final void rerender() {
-        reinit();
+    public final void render() {
+        reinitialize();
         getMoney();
         if (playerLabel != null) {
             playerLabel.setText(String
@@ -179,9 +178,10 @@ public class PubController {
     }
 
     /**
-     *
+     * Re-initializes the game start store, map state store,
+     * and configuration repository.
      */
-    public final void reinit() {
+    private void reinitialize() {
         gameStartStore = GameStartStore.getInstance();
         mapStateStore = MULEStore.getInstance().getMapStateStore();
         configRepository = MULEStore.getInstance().getConfigRepository();

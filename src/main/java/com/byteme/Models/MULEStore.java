@@ -17,71 +17,71 @@ public class MULEStore {
     private StoreStateStore storeStateStore;
 
     /**
-     *
-     * @return
+     * Gets the instance of MULEStore.
+     * @return The instance of MULEStore
      */
     public static MULEStore getInstance() {
         return instance;
     }
 
     /**
-     *
-     * @return
+     * Gets the Config Repository.
+     * @return The Config Repository
      */
     public ConfigRepository getConfigRepository() {
         return configRepository;
     }
 
     /**
-     *
-     * @return
+     * Gets the Game Start Store.
+     * @return The Game Start Store
      */
     public GameStartStore getGameStartStore() {
         return gameStartStore;
     }
 
     /**
-     *
-     * @return
+     * Gets the Land Grant Store.
+     * @return The Land Grant Store
      */
     public LandGrantStore getLandGrantStore() {
         return landGrantStore;
     }
 
     /**
-     *
-     * @return
+     * Gets the Land Purchase Store.
+     * @return The Land Purchase Store
      */
     public LandPurchaseStore getLandPurchaseStore() {
         return landPurchaseStore;
     }
 
     /**
-     *
-     * @return
+     * Gets the Map State Store.
+     * @return The Map State Store
      */
     public MapStateStore getMapStateStore() {
         return mapStateStore;
     }
 
     /**
-     *
-     * @return
+     * Gets the Place Mule Store.
+     * @return The Place Mule Store
      */
     public PlaceMuleStore getPlaceMuleStore() {
         return placeMuleStore;
     }
 
     /**
-     *
-     * @return
+     * Gets the Store State Store.
+     * @return The Store State Store
      */
     public StoreStateStore getStoreStateStore() {
         return storeStateStore;
     }
 
     /**
-     *
+     * Creates a MULEStore.
      */
     private MULEStore() {
     }
@@ -114,7 +114,7 @@ public class MULEStore {
     }
 
     /**
-     *
+     * Loads the game from disk.
      */
     public void load() {
         System.out.println("LOADING GAME FROM DISK!");
@@ -128,7 +128,7 @@ public class MULEStore {
     }
 
     /**
-     *
+     * Saves the game to disk.
      */
     public void save() {
         System.out.println("SAVING GAME TO DISK!");
@@ -142,9 +142,9 @@ public class MULEStore {
     }
 
     /**
-     *
-     * @param string
-     * @param instance
+     * Saves the game.
+     * @param string Output file name.
+     * @param instance instance of the game.
      */
     private void saveToDisk(String string, Serializable instance) {
         try {
@@ -160,9 +160,9 @@ public class MULEStore {
     }
 
     /**
-     *
-     * @param string
-     * @return
+     * Loads the game from disk.
+     * @param string The string
+     * @return The object loaded
      */
     private Object loadFromDisk(String string) {
         long timeStart = System.nanoTime();
@@ -186,11 +186,12 @@ public class MULEStore {
     }
 
     /**
-     *
+     * Re-initializes the land grant store, land purchase store,
+     * and the map state store.
      */
-    public void reinit() {
-        landGrantStore.reinit();
-        landPurchaseStore.reinit();
-        mapStateStore.reinit();
+    public void reinitialize() {
+        landGrantStore.reinitialize();
+        landPurchaseStore.reinitialize();
+        mapStateStore.reinitialize();
     }
 }

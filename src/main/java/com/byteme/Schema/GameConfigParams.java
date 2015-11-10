@@ -8,50 +8,46 @@ import java.io.Serializable;
 
 public class GameConfigParams implements Serializable{
     private final Difficulty difficulty;
-    private final MapType maptype;
-    private final int numplayers;
+    private final MapType mapType;
+    private final int numPlayers;
 
     /**
-     *
-     * @param diff
-     * @param type
-     * @param n
+     * Creates a Game Config Params object.
+     * @param diff The difficulty
+     * @param type The MapType
+     * @param n The number of players
      */
     public GameConfigParams(Difficulty diff, MapType type, int n) {
         difficulty = diff;
-        maptype = type;
-        numplayers = n;
+        mapType = type;
+        numPlayers = n;
     }
 
     /**
-     *
-     * @return
+     * Get the difficulty of the game.
+     * @return The difficulty
      */
     public Difficulty getDifficulty() {
         return difficulty;
     }
 
     /**
-     *
-     * @return
+     * Get the map type of the game.
+     * @return The MapType
      */
-    public MapType getMaptype() {
-        return maptype;
+    public MapType getMapType() {
+        return mapType;
     }
 
     /**
-     *
-     * @return
+     * Get the number of players.
+     * @return The number of players.
      */
     public int getNumPlayers() {
-        return numplayers;
+        return numPlayers;
     }
 
-    /**
-     *
-     * @return
-     */
     public String toString() {
-        return "Difficulty: " + difficulty + "\tMap Type: " + maptype + "\tNumber of Players: " + numplayers;
+        return "Difficulty: " + difficulty + "\tMap Type: " + mapType + "\tNumber of Players: " + numPlayers;
     }
 }

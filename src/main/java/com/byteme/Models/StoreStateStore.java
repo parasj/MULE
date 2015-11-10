@@ -26,61 +26,61 @@ public class StoreStateStore implements Serializable {
     private static final int crystiteMuleCost = 25;
 
     /**
-     *
+     * Creates a StoreStateStore.
      */
     public StoreStateStore() {}
 
     /**
-     *
-     * @return
+     * Gets the state.
+     * @return The state
      */
     public boolean getState() {
         return state;
     }
 
     /**
-     *
-     * @param state
+     * Sets the state.
+     * @param state The state
      */
     public void setState(boolean state) {
         this.state = state;
     }
 
     /**
-     *
-     * @return
+     * Gets whether there is a state.
+     * @return Is there a state.
      */
     public boolean isState() {
         return state;
     }
 
     /**
-     *
-     * @return
+     * Gets the amount of food.
+     * @return Amount of food
      */
     public int getFoodQuantity() {
         return foodQuantity;
     }
 
     /**
-     *
-     * @param foodQuantity
+     * Sets the amount of food.
+     * @param foodQuantity The amount of food
      */
     public void setFoodQuantity(int foodQuantity) {
         this.foodQuantity = foodQuantity;
     }
 
     /**
-     *
-     * @return
+     * Gets the food price.
+     * @return The food price.
      */
     public int getFoodPrice() {
         return foodPrice;
     }
 
     /**
-     *
-     * @param foodPrice
+     * Sets the food price.
+     * @param foodPrice The food price
      */
     public void setFoodPrice(int foodPrice) {
         if (foodPrice < 0) {
@@ -91,16 +91,16 @@ public class StoreStateStore implements Serializable {
     }
 
     /**
-     *
-     * @return
+     * Gets the energy amount.
+     * @return The amount of energy
      */
     public int getEnergyQuantity() {
         return energyQuantity;
     }
 
     /**
-     *
-     * @param energyQuantity
+     * Sets the amount of energy.
+     * @param energyQuantity The amount of energy
      */
     public void setEnergyQuantity(int energyQuantity) {
         if (energyQuantity < 0) {
@@ -111,16 +111,16 @@ public class StoreStateStore implements Serializable {
     }
 
     /**
-     *
-     * @return
+     * Gets the price of energy.
+     * @return The price of energy
      */
     public int getEnergyPrice() {
         return energyPrice;
     }
 
     /**
-     *
-     * @param energyPrice
+     * Sets the energy price.
+     * @param energyPrice The price of energy
      */
     public void setEnergyPrice(int energyPrice) {
         if (energyPrice < 0) {
@@ -131,16 +131,16 @@ public class StoreStateStore implements Serializable {
     }
 
     /**
-     *
-     * @return
+     * Gets the amount of smith ore.
+     * @return The amount of smith ore
      */
     public int getSmithoreQuantity() {
         return smithoreQuantity;
     }
 
     /**
-     *
-     * @param smithoreQuantity
+     * Sets the amount of smith ore.
+     * @param smithoreQuantity The amount of smith ore.
      */
     public void setSmithoreQuantity(int smithoreQuantity) {
         if (smithoreQuantity < 0) {
@@ -151,13 +151,17 @@ public class StoreStateStore implements Serializable {
     }
 
     /**
-     *
-     * @return
+     * Gets the smith ore price.
+     * @return The price of smith ore.
      */
     public int getSmithorePrice() {
         return smithorePrice;
     }
 
+    /**
+     * Sets the price of smith ore.
+     * @param smithorePrice The price of smith ore.
+     */
     public void setSmithorePrice(int smithorePrice) {
         if (smithorePrice >= 0) {
             this.smithorePrice = smithorePrice;
@@ -165,16 +169,16 @@ public class StoreStateStore implements Serializable {
     }
 
     /**
-     *
-     * @return
+     * Gets the amount of crystite.
+     * @return The amount of crystite.
      */
     public int getCrystiteQuantity() {
         return crystiteQuantity;
     }
 
     /**
-     *
-     * @param crystiteQuantity
+     * Sets the amount of crystite.
+     * @param crystiteQuantity The amount of crystite.
      */
     public void setCrystiteQuantity(int crystiteQuantity) {
         if (crystiteQuantity < 0) {
@@ -185,16 +189,16 @@ public class StoreStateStore implements Serializable {
     }
 
     /**
-     *
-     * @return
+     * Gets the price of crystite.
+     * @return The price of crystite.
      */
     public int getCrystitePrice() {
         return crystitePrice;
     }
 
     /**
-     *
-     * @param crystitePrice
+     * Sets the price of the crystite.
+     * @param crystitePrice The price of crystite
      */
     public void setCrystitePrice(int crystitePrice) {
         if (crystitePrice < 0) {
@@ -205,16 +209,16 @@ public class StoreStateStore implements Serializable {
     }
 
     /**
-     *
-     * @return
+     * Gets the amount of mules.
+     * @return The amount of mules.
      */
     public int getMuleQuantity() {
         return muleQuantity;
     }
 
     /**
-     *
-     * @param muleQuantity
+     * Sets the amount of mules.
+     * @param muleQuantity The number of mules.
      */
     public void setMuleQuantity(int muleQuantity) {
         if (muleQuantity < 0) {
@@ -225,9 +229,9 @@ public class StoreStateStore implements Serializable {
     }
 
     /**
-     *
-     * @param type
-     * @return
+     * Gets the price of the mule based on type.
+     * @param type The type of mule.
+     * @return The price of the mule
      */
     public int getMuleTypePrice(String type) {
         switch (type) {
@@ -246,16 +250,16 @@ public class StoreStateStore implements Serializable {
     }
 
     /**
-     *
-     * @return
+     * Gets the mule price.
+     * @return The price of the mule.
      */
     public int getMulePrice() {
         return this.mulePrice;
     }
 
     /**
-     *
-     * @param mulePrice
+     * Sets the mule price.
+     * @param mulePrice The price of the mule.
      */
     public void setMulePrice(int mulePrice) {
         if (mulePrice < 0) {
@@ -266,9 +270,9 @@ public class StoreStateStore implements Serializable {
     }
 
     /**
-     *
-     * @param string
-     * @return
+     * Gets the cost for each mule based on type.
+     * @param string The type of mule
+     * @return The cost
      */
     public int getMuleTypeCost(String string) {
         switch (string) {

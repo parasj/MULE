@@ -132,17 +132,17 @@ public class StoreController {
     private ChoiceBox muleType;
 
     /**
-     *
+     * Reloads stores.
      */
-    //Reloads stores
     public StoreController() {
-        reinit();
+        reinitialize();
     }
 
     /**
      *
      */
-    public final void goToMap() {
+    @FXML
+    private void goToMap() {
         MasterController.getInstance().map();
     }
 
@@ -160,7 +160,7 @@ public class StoreController {
      */
     //Changes between buy and selling items
     public final void changeState() {
-        reinit();
+        reinitialize();
         if (storeStateStore.getState()) {
             foodButton.setText("Sell Food");
             energyButton.setText("Sell Energy");
@@ -183,11 +183,10 @@ public class StoreController {
     }
 
     /**
-     *
+     * Changes all the labels.
      */
-    //Changes all the labels
     public final void reRender() {
-        reinit();
+        reinitialize();
         PlayerConfigParams player = mapStateStore.getPlayerAt(gameStartStore
             .getCurrentPlayer());
         if (player == null) {
@@ -212,11 +211,10 @@ public class StoreController {
     }
 
     /**
-     *
+     * Buys / sells food.
      */
-    //Buys/ sells food
     public final void tradeFood() {
-        reinit();
+        reinitialize();
         PlayerConfigParams player = mapStateStore.getPlayerAt(gameStartStore
             .getCurrentPlayer());
         if (player == null) {
@@ -250,7 +248,7 @@ public class StoreController {
      *
      */
     public final void tradeEnergy() {
-        reinit();
+        reinitialize();
         PlayerConfigParams player = mapStateStore.getPlayerAt(gameStartStore
             .getCurrentPlayer());
         if (player == null) {
@@ -284,7 +282,7 @@ public class StoreController {
      *
      */
     public final void tradeSmithore() {
-        reinit();
+        reinitialize();
         PlayerConfigParams player = mapStateStore.getPlayerAt(gameStartStore
             .getCurrentPlayer());
         if (player == null) {
@@ -318,7 +316,7 @@ public class StoreController {
      *
      */
     public final void tradeCrystite() {
-        reinit();
+        reinitialize();
         PlayerConfigParams player = mapStateStore
             .getPlayerAt(gameStartStore.getCurrentPlayer());
         if (player == null) {
@@ -349,11 +347,10 @@ public class StoreController {
     }
 
     /**
-     *
+     * Buys mule and places it, does not sell.
      */
-    //Buys mule and places it, does not sell
     public final void tradeMule() {
-        reinit();
+        reinitialize();
         PlayerConfigParams player = mapStateStore.
                                     getPlayerAt(
                                             gameStartStore.getCurrentPlayer());
@@ -388,14 +385,14 @@ public class StoreController {
      *
      * @param string The string to be logged.
      */
-    public final void log(final String string) {
+    private void log(final String string) {
         System.out.println(string);
     }
 
     /**
      *
      */
-    public final void logPlayer() {
+    private void logPlayer() {
         PlayerConfigParams player = mapStateStore
                                     .getPlayerAt(
                                             gameStartStore.getCurrentPlayer());
@@ -416,7 +413,7 @@ public class StoreController {
      * @return The corresponding MuleType for the String
      */
     //Changes string to MuleType
-    public final MuleType getType(final String string) {
+    private MuleType getType(final String string) {
         switch (string) {
             case "Food":
                 return MuleType.FOOD;
@@ -432,10 +429,9 @@ public class StoreController {
     }
 
     /**
-     *
+     * Loads the stores.
      */
-    //Loads the stores
-    public final void reinit() {
+    private void reinitialize() {
         gameStartStore = GameStartStore.getInstance();
         mapStateStore = MULEStore.getInstance().getMapStateStore();
         storeStateStore = MULEStore.getInstance().getStoreStateStore();

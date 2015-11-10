@@ -7,7 +7,6 @@
 <?import javafx.collections.*?>
 
 <Pane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0" style="-fx-background-color: #2C3E50;" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.byteme.Controllers.ConfigurationController">
-   <children>
       <Label layoutX="192.0" layoutY="38.0" prefWidth="224.0" text="Player Configuration" textFill="WHITE">
          <font>
             <Font size="18.0" />
@@ -49,5 +48,4 @@
             </FXCollections>
          </items>
       </ChoiceBox>
-   </children>
 </Pane>

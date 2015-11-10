@@ -10,50 +10,50 @@ public class Property implements Serializable {
     private int row;
     private PlayerConfigParams owner;
     private Mule mule;
-    private MapTile maptile;
+    private MapTile mapTile;
 
     /**
-     *
-     * @param column
-     * @param row
-     * @param owner
-     * @param mapTile
+     * Creates a property object.
+     * @param column The column
+     * @param row The row
+     * @param owner The owner
+     * @param mapTile The MapTile
      */
     public Property(int column, int row, PlayerConfigParams owner, MapTile mapTile) {
         this.row = row;
         this.column = column;
         this.owner = owner;
         this.mule = null;
-        this.maptile = mapTile;
+        this.mapTile = mapTile;
     }
 
     /**
-     *
-     * @return
+     * Gets the column.
+     * @return The column
      */
     public int getColumn() {
         return this.column;
     }
 
     /**
-     *
-     * @return
+     * Gets the row.
+     * @return The row
      */
     public int getRow() {
         return this.row;
     }
 
     /**
-     *
-     * @return
+     * Gets the owner.
+     * @return The owner
      */
     public PlayerConfigParams getOwner() {
         return this.owner;
     }
 
     /**
-     *
-     * @param column
+     * Sets the column.
+     * @param column The column
      */
     public void setColumn(int column) {
         if (column < 0) {
@@ -64,8 +64,8 @@ public class Property implements Serializable {
     }
 
     /**
-     *
-     * @param row
+     * Sets the row.
+     * @param row The row
      */
     public void setRow(int row) {
         if (row < 0) {
@@ -74,6 +74,11 @@ public class Property implements Serializable {
             this.row = row;
         }
     }
+
+    /**
+     * Sets the owner.
+     * @param owner The owner
+     */
     public void setOwner(PlayerConfigParams owner) {
         if (owner != null) {
             this.owner = owner;
@@ -83,16 +88,16 @@ public class Property implements Serializable {
     }
 
     /**
-     *
-     * @return
+     * Gets the mule.
+     * @return The mule
      */
     public Mule getMule() {
         return mule;
     }
 
     /**
-     *
-     * @param mule
+     * Adds a mule.
+     * @param mule The mule
      */
     public void addMule(Mule mule) {
         if (mule != null) {
@@ -103,44 +108,40 @@ public class Property implements Serializable {
     }
 
     /**
-     *
+     * Removes a mule.
      */
-    public void removeMule() {
+    private void removeMule() {
         mule = null;
     }
 
     /**
-     *
-     * @return
+     * Checks if there is a mule.
+     * @return Is there a mule?
      */
     public boolean hasMule() {
         return this.mule != null;
     }
 
     /**
-     *
-     * @return
+     * Gets the MapTile.
+     * @return The MapTile
      */
-    public MapTile getMaptile() {
-        return maptile;
+    public MapTile getMapTile() {
+        return mapTile;
     }
 
     /**
-     *
-     * @param maptile
+     * Sets the MapTile.
+     * @param mapTile The MapTile
      */
-    public void setMaptile(MapTile maptile) {
-        if (maptile != null) {
-            this.maptile = maptile;
+    public void setMapTile(MapTile mapTile) {
+        if (mapTile != null) {
+            this.mapTile = mapTile;
         } else {
             throw new IllegalArgumentException("Map Tile cannot be null!");
         }
     }
 
-    /**
-     *
-     * @return
-     */
     @Override
     public int hashCode() {
         int result = column;

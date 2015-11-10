@@ -2,16 +2,13 @@
 
 <?import javafx.scene.text.*?>
 <?import javafx.scene.layout.*?>
-<?import java.lang.*?>
 <?import javafx.scene.control.*?>
 
 
 <Pane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0" style="-fx-background-color: #2C3E50;" xmlns="http://javafx.com/javafx/8.0.40" fx:controller="com.byteme.Controllers.ConfigurationController" xmlns:fx="http://javafx.com/fxml/1">
-   <children>
       <Label layoutX="193.0" layoutY="183.0" text="Under Construction!" textFill="WHITE">
          <font>
             <Font size="24.0" />
          </font>
       </Label>
-   </children>
 </Pane>

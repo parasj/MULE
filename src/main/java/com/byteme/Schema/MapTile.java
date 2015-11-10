@@ -4,16 +4,22 @@ import java.util.HashMap;
 import java.util.Map;
 
 /**
- * MULE
+ * MULE MapTile.
  */
 public enum MapTile {
     P, M1, M2, M3, R, Town;
 
+    /**
+     * The image path.
+     */
     private final Map<String, String> imagePath;
+    /**
+     * The image path with the mule.
+     */
     private final Map<String, String> imagePathWithMule;
 
     /**
-     *
+     * Creates a MapTile.
      */
     MapTile() {
         imagePathWithMule = new HashMap<>();
@@ -34,17 +40,13 @@ public enum MapTile {
     }
 
     /**
-     *
-     * @return
+     * Gets the image path.
+     * @return The image path.
      */
     public String imagePath() {
         return imagePath(false);
     }
 
-    /**
-     *
-     * @return
-     */
     @Override
     public String toString() {
         return EnumHumanizer.humanizeEnum(super.toString());
@@ -52,8 +54,8 @@ public enum MapTile {
 
     /**
      * Adds a picture with a mule if necessary
-     * @param mule
-     * @return
+     * @param mule Whether there is a mule.
+     * @return The image path.
      */
     public String imagePath(boolean mule) {
         if (mule) {

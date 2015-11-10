@@ -34,7 +34,7 @@ public class PlaceMuleHandler extends MapStateHandler {
     private final MapStateStore mapStateStore;
 
     /**
-     *
+     * Creates a PlaceMuleHandler.
      * @param boardController of type BoardController.
      */
     public PlaceMuleHandler(final BoardController boardController) {
@@ -44,25 +44,15 @@ public class PlaceMuleHandler extends MapStateHandler {
         mapStateStore = MULEStore.getInstance().getMapStateStore();
     }
 
-    /**
-     *
-     */
     @Override
     public final void handlePass() {
         log("Cannot pass now!");
     }
 
-    /**
-     *
-     */
     @Override
     public void handleTownButtonClicked() {
     }
 
-    /**
-     *
-     * @param event
-     */
     //Places mule on tile if owned
     @Override
     public final void tileChosen(final MouseEvent event) {
@@ -148,20 +138,14 @@ public class PlaceMuleHandler extends MapStateHandler {
         }
     }
 
-    /**
-     *
-     * @param location
-     * @param resources
-     */
     @Override
     public void initialize(final URL location, final ResourceBundle resources) {
 
     }
 
     /**
-     *
+     * Changes state and goes to store.
      */
-    //Changes state and goes to store
     private void goToStore() {
         MasterController.getInstance().store();
         getBoardController().updateState(MapControllerStates.GAME_START, true);

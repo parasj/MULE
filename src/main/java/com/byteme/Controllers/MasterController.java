@@ -77,7 +77,7 @@ public class MasterController {
      *
      */
     ///Creates scenes
-    public MasterController() {
+    private MasterController() {
         Parent root;
         try {
             root = FXMLLoader.load(getClass()
@@ -190,7 +190,7 @@ public class MasterController {
     public final void pubScene() {
 //        currStage = "Pub";
         theStage.setScene(pubScene);
-        pubController.rerender();
+        pubController.render();
     }
 
     /**
@@ -214,7 +214,7 @@ public class MasterController {
      *  Changed Param name because of checkstyle.
      * @param boardController1 of type BoardController.
      */
-    public final void
+    private void
         setBoardController(final BoardController boardController1) {
         if (boardController1 == null) {
             throw new IllegalArgumentException("Board Controller is null!");

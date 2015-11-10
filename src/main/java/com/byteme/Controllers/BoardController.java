@@ -39,7 +39,7 @@ public class BoardController implements Initializable, CanTick {
     /**
      * A static value added to the map.
      */
-    private static final int MAPTAKEINNUM = 4;
+    private static final int MAP_TAKE_IN_NUM = 4;
 
     /**
      * possibleMaps of type MapBoard.
@@ -207,7 +207,7 @@ public class BoardController implements Initializable, CanTick {
     private void initRiver() {
         ImageView townImage = new ImageView("/images/Town.png");
         townImage.setOnMouseClicked((MouseEvent e) -> townButtonClicked());
-        map.add(townImage, MAPTAKEINNUM, 2);
+        map.add(townImage, MAP_TAKE_IN_NUM, 2);
         // Todo: hardcode the river
     }
 
@@ -303,7 +303,7 @@ public class BoardController implements Initializable, CanTick {
      *
      * @param event of type MouseEvent.
      */
-    public final void tileChosen(final MouseEvent event) {
+    private void tileChosen(final MouseEvent event) {
         childController.tileChosen(event);
     }
 
@@ -596,7 +596,7 @@ public class BoardController implements Initializable, CanTick {
      *
      * @return instance of ConfigRepository.
      */
-    public final ConfigRepository getConfigRepository() {
+    private ConfigRepository getConfigRepository() {
         return MULEStore.getInstance().getConfigRepository();
     }
 

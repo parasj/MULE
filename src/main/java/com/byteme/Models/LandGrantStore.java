@@ -16,8 +16,8 @@ public class LandGrantStore implements Serializable {
     private int currentPropertyCount;
 
     /**
-     *
-     * @param configRepository
+     * Creates a Land Grant Store.
+     * @param configRepository The config repository for the store.
      */
     public LandGrantStore(ConfigRepository configRepository) {
         this.configRepository = configRepository;
@@ -27,47 +27,47 @@ public class LandGrantStore implements Serializable {
     }
 
     /**
-     *
+     * Creates a new List of Players.
      */
-    public void reinit() {
+    public void reinitialize() {
         players = new ArrayList<>(configRepository.getPlayers());
     }
 
     /**
-     *
+     * Increments the current player.
      */
-    public void incrPlayer() {
+    public void incrementPlayer() {
         if (currentPlayer == players.size() - 1)
-            incrPropertyCount();
+            incrementPropertyCount();
         currentPlayer = (currentPlayer + 1) % players.size();
     }
 
     /**
-     *
-     * @return
+     * Gets the Configuration parameters of the current player.
+     * @return The current player's configuration parameters
      */
     public PlayerConfigParams getCurrentPlayer() {
         return players.get(currentPlayer);
     }
 
     /**
-     *
+     * Increases the property count by one.
      */
-    private void incrPropertyCount() {
+    private void incrementPropertyCount() {
         currentPropertyCount++;
     }
 
     /**
-     *
-     * @return
+     * Gets the current property count.
+     * @return The current property count.
      */
     public int getCurrentPropertyCount() {
         return currentPropertyCount;
     }
 
     /**
-     *
-     * @return
+     * Gets the ID of the current player.
+     * @return The ID of the current player
      */
     public int getCurrentPlayerId() {
         return currentPlayer;

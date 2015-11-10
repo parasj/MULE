@@ -12,19 +12,11 @@ import java.io.IOException;
 import java.net.URL;
 
 public class Main extends Application {
-    /**
-     *
-     * @param args
-     */
+
     public static void main(String[] args) {
         launch(args);
     }
 
-    /**
-     *
-     * @param stage
-     * @throws IOException
-     */
     @Override
     public void start(Stage stage) throws IOException {
         // Launches the welcome screen

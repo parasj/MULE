@@ -29,16 +29,16 @@ public class ConfigRepository implements Serializable {
     // Getters and Setters
 
     /**
-     *
-     * @return
+     * Gets the Game Config Parameters.
+     * @return Game Config Parameters
      */
     public GameConfigParams getGameConfig() {
         return gameConfigParams;
     }
 
     /**
-     *
-     * @param config
+     * Sets the game config parameters.
+     * @param config The game config parameters
      */
     public void setGameConfig(GameConfigParams config) {
         if (config != null) {
@@ -47,26 +47,26 @@ public class ConfigRepository implements Serializable {
     }
 
     /**
-     *
-     * @return
+     * Gets the total number of players.
+     * @return The total number of players
      */
     public int getTotalPlayers() {
         return gameConfigParams.getNumPlayers();
     }
 
     /**
-     *
-     * @param id
-     * @return
+     * Gets the Player Config Parameters of a player by ID.
+     * @param id The Player's ID
+     * @return The player's config parameters
      */
     public PlayerConfigParams getPlayerConfig(int id) {
         return playerConfigList.get(id);
     }
 
     /**
-     *
-     * @param player
-     * @param id
+     * Sets the player's configuration parameters by ID.
+     * @param player  The player's configuration parameters.
+     * @param id The player's ID
      */
     public void setPlayerConfig(PlayerConfigParams player, int id) {
         if (player != null) {
@@ -75,16 +75,16 @@ public class ConfigRepository implements Serializable {
     }
 
     /**
-     *
-     * @return
+     * Gets the players.
+     * @return Collection of players.
      */
     public Collection<PlayerConfigParams> getPlayers() {
         return playerConfigList.values();
     }
 
     /**
-     *
-     * @return
+     * Gets the first player's configuration parameters.
+     * @return The first player's configuration parameters
      */
     public PlayerConfigParams getFirstPlayerConfig() {
         return playerConfigList.get(1);

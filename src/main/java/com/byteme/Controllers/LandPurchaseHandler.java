@@ -24,7 +24,7 @@ public class LandPurchaseHandler extends MapStateHandler {
     private final MapStateStore mapStateStore;
 
     /**
-     *
+     * Creates a LandPurchaseHandler.
      * @param boardController of type BoardController.
      */
     public LandPurchaseHandler(final BoardController boardController) {
@@ -33,28 +33,18 @@ public class LandPurchaseHandler extends MapStateHandler {
         mapStateStore = MULEStore.getInstance().getMapStateStore();
     }
 
-    /**
-     *
-     */
     //Pass goes to next player
     @Override
     public final void handlePass() {
-        landPurchaseStore.incrPropertyCount();
+        landPurchaseStore.incrementPropertyCount();
         checkIfDone();
     }
 
-    /**
-     *
-     */
     @Override
     public final void handleTownButtonClicked() {
         log("Cannot go to town during land purchase phase!");
     }
 
-    /**
-     *
-     * @param event
-     */
     //Highlights tile and increments player till done
     @Override
     public final void tileChosen(final MouseEvent event) {
@@ -66,7 +56,7 @@ public class LandPurchaseHandler extends MapStateHandler {
             // Change tile background color to player color
             if (landPurchaseStore.getCurrentPlayer()
                     .getMoney() >= BoardController.getCost()) {
-                landPurchaseStore.incrPropertyCount();
+                landPurchaseStore.incrementPropertyCount();
                 getBoardController().setColorTile(tile, landPurchaseStore
                         .getCurrentPlayer());
                 landPurchaseStore.getCurrentPlayer()
@@ -80,16 +70,15 @@ public class LandPurchaseHandler extends MapStateHandler {
     }
 
     /**
-     *
+     * Checks if done.
      */
-    //Checks if done
     private void checkIfDone() {
         // Land Purchase is only 2 turns per player
         if (landPurchaseStore.getCurrentPropertyCount() <= 2
             * landPurchaseStore.getPlayers().size()) {
             mapStateStore
                 .setCurrentPlayer(mapStateStore.getCurrentPlayer() + 1);
-            landPurchaseStore.incrPlayer();
+            landPurchaseStore.incrementPlayer();
             getBoardController().setPlayer(landPurchaseStore
                 .getCurrentPlayer());
             getBoardController().setMoney(landPurchaseStore.getCurrentPlayer());
@@ -107,9 +96,6 @@ public class LandPurchaseHandler extends MapStateHandler {
         }
     }
 
-    /**
-     *
-     */
     @Override
     public final void stateChanged() {
         getBoardController().getPhaseLabel().setText("Purchase Selection");
@@ -120,19 +106,11 @@ public class LandPurchaseHandler extends MapStateHandler {
         getBoardController().setMoney(landPurchaseStore.getCurrentPlayer());
     }
 
-    /**
-     *
-     */
     @Override
     public void tick() {
 
     }
 
-    /**
-     *
-     * @param location
-     * @param resources
-     */
     @Override
     public final void
         initialize(final URL location, final ResourceBundle resources) {

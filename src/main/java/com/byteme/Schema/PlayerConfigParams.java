@@ -21,13 +21,13 @@ public class PlayerConfigParams implements Comparable<PlayerConfigParams>, Seria
     private ArrayList<Property> properties;
 
     /**
-     *
-     * @param name
-     * @param race
-     * @param color
-     * @param money
-     * @param properties
-     * @param order
+     * Creates a PlayerConfiguration Parameters object.
+     * @param name The name of the player.
+     * @param race The race of the player.
+     * @param color The color of the player.
+     * @param money The money of the player.
+     * @param properties The properties of the player.
+     * @param order The order of the player.
      */
     public PlayerConfigParams(String name, Race race, String color, int money, ArrayList<Property> properties, int order) {
         this.name = name;
@@ -39,56 +39,56 @@ public class PlayerConfigParams implements Comparable<PlayerConfigParams>, Seria
     }
 
     /**
-     *
-     * @return
+     * Gets the order of the player.
+     * @return The order
      */
     public int getOrder() {
         return order;
     }
 
     /**
-     *
-     * @param order
+     * Sets the order of the player.
+     * @param order The order
      */
     public void setOrder(int order) {
         this.order = order;
     }
 
     /**
-     *
-     * @return
+     * Gets the name of the player.
+     * @return The name
      */
     public String getName() {
         return name;
     }
 
     /**
-     *
-     * @return
+     * Gets the race of the player.
+     * @return The race
      */
     public Race getRace() {
         return race;
     }
 
     /**
-     *
-     * @return
+     * Gets the color of the player.
+     * @return The color
      */
     public String getColor() {
         return color;
     }
 
     /**
-     *
-     * @return
+     * Gets the money of the player.
+     * @return The money
      */
     public int getMoney() {
         return money;
     }
 
     /**
-     *
-     * @param money
+     * Sets the money of the player.
+     * @param money The money
      */
     public void setMoney(int money) {
         if (money < 0) {
@@ -99,8 +99,8 @@ public class PlayerConfigParams implements Comparable<PlayerConfigParams>, Seria
     }
 
     /**
-     *
-     * @param cost
+     * Makes the player pay money.
+     * @param cost Amount of money to be lost.
      */
     public void payMoney(int cost) {
         if (money > cost) {
@@ -111,32 +111,32 @@ public class PlayerConfigParams implements Comparable<PlayerConfigParams>, Seria
     }
 
     /**
-     *
-     * @param cost
+     * Lets the player make money.
+     * @param cost Amount to increase player money by.
      */
     public void makeMoney(int cost) {
         this.money = this.money + cost;
     }
 
     /**
-     *
-     * @return
+     * Returns list of properties owned.
+     * @return Player's properties.
      */
     public ArrayList<Property> getProperties() {
         return properties;
     }
 
     /**
-     *
-     * @param properties
+     * Sets the list of properties.
+     * @param properties The list of properties.
      */
     public void setProperties(ArrayList<Property> properties) {
         this.properties = properties;
     }
 
     /**
-     *
-     * @param property
+     * Adds a property.
+     * @param property The property
      */
     public void addProperty(Property property) {
         if (property != null) {
@@ -147,32 +147,28 @@ public class PlayerConfigParams implements Comparable<PlayerConfigParams>, Seria
     }
 
     /**
-     *
-     * @param property
-     * @return
+     * Removes a property if possible.
+     * @param property The property to remove.
+     * @return Whether or not the property was removed.
      */
     public boolean removeProperty(Property property) {
         return this.properties.remove(property);
     }
 
-    /**
-     *
-     * @return
-     */
     public String toString() {
         return color + " " + race + " named " + name;
     }
 
     /**
-     *
-     * @return
+     * Calculates the score.
+     * @return The score of the player.
      */
     public int calcScore() {
         return (this.money + 500 * properties.size()) + this.crystite + this.energy + this.food + this.smithore;
     }
 
     /**
-     *
+     * Calculates the time left.
      */
     public void calcTimeLeft() {
         //TODO calculate the time left
@@ -180,16 +176,16 @@ public class PlayerConfigParams implements Comparable<PlayerConfigParams>, Seria
     }
 
     /**
-     *
-     * @return
+     * Gets the time left for the player.
+     * @return The time left
      */
     public int getTimeLeft() {
         return timeLeft;
     }
 
     /**
-     *
-     * @param timeLeft
+     * Sets the time left.
+     * @param timeLeft The time left
      */
     public void setTimeLeft(int timeLeft) {
         if (timeLeft < 0) {
@@ -200,16 +196,16 @@ public class PlayerConfigParams implements Comparable<PlayerConfigParams>, Seria
     }
 
     /**
-     *
-     * @return
+     * Gets the food.
+     * @return Amount food
      */
     public int getFood() {
         return food;
     }
 
     /**
-     *
-     * @param food
+     * Sets the amount of food.
+     * @param food The food amount
      */
     public void setFood(int food) {
         if (food < 0) {
@@ -220,16 +216,16 @@ public class PlayerConfigParams implements Comparable<PlayerConfigParams>, Seria
     }
 
     /**
-     *
-     * @return
+     * Gets the amount of energy.
+     * @return The amount of energy.
      */
     public int getEnergy() {
         return energy;
     }
 
     /**
-     *
-     * @param energy
+     * Sets the amount of energy.
+     * @param energy The amount of energy.
      */
     public void setEnergy(int energy) {
         if (energy < 0) {
@@ -240,16 +236,16 @@ public class PlayerConfigParams implements Comparable<PlayerConfigParams>, Seria
     }
 
     /**
-     *
-     * @return
+     * Gets the amount of smith ore.
+     * @return The amount of smith ore.
      */
     public int getSmithore() {
         return smithore;
     }
 
     /**
-     *
-     * @param smithore
+     * Sets the amount of smith ore.
+     * @param smithore The amount of smith ore.
      */
     public void setSmithore(int smithore) {
         if (smithore < 0) {
@@ -260,16 +256,16 @@ public class PlayerConfigParams implements Comparable<PlayerConfigParams>, Seria
     }
 
     /**
-     *
-     * @return
+     * Gets the amount of crystite.
+     * @return The amount of crystite
      */
     public int getCrystite() {
         return crystite;
     }
 
     /**
-     *
-     * @param crystite
+     * Sets the amount of crystite.
+     * @param crystite The amount of crystite
      */
     public void setCrystite(int crystite) {
         if (crystite < 0) {
@@ -280,64 +276,64 @@ public class PlayerConfigParams implements Comparable<PlayerConfigParams>, Seria
     }
 
     /**
-     *
+     * Increments the amount of food.
      */
     public void addFood() {
         this.food++;
     }
 
     /**
-     *
+     * Increments the amount of energy.
      */
     public void addEnergy() {
         this.energy++;
     }
 
     /**
-     *
+     * Increments the amount of smith ore.
      */
     public void addSmithore() {
         this.smithore++;
     }
 
     /**
-     *
+     * Increments the amount of crystite.
      */
     public void addCrystite() {
         this.crystite++;
     }
 
     /**
-     *
+     * Decrements the amount of food by one.
      */
     public void subFood() {
         setFood(food - 1);
     }
 
     /**
-     *
+     * Decrements the amount of energy by one.
      */
     public void subEnergy() {
         setEnergy(energy - 1);
     }
 
     /**
-     *
+     * Decrements the amount of smith ore by one.
      */
     public void subSmithore() {
         setSmithore(smithore - 1);
     }
 
     /**
-     *
+     * Decrements the amount of crystite by one.
      */
     public void subCrystite() {
         setCrystite(crystite - 1);
     }
 
     /**
-     *
-     * @return
+     * Gets the amount of resources in string form.
+     * @return Resources as a string.
      */
     public String getResources() {
         return "Player: " + getName() + "\n"
@@ -348,19 +344,14 @@ public class PlayerConfigParams implements Comparable<PlayerConfigParams>, Seria
                 + "==================================================";
     }
 
-    /**
-     * CompareTo override
-     * @param otherPlayer
-     * @return compare to value
-     */
     @Override
     public int compareTo(PlayerConfigParams otherPlayer) {
         return (this.calcScore() - otherPlayer.calcScore());
     }
 
     /**
-     *
-     * @return
+     * Get the number of mules.
+     * @return The number of mules.
      */
     public int getMuleCount() {
         int muleCount = 0;

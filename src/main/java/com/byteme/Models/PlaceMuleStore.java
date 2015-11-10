@@ -12,21 +12,21 @@ public class PlaceMuleStore implements Serializable{
     private Mule mule;
 
     /**
-     *
+     * Creates a PlaceMuleStore.
      */
     public PlaceMuleStore() {}
 
     /**
-     *
-     * @return
+     * Gets the mule.
+     * @return The mule.
      */
     public Mule getMule() {
         return mule;
     }
 
     /**
-     *
-     * @param mule
+     * Sets the mule.
+     * @param mule The mule to set to.
      */
     public void setMule(Mule mule) {
         if (mule != null) {

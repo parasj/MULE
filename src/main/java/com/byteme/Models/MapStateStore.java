@@ -28,120 +28,120 @@ public class MapStateStore implements Serializable {
     }
 
     /**
-     *
-     * @param configRepository
+     * Creates a MapStateStore object.
+     * @param configRepository The config repository
      */
     public MapStateStore(ConfigRepository configRepository) {
         this.configRepository = configRepository;
     }
 
     /**
-     *
-     * @return
+     * Gets the current state.
+     * @return The current state
      */
     public MapControllerStates getCurrentState() {
         return currentState;
     }
 
     /**
-     *
-     * @return
+     * Whether isFromTownGoToPub or not.
+     * @return isFromTownGoToPub
      */
     public boolean isFromTownGoToPub() {
         return fromTownGoToPub;
     }
 
     /**
-     *
-     * @param fromTownGoToPub
+     * Sets FromTownGoToPub.
+     * @param fromTownGoToPub True or False
      */
     public void setFromTownGoToPub(boolean fromTownGoToPub) {
         this.fromTownGoToPub = fromTownGoToPub;
     }
 
     /**
-     *
-     * @return
+     * Gets the current player.
+     * @return The current player
      */
     public int getCurrentPlayer() {
         return currentPlayer;
     }
 
     /**
-     *
-     * @param currentPlayer
+     * Sets the current player.
+     * @param currentPlayer The current player
      */
     public void setCurrentPlayer(int currentPlayer) {
         this.currentPlayer = currentPlayer % configRepository.getTotalPlayers();
     }
 
     /**
-     *
-     * @return
+     * Gets the current round.
+     * @return The current round
      */
     public int getCurrentRound() {
         return currentRound;
     }
 
     /**
-     *
-     * @param currentRound
+     * Sets the current round.
+     * @param currentRound The current round
      */
     public void setCurrentRound(int currentRound) {
         this.currentRound = currentRound;
     }
 
     /**
-     *
-     * @return
+     * Gets the pass counter.
+     * @return The pass counter
      */
     public int getPassCounter() {
         return passCounter;
     }
 
     /**
-     *
-     * @param passCounter
+     * Sets the pass counter.
+     * @param passCounter The pass counter
      */
     public void setPassCounter(int passCounter) {
         this.passCounter = passCounter;
     }
 
     /**
-     *
-     * @return
+     * Gets the purchase opportunities.
+     * @return The purchase opportunities
      */
     public int getPurchaseOpportunities() {
         return purchaseOpportunities;
     }
 
     /**
-     *
-     * @param purchaseOpportunities
+     * Sets the purchase opportunities.
+     * @param purchaseOpportunities The number of purchase opportunities
      */
     public void setPurchaseOpportunities(int purchaseOpportunities) {
         this.purchaseOpportunities = purchaseOpportunities;
     }
 
     /**
-     *
-     * @return
+     * Get the number of players.
+     * @return The number of players.
      */
     public int getNumPlayers() {
         return numPlayers;
     }
 
     /**
-     *
-     * @param numPlayers
+     * Set the number of players.
+     * @param numPlayers The number of players.
      */
     public void setNumPlayers(int numPlayers) {
         this.numPlayers = numPlayers;
     }
 
     /**
-     *
-     * @param currentState
+     * Set the current state.
+     * @param currentState The current state
      */
     public void setCurrentState(MapControllerStates currentState) {
         if (currentState != null) {
@@ -149,10 +149,6 @@ public class MapStateStore implements Serializable {
         }
     }
 
-    /**
-     *
-     * @return
-     */
     @Override
     public String toString() {
         return "MapStateStore{" +
@@ -164,7 +160,7 @@ public class MapStateStore implements Serializable {
     }
 
     /**
-     *
+     * Sorts the players.
      */
     public void sortPlayers() {
         Collections.sort(players);
@@ -174,9 +170,9 @@ public class MapStateStore implements Serializable {
     }
 
     /**
-     *
-     * @param index
-     * @return
+     * Gets the player at an index.
+     * @param index The index
+     * @return The player at that index
      */
     public PlayerConfigParams getPlayerAt(int index) {
         if (index < players.size()) {
@@ -187,29 +183,31 @@ public class MapStateStore implements Serializable {
     }
 
     /**
-     *
+     * Sets the players to a new list of players.
      */
     public void refresh() {
         this.players = new ArrayList<>(configRepository.getPlayers());
     }
 
     /**
-     *
-     * @return
+     * Gets the list of players.
+     * @return A list of players
      */
     public ArrayList<PlayerConfigParams> getPlayers() {
         return players;
     }
 
     /**
-     *
+     * Refreshes the player list.
      */
-    public void reinit() {
+    public void reinitialize() {
         refresh();
     }
 
-
-    public void incRound() {
+    /**
+     * Increments the round by one.
+     */
+    public void incrementRound() {
         currentRound++;
     }
 }
