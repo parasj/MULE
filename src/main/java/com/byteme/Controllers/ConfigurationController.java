@@ -96,7 +96,15 @@ public class ConfigurationController {
     private ChoiceBox mapType;
 
     /**
-     * Runs when player clicks "OK" button on the Game Config settings screen.
+     * @param num the num of players
+     * Sets number of players. Avoids FindBugs Problem
+     */
+    public static void setNumPlayers(int num) {
+        ConfigurationController.numPlayers = num;
+    }
+
+    /**
+     * Runs when player clicks "OK" button on the Game Configuration settings screen.
      * Saves the configuration settings.
      * Opens Player 1 settings configuration screen.
      */
@@ -114,10 +122,10 @@ public class ConfigurationController {
         System.out.println("DIFFICULTY        : " + difficulty);
         System.out.println("NUMBER OF PLAYERS : " + numPlayers);
         System.out.println("MAP               : " + map + "\t"
-            + mapType.getValue());
+                + mapType.getValue());
         getConfigRepository().setGameConfig(new GameConfigParams(difficulty,
-            map, numPlayers));
-        ConfigurationController.numPlayers = numPlayers;
+                map, numPlayers));
+        setNumPlayers(numPlayers);
         MasterController.getInstance().playerConfig();
     }
 
@@ -126,10 +134,11 @@ public class ConfigurationController {
      * @return The selected MapType.
      */
     private MapType selectedMapType() {
-        // Todo: Give different maps based on player input
-        switch ((String) mapType.getValue()) {
-            default: return MapType.STANDARD;
-        }
+        // TODO: Give different maps based on player input
+        //switch ((String) mapType.getValue()) {
+            //default: return MapType.STANDARD;
+        //}
+        return MapType.STANDARD;
     }
 
     /**

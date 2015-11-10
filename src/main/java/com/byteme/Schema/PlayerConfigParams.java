@@ -398,4 +398,14 @@ public class PlayerConfigParams implements Comparable<PlayerConfigParams>, Seria
                 !properties.equals(that.properties) : that.properties != null);
 
     }
+
+    /**
+     * hashCode to fix findBugs
+     * @return 42
+     */
+    @Override
+    public int hashCode() {
+        assert false : "hashCode not designed";
+        return 42; // any arbitrary constant will do
+    }
 }
