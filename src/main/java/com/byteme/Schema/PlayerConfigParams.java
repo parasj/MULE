@@ -355,6 +355,9 @@ public class PlayerConfigParams
 
     @Override
     public int compareTo(PlayerConfigParams otherPlayer) {
+        if (otherPlayer == null) {
+            throw new NullPointerException("Player cannot be null!");
+        }
         return (this.calcScore() - otherPlayer.calcScore());
     }
 
