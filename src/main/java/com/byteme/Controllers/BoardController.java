@@ -20,7 +20,6 @@ import javafx.scene.layout.GridPane;
 import java.net.URL;
 import java.util.ResourceBundle;
 
-import static com.byteme.Schema.MapControllerStates.*;
 
 /**
  * MULE.
@@ -28,13 +27,13 @@ import static com.byteme.Schema.MapControllerStates.*;
 public class BoardController implements Initializable, CanTick {
     //Variables stored here, will be used and saved/loaded later
     /**
-     * timer of type GlobalTimer.
+     * TIMER of type GlobalTimer.
      */
-    private static final GlobalTimer timer = GlobalTimer.getInstance();
+    private static final GlobalTimer TIMER = GlobalTimer.getInstance();
     /**
-     * cost of type int.
+     * COST of type int.
      */
-    private static final int cost = 300;
+    private static final int COST = 300;
 
     /**
      * A static value added to the map.
@@ -131,11 +130,11 @@ public class BoardController implements Initializable, CanTick {
 
     /**
      *
-     * Sets up game state and clock
+     * Sets up game state and clock.
      */
     public BoardController() {
-        updateState(START, false);
-        timer.setTickHandler(this);
+        updateState(com.byteme.Schema.MapControllerStates.START, false);
+        TIMER.setTickHandler(this);
     }
 
 
@@ -157,7 +156,7 @@ public class BoardController implements Initializable, CanTick {
         initBoard();
         initRiver();
         initBoardCleanup();
-        updateState(LAND_GRANT, false);
+        updateState(com.byteme.Schema.MapControllerStates.LAND_GRANT, false);
     }
 
     //Makes map and stores BorderPanes in an array
@@ -268,15 +267,20 @@ public class BoardController implements Initializable, CanTick {
             MULEStore.getInstance().getMapStateStore()
                 .setCurrentState(newState);
         }
-        if (state == LAND_GRANT) {
+        if (state
+                == com.byteme.Schema.MapControllerStates.LAND_GRANT) {
             childController = landGrantHandler;
-        } else if (state == LAND_PURCHASE) {
+        } else if (state
+                == com.byteme.Schema.MapControllerStates.LAND_PURCHASE) {
             childController = landPurchaseHandler;
-        } else if (state == GAME_START) {
+        } else if (state
+                == com.byteme.Schema.MapControllerStates.GAME_START) {
             childController = gameStartHandler;
-        } else if (state == TURN_OVER) {
+        } else if (state
+                == com.byteme.Schema.MapControllerStates.TURN_OVER) {
             childController = turnOverHandler;
-        } else if (state == PLACE_MULE) {
+        } else if (state
+                == com.byteme.Schema.MapControllerStates.PLACE_MULE) {
             childController = placeMuleHandler;
         } else {
             childController = emptyHandler;
@@ -458,10 +462,10 @@ public class BoardController implements Initializable, CanTick {
 
     /**
      *
-     * @return cost of buying Resources.
+     * @return COST of buying Resources.
      */
     public static int getCost() {
-        return cost;
+        return COST;
     }
 
     /**
