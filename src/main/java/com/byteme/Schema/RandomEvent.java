@@ -21,10 +21,26 @@ public enum RandomEvent {
      INTO YOUR STORAGE SHED AND STOLE HALF YOUR FOOD.
     YOUR SPACE GYPSY IN-LAWS MADE
      A MESS OF THE TOWN. IT COST YOU $6*m TO CLEAN IT UP.
+    ACID RAIN STORM.
+     FOOD PRODUCTION INCREASES (4 FOOD). //new events start here
+    SPACE PIRATES ATTACK YOU. THEY TAKE 8*m
+    METEORITE STRIKE.
+     A METEORITE LANDS ON A PLOT AND CAUSES A HIGH ORE DEPOSIT (+9).
+    RED SUN.
+     IT'S THE TIME OF THE YEAR WHEN THE RED SUN ORBITS, INCREASES ENERGY.
+    MEGATRON RETURNS.
+     CALVIN JOHNSON COMES BACK TO GATECH AND BRINGS THE HYPE AND CASH TOO.
+    STAFFORD RETURNS.
+     MATTHEW STAFFORD ALSO COMES BACK TO HAUNT GATECH AND WE LOSE MONEY.
+    RADIATION. RADIATION ACCIDENT CAUSES
+      YOU TO LOSE MONEY $4*m FOR TREATMENT.
+    THE GODDESS OF HARVEST, DEMETER HAS DECIDED TO SHINE HER FACE ON YOU.
+     YOU GET +9 FOOD.
     */
 
     NOTHING, GT_ALUMNI_PACKAGE, TECH_STUDENT_HOSPITALITY,
-    MUSEUM_COMPUTER, MOOSE_RAT, FLYING_CAT_BUGS, UGA_STUDENTS, SPACE_IN_LAWS;
+    MUSEUM_COMPUTER, MOOSE_RAT, FLYING_CAT_BUGS, UGA_STUDENTS, SPACE_IN_LAWS, ACID_RAIN, SPACE_PIRATES,
+    METEORITE_STRIKE, RED_SUN, MEGATRON_RETURNS, STAFFORD_RETURNS, RADIATION, DEMETERS_SMILE;
 
     private boolean isGood;
     private int foodEffect;
@@ -53,6 +69,22 @@ public enum RandomEvent {
         SPACE_IN_LAWS.str = "Your space gypsy in-laws made a"
                 + " mess of the town. It cost you "
                 + "$### to clean it up.";
+        ACID_RAIN.str = "Acid rain just fell, you get 4 food.";
+        SPACE_PIRATES.str = "Space Pirates just attacked you,"
+                + " you lose $### ";
+        METEORITE_STRIKE.str = "A meteorite just landed on a plot,"
+                + " leading to high ore deposit (9)";
+        RED_SUN.str = "The red sun is in orbit, your energy increases by 6";
+        MEGATRON_RETURNS.str = "Megatron comes back to Georgia Tech"
+                + "You gain a +5 increase in energy and money.";
+        STAFFORD_RETURNS.str =  "Matthew Stafford comes to Georgia Tech"
+                + "You lose -4 in money";
+        RADIATION.str = "A radiation accident just occured"
+                + " You lose $### for treatment";
+        DEMETERS_SMILE.str = "The goddess of harvest has shone her face on you"
+                + "You gain +9 in food.";
+
+
 
         NOTHING.isGood = true;
         GT_ALUMNI_PACKAGE.isGood = true;
@@ -62,6 +94,14 @@ public enum RandomEvent {
         FLYING_CAT_BUGS.isGood = false;
         UGA_STUDENTS.isGood = false;
         SPACE_IN_LAWS.isGood = false;
+        ACID_RAIN.isGood = true;
+        SPACE_PIRATES.isGood = false;
+        METEORITE_STRIKE.isGood = false;
+        RED_SUN.isGood = true;
+        MEGATRON_RETURNS.isGood = true;
+        STAFFORD_RETURNS.isGood = false;
+        RADIATION.isGood = false;
+        DEMETERS_SMILE.isGood = true;
 
         NOTHING.foodEffect = 0;
         GT_ALUMNI_PACKAGE.foodEffect = 3;
@@ -71,6 +111,14 @@ public enum RandomEvent {
         FLYING_CAT_BUGS.foodEffect = 0;
         UGA_STUDENTS.foodEffect = -10; // temp value
         SPACE_IN_LAWS.foodEffect = 0;
+        ACID_RAIN.foodEffect = 4;
+        SPACE_PIRATES.foodEffect = 0;
+        METEORITE_STRIKE.foodEffect = 0;
+        RED_SUN.foodEffect = 0;
+        MEGATRON_RETURNS.foodEffect = 0;
+        STAFFORD_RETURNS.foodEffect = 0;
+        RADIATION.foodEffect = 0;
+        DEMETERS_SMILE.foodEffect = 9;
 
         NOTHING.oreEffect = 0;
         GT_ALUMNI_PACKAGE.oreEffect = 0;
@@ -80,6 +128,14 @@ public enum RandomEvent {
         FLYING_CAT_BUGS.oreEffect = 0;
         UGA_STUDENTS.oreEffect = 0;
         SPACE_IN_LAWS.oreEffect = 0;
+        ACID_RAIN.oreEffect = 0;
+        SPACE_PIRATES.oreEffect = 0;
+        METEORITE_STRIKE.oreEffect = 9;
+        RED_SUN.oreEffect = 0;
+        MEGATRON_RETURNS.oreEffect = 0;
+        STAFFORD_RETURNS.oreEffect = 0;
+        RADIATION.oreEffect = 0;
+        DEMETERS_SMILE.oreEffect = 0;
 
         NOTHING.energyEffect = 0;
         GT_ALUMNI_PACKAGE.energyEffect = 2;
@@ -89,6 +145,15 @@ public enum RandomEvent {
         FLYING_CAT_BUGS.energyEffect = 0;
         UGA_STUDENTS.energyEffect = 0;
         SPACE_IN_LAWS.energyEffect = 0;
+        ACID_RAIN.energyEffect = 0;
+        SPACE_PIRATES.energyEffect = 0;
+        METEORITE_STRIKE.energyEffect = 0;
+        RED_SUN.energyEffect = 6;
+        MEGATRON_RETURNS.energyEffect = 5;
+        STAFFORD_RETURNS.energyEffect = 0;
+        RADIATION.energyEffect = 0;
+        DEMETERS_SMILE.energyEffect = 0;
+
 
         NOTHING.moneyEffect = 0;
         GT_ALUMNI_PACKAGE.moneyEffect = 0;
@@ -98,6 +163,14 @@ public enum RandomEvent {
         FLYING_CAT_BUGS.moneyEffect = -4;
         UGA_STUDENTS.moneyEffect = 0;
         SPACE_IN_LAWS.moneyEffect = -6;
+        ACID_RAIN.moneyEffect = 0;
+        SPACE_PIRATES.moneyEffect = -8;
+        METEORITE_STRIKE.moneyEffect = 0;
+        RED_SUN.moneyEffect = 0;
+        MEGATRON_RETURNS.moneyEffect = 5;
+        STAFFORD_RETURNS.moneyEffect = -4;
+        RADIATION.moneyEffect = -3;
+        DEMETERS_SMILE.moneyEffect = 0;
     }
 
     /**
