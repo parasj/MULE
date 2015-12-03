@@ -18,7 +18,7 @@ import javafx.scene.control.Label;
 /**
  * Mule.
  */
-public class StoreController {
+public class StoreController implements Controller {
     /**
      * gameStartStore of type GameStartStore.
      */

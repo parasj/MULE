@@ -5,7 +5,7 @@ import com.byteme.Schema.MapControllerStates;
 /**
  * This is the MULE game's TownController.
  */
-public class TownController {
+public class TownController implements Controller {
 
     /**
      *

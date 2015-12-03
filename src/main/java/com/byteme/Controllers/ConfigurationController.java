@@ -25,7 +25,7 @@ import java.util.Locale;
 /**
  * MULE.
  */
-public class ConfigurationController {
+public class ConfigurationController implements Controller {
     /**
      * FLAPPER_NUM of type int.
      */

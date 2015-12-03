@@ -9,7 +9,7 @@ import java.io.IOException;
 /**
  * MULE.
  */
-public class MasterController {
+public class MasterController implements Controller {
 
     /**
      * gameStartStore of type GameStartStore.
@@ -78,7 +78,7 @@ public class MasterController {
      *
      */
     ///Creates scenes
-    private MasterController() {
+    public MasterController() {
         Parent root;
         try {
             root = FXMLLoader.load(getClass()
@@ -110,6 +110,10 @@ public class MasterController {
         } catch (IOException e) {
             e.printStackTrace();
         }
+    }
+
+    public MasterController(Scene startGame, Scene loadGame, Scene gameConfig, Scene playerConfig, Scene town,, Scene temp, Scene pubScene, PubController pubController, Scene storeScene, ) {
+
     }
 
     /**
@@ -246,5 +250,13 @@ public class MasterController {
         } catch (IOException e) {
             e.printStackTrace();
         }
+    }
+
+    public PubController getPubController() {
+        return pubController;
+    }
+
+    public StoreController getStoreController() {
+        return storeController;
     }
 }
