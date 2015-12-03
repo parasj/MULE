@@ -1,5 +1,6 @@
 package com.byteme.Controllers;
 
+import com.byteme.Handlers.BoardHandlerFactory;
 import com.byteme.Models.ConfigRepository;
 import com.byteme.Models.MULEStore;
 import com.byteme.Models.MapBoard;
@@ -65,6 +66,7 @@ public class BoardController implements Initializable, CanTick {
     /***
      * FXML UI items
      ***/
+
     /**
      * playerLabel of type Label.
      */
@@ -100,39 +102,14 @@ public class BoardController implements Initializable, CanTick {
      */
     @FXML
     private Label timerLabel;
-
-    // implementations of MapStateHandler, handles each phase of the game
-    /**
-     * landPurchaseHandler of type MapStateHandler.
-     */
-    private final MapStateHandler landPurchaseHandler
-        = new LandPurchaseHandler(this);
-    /**
-     * gameStartHandler of type MapStateHandler.
-     */
-    private final MapStateHandler gameStartHandler = new GameStartHandler(this);
-    /**
-     * landGrantHandler of type MapStateHandler.
-     */
-    private final MapStateHandler landGrantHandler = new LandGrantHandler(this);
-    /**
-     * emptyHandler of type MapStateHandler.
-     */
-    private final MapStateHandler emptyHandler = new EmptyHandler(this);
-    /**
-     * turnOverHandler of type MapStateHandler.
-     */
-    private final MapStateHandler turnOverHandler = new TurnOverHandler(this);
-    /**
-     * placeMuleHandler of type MapStateHandler.
-     */
-    private final MapStateHandler placeMuleHandler = new PlaceMuleHandler(this);
+    private BoardHandlerFactory boardHandlerFactory;
 
     /**
-     *
      * Sets up game state and clock.
      */
     public BoardController() {
+        boardHandlerFactory = new BoardHandlerFactory(this);
+
         updateState(com.byteme.Schema.MapControllerStates.START, false);
         TIMER.setTickHandler(this);
     }
@@ -267,24 +244,8 @@ public class BoardController implements Initializable, CanTick {
             MULEStore.getInstance().getMapStateStore()
                 .setCurrentState(newState);
         }
-        if (state
-                == com.byteme.Schema.MapControllerStates.LAND_GRANT) {
-            childController = landGrantHandler;
-        } else if (state
-                == com.byteme.Schema.MapControllerStates.LAND_PURCHASE) {
-            childController = landPurchaseHandler;
-        } else if (state
-                == com.byteme.Schema.MapControllerStates.GAME_START) {
-            childController = gameStartHandler;
-        } else if (state
-                == com.byteme.Schema.MapControllerStates.TURN_OVER) {
-            childController = turnOverHandler;
-        } else if (state
-                == com.byteme.Schema.MapControllerStates.PLACE_MULE) {
-            childController = placeMuleHandler;
-        } else {
-            childController = emptyHandler;
-        }
+
+        childController = boardHandlerFactory.getHandler(state);
         childController.stateChanged();
     }
 
@@ -531,6 +492,9 @@ public class BoardController implements Initializable, CanTick {
     /****
      * Util functions
      ****/
+    public BoardHandlerFactory getBoardHandlerFactory() {
+        return boardHandlerFactory;
+    }
 
     /**
      *
@@ -546,46 +510,6 @@ public class BoardController implements Initializable, CanTick {
      */
     public final MapStateHandler getChildController() {
         return childController;
-    }
-
-    /**
-     *
-     * @return instance of MapStateHandler.
-     */
-    public final MapStateHandler getLandPurchaseHandler() {
-        return landPurchaseHandler;
-    }
-
-    /**
-     *
-     * @return instance of MapStateHandler.
-     */
-    public final MapStateHandler getGameStartHandler() {
-        return gameStartHandler;
-    }
-
-    /**
-     *
-     * @return instance of MapStateHandler.
-     */
-    public final MapStateHandler getLandGrantHandler() {
-        return landGrantHandler;
-    }
-
-    /**
-     *
-     * @return instance of MapStateHandler.
-     */
-    public final MapStateHandler getEmptyHandler() {
-        return emptyHandler;
-    }
-
-    /**
-     *
-     * @return instance of MapStateHandler.
-     */
-    public final MapStateHandler getTurnOverHandler() {
-        return turnOverHandler;
     }
 
     /**
