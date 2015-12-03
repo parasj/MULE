@@ -250,7 +250,7 @@ public enum RandomEvent {
      * @param round The round number.
      * @return The round multiple
      */
-    private int roundMultiple(int round) {
+    protected static int roundMultiple(int round) {
         if (round > 0 && round < 4) {
             return 25;
         } else if (round < 8) {

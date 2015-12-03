@@ -3,15 +3,11 @@ package com.byteme.Handlers;
 import com.byteme.Controllers.BoardController;
 import com.byteme.Controllers.MasterController;
 import com.byteme.Models.RandomEventGenerator;
-import com.byteme.Schema.RandomEvent;
-import com.byteme.Schema.Property;
-import com.byteme.Schema.MapControllerStates;
+import com.byteme.Schema.*;
 import com.byteme.Models.GameStartStore;
 import com.byteme.Models.MULEStore;
 import com.byteme.Models.MapStateStore;
-import com.byteme.Schema.PlayerConfigParams;
 import com.byteme.Models.ConfigRepository;
-import com.byteme.Schema.Mule;
 
 import javafx.scene.control.Alert;
 import javafx.scene.input.MouseEvent;
@@ -190,6 +186,7 @@ public class GameStartHandler extends MapStateHandler {
                 .getTotalPlayers() - 1) {
             mapStateStore.setCurrentRound(mapStateStore.getCurrentRound() + 1);
             calculateProduction();
+            calculateRoundRandomEvents();
             gameStartStore.setCurrentPlayer(1);
             mapStateStore.sortPlayers();
         }
@@ -229,6 +226,36 @@ public class GameStartHandler extends MapStateHandler {
 
             Alert alert = new Alert(alertType);
             alert.setTitle("Random Event");
+            alert.setHeaderText(header);
+            alert.setContentText(evtName);
+
+            alert.showAndWait();
+        }
+    }
+
+    /**
+     *
+     */
+    //Checks random events at beginning of turn
+    public final void calculateRoundRandomEvents() {
+        RoundRandomEvents evt = RoundRandomEvents.getRandomEvent();
+
+        for (PlayerConfigParams p : mapStateStore.getPlayers()) {
+            p.setFood(evt.calcFood(p.getFood()));
+            p.setEnergy(evt.calcEnergy(p.getEnergy()));
+            p.setMoney(evt.calcMoney(p.getMoney(), mapStateStore.getCurrentRound()));
+            p.setSmithore(evt.calcOre(p.getSmithore()));
+        }
+
+        String evtName = evt.toString();
+        log("Round Random Event: " + evtName);
+
+        if (!evt.equals(RoundRandomEvents.NOTHING)) {
+            Alert.AlertType alertType = Alert.AlertType.INFORMATION;
+            String header = "A random event occurs this round!";
+
+            Alert alert = new Alert(alertType);
+            alert.setTitle("Round Random Event");
             alert.setHeaderText(header);
             alert.setContentText(evtName);
 
