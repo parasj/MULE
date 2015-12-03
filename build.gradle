@@ -26,3 +26,8 @@ jar {
 
   }
 }
+
+task buildWeb(type: Copy, dependsOn: jar) {
+    from 'build/libs'
+    into 'web/libs'
+}

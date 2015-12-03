@@ -1,5 +1,6 @@
 package com.byteme.Controllers;
 
+import javafx.embed.swing.JFXPanel;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
@@ -73,6 +74,7 @@ public class MasterController {
      * storeController of type StoreController.
      */
     private StoreController storeController;
+    private JFXPanel thePanel;
 
     /**
      *
@@ -128,13 +130,17 @@ public class MasterController {
     public final void setStage(final Stage stage) {
         theStage = stage;
     }
+    
+    public final void setFXPanel(final JFXPanel panel) {
+        thePanel = panel;
+    }
 
     /**
      *
      */
     public final void startGame() {
 //        currStage = "Start Game";
-        theStage.setScene(startGame);
+        changeScene(startGame);
     }
 
     /**
@@ -142,7 +148,7 @@ public class MasterController {
      */
     public final void loadGame() {
 //        currStage = "Load Game";
-        theStage.setScene(loadGame);
+        changeScene(loadGame);
     }
 
     /**
@@ -150,7 +156,7 @@ public class MasterController {
      */
     public final void gameConfig() {
 //        currStage = "Game Config";
-        theStage.setScene(gameConfig);
+        changeScene(gameConfig);
     }
 
     /**
@@ -158,7 +164,7 @@ public class MasterController {
      */
     public final void playerConfig() {
 //        currStage = "Player Config";
-        theStage.setScene(playerConfig);
+        changeScene(playerConfig);
     }
 
     /**
@@ -166,7 +172,7 @@ public class MasterController {
      */
     public final void map() {
 //        currStage = "Map";
-        theStage.setScene(map);
+        changeScene(map);
     }
 
     /**
@@ -174,7 +180,7 @@ public class MasterController {
      */
     public final void town() {
 //        currStage = "Town";
-        theStage.setScene(town);
+        changeScene(town);
     }
 
     /**
@@ -182,7 +188,7 @@ public class MasterController {
      */
     public final void temp() {
 //        currStage = "Temp";
-        theStage.setScene(temp);
+        changeScene(temp);
     }
 
     /**
@@ -190,7 +196,7 @@ public class MasterController {
      */
     public final void pubScene() {
 //        currStage = "Pub";
-        theStage.setScene(pubScene);
+        changeScene(pubScene);
         pubController.render();
     }
 
@@ -199,8 +205,17 @@ public class MasterController {
      */
     public final void store() {
 //        currStage = "Store";
-        theStage.setScene(storeScene);
+        changeScene(storeScene);
         storeController.reRender();
+    }
+
+
+    private void changeScene(Scene s) {
+        if (theStage != null) {
+            theStage.setScene(s);
+        } else {
+            thePanel.setScene(s);
+        }
     }
 
     /**
