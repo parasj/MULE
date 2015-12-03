@@ -75,14 +75,14 @@ public enum RandomEvent {
         METEORITE_STRIKE.str = "A meteorite just landed on a plot,"
                 + " leading to high ore deposit (9)";
         RED_SUN.str = "The red sun is in orbit, your energy increases by 6";
-        MEGATRON_RETURNS.str = "Megatron comes back to Georgia Tech"
-                + "You gain a +5 increase in energy and money.";
-        STAFFORD_RETURNS.str =  "Matthew Stafford comes to Georgia Tech"
-                + "You lose -4 in money";
-        RADIATION.str = "A radiation accident just occured"
+        MEGATRON_RETURNS.str = "Megatron comes back to Georgia Tech."
+                + " You gain a +5 increase in energy and money.";
+        STAFFORD_RETURNS.str =  "Matthew Stafford comes to Georgia Tech."
+                + " You lose -4 in money";
+        RADIATION.str = "A radiation accident just occurred."
                 + " You lose $### for treatment";
-        DEMETERS_SMILE.str = "The goddess of harvest has shone her face on you"
-                + "You gain +9 in food.";
+        DEMETERS_SMILE.str = "The goddess of harvest has shone her face on you."
+                + " You gain +9 in food.";
 
 
 

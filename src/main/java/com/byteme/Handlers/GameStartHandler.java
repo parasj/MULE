@@ -1,5 +1,7 @@
-package com.byteme.Controllers;
+package com.byteme.Handlers;
 
+import com.byteme.Controllers.BoardController;
+import com.byteme.Controllers.MasterController;
 import com.byteme.Models.RandomEventGenerator;
 import com.byteme.Schema.RandomEvent;
 import com.byteme.Schema.Property;
@@ -116,16 +118,6 @@ public class GameStartHandler extends MapStateHandler {
         MasterController.getInstance().town();
     }
 
-    //Does nothing, just there because it is inherited
-
-    /**
-     *
-     * @param event of type MouseEvent.
-     */
-    @Override
-    public void tileChosen(final MouseEvent event) {
-
-    }
 
     //Renders all text labels
 
@@ -187,16 +179,6 @@ public class GameStartHandler extends MapStateHandler {
                 .updateState(MapControllerStates.TURN_OVER, true);
             MasterController.getInstance().pubScene();
         }
-    }
-
-    /**
-     *
-     * @param location of type URL.
-     * @param resources of type ResourceBundle.
-     */
-    @Override
-    public void initialize(final URL location, final ResourceBundle resources) {
-
     }
 
     /**

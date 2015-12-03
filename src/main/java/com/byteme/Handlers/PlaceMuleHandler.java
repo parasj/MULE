@@ -1,5 +1,8 @@
-package com.byteme.Controllers;
+package com.byteme.Handlers;
 
+import com.byteme.Controllers.BoardController;
+import com.byteme.Controllers.MasterController;
+import com.byteme.Handlers.MapStateHandler;
 import com.byteme.Models.GameStartStore;
 import com.byteme.Models.MULEStore;
 import com.byteme.Models.MapStateStore;
@@ -44,12 +47,10 @@ public class PlaceMuleHandler extends MapStateHandler {
         mapStateStore = MULEStore.getInstance().getMapStateStore();
     }
 
-    @Override
     public final void handlePass() {
         log("Cannot pass now!");
     }
 
-    @Override
     public void handleTownButtonClicked() {
     }
 

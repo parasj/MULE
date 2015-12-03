@@ -1,5 +1,6 @@
-package com.byteme.Controllers;
+package com.byteme.Handlers;
 
+import com.byteme.Controllers.BoardController;
 import com.byteme.Models.LandGrantStore;
 import com.byteme.Models.MULEStore;
 import com.byteme.Models.MapStateStore;
@@ -94,14 +95,6 @@ public class LandGrantHandler extends MapStateHandler {
         getBoardController().getMoneyLabel().setText("");
         getBoardController().getRoundLabel().setText("");
         getBoardController().getTimerLabel().setText("");
-    }
-
-    @Override
-    public void initialize(final URL location, final ResourceBundle resources) {
-    }
-
-    @Override
-    public void tick() {
     }
 
     /**

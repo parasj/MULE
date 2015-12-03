@@ -1,4 +1,5 @@
 package com.byteme.Controllers;
+import com.byteme.Handlers.GameStartHandler;
 import com.byteme.Models.GameStartStore;
 import com.byteme.Models.MULEStore;
 import com.byteme.Models.MapStateStore;
@@ -105,7 +106,7 @@ public class PubController {
     public final void goToMap() {
         MasterController.getInstance().map();
         GameStartHandler gameStartHandler =
-            (GameStartHandler) boardController.getGameStartHandler();
+            (GameStartHandler) boardController.getBoardHandlerFactory().getGameStartHandler();
         gameStartHandler.nextPlayer();
         boardController.updateState(MapControllerStates.GAME_START, true);
     }
