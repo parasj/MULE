@@ -1,6 +1,7 @@
 package com.byteme.Models;
 
 import com.byteme.Schema.GameConfigParams;
+import com.byteme.Schema.MapType;
 import com.byteme.Schema.PlayerConfigParams;
 
 import java.io.Serializable;
@@ -98,5 +99,9 @@ public class ConfigRepository implements Serializable {
      */
     public PlayerConfigParams getFirstPlayerConfig() {
         return playerConfigList.get(1);
+    }
+
+    public MapType getMapType() {
+        return gameConfigParams.getMapType();
     }
 }

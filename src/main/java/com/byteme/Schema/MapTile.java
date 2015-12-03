@@ -2,6 +2,7 @@ package com.byteme.Schema;
 
 import java.util.HashMap;
 import java.util.Map;
+import java.util.Random;
 
 /**
  * MULE MapTile.
