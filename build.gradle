@@ -9,6 +9,7 @@ dependencies {
     compile group: 'commons-collections', name: 'commons-collections', version: '3.2'
     testCompile group: 'junit', name: 'junit', version: '4.+'
     testCompile group: 'org.mockito', name: 'mockito-core', version: '1.9.+'
+    compile group: 'com.google.inject', name: 'guice', version: '3.0'
 }
 
 javafx {
@@ -22,5 +23,6 @@ jar {
     attributes 'Implementation-Title': 'MULE Game - ByteMe',
            	   'Implementation-Version': '1.0',
            	   'Main-Class': 'com.byteme.Main'
+
   }
 }
