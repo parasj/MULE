@@ -5,9 +5,7 @@ import com.byteme.Handlers.MapStateHandler;
 import com.byteme.Models.ConfigRepository;
 import com.byteme.Models.MULEStore;
 import com.byteme.Models.MapBoard;
-import com.byteme.Schema.MapControllerStates;
-import com.byteme.Schema.PlayerConfigParams;
-import com.byteme.Schema.Property;
+import com.byteme.Schema.*;
 import com.byteme.Util.CanTick;
 import com.byteme.Util.GlobalTimer;
 import javafx.fxml.FXML;
@@ -131,7 +129,7 @@ public class BoardController implements Initializable, CanTick {
         final ResourceBundle resources) {
         log("Initializing");
         setPlayer(getConfigRepository().getFirstPlayerConfig());
-        initBoard();
+        initBoard(5,9,getConfigRepository().getMapType());
         initRiver();
         initBoardCleanup();
         updateState(com.byteme.Schema.MapControllerStates.LAND_GRANT, false);
@@ -142,8 +140,8 @@ public class BoardController implements Initializable, CanTick {
     /**
      *
      */
-    private void initBoard() {
-        possibleMaps = new MapBoard();
+    private void initBoard(int height, int width, MapType type) {
+        possibleMaps = new MapBoard(height,width, type);
         mapSpots = new boolean[possibleMaps.getHeight()][possibleMaps
             .getWidth()];
         this.bps = new BorderPane[possibleMaps.getHeight()][possibleMaps

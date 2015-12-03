@@ -116,7 +116,6 @@ public class ConfigurationController {
      */
     public final void saveGameConfig() {
         Difficulty difficulty = selectedDifficultyButton();
-        // Todo: parse map info
         MapType map = selectedMapType();
         int numPlayers = (int) numPlayersSlider.getValue();
 
@@ -140,8 +139,11 @@ public class ConfigurationController {
      * @return The selected MapType.
      */
     private MapType selectedMapType() {
-        // Todo: Give different maps based on player input
-        return MapType.STANDARD;
+        if (mapType.getValue().equals("Standard Map")) {
+            return MapType.STANDARD;
+        } else {
+            return MapType.RANDOM;
+        }
     }
 
     /**
