@@ -73,16 +73,16 @@ public enum RandomEvent {
         SPACE_PIRATES.str = "Space Pirates just attacked you,"
                 + " you lose $### ";
         METEORITE_STRIKE.str = "A meteorite just landed on a plot,"
-                + " leading to high ore deposit (9)";
-        RED_SUN.str = "The red sun is in orbit, your energy increases by 6";
+                + " leading to high ore deposit. Get 9 ore.";
+        RED_SUN.str = "The red sun is in orbit, your energy increases by 6.";
         MEGATRON_RETURNS.str = "Megatron comes back to Georgia Tech."
                 + " You gain a +5 increase in energy and money.";
         STAFFORD_RETURNS.str =  "Matthew Stafford comes to Georgia Tech."
-                + " You lose -4 in money";
+                + " You lose $4.";
         RADIATION.str = "A radiation accident just occurred."
-                + " You lose $### for treatment";
+                + " You lose $### for clean up.";
         DEMETERS_SMILE.str = "The goddess of harvest has shone her face on you."
-                + " You gain +9 in food.";
+                + " You gain 9 food.";
 
 
 

@@ -31,7 +31,7 @@ public enum RoundRandomEvents {
         BOUNTIFUL_HARVEST.moneyEffect = 0;
 
         LIGHTNING.foodEffect = 0;
-        LIGHTNING.energyEffect = 0;
+        LIGHTNING.energyEffect = 1;
         LIGHTNING.oreEffect = 0;
         LIGHTNING.moneyEffect = 0;
     }
