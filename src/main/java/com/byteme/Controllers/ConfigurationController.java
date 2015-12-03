@@ -27,18 +27,6 @@ import java.util.Locale;
  */
 public class ConfigurationController {
     /**
-     * FLAPPER_NUM of type int.
-     */
-    private static final int FLAPPER_NUM = 1600;
-    /**
-     * HUMAN_NUM of type int.
-     */
-    private static final int HUMAN_NUM = 600;
-    /**
-     * DEFAULT_NUM of type int.
-     */
-    private static final int DEFAULT_NUM = 1000;
-    /**
      * numPlayers of type int.
      */
     private static int numPlayers = -1;
@@ -222,7 +210,6 @@ public class ConfigurationController {
             name = playerName.getText();
             race = playerRace.getValue();
             color = playerColor.getValue();
-            money = chooseMoneyAmount(race);
 
             // Remove color already chosen by another player
             ObservableList<String> remainingChoices = playerColor.getItems();
@@ -236,7 +223,7 @@ public class ConfigurationController {
             System.out.println("RACE       : " + race);
             System.out.println("COLOR      : " + color);
             getConfigRepository().setPlayerConfig(playerConfigParser(name,
-                    race, color, money, currentPlayer), currentPlayer);
+                    race, color, currentPlayer), currentPlayer);
 
             if (currentPlayer >= numPlayers) {
                 // Go to Map screen.
@@ -259,37 +246,17 @@ public class ConfigurationController {
     }
 
     /**
-     * Chooses the starting money for a player based on his race.
-     * @param race The race of the player as parsed by the ChoiceBox
-     * @return The starting money for the player
-     */
-    public int chooseMoneyAmount(String race) {
-        race = race.toLowerCase();
-
-        switch (race) {
-        case "flapper":
-            return FLAPPER_NUM;
-        case "human":
-            return HUMAN_NUM;
-        default:
-            return DEFAULT_NUM;
-        }
-    }
-
-    /**
      * Creates a player configuration based on the player's options.
      * @param name The name of the player
      * @param race The race of the player
      * @param color The color of the player
-     * @param money The starting money of the player
      * @param order of type int.
      * @return A PlayerConfigParams object containing this player's information
      */
     private PlayerConfigParams playerConfigParser(final String name,
-         final String race, final String color,
-            final int money, final int order) {
+         final String race, final String color, final int order) {
         Race parsedRace = Race.valueOf(race.toUpperCase(Locale.ENGLISH));
-        return new PlayerConfigParams(name, parsedRace, color, money,
+        return new PlayerConfigParams(name, parsedRace, color, parsedRace.getStartingMoney(),
             new ArrayList<>(), order);
     }
 
