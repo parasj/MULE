@@ -1,5 +1,7 @@
-package com.byteme.Controllers;
+package com.byteme.Handlers;
 
+import com.byteme.Controllers.BoardController;
+import com.byteme.Handlers.MapStateHandler;
 import javafx.scene.input.MouseEvent;
 
 import java.net.URL;

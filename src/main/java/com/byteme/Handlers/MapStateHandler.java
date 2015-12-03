@@ -1,8 +1,12 @@
-package com.byteme.Controllers;
+package com.byteme.Handlers;
 
+import com.byteme.Controllers.BoardController;
 import com.byteme.Util.CanTick;
 import javafx.fxml.Initializable;
 import javafx.scene.input.MouseEvent;
+
+import java.net.URL;
+import java.util.ResourceBundle;
 
 /**
  * MULE.
@@ -42,23 +46,46 @@ public abstract class MapStateHandler implements CanTick, Initializable {
     /**
      *
      */
-    public abstract void handlePass();
+    public void handlePass() {
+
+    }
 
     /**
      *
      */
-    public abstract void handleTownButtonClicked();
+    public void handleTownButtonClicked() {
+
+    }
 
     /**
      *
      * @param event of type MouseEvent.
      */
-    public abstract void tileChosen(final MouseEvent event);
+    public void tileChosen(final MouseEvent event) {
+
+    }
 
     /**
      *
      */
-    public abstract void stateChanged();
+    public void stateChanged() {
+
+    }
+
+    /**
+     *
+     * @param location of type URL.
+     * @param resources of type ResourceBundle.
+     */
+    @Override
+    public void initialize(final URL location, final ResourceBundle resources) {
+
+    }
+
+    @Override
+    public void tick() {
+
+    }
 
     /**
      *

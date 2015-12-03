@@ -1,5 +1,6 @@
-package com.byteme.Controllers;
+package com.byteme.Handlers;
 
+import com.byteme.Controllers.BoardController;
 import com.byteme.Models.LandPurchaseStore;
 import com.byteme.Models.MULEStore;
 import com.byteme.Models.MapStateStore;
@@ -105,11 +106,6 @@ public class LandPurchaseHandler extends MapStateHandler {
         getBoardController().getTimerLabel().setText("");
         getBoardController().setPlayer(landPurchaseStore.getCurrentPlayer());
         getBoardController().setMoney(landPurchaseStore.getCurrentPlayer());
-    }
-
-    @Override
-    public void tick() {
-
     }
 
     @Override
