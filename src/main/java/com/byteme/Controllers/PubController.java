@@ -13,7 +13,7 @@ import javafx.scene.control.Label;
 /**
  * MULE
  */
-public class PubController {
+public class PubController implements Controller {
     /**
      * FIRST_NUM of type int.
      * Made these variables this way because of checkstyle.

@@ -25,7 +25,7 @@ import java.util.Locale;
 /**
  * MULE.
  */
-public class ConfigurationController {
+public class ConfigurationController implements Controller {
     /**
      * numPlayers of type int.
      */

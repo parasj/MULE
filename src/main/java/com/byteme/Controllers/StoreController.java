@@ -18,7 +18,7 @@ import javafx.scene.control.Label;
 /**
  * Mule.
  */
-public class StoreController {
+public class StoreController implements Controller {
     /**
      * gameStartStore of type GameStartStore.
      */
@@ -136,6 +136,13 @@ public class StoreController {
      */
     public StoreController() {
         reinitialize();
+    }
+
+    public StoreController(GameStartStore gameStartStore, MapStateStore mapStateStore, StoreStateStore storeStateStore, PlaceMuleStore placeMuleStore) {
+        this.gameStartStore = gameStartStore;
+        this.mapStateStore = mapStateStore;
+        this.storeStateStore = storeStateStore;
+        this.placeMuleStore = placeMuleStore;
     }
 
     /**

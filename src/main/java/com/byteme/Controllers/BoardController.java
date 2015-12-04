@@ -24,7 +24,7 @@ import java.util.ResourceBundle;
 /**
  * MULE.
  */
-public class BoardController implements Initializable, CanTick {
+public class BoardController implements Initializable, CanTick, Controller {
     //Variables stored here, will be used and saved/loaded later
     /**
      * TIMER of type GlobalTimer.
@@ -108,7 +108,6 @@ public class BoardController implements Initializable, CanTick {
      */
     public BoardController() {
         boardHandlerFactory = new BoardHandlerFactory(this);
-
         updateState(com.byteme.Schema.MapControllerStates.START, false);
         TIMER.setTickHandler(this);
     }

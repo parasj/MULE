@@ -48,6 +48,7 @@ public class MapBoard {
         return height;
     }
 
+
     /**
      * Creates a MapBoard.
      * @param height The height
