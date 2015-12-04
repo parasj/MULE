@@ -138,6 +138,13 @@ public class StoreController implements Controller {
         reinitialize();
     }
 
+    public StoreController(GameStartStore gameStartStore, MapStateStore mapStateStore, StoreStateStore storeStateStore, PlaceMuleStore placeMuleStore) {
+        this.gameStartStore = gameStartStore;
+        this.mapStateStore = mapStateStore;
+        this.storeStateStore = storeStateStore;
+        this.placeMuleStore = placeMuleStore;
+    }
+
     /**
      *
      */

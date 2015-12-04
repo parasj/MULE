@@ -112,8 +112,22 @@ public class MasterController implements Controller {
         }
     }
 
-    public MasterController(Scene startGame, Scene loadGame, Scene gameConfig, Scene playerConfig, Scene town,, Scene temp, Scene pubScene, PubController pubController, Scene storeScene, ) {
-
+    public MasterController(Scene startGame, Scene loadGame, Scene gameConfig,
+                            Scene playerConfig, Scene town, Scene temp,
+                            Scene pubScene, Scene storeScene,
+                            BoardController boardController, PubController pubController,
+                            StoreController storeController) {
+        this.startGame = startGame;
+        this.loadGame = loadGame;
+        this.gameConfig = gameConfig;
+        this.playerConfig = playerConfig;
+        this.town = town;
+        this.temp = temp;
+        this.pubScene = pubScene;
+        this.storeScene = storeScene;
+        this.boardController = boardController;
+        this.pubController = pubController;
+        this.storeController = storeController;
     }
 
     /**
